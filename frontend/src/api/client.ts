@@ -51,6 +51,11 @@ export async function searchCourses(query: string, mode = 'keyword', topK = 10) 
   return res.json()
 }
 
+export async function fetchPrereqTree(code: string) {
+  const res = await fetch(`${BASE}/api/v1/graph/tree/${encodeURIComponent(code)}`)
+  return res.json()
+}
+
 // --- Pipeline ---
 export async function triggerPipeline(config: {
   faculty_filter?: string[]

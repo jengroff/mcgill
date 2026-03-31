@@ -131,3 +131,70 @@ async def get_prerequisite_tree(code: str, depth: int = Query(default=3, le=5)):
         {"code": code},
     )
     return {"code": code, "chains": [r["chain"] for r in result]}
+
+
+@router.get("/graph/tree/{code}")
+async def get_prerequisite_tree_graph(code: str):
+    import re
+    code = code.upper().replace("-", " ")
+    m = re.match(r"([A-Z]{2,6})\s*(\d{3,4}[A-Z]?)", code)
+    if m:
+        code = f"{m.group(1)} {m.group(2)}"
+
+    from mcgill.db.neo4j import run_query
+
+    # Query 1: all nodes reachable from root, with shortest-path depth.
+    # min(length(path)) handles nodes reachable via multiple paths.
+    node_rows = await run_query(
+        """
+        MATCH path = (root:Course {code: $code})-[:PREREQUISITE_OF*0..4]->(n:Course)
+        RETURN DISTINCT n.code AS code, n.title AS title, n.credits AS credits,
+               min(length(path)) AS depth
+        """,
+        {"code": code},
+    )
+
+    if not node_rows:
+        return {"root": code, "nodes": [], "edges": []}
+
+    codes = [r["code"] for r in node_rows]
+
+    # Query 2: all PREREQUISITE_OF edges where both endpoints are in the node set.
+    # Pass codes as a parameter — do not interpolate into the query string.
+    prereq_edges = await run_query(
+        """
+        MATCH (src:Course)-[:PREREQUISITE_OF]->(tgt:Course)
+        WHERE src.code IN $codes AND tgt.code IN $codes
+        RETURN src.code AS source, tgt.code AS target
+        """,
+        {"codes": codes},
+    )
+
+    # Query 3: corequisite edges within the same node set.
+    coreq_edges = await run_query(
+        """
+        MATCH (src:Course)-[:COREQUISITE_OF]->(tgt:Course)
+        WHERE src.code IN $codes AND tgt.code IN $codes
+        RETURN src.code AS source, tgt.code AS target
+        """,
+        {"codes": codes},
+    )
+
+    nodes = [
+        {
+            "code": r["code"],
+            "title": r["title"] or r["code"],
+            "credits": r["credits"],
+            "depth": r["depth"],
+        }
+        for r in node_rows
+    ]
+    edges = [
+        {"source": r["source"], "target": r["target"], "type": "prerequisite"}
+        for r in prereq_edges
+    ] + [
+        {"source": r["source"], "target": r["target"], "type": "corequisite"}
+        for r in coreq_edges
+    ]
+
+    return {"root": code, "nodes": nodes, "edges": edges}

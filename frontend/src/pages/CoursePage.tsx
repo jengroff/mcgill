@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { ArrowLeft, BookOpen, Clock, AlertCircle, GitBranch } from 'lucide-react'
-import { fetchCourse } from '../api/client'
+import { fetchCourse, fetchPrereqTree } from '../api/client'
+import PrereqGraph from '../components/PrereqGraph'
 
 interface CourseDetail {
   code: string
@@ -25,6 +26,7 @@ export default function CoursePage() {
   const { code } = useParams<{ code: string }>()
   const [course, setCourse] = useState<CourseDetail | null>(null)
   const [loading, setLoading] = useState(true)
+  const [treeData, setTreeData] = useState<{ root: string; nodes: any[]; edges: any[] } | null>(null)
 
   useEffect(() => {
     if (!code) return
@@ -32,6 +34,7 @@ export default function CoursePage() {
       .then(setCourse)
       .catch(() => {})
       .finally(() => setLoading(false))
+    fetchPrereqTree(code).then(setTreeData).catch(() => {})
   }, [code])
 
   if (loading) {
@@ -136,6 +139,23 @@ export default function CoursePage() {
             </a>
           )}
         </div>
+
+        {treeData && treeData.nodes.length > 1 && (
+          <div className="mt-4">
+            <h2 className="text-xs font-medium uppercase tracking-wide mb-3"
+                style={{ color: 'var(--text-muted)' }}>
+              Prerequisite chain
+            </h2>
+            <div className="rounded-lg overflow-hidden relative"
+                 style={{ background: 'var(--bg-surface)', border: '1px solid var(--border)' }}>
+              <PrereqGraph
+                code={treeData.root}
+                nodes={treeData.nodes}
+                edges={treeData.edges}
+              />
+            </div>
+          </div>
+        )}
       </div>
     </div>
   )
