@@ -28,16 +28,28 @@ ProgressCallback = Callable[[str, str, int, int], None] | None
 
 async def run(
     faculty_filter: list[str] | None = None,
+    dept_filter: list[str] | None = None,
     max_course_pages: int | None = None,
     max_program_pages: int | None = None,
     headless: bool | None = None,
     on_progress: ProgressCallback = None,
 ) -> list[CourseCreate]:
-    active = get_active_faculties(faculty_filter)
-    if not active:
-        raise ValueError("No matching faculties found for the given filter")
-
-    active_prefixes = {p for _, _, prefixes in active for p in prefixes}
+    if dept_filter:
+        # Find faculties containing the requested departments
+        dept_set = {d.upper() for d in dept_filter}
+        active = [
+            (name, slug, prefixes)
+            for name, slug, prefixes in ALL_FACULTIES
+            if any(p in dept_set for p in prefixes)
+        ]
+        if not active:
+            raise ValueError(f"No faculties found containing departments: {dept_filter}")
+        active_prefixes = dept_set
+    else:
+        active = get_active_faculties(faculty_filter)
+        if not active:
+            raise ValueError("No matching faculties found for the given filter")
+        active_prefixes = {p for _, _, prefixes in active for p in prefixes}
     active_pages = [
         path for _, slug, _ in active for path in PROGRAM_PAGES.get(slug, [])
     ]
@@ -128,5 +140,30 @@ async def run(
         with open(out_path, "w") as f:
             json.dump([c.model_dump() for c in courses], f, indent=2)
         _progress("scrape", f"Wrote {out_path} ({len(courses)} records)")
+
+        # Save to database
+        _progress("scrape", "Saving to database...", 0, len(courses))
+        from mcgill.db.postgres import get_pool
+        pool = await get_pool()
+        async with pool.acquire() as conn:
+            for c in courses:
+                await conn.execute(
+                    """INSERT INTO courses (code, slug, title, dept, number, credits,
+                           faculty, terms, description, prerequisites_raw,
+                           restrictions_raw, notes_raw, url, name_variants)
+                       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14)
+                       ON CONFLICT (code) DO UPDATE SET
+                           title = EXCLUDED.title,
+                           description = EXCLUDED.description,
+                           prerequisites_raw = EXCLUDED.prerequisites_raw,
+                           restrictions_raw = EXCLUDED.restrictions_raw,
+                           terms = EXCLUDED.terms,
+                           updated_at = now()""",
+                    c.code, c.slug, c.title, c.dept, c.number,
+                    c.credits, c.faculty, c.terms, c.description,
+                    c.prerequisites_raw, c.restrictions_raw,
+                    c.notes_raw, c.url, c.name_variants,
+                )
+        _progress("scrape", f"Saved {len(courses)} courses to database", len(courses), len(courses))
 
         return courses

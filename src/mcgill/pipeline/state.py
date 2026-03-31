@@ -9,6 +9,7 @@ from operator import add
 class PipelineState(TypedDict, total=False):
     # Configuration
     faculty_filter: list[str] | None
+    dept_filter: list[str] | None
     max_course_pages: int | None
     max_program_pages: int | None
 

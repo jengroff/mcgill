@@ -22,6 +22,7 @@ _runs: dict[str, dict] = {}
 
 class PipelineRequest(BaseModel):
     faculty_filter: list[str] | None = None
+    dept_filter: list[str] | None = None
     max_course_pages: int | None = None
     max_program_pages: int | None = None
 
@@ -117,35 +118,11 @@ async def _execute_pipeline(run_id: str, req: PipelineRequest):
         from mcgill.scraper.catalogue import run as run_scrape
         courses = await run_scrape(
             faculty_filter=req.faculty_filter,
+            dept_filter=req.dept_filter,
             max_course_pages=req.max_course_pages,
             max_program_pages=req.max_program_pages,
             on_progress=on_progress,
         )
-
-        # Insert into PostgreSQL
-        on_progress("scrape", "Saving to database...", 0, len(courses))
-        from mcgill.db.postgres import get_pool
-        pool = await get_pool()
-        async with pool.acquire() as conn:
-            for i, c in enumerate(courses):
-                await conn.execute(
-                    """INSERT INTO courses (code, slug, title, dept, number, credits,
-                           faculty, terms, description, prerequisites_raw,
-                           restrictions_raw, notes_raw, url, name_variants)
-                       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14)
-                       ON CONFLICT (code) DO UPDATE SET
-                           title = EXCLUDED.title,
-                           description = EXCLUDED.description,
-                           prerequisites_raw = EXCLUDED.prerequisites_raw,
-                           restrictions_raw = EXCLUDED.restrictions_raw,
-                           terms = EXCLUDED.terms,
-                           updated_at = now()""",
-                    c.code, c.slug, c.title, c.dept, c.number,
-                    c.credits, c.faculty, c.terms, c.description,
-                    c.prerequisites_raw, c.restrictions_raw,
-                    c.notes_raw, c.url, c.name_variants,
-                )
-        on_progress("scrape", f"Saved {len(courses)} courses to database", len(courses), len(courses))
 
         # Phase 2: Resolve
         run["phase"] = "resolve"
@@ -174,7 +151,9 @@ async def _execute_pipeline(run_id: str, req: PipelineRequest):
         from mcgill.embeddings.chunker import chunk_course
         from mcgill.embeddings.voyage import embed_texts
         from mcgill.embeddings.vector_store import insert_chunks, create_ivfflat_index
+        from mcgill.db.postgres import get_pool
 
+        pool = await get_pool()
         async with pool.acquire() as conn:
             rows = await conn.fetch(
                 "SELECT id, code, title, description, prerequisites_raw, restrictions_raw, notes_raw FROM courses"

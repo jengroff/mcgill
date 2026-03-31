@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>University Intelligence Pipeline — Rust-Accelerated Agentic Architecture</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --diagram-canvas:    216 30% 97%;
+      --diagram-surface:   210 40% 98%;
+      --diagram-grid:      210 25% 88%;
+      --diagram-ink:       215 25% 20%;
+      --diagram-ink-muted: 215 18% 38%;
+      --diagram-accent-input:     215 25% 27%;
+      --diagram-accent-process:   172 50% 40%;
+      --diagram-accent-assembly:  265 45% 55%;
+      --diagram-accent-output:    145 40% 45%;
+      --diagram-accent-infra:     215 16% 47%;
+      --diagram-accent-optimizer:  35 75% 50%;
+      --diagram-accent-indexing:  210 60% 50%;
+      --diagram-shadow: 0 0 0 1px rgba(0,0,0,0.05), 0 2px 4px rgba(0,0,0,0.05), 0 12px 24px rgba(0,0,0,0.05);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: hsl(var(--diagram-canvas));
+      font-family: 'IBM Plex Mono', monospace;
+      padding: 48px 24px 64px;
+      color: hsl(var(--diagram-ink));
+    }
+    .wrap { max-width: 640px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; }
+    .node {
+      position: relative;
+      background: white;
+      border-radius: 8px;
+      box-shadow: var(--diagram-shadow);
+      padding: 12px 16px 12px 20px;
+      width: 100%;
+      max-width: 480px;
+    }
+    .stripe {
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      border-radius: 8px 0 0 8px;
+    }
+    .node-title { font-size: 13px; font-weight: 500; color: hsl(var(--diagram-ink)); line-height: 1.3; }
+    .node-sub   { font-size: 11px; color: hsl(var(--diagram-ink-muted)); margin-top: 2px; line-height: 1.3; }
+    .connector  { display: flex; flex-direction: column; align-items: center; height: 32px; width: 100%; }
+    .connector-line { flex: 1; width: 1.5px; background: hsl(var(--diagram-ink)); }
+    .connector-arrow { flex-shrink: 0; margin-top: -1px; }
+    .pill {
+      display: inline-block;
+      background: white;
+      border-radius: 9999px;
+      box-shadow: var(--diagram-shadow);
+      padding: 2px 12px;
+      font-size: 11px;
+      color: hsl(var(--diagram-ink-muted));
+      margin: 0 auto;
+    }
+    .container-card {
+      position: relative;
+      width: 100%;
+      max-width: 520px;
+      border: 1.5px dashed hsl(var(--diagram-grid));
+      border-radius: 12px;
+      background: hsl(var(--diagram-surface));
+      padding: 28px 16px 16px;
+    }
+    .container-label {
+      position: absolute;
+      top: 8px; left: 14px;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      color: hsl(var(--diagram-ink-muted));
+      text-transform: uppercase;
+    }
+    .parallel-row { display: flex; gap: 12px; width: 100%; }
+    .parallel-node {
+      position: relative;
+      background: white;
+      border-radius: 8px;
+      box-shadow: var(--diagram-shadow);
+      padding: 12px 16px 12px 20px;
+      flex: 1;
+    }
+    .badge {
+      display: inline-block;
+      background: hsl(35 80% 92%);
+      color: hsl(35 75% 35%);
+      font-size: 10px;
+      font-weight: 500;
+      padding: 1px 7px;
+      border-radius: 4px;
+      margin-top: 4px;
+    }
+    .legend {
+      margin-top: 32px;
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      background: white;
+      box-shadow: var(--diagram-shadow);
+      border-radius: 8px;
+      padding: 10px 20px;
+    }
+    .legend-item { display: flex; align-items: center; gap: 6px; }
+    .legend-stripe { width: 4px; height: 14px; border-radius: 2px; }
+    .legend-label { font-size: 11px; color: hsl(var(--diagram-ink)); }
+    .legend-dashed { width: 20px; height: 10px; border-radius: 3px; border: 1.5px dashed hsl(var(--diagram-grid)); }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <div style="text-align:center; margin-bottom:32px;">
+    <h2 style="font-size:16px; font-weight:500; color:hsl(var(--diagram-ink)); margin-bottom:4px;">
+      University Intelligence Pipeline
+    </h2>
+    <p style="font-size:11px; color:hsl(var(--diagram-ink-muted));">
+      Rust-accelerated agentic RAG · Jaro-Winkler entity resolution · PyO3 bridge
+    </p>
+  </div>
+
+  <div style="width:100%; border-radius:16px; background:hsl(var(--diagram-canvas)); border:1px solid hsl(var(--diagram-grid)); padding:32px 24px; display:flex; flex-direction:column; align-items:center;">
+
+    <!-- INPUT -->
+    <div class="node">
+      <div class="stripe" style="background:hsl(var(--diagram-accent-input));"></div>
+      <div class="node-title">Document Ingestion</div>
+      <div class="node-sub">Syllabi · Catalogs · Accreditation reports · Faculty CVs</div>
+    </div>
+
+    <div class="connector">
+      <div class="connector-line"></div>
+      <svg class="connector-arrow" width="10" height="7" viewBox="0 0 10 7"><path d="M0 0 L5 7 L10 0" fill="hsl(var(--diagram-ink))"/></svg>
+    </div>
+
+    <!-- PHASE 1: PARSING + CHUNKING -->
+    <div class="container-card">
+      <div class="container-label">Phase 1 — Parsing &amp; Chunking</div>
+      <div class="parallel-row">
+        <div class="parallel-node">
+          <div class="stripe" style="background:hsl(var(--diagram-accent-process));"></div>
+          <div class="node-title">Document Parser</div>
+          <div class="node-sub">PDF → text · HTML → text · OCR fallback</div>
+        </div>
+        <div class="parallel-node">
+          <div class="stripe" style="background:hsl(var(--diagram-accent-process));"></div>
+          <div class="node-title">Sentence Chunker</div>
+          <div class="node-sub">3-sentence windows · 1-sentence overlap · doc_id metadata</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="connector">
+      <div class="connector-line"></div>
+      <svg class="connector-arrow" width="10" height="7" viewBox="0 0 10 7"><path d="M0 0 L5 7 L10 0" fill="hsl(var(--diagram-ink))"/></svg>
+    </div>
+
+    <!-- PHASE 2: ENTITY RESOLUTION — CPU CHOKEPOINT -->
+    <div class="container-card">
+      <div class="container-label">Phase 2 — Entity Resolution ⚡ CPU Chokepoint</div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:0;">
+
+        <div class="node" style="max-width:100%;">
+          <div class="stripe" style="background:hsl(var(--diagram-accent-optimizer));"></div>
+          <div class="node-title">Course Name Normalizer</div>
+          <div class="node-sub">Extract canonical codes · Strip section suffixes · Deduplicate cross-listings</div>
+        </div>
+
+        <div class="connector"><div class="connector-line" style="background:hsl(var(--diagram-accent-optimizer));"></div><svg class="connector-arrow" width="10" height="7" viewBox="0 0 10 7"><path d="M0 0 L5 7 L10 0" fill="hsl(var(--diagram-accent-optimizer))"/></svg></div>
+
+        <div class="node" style="max-width:100%; border: 1px solid hsl(35 75% 70%);">
+          <div class="stripe" style="background:hsl(var(--diagram-accent-optimizer));"></div>
+          <div class="node-title">Jaro-Winkler Batch Matcher</div>
+          <div class="node-sub">10k+ course name pairs · accel.py shim · Rust fallback-to-Python</div>
+          <div class="badge">🦀 Rust via PyO3 — 18.5x speedup</div>
+        </div>
+
+        <div class="connector"><div class="connector-line"></div><svg class="connector-arrow" width="10" height="7" viewBox="0 0 10 7"><path d="M0 0 L5 7 L10 0" fill="hsl(var(--diagram-ink))"/></svg></div>
+
+        <div class="node" style="max-width:100%;">
+          <div class="stripe" style="background:hsl(var(--diagram-accent-process));"></div>
+          <div class="node-title">Entity Graph Builder</div>
+          <div class="node-sub">Course → Section → Department → College → University</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="connector">
+      <div class="connector-line"></div>
+      <svg class="connector-arrow" width="10" height="7" viewBox="0 0 10 7"><path d="M0 0 L5 7 L10 0" fill="hsl(var(--diagram-ink))"/></svg>
+    </div>
+
+    <!-- PHASE 3: INDEXING -->
+    <div class="container-card">
+      <div class="container-label">Phase 3 — Indexing</div>
+      <div class="parallel-row">
+        <div class="parallel-node">
+          <div class="stripe" style="background:hsl(var(--diagram-accent-indexing));"></div>
+          <div class="node-title">Embedding Store</div>
+          <div class="node-sub">Chunk embeddings · Cosine top-k retrieval</div>
+          <div class="badge">🦀 Rust — 7.7x speedup</div>
+        </div>
+        <div class="parallel-node">
+          <div class="stripe" style="background:hsl(var(--diagram-accent-indexing));"></div>
+          <div class="node-title">BM25 Index</div>
+          <div class="node-sub">Keyword hybrid retrieval · Reranking fallback</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="connector">
+      <div class="connector-line"></div>
+      <svg class="connector-arrow" width="10" height="7" viewBox="0 0 10 7"><path d="M0 0 L5 7 L10 0" fill="hsl(var(--diagram-ink))"/></svg>
+    </div>
+
+    <!-- PHASE 4: AGENTIC QUERY LOOP -->
+    <div class="container-card">
+      <div class="container-label">Phase 4 — Agentic Query Loop</div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:0;">
+
+        <div class="node" style="max-width:100%;">
+          <div class="stripe" style="background:hsl(var(--diagram-accent-assembly));"></div>
+          <div class="node-title">Orchestrator Agent</div>
+          <div class="node-sub">claude-sonnet-4-6 · tool dispatch · state management</div>
+        </div>
+
+        <div class="connector"><div class="connector-line"></div><svg class="connector-arrow" width="10" height="7" viewBox="0 0 10 7"><path d="M0 0 L5 7 L10 0" fill="hsl(var(--diagram-ink))"/></svg></div>
+
+        <div class="parallel-row">
+          <div class="parallel-node">
+            <div class="stripe" style="background:hsl(var(--diagram-accent-process));"></div>
+            <div class="node-title">Retrieval Agent</div>
+            <div class="node-sub">Hybrid search · Rerank · Context window packing</div>
+          </div>
+          <div class="parallel-node">
+            <div class="stripe" style="background:hsl(var(--diagram-accent-process));"></div>
+            <div class="node-title">Eligibility Agent</div>
+            <div class="node-sub">Prereq graph traversal · Enrollment check · Conflict detection</div>
+          </div>
+        </div>
+
+        <div class="connector"><div class="connector-line"></div><svg class="connector-arrow" width="10" height="7" viewBox="0 0 10 7"><path d="M0 0 L5 7 L10 0" fill="hsl(var(--diagram-ink))"/></svg></div>
+
+        <div class="node" style="max-width:100%;">
+          <div class="stripe" style="background:hsl(var(--diagram-accent-assembly));"></div>
+          <div class="node-title">Synthesis Agent</div>
+          <div class="node-sub">CoT reasoning · XML-structured output · Grounded citations</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="connector">
+      <div class="connector-line" style="background:hsl(var(--diagram-accent-output));"></div>
+      <svg class="connector-arrow" width="10" height="7" viewBox="0 0 10 7"><path d="M0 0 L5 7 L10 0" fill="hsl(var(--diagram-accent-output))"/></svg>
+    </div>
+
+    <!-- OUTPUT -->
+    <div class="node">
+      <div class="stripe" style="background:hsl(var(--diagram-accent-output));"></div>
+      <div class="node-title">Advisor Response</div>
+      <div class="node-sub">Structured JSON + natural language · Source citations · Confidence score</div>
+    </div>
+
+    <!-- INFRA sidebar annotation -->
+    <p style="font-size:10px; color:hsl(var(--diagram-ink-muted)); margin:12px 0 0; text-align:center;">
+      ↳ Entity graph · Vector store · Enrollment DB (infra, not in critical path)
+    </p>
+
+  </div>
+
+  <div class="legend">
+    <div class="legend-item">
+      <div class="legend-stripe" style="background:hsl(var(--diagram-accent-input));"></div>
+      <span class="legend-label">Input</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-stripe" style="background:hsl(var(--diagram-accent-process));"></div>
+      <span class="legend-label">Process</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-stripe" style="background:hsl(var(--diagram-accent-assembly));"></div>
+      <span class="legend-label">Agent / Orchestrator</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-stripe" style="background:hsl(var(--diagram-accent-output));"></div>
+      <span class="legend-label">Output</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-stripe" style="background:hsl(var(--diagram-accent-optimizer));"></div>
+      <span class="legend-label">CPU Chokepoint</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-stripe" style="background:hsl(var(--diagram-accent-indexing));"></div>
+      <span class="legend-label">Indexing</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-dashed"></div>
+      <span class="legend-label">Pipeline Phase</span>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

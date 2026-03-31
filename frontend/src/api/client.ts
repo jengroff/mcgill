@@ -54,6 +54,7 @@ export async function searchCourses(query: string, mode = 'keyword', topK = 10) 
 // --- Pipeline ---
 export async function triggerPipeline(config: {
   faculty_filter?: string[]
+  dept_filter?: string[]
   max_course_pages?: number
   max_program_pages?: number
 }) {
