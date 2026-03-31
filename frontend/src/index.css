@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+:root {
+  --bg-primary: #0c0f16;
+  --bg-surface: #141820;
+  --bg-elevated: #1c2029;
+  --border: #2a2f3a;
+  --text-primary: #e8eaf0;
+  --text-muted: #8891a4;
+  --accent: #ED1B2F;
+  --accent-light: #FF4D5E;
+  --phase1: #3b82f6;
+  --phase2: #8b5cf6;
+  --phase3: #06b6d4;
+  --phase4: #f59e0b;
+}
+
+body {
+  margin: 0;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}

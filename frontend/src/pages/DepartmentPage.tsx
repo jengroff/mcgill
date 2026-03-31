@@ -1,0 +1,59 @@
+import { useEffect, useState } from 'react'
+import { useParams, Link } from 'react-router-dom'
+import { ArrowLeft } from 'lucide-react'
+import { fetchDepartmentCourses } from '../api/client'
+import CourseCard from '../components/CourseCard'
+
+interface CourseItem {
+  code: string
+  slug: string
+  title: string
+  credits: number | null
+  terms: string[]
+  description: string
+}
+
+export default function DepartmentPage() {
+  const { code } = useParams<{ code: string }>()
+  const [courses, setCourses] = useState<CourseItem[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    if (!code) return
+    fetchDepartmentCourses(code)
+      .then(setCourses)
+      .catch(() => {})
+      .finally(() => setLoading(false))
+  }, [code])
+
+  return (
+    <div className="h-full overflow-y-auto p-6">
+      <div className="max-w-3xl mx-auto">
+        <Link to="/" className="flex items-center gap-1 text-xs mb-4 no-underline" style={{ color: 'var(--text-muted)' }}>
+          <ArrowLeft size={14} />
+          Back
+        </Link>
+
+        <h1 className="text-xl font-bold mb-1" style={{ color: 'var(--text-primary)' }}>{code}</h1>
+        <p className="text-sm mb-6" style={{ color: 'var(--text-muted)' }}>{courses.length} courses</p>
+
+        {loading ? (
+          <div className="text-center py-8" style={{ color: 'var(--text-muted)' }}>Loading courses...</div>
+        ) : (
+          <div className="space-y-3">
+            {courses.map((c) => (
+              <CourseCard
+                key={c.code}
+                code={c.code}
+                title={c.title}
+                credits={c.credits}
+                terms={c.terms}
+                description={c.description}
+              />
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
