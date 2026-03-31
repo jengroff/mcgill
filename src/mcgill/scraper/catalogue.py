@@ -91,7 +91,10 @@ async def run(
 
         _progress("scrape", f"Found {len(slugs)} course pages to scrape", 0, len(slugs))
 
-        # Phase 1b: Scrape individual course pages
+        # Phase 1b: Scrape individual course pages — upsert to DB immediately
+        from mcgill.db.postgres import get_pool
+        pool = await get_pool()
+
         records: dict[str, CourseCreate] = {}
         for i, slug in enumerate(slugs):
             dept = slug.split("-")[0].upper()
@@ -101,13 +104,31 @@ async def run(
                 rec = parse_course(slug, html, facs)
                 if rec:
                     records[slug] = rec
+                    async with pool.acquire() as conn:
+                        await conn.execute(
+                            """INSERT INTO courses (code, slug, title, dept, number, credits,
+                                   faculty, terms, description, prerequisites_raw,
+                                   restrictions_raw, notes_raw, url, name_variants)
+                               VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14)
+                               ON CONFLICT (code) DO UPDATE SET
+                                   title = EXCLUDED.title,
+                                   description = EXCLUDED.description,
+                                   prerequisites_raw = EXCLUDED.prerequisites_raw,
+                                   restrictions_raw = EXCLUDED.restrictions_raw,
+                                   terms = EXCLUDED.terms,
+                                   updated_at = now()""",
+                            rec.code, rec.slug, rec.title, rec.dept, rec.number,
+                            rec.credits, rec.faculty, rec.terms, rec.description,
+                            rec.prerequisites_raw, rec.restrictions_raw,
+                            rec.notes_raw, rec.url, rec.name_variants,
+                        )
 
             if (i + 1) % 50 == 0 or i == len(slugs) - 1:
                 _progress("scrape", f"Scraped {i+1}/{len(slugs)} pages, {len(records)} parsed", i + 1, len(slugs))
 
             await asyncio.sleep(settings.scraper_delay_sec)
 
-        _progress("scrape", f"Course scrape done: {len(records)} records")
+        _progress("scrape", f"Course scrape done: {len(records)} records saved to database")
 
         # Phase 1c: Extract name variants from program pages
         known = {r.code for r in records.values()}
@@ -128,42 +149,24 @@ async def run(
 
             await asyncio.sleep(settings.scraper_delay_sec)
 
-        # Deduplicate variants and attach to records
+        # Deduplicate variants, attach to records, and update DB
         all_variants = {k: list(dict.fromkeys(v)) for k, v in all_variants.items()}
         courses = list(records.values())
-        for rec in courses:
-            rec.name_variants = all_variants.get(rec.code, [])
+        async with pool.acquire() as conn:
+            for rec in courses:
+                rec.name_variants = all_variants.get(rec.code, [])
+                if rec.name_variants:
+                    await conn.execute(
+                        "UPDATE courses SET name_variants = $1 WHERE code = $2",
+                        rec.name_variants, rec.code,
+                    )
+        _progress("variants", f"Updated name variants for {sum(1 for c in courses if c.name_variants)} courses")
 
-        # Save to JSON
+        # Save JSON snapshot
         DATA_DIR.mkdir(parents=True, exist_ok=True)
         out_path = DATA_DIR / "courses.json"
         with open(out_path, "w") as f:
             json.dump([c.model_dump() for c in courses], f, indent=2)
         _progress("scrape", f"Wrote {out_path} ({len(courses)} records)")
-
-        # Save to database
-        _progress("scrape", "Saving to database...", 0, len(courses))
-        from mcgill.db.postgres import get_pool
-        pool = await get_pool()
-        async with pool.acquire() as conn:
-            for c in courses:
-                await conn.execute(
-                    """INSERT INTO courses (code, slug, title, dept, number, credits,
-                           faculty, terms, description, prerequisites_raw,
-                           restrictions_raw, notes_raw, url, name_variants)
-                       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14)
-                       ON CONFLICT (code) DO UPDATE SET
-                           title = EXCLUDED.title,
-                           description = EXCLUDED.description,
-                           prerequisites_raw = EXCLUDED.prerequisites_raw,
-                           restrictions_raw = EXCLUDED.restrictions_raw,
-                           terms = EXCLUDED.terms,
-                           updated_at = now()""",
-                    c.code, c.slug, c.title, c.dept, c.number,
-                    c.credits, c.faculty, c.terms, c.description,
-                    c.prerequisites_raw, c.restrictions_raw,
-                    c.notes_raw, c.url, c.name_variants,
-                )
-        _progress("scrape", f"Saved {len(courses)} courses to database", len(courses), len(courses))
 
         return courses

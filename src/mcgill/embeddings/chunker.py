@@ -23,14 +23,19 @@ def chunk_course(
     prerequisites_raw: str = "",
     restrictions_raw: str = "",
     notes_raw: str = "",
+    dept: str = "",
+    faculty: str = "",
     window_size: int = WINDOW_SIZE,
     overlap: int = OVERLAP,
 ) -> list[str]:
     """Create sentence-window chunks for a single course.
 
-    Each chunk starts with "Course: CODE — TITLE" for context.
+    Each chunk starts with faculty/department context for retrieval.
     """
-    prefix = f"Course: {code} — {title}."
+    context_parts = [f"Course: {code} — {title}."]
+    if faculty or dept:
+        context_parts.append(f"Faculty: {faculty}, Department: {dept}.")
+    prefix = " ".join(context_parts)
 
     # Combine all text fields
     parts = [description]

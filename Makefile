@@ -4,10 +4,10 @@ help: ## Show this help
 	@grep -E '^[a-zA-Z_-]+:.*?##' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-18s\033[0m %s\n", $$1, $$2}'
 
 start: ## Stop everything, then start db + API + frontend
-	@docker-compose down 2>/dev/null || true
+	@docker compose down 2>/dev/null || true
 	@lsof -ti:8001,5174 2>/dev/null | xargs -r kill 2>/dev/null || true
 	@echo "Starting databases..."
-	@docker-compose up -d --wait postgres neo4j
+	@docker compose up -d --wait postgres neo4j
 	@sleep 3
 	@echo "Starting API on :8001..."
 	@uv run uvicorn mcgill.api.app:create_app --factory --reload --host 0.0.0.0 --port 8001 &
@@ -29,7 +29,7 @@ dev: ## Install with dev deps
 	uv pip install -e ".[dev]"
 
 up: ## Start all services via Docker
-	docker-compose up -d --wait
+	docker compose up -d --wait
 	@echo ""
 	@echo "  API:      http://localhost:8001"
 	@echo "  Docs:     http://localhost:8001/docs"
@@ -37,21 +37,21 @@ up: ## Start all services via Docker
 	@echo "  Postgres: localhost:5433"
 
 down: ## Stop all Docker services
-	docker-compose down
+	docker compose down
 
 rebuild: ## Rebuild containers from scratch (no cache)
-	docker-compose down -v
-	docker-compose build --no-cache
-	docker-compose up -d --wait
+	docker compose down -v
+	docker compose build --no-cache
+	docker compose up -d --wait
 
 logs: ## Tail Docker logs
-	docker-compose logs -f
+	docker compose logs -f
 
 db: ## Start databases only (Neo4j + Postgres)
-	docker-compose up -d --wait postgres neo4j
+	docker compose up -d --wait postgres neo4j
 
 db-down: ## Stop databases
-	docker-compose down postgres neo4j
+	docker compose down postgres neo4j
 
 serve: ## Start API locally via uv (databases must be running)
 	uv run uvicorn mcgill.api.app:create_app --factory --reload --host 0.0.0.0 --port 8001

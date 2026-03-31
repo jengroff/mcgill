@@ -93,12 +93,14 @@ async def _run_chat_pipeline(question: str, session_id: str) -> AsyncIterator[di
 
     context_chunks = []
     try:
-        # Try keyword search first (works without embeddings)
-        from mcgill.embeddings.retrieval import keyword_search
-        results = await keyword_search(question, top_k=5)
-        context_chunks = results
+        from mcgill.embeddings.retrieval import hybrid_search
+        context_chunks = await hybrid_search(question, top_k=5)
     except Exception:
-        pass
+        try:
+            from mcgill.embeddings.retrieval import keyword_search
+            context_chunks = await keyword_search(question, top_k=5)
+        except Exception:
+            pass
 
     # Also try graph queries for prerequisite questions
     graph_context = ""

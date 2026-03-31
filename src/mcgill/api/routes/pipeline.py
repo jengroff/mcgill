@@ -154,9 +154,13 @@ async def _execute_pipeline(run_id: str, req: PipelineRequest):
         from mcgill.db.postgres import get_pool
 
         pool = await get_pool()
+        scraped_codes = [c.code for c in courses]
         async with pool.acquire() as conn:
             rows = await conn.fetch(
-                "SELECT id, code, title, description, prerequisites_raw, restrictions_raw, notes_raw FROM courses"
+                """SELECT id, code, title, description, prerequisites_raw,
+                          restrictions_raw, notes_raw, dept, faculty
+                   FROM courses WHERE code = ANY($1)""",
+                scraped_codes,
             )
 
         batch_texts: list[str] = []
@@ -169,6 +173,8 @@ async def _execute_pipeline(run_id: str, req: PipelineRequest):
                 prerequisites_raw=r["prerequisites_raw"] or "",
                 restrictions_raw=r["restrictions_raw"] or "",
                 notes_raw=r["notes_raw"] or "",
+                dept=r["dept"] or "",
+                faculty=r["faculty"] or "",
             )
             batch_meta.append((r["id"], len(batch_texts)))
             batch_texts.extend(chunks)
