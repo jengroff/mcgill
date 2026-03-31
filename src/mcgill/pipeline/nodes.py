@@ -18,6 +18,7 @@ async def scrape_node(state: PipelineState) -> PipelineState:
 
         courses = await run_scrape(
             faculty_filter=state.get("faculty_filter"),
+            dept_filter=state.get("dept_filter"),
             max_course_pages=state.get("max_course_pages"),
             max_program_pages=state.get("max_program_pages"),
         )
@@ -122,18 +123,21 @@ async def embed_node(state: PipelineState) -> PipelineState:
     """Phase 3: Generate embeddings and store in pgvector."""
     try:
         from mcgill.db.postgres import get_pool
-        from mcgill.embeddings.chunker import chunk_course
+        from mcgill.embeddings.chunker import chunk_course, chunk_program_page
         from mcgill.embeddings.voyage import embed_texts
-        from mcgill.embeddings.vector_store import insert_chunks, create_ivfflat_index
+        from mcgill.embeddings.vector_store import insert_chunks, insert_program_chunks, create_ivfflat_index
 
         pool = await get_pool()
+
+        # --- Course chunks ---
         async with pool.acquire() as conn:
             rows = await conn.fetch(
-                "SELECT id, code, title, description, prerequisites_raw, restrictions_raw, notes_raw FROM courses"
+                """SELECT id, code, title, description, prerequisites_raw,
+                          restrictions_raw, notes_raw, dept, faculty
+                   FROM courses"""
             )
 
-        total_chunks = 0
-        # Process in batches for embedding API efficiency
+        total_course_chunks = 0
         batch_texts: list[str] = []
         batch_meta: list[tuple[int, int]] = []  # (course_id, chunk_start_idx)
 
@@ -145,6 +149,8 @@ async def embed_node(state: PipelineState) -> PipelineState:
                 prerequisites_raw=r["prerequisites_raw"] or "",
                 restrictions_raw=r["restrictions_raw"] or "",
                 notes_raw=r["notes_raw"] or "",
+                dept=r["dept"] or "",
+                faculty=r["faculty"] or "",
             )
             batch_meta.append((r["id"], len(batch_texts)))
             batch_texts.extend(chunks)
@@ -152,24 +158,45 @@ async def embed_node(state: PipelineState) -> PipelineState:
         if batch_texts:
             all_embeddings = embed_texts(batch_texts)
 
-            # Now insert per-course
             for i, (course_id, start_idx) in enumerate(batch_meta):
-                # Determine end index
-                if i + 1 < len(batch_meta):
-                    end_idx = batch_meta[i + 1][1]
-                else:
-                    end_idx = len(batch_texts)
-
+                end_idx = batch_meta[i + 1][1] if i + 1 < len(batch_meta) else len(batch_texts)
                 course_chunks = batch_texts[start_idx:end_idx]
                 course_embs = all_embeddings[start_idx:end_idx]
-                count = await insert_chunks(course_id, course_chunks, course_embs)
-                total_chunks += count
+                total_course_chunks += await insert_chunks(course_id, course_chunks, course_embs)
 
-            # Create IVFFlat index after bulk insert
-            await create_ivfflat_index()
+        # --- Program page chunks ---
+        async with pool.acquire() as conn:
+            prog_rows = await conn.fetch(
+                "SELECT id, title, content, faculty_slug FROM program_pages"
+            )
+
+        total_prog_chunks = 0
+        prog_texts: list[str] = []
+        prog_meta: list[tuple[int, int]] = []
+
+        for r in prog_rows:
+            chunks = chunk_program_page(
+                title=r["title"] or "",
+                content=r["content"] or "",
+                faculty_slug=r["faculty_slug"] or "",
+            )
+            if chunks:
+                prog_meta.append((r["id"], len(prog_texts)))
+                prog_texts.extend(chunks)
+
+        if prog_texts:
+            prog_embeddings = embed_texts(prog_texts)
+
+            for i, (page_id, start_idx) in enumerate(prog_meta):
+                end_idx = prog_meta[i + 1][1] if i + 1 < len(prog_meta) else len(prog_texts)
+                page_chunks = prog_texts[start_idx:end_idx]
+                page_embs = prog_embeddings[start_idx:end_idx]
+                total_prog_chunks += await insert_program_chunks(page_id, page_chunks, page_embs)
+
+        await create_ivfflat_index()
 
         return {
-            "chunks_created": total_chunks,
+            "chunks_created": total_course_chunks + total_prog_chunks,
             "embed_status": "complete",
         }
     except Exception as e:

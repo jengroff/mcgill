@@ -65,3 +65,32 @@ def chunk_course(
             break
 
     return chunks
+
+
+def chunk_program_page(
+    title: str,
+    content: str,
+    faculty_slug: str,
+    window_size: int = WINDOW_SIZE,
+    overlap: int = OVERLAP,
+) -> list[str]:
+    """Create sentence-window chunks for a program guide page."""
+    prefix = f"Program: {title}. Faculty: {faculty_slug}."
+
+    sentences = split_sentences(content)
+
+    if not sentences:
+        return [prefix] if title else []
+
+    if len(sentences) <= window_size:
+        return [f"{prefix} {' '.join(sentences)}"]
+
+    chunks = []
+    step = max(1, window_size - overlap)
+    for i in range(0, len(sentences), step):
+        window = sentences[i : i + window_size]
+        chunks.append(f"{prefix} {' '.join(window)}")
+        if i + window_size >= len(sentences):
+            break
+
+    return chunks

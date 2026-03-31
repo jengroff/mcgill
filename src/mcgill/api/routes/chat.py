@@ -102,6 +102,18 @@ async def _run_chat_pipeline(question: str, session_id: str) -> AsyncIterator[di
         except Exception:
             pass
 
+    # Also search program guide pages for program/requirement questions
+    program_context = ""
+    try:
+        from mcgill.embeddings.retrieval import program_search
+        program_results = await program_search(question, top_k=3)
+        if program_results:
+            program_context = "\n\nProgram guide context:"
+            for r in program_results:
+                program_context += f"\n---\n[{r.get('faculty_slug', '')} — {r.get('title', '')}]\n{r.get('text', '')}\n"
+    except Exception:
+        pass
+
     # Also try graph queries for prerequisite questions
     graph_context = ""
     try:
@@ -145,6 +157,8 @@ async def _run_chat_pipeline(question: str, session_id: str) -> AsyncIterator[di
 
     if graph_context:
         context_text += graph_context
+    if program_context:
+        context_text += program_context
 
     try:
         from mcgill.config import settings

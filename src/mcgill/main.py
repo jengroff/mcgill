@@ -25,7 +25,11 @@ def cli():
     scrape.add_argument("--no-headless", action="store_true")
 
     # --- pipeline ---
-    sub.add_parser("pipeline", help="Run the full ingest pipeline")
+    pipeline = sub.add_parser("pipeline", help="Run the full ingest pipeline")
+    pipeline.add_argument("--faculty", action="append", metavar="NAME")
+    pipeline.add_argument("--dept", action="append", metavar="CODE")
+    pipeline.add_argument("--max-course-pages", type=int, default=None)
+    pipeline.add_argument("--max-program-pages", type=int, default=None)
 
     # --- seed ---
     sub.add_parser("seed", help="Load courses.json into databases")
@@ -51,7 +55,12 @@ def cli():
         ))
     elif args.command == "pipeline":
         from mcgill.pipeline.graph import run_pipeline
-        asyncio.run(run_pipeline())
+        asyncio.run(run_pipeline(
+            faculty_filter=args.faculty,
+            dept_filter=args.dept,
+            max_course_pages=args.max_course_pages,
+            max_program_pages=args.max_program_pages,
+        ))
     elif args.command == "seed":
         from mcgill.db.migrations import seed_from_json
         asyncio.run(seed_from_json())

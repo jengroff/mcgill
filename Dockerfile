@@ -7,21 +7,27 @@ RUN npm run build
 
 FROM python:3.12-slim AS base
 
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /usr/local/bin/
+
 RUN apt-get update && apt-get install -y --no-install-recommends \
     curl && rm -rf /var/lib/apt/lists/*
 
-# Playwright system deps + Chromium
-RUN pip install playwright && playwright install --with-deps chromium
-
 WORKDIR /app
 
-COPY pyproject.toml ./
-RUN pip install --no-cache-dir .
+# Install dependencies first (cached until pyproject.toml or uv.lock change)
+COPY pyproject.toml uv.lock ./
+RUN uv sync --frozen --no-install-project
 
+# Copy source and install the project itself
 COPY src/ src/
+RUN uv sync --frozen --no-editable
+
+# Playwright system deps + Chromium
+RUN uv run playwright install --with-deps chromium
+
 COPY data/ data/
 COPY --from=frontend /frontend/dist frontend/dist
 
 EXPOSE 8000
 
-CMD ["uvicorn", "mcgill.api.app:create_app", "--factory", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uv", "run", "uvicorn", "mcgill.api.app:create_app", "--factory", "--host", "0.0.0.0", "--port", "8000"]

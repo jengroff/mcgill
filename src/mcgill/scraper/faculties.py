@@ -153,5 +153,5 @@ def get_active_faculties(
 ) -> list[tuple[str, str, list[str]]]:
     if faculty_filter is None:
         return ALL_FACULTIES
-    allowed = set(faculty_filter)
-    return [f for f in ALL_FACULTIES if f[0] in allowed or f[1] in allowed]
+    allowed = {v.lower() for v in faculty_filter}
+    return [f for f in ALL_FACULTIES if f[0].lower() in allowed or f[1].lower() in allowed]

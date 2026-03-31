@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from mcgill.db.postgres import get_pool
 from mcgill.embeddings.voyage import embed_query
-from mcgill.embeddings.vector_store import search_similar
+from mcgill.embeddings.vector_store import search_similar, search_similar_programs
 
 
 async def keyword_search(query: str, top_k: int = 10) -> list[dict]:
@@ -25,6 +25,12 @@ async def keyword_search(query: str, top_k: int = 10) -> list[dict]:
 async def semantic_search(query: str, top_k: int = 10) -> list[dict]:
     query_emb = embed_query(query)
     return await search_similar(query_emb, top_k)
+
+
+async def program_search(query: str, top_k: int = 5) -> list[dict]:
+    """Semantic search over program guide pages."""
+    query_emb = embed_query(query)
+    return await search_similar_programs(query_emb, top_k)
 
 
 def reciprocal_rank_fusion(

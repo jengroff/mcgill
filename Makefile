@@ -1,4 +1,4 @@
-.PHONY: help start install dev up down rebuild logs serve db db-down frontend frontend-build seed scrape pipeline test test-cov lint format typecheck clean
+.PHONY: help start install dev up down rebuild rebuild-keep logs serve db db-down frontend frontend-build seed scrape pipeline test test-cov lint format typecheck clean
 
 help: ## Show this help
 	@grep -E '^[a-zA-Z_-]+:.*?##' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-18s\033[0m %s\n", $$1, $$2}'
@@ -39,8 +39,13 @@ up: ## Start all services via Docker
 down: ## Stop all Docker services
 	docker compose down
 
-rebuild: ## Rebuild containers from scratch (no cache)
+rebuild: ## Rebuild containers from scratch, wipes volumes (Postgres, Neo4j)
 	docker compose down -v
+	docker compose build --no-cache
+	docker compose up -d --wait
+
+rebuild-keep: ## Rebuild containers but keep database volumes
+	docker compose down
 	docker compose build --no-cache
 	docker compose up -d --wait
 
@@ -68,8 +73,8 @@ seed: ## Load courses.json into databases
 scrape: ## Run scraper (usage: make scrape FACULTY="Science")
 	uv run mcgill scrape $(if $(FACULTY),--faculty "$(FACULTY)",)
 
-pipeline: ## Run full ingest pipeline (scrape → resolve → embed)
-	uv run mcgill pipeline
+pipeline: ## Run full ingest pipeline (usage: make pipeline FACULTY="Science" DEPT="COMP")
+	uv run mcgill pipeline $(if $(FACULTY),--faculty "$(FACULTY)",) $(if $(DEPT),--dept "$(DEPT)",)
 
 test: ## Run test suite
 	uv run pytest tests/ -v --tb=short

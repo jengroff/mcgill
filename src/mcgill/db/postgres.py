@@ -64,6 +64,28 @@ CREATE TABLE IF NOT EXISTS course_chunks (
 
 CREATE INDEX IF NOT EXISTS idx_chunks_course ON course_chunks(course_id);
 
+CREATE TABLE IF NOT EXISTS program_pages (
+    id            SERIAL PRIMARY KEY,
+    faculty_slug  VARCHAR(64) NOT NULL,
+    path          VARCHAR(512) UNIQUE NOT NULL,
+    title         VARCHAR(256) DEFAULT '',
+    content       TEXT DEFAULT '',
+    scraped_at    TIMESTAMPTZ DEFAULT now()
+);
+
+CREATE INDEX IF NOT EXISTS idx_program_pages_faculty ON program_pages(faculty_slug);
+
+CREATE TABLE IF NOT EXISTS program_chunks (
+    id              SERIAL PRIMARY KEY,
+    program_page_id INTEGER REFERENCES program_pages(id) ON DELETE CASCADE,
+    chunk_index     INTEGER NOT NULL,
+    text            TEXT NOT NULL,
+    embedding       vector(1024),
+    created_at      TIMESTAMPTZ DEFAULT now()
+);
+
+CREATE INDEX IF NOT EXISTS idx_program_chunks_page ON program_chunks(program_page_id);
+
 CREATE TABLE IF NOT EXISTS pipeline_runs (
     id           SERIAL PRIMARY KEY,
     run_id       UUID UNIQUE NOT NULL,

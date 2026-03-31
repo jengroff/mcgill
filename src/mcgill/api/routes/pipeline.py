@@ -148,12 +148,14 @@ async def _execute_pipeline(run_id: str, req: PipelineRequest):
         run["phase"] = "embed"
         on_progress("embed", "Generating embeddings...", 0, 0)
 
-        from mcgill.embeddings.chunker import chunk_course
+        from mcgill.embeddings.chunker import chunk_course, chunk_program_page
         from mcgill.embeddings.voyage import embed_texts
-        from mcgill.embeddings.vector_store import insert_chunks, create_ivfflat_index
+        from mcgill.embeddings.vector_store import insert_chunks, insert_program_chunks, create_ivfflat_index
         from mcgill.db.postgres import get_pool
 
         pool = await get_pool()
+
+        # 3a: Embed course chunks
         scraped_codes = [c.code for c in courses]
         async with pool.acquire() as conn:
             rows = await conn.fetch(
@@ -179,27 +181,60 @@ async def _execute_pipeline(run_id: str, req: PipelineRequest):
             batch_meta.append((r["id"], len(batch_texts)))
             batch_texts.extend(chunks)
 
-        on_progress("embed", f"Embedding {len(batch_texts)} chunks...", 0, len(batch_texts))
+        on_progress("embed", f"Embedding {len(batch_texts)} course chunks...", 0, len(batch_texts))
 
+        total_course_chunks = 0
         if batch_texts:
             all_embeddings = embed_texts(batch_texts)
-            total_chunks = 0
 
             for i, (course_id, start_idx) in enumerate(batch_meta):
                 end_idx = batch_meta[i + 1][1] if i + 1 < len(batch_meta) else len(batch_texts)
                 course_chunks = batch_texts[start_idx:end_idx]
                 course_embs = all_embeddings[start_idx:end_idx]
-                total_chunks += await insert_chunks(course_id, course_chunks, course_embs)
+                total_course_chunks += await insert_chunks(course_id, course_chunks, course_embs)
 
-            await create_ivfflat_index()
-            on_progress("embed", f"Stored {total_chunks} chunks with embeddings", total_chunks, total_chunks)
+        on_progress("embed", f"Stored {total_course_chunks} course chunks", total_course_chunks, total_course_chunks)
+
+        # 3b: Embed program page chunks
+        async with pool.acquire() as conn:
+            prog_rows = await conn.fetch(
+                "SELECT id, title, content, faculty_slug FROM program_pages"
+            )
+
+        prog_texts: list[str] = []
+        prog_meta: list[tuple[int, int]] = []
+
+        for r in prog_rows:
+            chunks = chunk_program_page(
+                title=r["title"] or "",
+                content=r["content"] or "",
+                faculty_slug=r["faculty_slug"] or "",
+            )
+            if chunks:
+                prog_meta.append((r["id"], len(prog_texts)))
+                prog_texts.extend(chunks)
+
+        total_prog_chunks = 0
+        if prog_texts:
+            on_progress("embed", f"Embedding {len(prog_texts)} program chunks...", 0, len(prog_texts))
+            prog_embeddings = embed_texts(prog_texts)
+
+            for i, (page_id, start_idx) in enumerate(prog_meta):
+                end_idx = prog_meta[i + 1][1] if i + 1 < len(prog_meta) else len(prog_texts)
+                page_chunks = prog_texts[start_idx:end_idx]
+                page_embs = prog_embeddings[start_idx:end_idx]
+                total_prog_chunks += await insert_program_chunks(page_id, page_chunks, page_embs)
+
+        await create_ivfflat_index()
+        on_progress("embed", f"Stored {total_course_chunks} course + {total_prog_chunks} program chunks", 0, 0)
 
         run["status"] = "complete"
         run["result"] = {
             "courses_scraped": len(courses),
             "entities_created": entity_count,
             "relationships_created": rel_count,
-            "chunks_embedded": len(batch_texts),
+            "course_chunks_embedded": total_course_chunks,
+            "program_chunks_embedded": total_prog_chunks,
         }
 
     except Exception as e:

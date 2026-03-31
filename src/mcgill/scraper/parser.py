@@ -84,6 +84,31 @@ def parse_course(slug: str, html: str, faculty_names: list[str]) -> CourseCreate
     )
 
 
+def parse_program_page(html: str) -> tuple[str, str]:
+    """Extract title and text content from a program guide page.
+
+    Returns (title, content) where content is the full page text
+    suitable for chunking and embedding.
+    """
+    soup = BeautifulSoup(html, "html.parser")
+    area = soup.find("div", id="contentarea") or soup.find("main") or soup.body
+    if not area:
+        return "", ""
+
+    h1 = area.find("h1")
+    title = h1.get_text(strip=True) if h1 else ""
+
+    # Get all meaningful text from the page
+    blocks: list[str] = []
+    for el in area.find_all(["p", "li", "h2", "h3", "h4", "td"]):
+        text = el.get_text(strip=True)
+        if len(text) > 20:
+            blocks.append(text)
+
+    content = "\n".join(blocks)
+    return title, content
+
+
 def extract_variants(html: str, known_codes: set[str]) -> dict[str, list[str]]:
     ctx_re = re.compile(
         r"(?:completed?|take|must take|including|one of|two of|three of|"

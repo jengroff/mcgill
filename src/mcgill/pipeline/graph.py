@@ -48,6 +48,7 @@ def compile_pipeline():
 
 async def run_pipeline(
     faculty_filter: list[str] | None = None,
+    dept_filter: list[str] | None = None,
     max_course_pages: int | None = None,
     max_program_pages: int | None = None,
 ) -> PipelineState:
@@ -61,6 +62,7 @@ async def run_pipeline(
     app = compile_pipeline()
     initial_state: PipelineState = {
         "faculty_filter": faculty_filter,
+        "dept_filter": dept_filter,
         "max_course_pages": max_course_pages,
         "max_program_pages": max_program_pages,
         "errors": [],
