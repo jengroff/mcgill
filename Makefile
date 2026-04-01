@@ -40,7 +40,7 @@ down: ## Stop all Docker services
 	docker compose down
 
 rebuild: ## Rebuild containers from scratch, wipes volumes (Postgres, Neo4j)
-	docker compose down -v
+	docker compose down
 	docker compose build --no-cache
 	docker compose up -d --wait
 
