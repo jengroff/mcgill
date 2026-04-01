@@ -13,4 +13,5 @@ class RetrievalState(BaseWorkflowState, total=False):
     semantic_results: list[dict]
     program_results: list[dict]
     graph_context: str
+    structured_context: str
     fused_results: list[dict]
