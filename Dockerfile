@@ -19,7 +19,7 @@ COPY pyproject.toml uv.lock ./
 RUN uv sync --frozen --no-install-project
 
 # Copy source and install the project itself
-COPY src/ src/
+COPY backend/ backend/
 RUN uv sync --frozen --no-editable
 
 # Playwright system deps + Chromium
@@ -30,4 +30,4 @@ COPY --from=frontend /frontend/dist frontend/dist
 
 EXPOSE 8000
 
-CMD ["uv", "run", "uvicorn", "mcgill.api.app:create_app", "--factory", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uv", "run", "uvicorn", "backend.api.app:create_app", "--factory", "--host", "0.0.0.0", "--port", "8000"]

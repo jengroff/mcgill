@@ -10,7 +10,7 @@ start: ## Stop everything, then start db + API + frontend
 	@docker compose up -d --wait postgres neo4j
 	@sleep 3
 	@echo "Starting API on :8001..."
-	@uv run uvicorn mcgill.api.app:create_app --factory --reload --host 0.0.0.0 --port 8001 &
+	@uv run uvicorn backend.api.app:create_app --factory --reload --host 0.0.0.0 --port 8001 &
 	@echo "Starting frontend on :5174..."
 	@cd frontend && npm run dev &
 	@echo ""
@@ -59,7 +59,7 @@ db-down: ## Stop databases
 	docker compose down postgres neo4j
 
 serve: ## Start API locally via uv (databases must be running)
-	uv run uvicorn mcgill.api.app:create_app --factory --reload --host 0.0.0.0 --port 8001
+	uv run uvicorn backend.api.app:create_app --factory --reload --host 0.0.0.0 --port 8001
 
 frontend: ## Start frontend dev server
 	cd frontend && npm run dev
@@ -80,18 +80,18 @@ test: ## Run test suite
 	uv run pytest tests/ -v --tb=short
 
 test-cov: ## Run tests with coverage
-	uv run pytest tests/ -v --tb=short --cov=mcgill --cov-report=term-missing
+	uv run pytest tests/ -v --tb=short --cov=backend --cov-report=term-missing
 
 lint: ## Check linting
-	uv run ruff check src/ tests/
-	uv run ruff format --check src/ tests/
+	uv run ruff check backend/ tests/
+	uv run ruff format --check backend/ tests/
 
 format: ## Auto-fix lint + format
-	uv run ruff check --fix src/ tests/
-	uv run ruff format src/ tests/
+	uv run ruff check --fix backend/ tests/
+	uv run ruff format backend/ tests/
 
 typecheck: ## Run mypy
-	uv run mypy src/mcgill/
+	uv run mypy backend/
 
 clean: ## Remove build artifacts
 	find . -type d -name __pycache__ -exec rm -rf {} + 2>/dev/null || true
