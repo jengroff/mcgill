@@ -88,8 +88,12 @@ async def stream(session_id: str, request: Request):
 
                 # Check pipeline intent — if matched, spawn background task
                 pipeline_intent = _detect_pipeline_intent(question)
+                planner_intent = _detect_planner_intent(question)
                 if pipeline_intent:
                     _spawn_pipeline(session_id, pipeline_intent)
+                    session["status"] = "idle"
+                elif planner_intent:
+                    _spawn_planner(session_id, planner_intent)
                     session["status"] = "idle"
                 else:
                     yield _sse({"type": "thinking", "content": "Searching courses..."})
@@ -315,6 +319,7 @@ async def _run_qa_pipeline(question: str, session_id: str) -> AsyncIterator[dict
         retrieval_context=retrieval_state.get("fused_results", []),
         program_context=retrieval_state.get("program_results", []),
         graph_context=retrieval_state.get("graph_context", ""),
+        structured_context=retrieval_state.get("structured_context", ""),
     )
     yield {"type": "step_update", "phase": 2, "status": "done", "label": "Synthesis"}
 
@@ -322,3 +327,144 @@ async def _run_qa_pipeline(question: str, session_id: str) -> AsyncIterator[dict
     if answer:
         yield {"type": "assistant", "content": answer}
         _sessions[session_id]["messages"].append({"role": "assistant", "content": answer})
+
+
+# ---------------------------------------------------------------------------
+# Curriculum planner intent detection + background execution
+# ---------------------------------------------------------------------------
+
+def _detect_planner_intent(message: str) -> dict | None:
+    """Detect if the user wants to build a multi-semester curriculum plan.
+
+    Returns {"interests": [...], "semesters": int} or None.
+    """
+    import re
+
+    lower = message.lower()
+
+    # Must contain a planning trigger
+    plan_triggers = ("plan my", "build a curriculum", "plan a curriculum", "semester plan",
+                     "course plan", "plan my courses", "plan my schedule", "year plan",
+                     "next year", "next two years", "next 2 years", "schedule for",
+                     "curriculum for", "plan for next")
+    if not any(t in lower for t in plan_triggers):
+        return None
+
+    # Extract semester count
+    semesters = 4  # default: 2 years
+    sem_match = re.search(r"(\d+)\s*semester", lower)
+    year_match = re.search(r"(\d+)\s*year", lower)
+    if sem_match:
+        semesters = int(sem_match.group(1))
+    elif year_match:
+        semesters = int(year_match.group(1)) * 2
+    elif "next year" in lower:
+        semesters = 2
+
+    # Extract interests from the message (rough: words after "interested in" / "focus on" / "studying")
+    interests: list[str] = []
+    interest_patterns = [
+        r"interested?\s+in\s+(.+?)(?:\.|,\s*(?:and\s+)?plan|$)",
+        r"(?:focus|focusing)\s+on\s+(.+?)(?:\.|,\s*(?:and\s+)?plan|$)",
+        r"studying\s+(.+?)(?:\.|,\s*(?:and\s+)?plan|$)",
+        r"major(?:ing)?\s+in\s+(.+?)(?:\.|,\s*(?:and\s+)?plan|$)",
+    ]
+    for pattern in interest_patterns:
+        match = re.search(pattern, lower)
+        if match:
+            raw = match.group(1).strip()
+            # Split on "and" / commas
+            parts = re.split(r"\s*(?:,|and)\s*", raw)
+            interests.extend(p.strip() for p in parts if p.strip())
+            break
+
+    if not interests:
+        # Fallback: use the whole message minus trigger words as a rough interest signal
+        noise = {"plan", "my", "curriculum", "courses", "schedule", "build", "a", "for",
+                 "next", "year", "years", "semester", "semesters", "the", "me", "please",
+                 "can", "you", "i", "want", "to", "would", "like", "create", "make", "two", "2"}
+        words = re.findall(r"[a-z]+", lower)
+        interests = [w for w in words if w not in noise and len(w) > 2]
+
+    return {"interests": interests, "semesters": semesters} if interests else None
+
+
+def _spawn_planner(session_id: str, intent: dict) -> str:
+    """Spawn the curriculum planner as a background task."""
+    run_id = str(uuid.uuid4())[:8]
+    session = _sessions[session_id]
+    queue: asyncio.Queue = session["event_queue"]
+
+    interests = intent.get("interests", [])
+    semesters = intent.get("semesters", 4)
+    label = f"{semesters}-semester plan for {', '.join(interests[:3])}"
+
+    queue.put_nowait({
+        "type": "assistant",
+        "content": f"Building a **{semesters}-semester curriculum plan** based on your interests "
+                   f"in **{', '.join(interests)}**. This may take a minute — the planning agent "
+                   f"is analyzing courses, prerequisites, and term availability.",
+    })
+    queue.put_nowait({
+        "type": "step_update",
+        "phase": "planner",
+        "label": label,
+        "status": "running",
+    })
+
+    task = asyncio.create_task(
+        _run_planner_bg(session_id, run_id, interests, semesters)
+    )
+    session["bg_tasks"][run_id] = task
+    return run_id
+
+
+async def _run_planner_bg(
+    session_id: str,
+    run_id: str,
+    interests: list[str],
+    semesters: int,
+):
+    """Background coroutine that runs the planner workflow."""
+    from backend.workflows.planner.graph import PlannerOrchestrator
+
+    session = _sessions[session_id]
+    queue: asyncio.Queue = session["event_queue"]
+
+    try:
+        orchestrator = PlannerOrchestrator()
+        result = await orchestrator.run(
+            student_interests=interests,
+            target_semesters=semesters,
+        )
+
+        plan_md = result.get("plan_markdown", "")
+        errors = result.get("errors", [])
+
+        if plan_md:
+            queue.put_nowait({"type": "assistant", "content": plan_md})
+            session["messages"].append({"role": "assistant", "content": plan_md})
+        elif errors:
+            queue.put_nowait({
+                "type": "error",
+                "content": f"Planner encountered errors: {'; '.join(errors)}",
+            })
+
+        queue.put_nowait({
+            "type": "step_update",
+            "phase": "planner",
+            "label": "Curriculum plan",
+            "status": "done",
+        })
+
+    except Exception as e:
+        logger.exception(f"Planner {run_id} failed")
+        queue.put_nowait({"type": "error", "content": f"Planner failed: {e}"})
+        queue.put_nowait({
+            "type": "step_update",
+            "phase": "planner",
+            "label": "Curriculum plan",
+            "status": "error",
+        })
+    finally:
+        session["bg_tasks"].pop(run_id, None)

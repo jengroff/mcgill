@@ -22,6 +22,7 @@ make frontend                 # UI on :5174
 - **Full ingest pipeline** — scrape, resolve, embed in one shot with real-time SSE progress streaming
 - **PDF ingestion** — upload PDFs to extract, chunk, embed, and store in pgvector
 - **Curriculum recommendations** — provide interests and completed courses, get AI-assembled course plans
+- **Multi-semester planner** — Claude Agent SDK builds a realistic 2–4 semester curriculum plan, with VLM processing for uploaded PDF course guides
 
 ## Ports
 
@@ -74,13 +75,15 @@ backend/
 │   ├── ingest/            Scrape → Resolve → Chunk → Embed
 │   ├── retrieval/         Keyword + Semantic + Program + Graph → RRF fusion
 │   ├── ingestion/         PDF / URL → Extract → Chunk → Embed → Store
-│   └── synthesis/         Chat synthesis + Curriculum assembly
+│   ├── synthesis/         Chat synthesis + Curriculum assembly
+│   └── planner/           Multi-semester curriculum planner (Agent SDK + VLM)
 │
 ├── services/       Stateless domain services (no workflow/lib imports)
 │   ├── scraping/          Browser, parser, catalogue, faculties registry
 │   ├── resolution/        Jaro-Winkler, entity graph, prerequisites
 │   ├── embedding/         Chunker, Voyage AI, vector store, retrieval
 │   ├── pdf/               PDF text extraction (pymupdf + pdfplumber)
+│   ├── vlm/               Vision Language Model for PDF course guide processing
 │   └── synthesis/         Curriculum assembler (interest mapping, requirements)
 │
 ├── db/             PostgreSQL + pgvector, Neo4j (unchanged)
@@ -106,6 +109,7 @@ backend/
 | `ingestion` | PDF / URL → extract → chunk → embed → store |
 | `synthesis` | Context packing → Claude synthesis |
 | `curriculum` | Interest mapping → requirements → retrieval → prereq filter → rank → assemble |
+| `planner` | Multi-semester curriculum planning via Claude Agent SDK + VLM PDF processing |
 
 ### API Endpoints
 
@@ -121,6 +125,8 @@ backend/
 | `GET /api/v1/pipeline/stream/{run_id}` | SSE stream for pipeline progress |
 | `POST /api/v1/ingest/pdf` | Upload and ingest a PDF file |
 | `POST /api/v1/curriculum/recommend` | Generate curriculum recommendations |
+| `POST /api/v1/planner/plan` | Multi-semester curriculum plan (accepts PDF upload) |
+| `POST /api/v1/planner/stream` | SSE stream for planner progress |
 | `POST /api/v1/chat/session` | Create chat session |
 | `POST /api/v1/chat/ask` | Submit a question (or pipeline trigger) |
 | `GET /api/v1/chat/stream` | SSE stream for chat responses |
@@ -139,7 +145,7 @@ mcgill curriculum --interests "machine learning" "statistics" --program computer
 
 ## Stack
 
-- **Backend**: Python 3.12, FastAPI, LangGraph, asyncpg, neo4j, rapidfuzz, Voyage AI, Anthropic
+- **Backend**: Python 3.12, FastAPI, LangGraph, Claude Agent SDK, asyncpg, neo4j, rapidfuzz, Voyage AI, Anthropic
 - **Frontend**: React 19, TypeScript, Vite, Tailwind CSS 4, Zustand, react-router-dom, D3
 - **Databases**: PostgreSQL 17 + pgvector, Neo4j 5
 - **Infra**: uv, Docker Compose

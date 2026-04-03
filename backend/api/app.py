@@ -61,6 +61,7 @@ def create_app() -> FastAPI:
     from backend.api.routes.chat import router as chat_router
     from backend.api.routes.ingestion import router as ingestion_router
     from backend.api.routes.curriculum import router as curriculum_router
+    from backend.api.routes.planner import router as planner_router
 
     app.include_router(health_router)
     app.include_router(faculties_router, prefix="/api/v1")
@@ -70,6 +71,7 @@ def create_app() -> FastAPI:
     app.include_router(chat_router, prefix="/api/v1/chat")
     app.include_router(ingestion_router, prefix="/api/v1")
     app.include_router(curriculum_router, prefix="/api/v1")
+    app.include_router(planner_router, prefix="/api/v1")
 
     # Serve frontend static files if built
     static_dir = Path(__file__).parent.parent.parent.parent / "frontend" / "dist"

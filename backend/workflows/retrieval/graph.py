@@ -15,6 +15,7 @@ from backend.workflows.retrieval.nodes import (
     semantic_node,
     program_node,
     graph_node,
+    structured_node,
     fusion_node,
 )
 
@@ -33,14 +34,15 @@ class RetrievalOrchestrator(WorkflowOrchestrator):
         graph.add_node("semantic", semantic_node)
         graph.add_node("program", program_node)
         graph.add_node("graph", graph_node)
+        graph.add_node("structured", structured_node)
         graph.add_node("fusion", fusion_node)
 
-        # Fan-out from entry to all four retrieval nodes
         graph.set_entry_point("keyword")
         graph.add_edge("keyword", "semantic")
         graph.add_edge("semantic", "program")
         graph.add_edge("program", "graph")
-        graph.add_edge("graph", "fusion")
+        graph.add_edge("graph", "structured")
+        graph.add_edge("structured", "fusion")
         graph.add_edge("fusion", END)
 
         return graph.compile()
@@ -57,6 +59,7 @@ class RetrievalOrchestrator(WorkflowOrchestrator):
             semantic_results=[],
             program_results=[],
             graph_context="",
+            structured_context="",
             fused_results=[],
         )
 

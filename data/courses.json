@@ -1,2037 +1,3156 @@
 [
   {
-    "code": "PHIL 197",
-    "slug": "phil-197",
-    "title": "FYS: Right and Wrong",
-    "dept": "PHIL",
-    "number": "197",
-    "credits": null,
-    "faculty": "Arts",
-    "faculties": [
-      "Arts"
-    ],
-    "terms": [],
-    "description": "Reading and discussion of classic and contemporary philosophical texts on morality: its nature, status, and importance.",
-    "prerequisites_raw": "",
-    "restrictions_raw": "Restriction: Open only to newly admitted students in U0 or U1 who may take only one FYS",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-197/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "PHIL 198",
-    "slug": "phil-198",
-    "title": "FYS: Knowledge and Ideas in Early Modern Philosophy",
-    "dept": "PHIL",
-    "number": "198",
-    "credits": null,
-    "faculty": "Arts",
-    "faculties": [
-      "Arts"
-    ],
-    "terms": [],
-    "description": "An introduction to central issues in the philosophy of the early modern period through an examination of works by, for example, Descartes, Malebranche, Spinoza, Locke, Leibniz, Berkeley and Hume.",
-    "prerequisites_raw": "",
-    "restrictions_raw": "Restriction: Open only to newly admitted students in U0 or U1 who may take only one FYS",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-198/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "PHIL 199",
-    "slug": "phil-199",
-    "title": "FYS: Minds, Brain, and Machines",
-    "dept": "PHIL",
-    "number": "199",
-    "credits": null,
-    "faculty": "Arts",
-    "faculties": [
-      "Arts"
-    ],
-    "terms": [],
-    "description": "An introduction to the philosophical foundations of the sciences of the mind.",
-    "prerequisites_raw": "",
-    "restrictions_raw": "Restriction: Open only to newly admitted students in U0 or U1 who may take only one FYS",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-199/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "PHIL 200",
-    "slug": "phil-200",
-    "title": "Introduction to Philosophy 1",
-    "dept": "PHIL",
-    "number": "200",
-    "credits": null,
-    "faculty": "Arts",
-    "faculties": [
-      "Arts"
-    ],
-    "terms": [],
-    "description": "A course treating some of the central problems of philosophy: the mind-body problem, freedom, scepticism and certainty, fate, time, and the existence of God.",
-    "prerequisites_raw": "",
-    "restrictions_raw": "",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-200/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "PHIL 201",
-    "slug": "phil-201",
-    "title": "Introduction to Philosophy 2",
-    "dept": "PHIL",
+    "code": "EDEC 201",
+    "slug": "edec-201",
+    "title": "First Year Professional Seminar",
+    "dept": "EDEC",
     "number": "201",
     "credits": null,
-    "faculty": "Arts",
+    "faculty": "Education",
     "faculties": [
-      "Arts"
+      "Education"
     ],
     "terms": [],
-    "description": "An introduction to some of the major problems of philosophy. This course does not duplicatePHIL 200.",
-    "prerequisites_raw": "",
-    "restrictions_raw": "",
+    "description": "Orientation to the culture and community of school and to teaching as a profession. Focus on the general functioning of schools and complexity of the teacher role. Competencies and working professional portfolios will be addressed.",
+    "prerequisites_raw": "Corequisite: EDFE 200",
+    "restrictions_raw": "Restriction: Open to B.Ed. Secondary and B.Ed. K/Elem. students only",
     "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-201/index.html",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-201/index.html",
     "name_variants": []
   },
   {
-    "code": "PHIL 202",
-    "slug": "phil-202",
-    "title": "The Good Life",
-    "dept": "PHIL",
+    "code": "EDEC 202",
+    "slug": "edec-202",
+    "title": "Effective Communication",
+    "dept": "EDEC",
     "number": "202",
     "credits": null,
-    "faculty": "Arts",
+    "faculty": "Education",
     "faculties": [
-      "Arts"
+      "Education"
     ],
     "terms": [],
-    "description": "Explores how philosophers from Socrates to Sartre wrestle with the question of how we should live, including ancient philosophers who present their teachings as pathways to happiness, virtue, and peace of mind; medieval philosophers who seek to understand God\u2019s will; and modern philosophers who grapple with the tension between community and freedom. Analyzes debates of fundamental moral and existential questions: What things really matter? Does it pay to be good? What constitutes the best society? Can we escape the roller coaster of our emotions? Examines how answers are intertwined with beliefs about God, nature, knowledge, the soul, and politics.",
+    "description": "Effective writing, speaking, and non-verbal communication skills for a variety of academic\nand professional situations. Feedback approaches, influential rhetoric, and how to\nmake effective requests to build productive teams through communication. Communication norms in multiple contexts and cultures, identification and correction of common errors in grammar, mechanics and usage.",
     "prerequisites_raw": "",
     "restrictions_raw": "",
     "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-202/index.html",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-202/index.html",
     "name_variants": []
   },
   {
-    "code": "PHIL 203",
-    "slug": "phil-203",
-    "title": "Introduction to Artificial Intelligence Ethics",
-    "dept": "PHIL",
+    "code": "EDEC 203",
+    "slug": "edec-203",
+    "title": "Communication in Education",
+    "dept": "EDEC",
     "number": "203",
     "credits": null,
-    "faculty": "Arts",
+    "faculty": "Education",
     "faculties": [
-      "Arts"
+      "Education"
     ],
     "terms": [],
-    "description": "An introduction to several important debates in the ethics of artificial intelligence (AI), including: artificial general intelligence, artificial consciousness, existential risk, and the moral status of advanced AI systems, to practical ethical and political issues raised by the uses of AI systems, including opacity, discrimination, privacy,disinformation and impacts on work and wealth distribution.",
+    "description": "Written and oral communication in Education (in English): emphasis on strategies for identifying, analyzing and solving writing and speaking problems. Course work based on academic and professional communication in education, with a particular focus on classroom communication.",
     "prerequisites_raw": "",
     "restrictions_raw": "",
     "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-203/index.html",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-203/index.html",
     "name_variants": []
   },
   {
-    "code": "PHIL 210",
-    "slug": "phil-210",
-    "title": "Introduction to Deductive Logic 1",
-    "dept": "PHIL",
-    "number": "210",
+    "code": "EDEC 211",
+    "slug": "edec-211",
+    "title": "Innu Language 1",
+    "dept": "EDEC",
+    "number": "211",
     "credits": null,
-    "faculty": "Arts",
+    "faculty": "Education",
     "faculties": [
-      "Arts"
+      "Education"
     ],
     "terms": [],
-    "description": "An introduction to propositional and predicate logic; formalization of arguments, truth tables, systems of deduction, elementary metaresults, and related topics.",
+    "description": "Innu grammatical patterns as well as vocabulary and common spellings, including literacy and what makes Innu distinctive as well as how the culture is reflected in the language.",
     "prerequisites_raw": "",
-    "restrictions_raw": "Restriction: Not open to students who are taking or have taken MATH 318",
+    "restrictions_raw": "",
     "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-210/index.html",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-211/index.html",
     "name_variants": []
   },
   {
-    "code": "PHIL 221",
-    "slug": "phil-221",
-    "title": "Introduction to History and Philosophy of Science 2",
-    "dept": "PHIL",
+    "code": "EDEC 213",
+    "slug": "edec-213",
+    "title": "Innu Language 2",
+    "dept": "EDEC",
+    "number": "213",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "The study of Innu grammar, vocabulary, spelling, and literacy. Focus on the oral skills associated with basic and classroom interaction and the difficulties encountered by additional language learners, including implications for additional language teaching and learning.",
+    "prerequisites_raw": "Prerequisites: EDEC 211",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-213/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDEC 215",
+    "slug": "edec-215",
+    "title": "English Exam for Teacher Certification",
+    "dept": "EDEC",
+    "number": "215",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "The English Exam for Teacher Certification (EETC) is a Quebec Ministry of Education-required component of the B.Ed. degree. The exam is coordinated by an independent organization, the Centre for the English Exam for Teacher Certification (CEETC). Consists of a 2-hour exam designed to assess teacher\ncandidates' competency in the language of instruction. Must be completed before the 3rd Field Experience. Students must register for EDEC 215 and register for the EETC on the CEETC website. Students who do not pass after four attempts require permission from the Internships & Student Affairs Office to re-take the exam.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-215/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDEC 216",
+    "slug": "edec-216",
+    "title": "Indigenous Language Requirement",
+    "dept": "EDEC",
+    "number": "216",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "The Indigenous language requirement is a program requirement. Students will be required to fulfill the Indigenous language competencies of the program through the successful completion of two courses in their Indigenous language.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-216/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDEC 220",
+    "slug": "edec-220",
+    "title": "Curriculum Development",
+    "dept": "EDEC",
+    "number": "220",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "This course, introducing Aboriginal educators to the principles and processes of curriculum development, emphasizes the impact of language and culture on the development of materials. Features of the process of curriculum and materials design, which are strategically important in meeting the needs of Aboriginal students, are highlighted.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-220/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDEC 221",
+    "slug": "edec-221",
+    "title": "Leadership and Group Skills",
+    "dept": "EDEC",
     "number": "221",
     "credits": null,
-    "faculty": "Arts",
+    "faculty": "Education",
     "faculties": [
-      "Arts"
+      "Education"
     ],
     "terms": [],
-    "description": "A survey of the development of modern science since the Eighteenth Century.",
+    "description": "Management, effective team leadership, group dynamics, and communications skills crucial for leaders. Discussion of mainstream, intercultural, Indigenous, international, and institutional practices and leadership skills.",
     "prerequisites_raw": "",
-    "restrictions_raw": "",
+    "restrictions_raw": "Restriction: Normally for students registered within Certificate in First Nations and Inuit Educational Leadership",
     "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-221/index.html",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-221/index.html",
     "name_variants": []
   },
   {
-    "code": "PHIL 230",
-    "slug": "phil-230",
-    "title": "Introduction to Moral Philosophy 1",
-    "dept": "PHIL",
+    "code": "EDEC 222",
+    "slug": "edec-222",
+    "title": "Personnel Management and Group Skills",
+    "dept": "EDEC",
+    "number": "222",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Management, effective team leadership, group dynamics, and communications skills crucial to First Nations and Inuit community-based educational leaders. Techniques of developing staff members' potential through staff development and quality performance.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "Restriction: Normally for students registered within Certificate in First Nations and Inuit Educational Leadership.",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-222/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDEC 227",
+    "slug": "edec-227",
+    "title": "Naskapi Language 1",
+    "dept": "EDEC",
+    "number": "227",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "The phonological system, including syntax and morphology. Word generation conventions will be analyzed and labels will be developed to describe how the language functions.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-227/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDEC 228",
+    "slug": "edec-228",
+    "title": "Naskapi Language 2",
+    "dept": "EDEC",
+    "number": "228",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "The morphology and syntax analysis of Naskapi at a more advanced level, including the study of word generation conventions. Importance will be placed on developing reading and writing skills.",
+    "prerequisites_raw": "Prerequisite: EDEC 227",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-228/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDEC 230",
+    "slug": "edec-230",
+    "title": "Conflict Resolution",
+    "dept": "EDEC",
     "number": "230",
     "credits": null,
-    "faculty": "Arts",
+    "faculty": "Education",
     "faculties": [
-      "Arts"
+      "Education"
     ],
     "terms": [],
-    "description": "A survey of a number of historically important and influential theories. Philosophers to be discussed may include Aristotle, Hume, Kant, Bentham, Mill, and Moore.",
+    "description": "Methods and techniques for preventing and resolving conflicts in the workplace. Emphasis on culturally relevant strategies.",
     "prerequisites_raw": "",
-    "restrictions_raw": "",
+    "restrictions_raw": "Restriction(s): Limited to students enrolled in off-campus programs delivered through First Nations and Inuit Education or permission of the OFNIE director.",
     "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-230/index.html",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-230/index.html",
     "name_variants": []
   },
   {
-    "code": "PHIL 237",
-    "slug": "phil-237",
-    "title": "Contemporary Moral Issues",
-    "dept": "PHIL",
+    "code": "EDEC 233",
+    "slug": "edec-233",
+    "title": "Indigenous Education",
+    "dept": "EDEC",
+    "number": "233",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "An exploration of Indigenous knowledge and pedagogy, primarily in Canada but also world-wide. Consideration of the diverse social, cultural, linguistic, political, and pedagogical histories of Indigenous communities. Examines how a teacher's professional identity and practice can be influenced by an understanding of Indigenous knowledge and worldviews.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-233/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDEC 237",
+    "slug": "edec-237",
+    "title": "Mi'gmaw Heritage Language 1",
+    "dept": "EDEC",
     "number": "237",
     "credits": null,
-    "faculty": "Arts",
+    "faculty": "Education",
     "faculties": [
-      "Arts"
+      "Education"
     ],
     "terms": [],
-    "description": "An introductory discussion of central ethical questions (the value of persons, or the relationship of rights and utilities, for example) through the investigation of currently disputed social and political issues. Specific issues to be discussed may include pornography and censorship, affirmative action, civil disobedience, punishment, abortion, and euthanasia.",
+    "description": "Students will gain a basic understanding of Mi'gmaw syntax and morphology, and stress and intonation patterns of the language. Students will develop literacy and learn what makes Mi'gmaw distinctive as well as how the culture is reflected in the language.",
     "prerequisites_raw": "",
     "restrictions_raw": "",
     "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-237/index.html",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-237/index.html",
     "name_variants": []
   },
   {
-    "code": "PHIL 240",
-    "slug": "phil-240",
-    "title": "Political Philosophy 1",
-    "dept": "PHIL",
+    "code": "EDEC 238",
+    "slug": "edec-238",
+    "title": "Mi'gmaw Heritage Language 2",
+    "dept": "EDEC",
+    "number": "238",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Continues the study of Mi'gmaw syntax and morphology with the objective of improving student literacy. Focus on the oral skills associated with basic and classroom interaction and the difficulties encountered by additional language learners. Additional emphasis on implications for additional language teaching\nand learning.",
+    "prerequisites_raw": "Prerequisite: EDEC 237",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-238/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDEC 239",
+    "slug": "edec-239",
+    "title": "Mi'gmaw Language 1",
+    "dept": "EDEC",
+    "number": "239",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "An introduction to the study of the phonological system of Mi'gmaw for the purpose of literacy skills development. Explores Mi'gmaw syntax and morphology, word generation conventions, and Mi'gmaw labeling in order to develop understanding of the functioning of the Mi'gmaw language.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-239/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDEC 240",
+    "slug": "edec-240",
+    "title": "Mi'gmaw Language 2",
+    "dept": "EDEC",
     "number": "240",
     "credits": null,
-    "faculty": "Arts",
+    "faculty": "Education",
     "faculties": [
-      "Arts"
+      "Education"
     ],
     "terms": [],
-    "description": "An introduction to contemporary philosophy of politics by concentrating on a number of contested concepts, such as freedom, justice and equality, in contemporary political philosophy and practice.",
-    "prerequisites_raw": "",
+    "description": "Students will continue their syntactical and morphological analysis of Mi'gmaw and further develop their reading and writing skills. Features of Mi'gmaw that are difficult for language learners will be highlighted and implications for classroom practice discussed.",
+    "prerequisites_raw": "Prerequisite: EDEC 239",
     "restrictions_raw": "",
     "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-240/index.html",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-240/index.html",
     "name_variants": []
   },
   {
-    "code": "PHIL 242",
-    "slug": "phil-242",
-    "title": "Introduction to Feminist Theory",
-    "dept": "PHIL",
+    "code": "EDEC 241",
+    "slug": "edec-241",
+    "title": "Cree Language 1",
+    "dept": "EDEC",
+    "number": "241",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Students will learn their own phonology and see how the phonological system is reflected in dialects. They will learn the spelling rules and develop their literacy skills in syllabics. Finally, they will derive Cree grammatical terms and begin to study Cree morphology and syntax.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-241/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDEC 242",
+    "slug": "edec-242",
+    "title": "Cree Language 2",
+    "dept": "EDEC",
     "number": "242",
     "credits": null,
-    "faculty": "Arts",
+    "faculty": "Education",
     "faculties": [
-      "Arts"
+      "Education"
     ],
     "terms": [],
-    "description": "An introduction to feminist theory as political theory. Emphasis is placed on the plurality of analyses and proposals that constitute contemporary feminist thought. Some of the following are considered: liberal feminism, marxist and socialist feminism, radical feminism, postmodern feminism, francophone feminism, and the contributions to feminist theory by women of colour and lesbians.",
-    "prerequisites_raw": "",
+    "description": "Students will study the morphology and syntax analysis of Cree at a more advanced level and begin the study of word generation conventions. In addition, features of Cree that are difficult in first language acquisition will be highlighted and implications for classroom practice discussed.",
+    "prerequisites_raw": "Prerequisite: EDEC 241",
     "restrictions_raw": "",
-    "notes_raw": "Note: Since this course is being taught abroad, the Victoria Day statutory holiday will not be taken into consideration. Therefore, students are expected to attend their lecture on Monday, May 19, 2014.",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-242/index.html",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-242/index.html",
     "name_variants": []
   },
   {
-    "code": "PHIL 301",
-    "slug": "phil-301",
-    "title": "Philosophical Fundamentals",
-    "dept": "PHIL",
+    "code": "EDEC 243",
+    "slug": "edec-243",
+    "title": "Teaching: Multigrade Classrooms",
+    "dept": "EDEC",
+    "number": "243",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "This course introduces students to concepts and strategies for organizing, teaching, and evaluating learning in classes in which there are students from two, three or four grade levels.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-243/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDEC 244",
+    "slug": "edec-244",
+    "title": "Issues in First Nations and Inuit Education",
+    "dept": "EDEC",
+    "number": "244",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Issues related to First Nations and Inuit education, e.g., local control, development of linguistic and cultural policies.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-244/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDEC 245",
+    "slug": "edec-245",
+    "title": "Middle School Teaching",
+    "dept": "EDEC",
+    "number": "245",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Explores the philosophy of middle school teaching and how this impacts on the institutional, curricula and instructional decisions made in meeting the specialized needs of Aboriginal adolescents. Particular attention will be paid to how middle school philosophy can be integrated with Aboriginal values.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-245/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDEC 246",
+    "slug": "edec-246",
+    "title": "Middle School Curriculum",
+    "dept": "EDEC",
+    "number": "246",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Curriculum principles underlying an integrated approach to learning in the middle school level; surveys various curricula looking at program structures; explores teaching and learning methodologies appropriate for this age level when implementing an integrated curriculum, with particular attention to integrating indigenous language and culture.",
+    "prerequisites_raw": "Prerequisite: EDEC 245",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-246/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDEC 247",
+    "slug": "edec-247",
+    "title": "Policy Issues in Quebec and Indigenous Education",
+    "dept": "EDEC",
+    "number": "247",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "The organization of Quebec education, including Indigenous education, from historical, political, social, cultural and legal perspectives. The implications and contributions of policy decisions to schools, students, and families.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "Restriction: Not open to students who have taken EDEM 405.",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-247/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDEC 248",
+    "slug": "edec-248",
+    "title": "Equity and Education",
+    "dept": "EDEC",
+    "number": "248",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Introduction to and exploration of contemporary issues and theories about equity in education and society in Quebec/Canada from a range of perspectives, including\nthe historical, political, social, and economic. Provides learning opportunities for future educators to critically reflect upon and engage with equity issues and concerns in relation to schooling, including the exploration of classroom resources and activities that foster anti-racism, anti-oppression and intercultural approaches.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "Restriction: Not open to students who have taken or are taking EDEC 249.",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-248/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDEC 249",
+    "slug": "edec-249",
+    "title": "Global Education and Social Justice",
+    "dept": "EDEC",
+    "number": "249",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "A cross-curricular, interdisciplinary approach to teaching/creating learning experiences for students. It will foster critical thinking and nurture lifelong global understanding, active engagement and participation in relation to questions of social, economic, and environmental justice, by infusing these issues in the classroom.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "Restriction: Not open to students who have taken or are taking EDEC 248.",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-249/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDEC 253",
+    "slug": "edec-253",
+    "title": "Second Professional Seminar (Kindergarten/Elementary)",
+    "dept": "EDEC",
+    "number": "253",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Preparation for the second field experience through development of basic practices in planning and teaching in elementary school classrooms. Competencies and working professional portfolios will be addressed.",
+    "prerequisites_raw": "Prerequisites: EDEE 223, EDEE 253, EDEE 273, EDEE 283",
+    "restrictions_raw": "Restriction: Open to B.Ed.(K/Elem) students.",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-253/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDEC 254",
+    "slug": "edec-254",
+    "title": "Second Professional Seminar (Secondary)",
+    "dept": "EDEC",
+    "number": "254",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Preparation for the second field experience through development of basic practices in planning and teaching in secondary school classrooms. Competencies and professional portfolio will be addressed.",
+    "prerequisites_raw": "Corequisite: EDFE 254",
+    "restrictions_raw": "Restrictions: Open to B.Ed. Sec and concurrent B.Sc. and B.Ed. students.",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-254/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDEC 260",
+    "slug": "edec-260",
+    "title": "Philosophical Foundations",
+    "dept": "EDEC",
+    "number": "260",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Ideas essential for the development of a coherent educational theory and sound professional practice. Reflections on: the nature of the person, of reality, of knowledge, and of value; the aims of education, the nature of the school and the curriculum, the roles and responsibilities of professional educators.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "Restrictions: Not open to students who have taken EDER 400. Students who have taken or are taking EDEC 261 cannot take this course for credit.",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-260/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDEC 262",
+    "slug": "edec-262",
+    "title": "Media, Technology and Education",
+    "dept": "EDEC",
+    "number": "262",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Orientation to the equipment and systems of educational technology. Examination of theories of educational technology, media education and technology education and the exploration and development of possible applications in school settings.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "Restrictions: Not open to students who have taken or are taking EDGC 201.",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-262/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDEC 270",
+    "slug": "edec-270",
+    "title": "Algonquin Heritage Language 1",
+    "dept": "EDEC",
+    "number": "270",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Students will develop a basic knowledge of the Algonquin phonological system and gain some understanding of the morphological and syntactic rules, the stress and intonation patterns which control the language, and how Algonquin culture is reflected in the language.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "Restriction(s): Not open to students who have taken EDEE 293.",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-270/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDEC 271",
+    "slug": "edec-271",
+    "title": "Algonquin Heritage Language 2",
+    "dept": "EDEC",
+    "number": "271",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Continues the study of Algonquin syntax and morphology with the objective of improving student literacy. Focus on the oral skills associated with basic and classroom interaction and the difficulties encountered by additional language learners. Additional emphasis on implications for additional language teaching\nand learning.",
+    "prerequisites_raw": "Prerequisite(s): EDEC 270",
+    "restrictions_raw": "Restriction(s): Not open to students who have taken EDEC 234.",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-271/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDEC 272",
+    "slug": "edec-272",
+    "title": "Algonquin Language 1",
+    "dept": "EDEC",
+    "number": "272",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Students will learn the Algonquin phonological system. They will focus on animate/inanimate and inflections for agreement, aspect, tense and number. They will analyze word generation conventions and derive Algonquin labels to describe how Algonquin operates.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "Restriction(s): Not open to students who have taken EDEE 294.",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-272/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDEC 273",
+    "slug": "edec-273",
+    "title": "Algonquin Language 2",
+    "dept": "EDEC",
+    "number": "273",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Continues earlier study of the Algonquin language with a focus on complex tenses,\ncomplex sentence structures (e.g., conditionals, subordination, embedded structure), and nominalizing verbs and verbalizing nouns. Objective is to develop reading and writing skills.",
+    "prerequisites_raw": "Prerequisite: EDEC 272",
+    "restrictions_raw": "Restriction: Not open to students who have taken EDEE 295.",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-273/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDEC 275",
+    "slug": "edec-275",
+    "title": "Mohawk Heritage Language 1",
+    "dept": "EDEC",
+    "number": "275",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Students will develop a basic knowledge of the Mohawk phonological system and have some understanding of the morphological and syntactic rules, the stress and intonation patterns which control the language, and how Mohawk culture is reflected in the language.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "Restriction(s): Not open to students who have taken EDEE 296.",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-275/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDEC 276",
+    "slug": "edec-276",
+    "title": "Mohawk Heritage Language 2",
+    "dept": "EDEC",
+    "number": "276",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Continues the study of Mohawk syntax and morphology with the objective of improving student literacy. Focus on the oral skills associated with basic and classroom interaction and the difficulties encountered by additional language learners. Additional emphasis on implications for additional language teaching\nand learning.",
+    "prerequisites_raw": "Prerequisite: EDEC 275",
+    "restrictions_raw": "Restriction(s): Not open to students who have taken EDEC 236.",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-276/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDEC 277",
+    "slug": "edec-277",
+    "title": "Mohawk Language 1",
+    "dept": "EDEC",
+    "number": "277",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Students will learn the Mohawk phonological system (including glottal stop, length mark, up and down stress). Syntactically and morphologically, they will focus on the pronoun system (tense included). Word generation conventions will be analyzed and Mohawk labels developed to describe how the language functions.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "Restriction(s): Not open to students who have taken EDEE 297.",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-277/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDEC 278",
+    "slug": "edec-278",
+    "title": "Mohawk Language 2",
+    "dept": "EDEC",
+    "number": "278",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Continues earlier study of the predictable items in the Mohawk language and introduces an examination of non-predictable items: irregular verbs, reflexive and semi-reflexive verbs, purposive stem, translocative, etc. Objective is to develop reading and writing skills.",
+    "prerequisites_raw": "Prerequisite: EDEC 277",
+    "restrictions_raw": "Restrictions: Not open to students who have taken EDEE 298.",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-278/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDEC 288",
+    "slug": "edec-288",
+    "title": "Inuktitut for Beginners",
+    "dept": "EDEC",
+    "number": "288",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "An introduction to the basic structures of Inuktitut, with intensive drill and classroom practice in the use of the language.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "Restriction(s): Not open to students who have taken EDEE 341.",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-288/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDEC 289",
+    "slug": "edec-289",
+    "title": "Inuktitut Orthography and Grammar",
+    "dept": "EDEC",
+    "number": "289",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Structure and morphology of Inuktitut for teachers working in that language. Use of orthography, both qaliujaaqpait (Roman script) and qaniujaaqpait (syllabics) as established by the Inuit Cultural Association.",
+    "prerequisites_raw": "Prerequisite: Fluency in Inuktitut",
+    "restrictions_raw": "Restrictions: Not open to students who have taken EDEE 249.",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-289/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDEC 300",
+    "slug": "edec-300",
+    "title": "Special Topics 1",
+    "dept": "EDEC",
+    "number": "300",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Selected topics and contemporary developments in the areas of elementary and/or secondary education. The content will vary from year to year and will be announced prior to registration.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-300/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDEC 301",
+    "slug": "edec-301",
+    "title": "Special Topics 2",
+    "dept": "EDEC",
     "number": "301",
     "credits": null,
-    "faculty": "Arts",
+    "faculty": "Education",
     "faculties": [
-      "Arts"
+      "Education"
     ],
     "terms": [],
-    "description": "An intensive study of basic philosophical skills; reading, writing, analysis, and argumentation.",
-    "prerequisites_raw": "Prerequisites: two previous courses in philosophy, one of which must be PHIL 210 or written consent of the Department",
-    "restrictions_raw": "Restriction: Open only to and required of Philosophy Honours and Joint Honours students",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-301/index.html",
-    "name_variants": [
-      "take a special 3-credit course ( PHIL 301 Philosophical Fundamentals"
-    ]
-  },
-  {
-    "code": "PHIL 306",
-    "slug": "phil-306",
-    "title": "Philosophy of Mind",
-    "dept": "PHIL",
-    "number": "306",
-    "credits": null,
-    "faculty": "Arts",
-    "faculties": [
-      "Arts"
-    ],
-    "terms": [],
-    "description": "A survey of major positions of the mind-body problem, focusing on such questions as: Do we have minds and bodies? Can minds affect bodies? Is mind identical to body? If so, in what sense \"identical\"? Can physical bodies be conscious.",
+    "description": "Selected topics and contemporary developments in the areas of elementary and/or secondary education. The content will vary from year to year and will be announced prior to registration.",
     "prerequisites_raw": "",
     "restrictions_raw": "",
     "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-306/index.html",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-301/index.html",
     "name_variants": []
   },
   {
-    "code": "PHIL 310",
-    "slug": "phil-310",
-    "title": "Intermediate Logic",
-    "dept": "PHIL",
-    "number": "310",
+    "code": "EDEC 308",
+    "slug": "edec-308",
+    "title": "Learning to Write Fiction",
+    "dept": "EDEC",
+    "number": "308",
     "credits": null,
-    "faculty": "Arts",
+    "faculty": "Education",
     "faculties": [
-      "Arts"
+      "Education"
     ],
     "terms": [],
-    "description": "A second course in Logic. NB. The course will be technical in nature, and some mathematical aptitude is essential. The emphasis is on the expressive properties of standard logical systems, including implications for the philosophy of mathematics. We will study the Completeness of First-Order Logic, then the 'limitative' theorems of Tarski and G\u00f6del.",
-    "prerequisites_raw": "Prerequisite: PHIL 210 or equivalent",
+    "description": "Course focuses on basic story elements: character development, plot structure, setting, description, dialogue, point of view and the drafting and revising of stories through a shared experience within a community of supportive readers.",
+    "prerequisites_raw": "",
     "restrictions_raw": "",
     "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-310/index.html",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-308/index.html",
     "name_variants": []
   },
   {
-    "code": "PHIL 311",
-    "slug": "phil-311",
-    "title": "Philosophy of Mathematics",
-    "dept": "PHIL",
+    "code": "EDEC 309",
+    "slug": "edec-309",
+    "title": "Learning to Write Poetry",
+    "dept": "EDEC",
+    "number": "309",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Basic poetic techniques such as free writing, lineation, metaphor, simile, and scansion. Collaborative development and oral readings.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-309/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDEC 311",
+    "slug": "edec-311",
+    "title": "Resource Management",
+    "dept": "EDEC",
     "number": "311",
     "credits": null,
-    "faculty": "Arts",
+    "faculty": "Education",
     "faculties": [
-      "Arts"
+      "Education"
     ],
     "terms": [],
-    "description": "This course provides an historically informed introduction to philosophy of mathematics. It gives the student an overview of prominent issues and arguments, to enable her to follow and discuss contemporary research in philosophy of mathematics.",
-    "prerequisites_raw": "Prerequisite: PHIL 210",
-    "restrictions_raw": "",
+    "description": "A problem-solving approach (needs assessment, projections, creative solutions, and proposals) will establish a procedure for proactive management of the First Nations and Inuit educational environment (human, financial, and physical resources). Topics include staffing, finance, budgeting, payroll, interviewing techniques, health and safety management, and building and equipment maintenance.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "Restriction: Normally for students registered within the Certificate in First Nations and Inuit Educational Leadership",
     "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-311/index.html",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-311/index.html",
     "name_variants": []
   },
   {
-    "code": "PHIL 327",
-    "slug": "phil-327",
-    "title": "Philosophy of Race",
-    "dept": "PHIL",
-    "number": "327",
+    "code": "EDEC 312",
+    "slug": "edec-312",
+    "title": "Practicum in Educational Leadership",
+    "dept": "EDEC",
+    "number": "312",
     "credits": null,
-    "faculty": "Arts",
+    "faculty": "Education",
     "faculties": [
-      "Arts"
+      "Education"
     ],
     "terms": [],
-    "description": "An introduction to issues in the philosophy of race, for example: the metaphysical status of race; the biology of racial categories; the social construction of race; the relationship between race and racism; the phenomenology of racialized subjectivity; or, intersections of race, gender, and other identity categories.",
+    "description": "A work-study course within a First Nations and Inuit educational milieu. Supervised practice and application of communication and group skills; staff development and evaluation; human, fiscal, and physical resource management; and community outreach.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "Restriction: Normally for students registered within the Certificate in First Nations and Inuit Educational Leadership",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-312/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDEC 313",
+    "slug": "edec-313",
+    "title": "Indigenous Land-Based Pedagogy",
+    "dept": "EDEC",
+    "number": "313",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Focuses on the role of land-based experiential learning in contributing to pedagogical practices of educators and learners. Models and addresses how to incorporate land-based education in the preparation and delivery of K-11 curriculum. Structured to encourage reflection regarding peoples-to-land relationships and the social relations,\nknowledges and languages that arise.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "Restriction: Open only to students enrolled in First Nations and Inuit programs offered by the Faculty of Education.",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-313/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDEC 321",
+    "slug": "edec-321",
+    "title": "Visions and Realities of Indigenous Education",
+    "dept": "EDEC",
+    "number": "321",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Exploration of Indigenous traditions and worldviews, and the direction they offer Indigenous education. Consideration of how contemporary Indigenous thought can be translated into education practice.",
     "prerequisites_raw": "",
     "restrictions_raw": "",
     "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-327/index.html",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-321/index.html",
     "name_variants": []
   },
   {
-    "code": "PHIL 334",
-    "slug": "phil-334",
-    "title": "Ethical Theory",
-    "dept": "PHIL",
-    "number": "334",
-    "credits": null,
-    "faculty": "Arts",
-    "faculties": [
-      "Arts"
-    ],
-    "terms": [],
-    "description": "A course focusing on central questions in ethical theory such as the nature of the good and the right and the factors which determine moral rightness and wrongness.",
-    "prerequisites_raw": "Prerequisite: one of PHIL 230, PHIL 237, PHIL 242, PHIL 343, or written permission of the instructor",
-    "restrictions_raw": "",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-334/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "PHIL 336",
-    "slug": "phil-336",
-    "title": "Aesthetics",
-    "dept": "PHIL",
-    "number": "336",
-    "credits": null,
-    "faculty": "Arts",
-    "faculties": [
-      "Arts"
-    ],
-    "terms": [],
-    "description": "An introduction to issues central to aesthetic theory; the nature of aesthetic judgment, perception of the aesthetic object, the nature of the art object.",
-    "prerequisites_raw": "",
-    "restrictions_raw": "",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-336/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "PHIL 341",
-    "slug": "phil-341",
-    "title": "Philosophy of Science 1",
-    "dept": "PHIL",
+    "code": "EDEC 341",
+    "slug": "edec-341",
+    "title": "Intermediate Indigenous Heritage Language",
+    "dept": "EDEC",
     "number": "341",
     "credits": null,
-    "faculty": "Arts",
+    "faculty": "Education",
     "faculties": [
-      "Arts"
+      "Education"
     ],
     "terms": [],
-    "description": "A discussion of philosophical problems as they arise in the context of scientific practice and enquiry. Such issues as the philosophical presuppositions of the physical and social sciences, the nature of scientific method and its epistemological implications will be addressed.",
-    "prerequisites_raw": "",
-    "restrictions_raw": "",
+    "description": "Study of local Indigenous grammar and discourse practices of literacy and orality. Focus on oral and emerging writing skills, including difficulties encountered by additional language learners.",
+    "prerequisites_raw": "Prerequisite: EDEC 271 or EDEC 238 or EDEC 276",
+    "restrictions_raw": "Restriction: Open only to students enrolled in First Nations and Inuit programs offered by the Faculty of Education.",
     "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-341/index.html",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-341/index.html",
     "name_variants": []
   },
   {
-    "code": "PHIL 343",
-    "slug": "phil-343",
-    "title": "Biomedical Ethics",
-    "dept": "PHIL",
+    "code": "EDEC 342",
+    "slug": "edec-342",
+    "title": "Intermediate Indigenous Language",
+    "dept": "EDEC",
+    "number": "342",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "A study of Indigenous language phonology and structure, emphasizing the connection between the two, demonstrating the orderliness of many dialectic differences.",
+    "prerequisites_raw": "Prerequisite(s): EDEC 289 or equivalent, e.g. EDEC 273, EDEC 278 or permission of Director",
+    "restrictions_raw": "Restriction(s): Not open to students who have taken EDEE 342. Limited to students enrolled in off-campus programs delivered through the Office of First Nations and Inuit Education.",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-342/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDEC 343",
+    "slug": "edec-343",
+    "title": "Advanced Indigenous Heritage Language",
+    "dept": "EDEC",
     "number": "343",
     "credits": null,
-    "faculty": "Arts",
+    "faculty": "Education",
     "faculties": [
-      "Arts"
+      "Education"
     ],
     "terms": [],
-    "description": "An investigation of ethical issues as they arise in the practice of medicine (informed consent, e.g.) or in the application of medical technology (in vitro fertilization, euthanasia, e.g.)",
-    "prerequisites_raw": "",
-    "restrictions_raw": "",
+    "description": "Local Indigenous language (discourse and grammar) and its connection to local culture. Use of complex language patterns and formal language, and discussion of community issues and the study of customs, traditions, and worldviews.",
+    "prerequisites_raw": "Prerequisite: EDEC 341",
+    "restrictions_raw": "Restriction: Open only to students enrolled in First Nations and Inuit programs offered by the Faculty of Education.",
     "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-343/index.html",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-343/index.html",
     "name_variants": []
   },
   {
-    "code": "PHIL 344",
-    "slug": "phil-344",
-    "title": "Medieval and Renaissance Political Theory",
-    "dept": "PHIL",
+    "code": "EDEC 344",
+    "slug": "edec-344",
+    "title": "Advanced Indigenous Language",
+    "dept": "EDEC",
     "number": "344",
     "credits": null,
-    "faculty": "Arts",
+    "faculty": "Education",
     "faculties": [
-      "Arts"
+      "Education"
     ],
     "terms": [],
-    "description": "A study of Medieval and Renaissance political theory.",
+    "description": "The final course in a set dealing with Indigenous phonology and structure. An understanding of basic Indigenous syntax in particular, rules governing verb and possessive endings.",
+    "prerequisites_raw": "Prerequisite(s): EDEC 342 or permission of Director",
+    "restrictions_raw": "Restriction(s): Not open to students who have taken EDEE 344.",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-344/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDEC 351",
+    "slug": "edec-351",
+    "title": "Third Professional Seminar (Secondary)",
+    "dept": "EDEC",
+    "number": "351",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Professional portfolios and competencies will be addressed. Preparation for the third field experience through engaging in the full spectrum of unit/lesson planning, critical analysis and self-reflection. Professional portfolios and competencies will be addressed.",
+    "prerequisites_raw": "Corequisites: EDFE 351 and EDES 350",
+    "restrictions_raw": "Restriction: Open to B.Ed. Secondary, B.Sc. and B.Ed. concurrent students only. Not open to students who have taken EDEC 306.",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-351/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDEC 374",
+    "slug": "edec-374",
+    "title": "Education and the Environment",
+    "dept": "EDEC",
+    "number": "374",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Familiarizes students with major environmental issues, engages them in interdisciplinary problem-based inquiries and draws attention to the interrelatedness of biotic and abiotic components of the ecosystem. Promotes understanding of the impact of individual and collective civic and economic choices on environmental resources.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "Restriction(s): Not open to students who have taken EDEE 474.",
+    "notes_raw": "Note 1: Offered through Summer Studies",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-374/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDEC 403",
+    "slug": "edec-403",
+    "title": "The Dialects of Inuktitut",
+    "dept": "EDEC",
+    "number": "403",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Study of the main Eskimo-Aleut dialects from Siberia to Greenland, looking at the effect of Inuit migrations across the Arctic on the development of dialectical differences. The main phonological, grammatical and lexical differences between the dialects and the patterns underlying these differences will be examined.",
+    "prerequisites_raw": "Prerequisite: EDEE 344",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-403/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDEC 404",
+    "slug": "edec-404",
+    "title": "Fourth Year Professional Seminar (Sec)",
+    "dept": "EDEC",
+    "number": "404",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Preparation for the final field experience and entry into the teaching profession. Emphasis will be placed on developing the ability to demonstrate ethical and responsible professional behaviour in the performance of duties across all professional competencies. Final transition to showcase working professional portfolios will be addressed.",
+    "prerequisites_raw": "Corequisite: EDFE 451",
+    "restrictions_raw": "Restriction: Open to B.Ed. Secondary students only",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-404/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDEC 405",
+    "slug": "edec-405",
+    "title": "Fourth Year Professional Seminar (K/Elem)",
+    "dept": "EDEC",
+    "number": "405",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Preparation for the final field experience and entry into the teaching profession. Emphasis will be placed on developing the ability to demonstrate ethical and responsible professional behaviour in the performance of duties across all professional competencies. Final transition from working professional portfolios will be addressed.",
+    "prerequisites_raw": "Corequisite: EDFE 406",
+    "restrictions_raw": "Restriction: Open to B.Ed. K/Elem. students only",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-405/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDEC 518",
+    "slug": "edec-518",
+    "title": "Arts-Based Approaches to Teaching and Learning",
+    "dept": "EDEC",
+    "number": "518",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Exploration of the role of arts in teaching and learning. Combining practical and theoretical arts based explorations using a variety of art forms.",
     "prerequisites_raw": "",
     "restrictions_raw": "",
     "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-344/index.html",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-518/index.html",
     "name_variants": []
   },
   {
-    "code": "PHIL 345",
-    "slug": "phil-345",
-    "title": "Greek Political Theory",
-    "dept": "PHIL",
-    "number": "345",
+    "code": "EDEC 520",
+    "slug": "edec-520",
+    "title": "Meanings of Literacy",
+    "dept": "EDEC",
+    "number": "520",
     "credits": null,
-    "faculty": "Arts",
+    "faculty": "Education",
     "faculties": [
-      "Arts"
+      "Education"
     ],
     "terms": [],
-    "description": "An examination of the ethical and political theories of ancient Greece, especially those of Plato and Aristotle.",
+    "description": "Introduction to literacies, arts, and cultural production as social practices in which to draw on diverse cultural histories, languages, and multimodal systems to create texts and meaning.",
     "prerequisites_raw": "",
-    "restrictions_raw": "Restriction: Not open to students who have taken POLI 333",
+    "restrictions_raw": "Restrictions: Not open to students who have taken EDEC 620.",
     "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-345/index.html",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-520/index.html",
     "name_variants": []
   },
   {
-    "code": "PHIL 348",
-    "slug": "phil-348",
-    "title": "Philosophy of Law 1",
-    "dept": "PHIL",
-    "number": "348",
+    "code": "EDEC 550",
+    "slug": "edec-550",
+    "title": "Indigenizing Pedagogy and Curriculum",
+    "dept": "EDEC",
+    "number": "550",
     "credits": null,
-    "faculty": "Arts",
+    "faculty": "Education",
     "faculties": [
-      "Arts"
+      "Education"
     ],
     "terms": [],
-    "description": "A discussion of the nature of justice and law, and of the relationship between them.",
-    "prerequisites_raw": "",
-    "restrictions_raw": "Restriction: This course is intended for students with a non-professional interest in law, as well as for those considering law as a profession",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-348/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "PHIL 349",
-    "slug": "phil-349",
-    "title": "Environmental Philosophy",
-    "dept": "PHIL",
-    "number": "349",
-    "credits": null,
-    "faculty": "Arts",
-    "faculties": [
-      "Arts"
-    ],
-    "terms": [],
-    "description": "An introduction to environmental ethics; potentially also such related fields as philosophy of ecology, environmental aesthetics, and/or other philosophical topics demonstrably relevant to environmental issues.",
+    "description": "Diverse social, cultural, linguistic, political, and pedagogical histories of Indigenous communities. Indigenous ways of knowing and worldviews.",
     "prerequisites_raw": "",
     "restrictions_raw": "",
     "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-349/index.html",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-550/index.html",
     "name_variants": []
   },
   {
-    "code": "PHIL 350",
-    "slug": "phil-350",
-    "title": "History and Philosophy of Ancient Science",
-    "dept": "PHIL",
-    "number": "350",
+    "code": "EDEC 575",
+    "slug": "edec-575",
+    "title": "Special Topics in Education",
+    "dept": "EDEC",
+    "number": "575",
     "credits": null,
-    "faculty": "Arts",
+    "faculty": "Education",
     "faculties": [
-      "Arts"
+      "Education"
     ],
     "terms": [],
-    "description": "Topics in ancient pure mathematics (geometry and number theory), \"mixed mathematics\" (astronomy, music theory, optics, mechanics), and/or natural science (including medicine), studied with a view to philosophical issues raised by the content of ancient science and/or by the logic of scientific argument.",
+    "description": "In-depth study of current topic(s) in the field of education.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "Restrictions: Open only to higher-level Undergraduate students and Master's students.",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-575/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDEC 590",
+    "slug": "edec-590",
+    "title": "Culturally Appropriate Teaching",
+    "dept": "EDEC",
+    "number": "590",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Principles of cooperative learning and how they may be applied in Indigenous schools to the creation of effective classroom activities and to the development of culturally appropriate learning materials. Referring to culturally grounded learning styles, appropriate teaching styles will be examined. Critical pedagogy will be emphasized.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "Restriction(s): Not open to students who have taken EDEE 290.",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-590/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDEC 591",
+    "slug": "edec-591",
+    "title": "Cultural Values and Socialization",
+    "dept": "EDEC",
+    "number": "591",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "An introduction to the educational implications of cultural values and patterns of socialization of youth. Topics will include a description of the cultural values of Indigenous peoples, home styles of communication, learning and discipline and intercultural educational issues.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "Restriction(s): Not open to students who have taken EDEE 291.",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-591/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDEC 602",
+    "slug": "edec-602",
+    "title": "Foundations in Curriculum",
+    "dept": "EDEC",
+    "number": "602",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "This course introduces the field of curriculum studies, including a historical approach to the discourses, debates and issues that have shaped it. Students will actively explore relationships between curriculum theory and professional as well as pedagogical practice.",
     "prerequisites_raw": "",
     "restrictions_raw": "",
     "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-350/index.html",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-602/index.html",
     "name_variants": []
   },
   {
-    "code": "PHIL 353",
-    "slug": "phil-353",
-    "title": "The Presocratic Philosophers",
-    "dept": "PHIL",
-    "number": "353",
+    "code": "EDEC 603",
+    "slug": "edec-603",
+    "title": "Extended Individual Reading Course",
+    "dept": "EDEC",
+    "number": "603",
     "credits": null,
-    "faculty": "Arts",
+    "faculty": "Education",
     "faculties": [
-      "Arts"
+      "Education"
     ],
     "terms": [],
-    "description": "An examination of the surviving fragments of the presocratic philosophers and schools of philosophy, as well as later reports of their views.",
+    "description": "Individualized and guided extensive study of a topic in the teaching of the candidates' specialities selected according to their interest and teaching experience.",
     "prerequisites_raw": "",
     "restrictions_raw": "",
     "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-353/index.html",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-603/index.html",
     "name_variants": []
   },
   {
-    "code": "PHIL 354",
-    "slug": "phil-354",
-    "title": "Plato",
-    "dept": "PHIL",
-    "number": "354",
+    "code": "EDEC 604",
+    "slug": "edec-604",
+    "title": "Literacy and Learning Across Curriculum",
+    "dept": "EDEC",
+    "number": "604",
     "credits": null,
-    "faculty": "Arts",
+    "faculty": "Education",
     "faculties": [
-      "Arts"
+      "Education"
     ],
     "terms": [],
-    "description": "An examination of some of the philosophical problems (those in logic, epistemology, metaphysics, and ethics, e.g.) found in a selection of Plato's dialogues.",
+    "description": "Examination of the central role of language in learning across the curriculum: the processes by which pupils acquire information and understanding and the ways in which teaching must take account of these processes: learning through talk, learning by writing, learning from text.",
     "prerequisites_raw": "",
     "restrictions_raw": "",
     "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-354/index.html",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-604/index.html",
     "name_variants": []
   },
   {
-    "code": "PHIL 355",
-    "slug": "phil-355",
-    "title": "Aristotle",
-    "dept": "PHIL",
-    "number": "355",
-    "credits": null,
-    "faculty": "Arts",
-    "faculties": [
-      "Arts"
-    ],
-    "terms": [],
-    "description": "An examination of selected works by Aristotle. The course considers issues in moral philosophy as well as those found in the logical treatises, the Physics and Metaphysics, and in the philosophy of mind.",
-    "prerequisites_raw": "",
-    "restrictions_raw": "",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-355/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "PHIL 356",
-    "slug": "phil-356",
-    "title": "Early Medieval Philosophy",
-    "dept": "PHIL",
-    "number": "356",
-    "credits": null,
-    "faculty": "Arts",
-    "faculties": [
-      "Arts"
-    ],
-    "terms": [],
-    "description": "An examination of selected works in the Christian, Islamic and Jewish traditions. Topics in moral and political philosophy, logic and metaphysics, philosophical psychology and epistemology, philosophy of science, and philosophical theology may be discussed.",
-    "prerequisites_raw": "",
-    "restrictions_raw": "",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-356/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "PHIL 360",
-    "slug": "phil-360",
-    "title": "17th Century Philosophy",
-    "dept": "PHIL",
-    "number": "360",
-    "credits": null,
-    "faculty": "Arts",
-    "faculties": [
-      "Arts"
-    ],
-    "terms": [],
-    "description": "An examination of the work of such seventeenth-century philosophers as Descartes, Hobbes, Gassendi, Malebranche, Leibniz, and the Cambridge Platonists.",
-    "prerequisites_raw": "",
-    "restrictions_raw": "",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-360/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "PHIL 361",
-    "slug": "phil-361",
-    "title": "18th Century Philosophy",
-    "dept": "PHIL",
-    "number": "361",
-    "credits": null,
-    "faculty": "Arts",
-    "faculties": [
-      "Arts"
-    ],
-    "terms": [],
-    "description": "A survey of eighteenth century philosophy, especially British philosophy. Attention is given to fundamental metaphysical, epistemological, and moral issues as reflected in the work of such philosophers as Locke, Shaftesbury, Berkeley, Hutcheson, Butler, Hume and Reid.",
-    "prerequisites_raw": "",
-    "restrictions_raw": "",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-361/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "PHIL 366",
-    "slug": "phil-366",
-    "title": "18th and Early 19th Century German Philosophy",
-    "dept": "PHIL",
-    "number": "366",
-    "credits": null,
-    "faculty": "Arts",
-    "faculties": [
-      "Arts"
-    ],
-    "terms": [],
-    "description": "An examination of the works of such philosophers as Kant, Fichte, Jacobi, Schelling, and Hegel.",
-    "prerequisites_raw": "Prerequisite: PHIL 360 or PHIL 361 is recommended",
-    "restrictions_raw": "",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-366/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "PHIL 367",
-    "slug": "phil-367",
-    "title": "19th Century Philosophy",
-    "dept": "PHIL",
-    "number": "367",
-    "credits": null,
-    "faculty": "Arts",
-    "faculties": [
-      "Arts"
-    ],
-    "terms": [],
-    "description": "An examination of the works of such 19th century philosophers as Mach, Helmholtz, Dedekind, Frege, Marx, Kierkegaard, Schopenhauer, Nietzsche, Mill and Bradley.",
-    "prerequisites_raw": "Prerequisite: A previous course in philosophy is recommended",
-    "restrictions_raw": "",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-367/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "PHIL 375",
-    "slug": "phil-375",
-    "title": "Existentialism",
-    "dept": "PHIL",
-    "number": "375",
-    "credits": null,
-    "faculty": "Arts",
-    "faculties": [
-      "Arts"
-    ],
-    "terms": [],
-    "description": "This course will examine the nature of existentialist thought as represented in various philosophical and literary texts. Particular themes to be examined include freedom, alienation, responsibility and choice, and the nature of self.",
-    "prerequisites_raw": "Prerequisite: one course in philosophy",
-    "restrictions_raw": "",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-375/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "PHIL 397",
-    "slug": "phil-397",
-    "title": "Tutorial 01",
-    "dept": "PHIL",
-    "number": "397",
-    "credits": null,
-    "faculty": "Arts",
-    "faculties": [
-      "Arts"
-    ],
-    "terms": [],
-    "description": "Individualized guided research on an approved topic in philosophy.",
-    "prerequisites_raw": "",
-    "restrictions_raw": "Restriction: Open to second year Full Honours students in Philosophy and to other students, with consent of the Department",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-397/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "PHIL 398",
-    "slug": "phil-398",
-    "title": "Tutorial 02",
-    "dept": "PHIL",
-    "number": "398",
-    "credits": null,
-    "faculty": "Arts",
-    "faculties": [
-      "Arts"
-    ],
-    "terms": [],
-    "description": "Individualized guided research on an approved topic in philosophy.",
-    "prerequisites_raw": "",
-    "restrictions_raw": "Restriction: Open to second year Full Honours students in Philosophy and to other students, with consent of the Department",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-398/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "PHIL 411",
-    "slug": "phil-411",
-    "title": "Topics in Philosophy of Logic and Mathematics",
-    "dept": "PHIL",
-    "number": "411",
-    "credits": null,
-    "faculty": "Arts",
-    "faculties": [
-      "Arts"
-    ],
-    "terms": [],
-    "description": "A course focusing on some philosophical issue (e.g., the nature of numbers or the relation of truth to provability) as it arises in the study of mathematics and logic.",
-    "prerequisites_raw": "Prerequisites: PHIL 210 or the equivalent, and one intermediate course in philosophy",
-    "restrictions_raw": "",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-411/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "PHIL 415",
-    "slug": "phil-415",
-    "title": "Philosophy of Language",
-    "dept": "PHIL",
-    "number": "415",
-    "credits": null,
-    "faculty": "Arts",
-    "faculties": [
-      "Arts"
-    ],
-    "terms": [],
-    "description": "An examination of central notions in the philosophy of language (reference, meaning, and truth, e.g.), the puzzles these notions give rise to, and the relevance of these notions to such questions as: What is language? How is communication possible? What is understanding? Is language rule-governed.",
-    "prerequisites_raw": "Prerequisites: PHIL 210 or equivalent and one intermediate course in philosophy",
-    "restrictions_raw": "",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-415/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "PHIL 419",
-    "slug": "phil-419",
-    "title": "Epistemology",
-    "dept": "PHIL",
-    "number": "419",
-    "credits": null,
-    "faculty": "Arts",
-    "faculties": [
-      "Arts"
-    ],
-    "terms": [],
-    "description": "A discussion of central topics in the theory of knowledge. The questions addressed in the course may include: What is knowledge? Do we have any knowledge? What is the relation between knowledge and belief? When is belief justified? Is all knowledge conscious knowledge.",
-    "prerequisites_raw": "Prerequisite: PHIL 210 or equivalent and one intermediate course in philosophy",
-    "restrictions_raw": "",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-419/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "PHIL 421",
-    "slug": "phil-421",
-    "title": "Metaphysics",
-    "dept": "PHIL",
-    "number": "421",
-    "credits": null,
-    "faculty": "Arts",
-    "faculties": [
-      "Arts"
-    ],
-    "terms": [],
-    "description": "An examination of central questions in metaphysics in their historical and contemporary forms. Topics may be chosen from such issues as: personal identity, the nature of space and time, the nature of events and properties, possible worlds, and the problem of realism.",
-    "prerequisites_raw": "Prerequisites: PHIL 210 or equivalent and one intermediate course in philosophy",
-    "restrictions_raw": "",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-421/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "PHIL 427",
-    "slug": "phil-427",
-    "title": "Topics in Critical Philosophy of Race",
-    "dept": "PHIL",
-    "number": "427",
-    "credits": null,
-    "faculty": "Arts",
-    "faculties": [
-      "Arts"
-    ],
-    "terms": [],
-    "description": "An advanced discussion of topics in the critical philosophy of race.",
-    "prerequisites_raw": "",
-    "restrictions_raw": "",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-427/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "PHIL 434",
-    "slug": "phil-434",
-    "title": "Metaethics",
-    "dept": "PHIL",
-    "number": "434",
-    "credits": null,
-    "faculty": "Arts",
-    "faculties": [
-      "Arts"
-    ],
-    "terms": [],
-    "description": "A study of the status of sentences containing moral terms, judgements about moral claims, and the nature of moral facts.",
-    "prerequisites_raw": "Prerequisite: PHIL 334 or written permission of the instructor",
-    "restrictions_raw": "",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-434/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "PHIL 436",
-    "slug": "phil-436",
-    "title": "Aesthetics 2",
-    "dept": "PHIL",
-    "number": "436",
-    "credits": null,
-    "faculty": "Arts",
-    "faculties": [
-      "Arts"
-    ],
-    "terms": [],
-    "description": "An advanced discussion of issues in aesthetics.",
-    "prerequisites_raw": "Prerequisite: PHIL 336 or written permission of the instructor",
-    "restrictions_raw": "",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-436/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "PHIL 441",
-    "slug": "phil-441",
-    "title": "Philosophy of Science 2",
-    "dept": "PHIL",
-    "number": "441",
-    "credits": null,
-    "faculty": "Arts",
-    "faculties": [
-      "Arts"
-    ],
-    "terms": [],
-    "description": "An analysis of some key philosophical ideas in science and technology, e.g. problem, explanation, forecast, testability and truth.",
-    "prerequisites_raw": "Prerequisite: PHIL 341 or written permission of the instructor",
-    "restrictions_raw": "",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-441/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "PHIL 442",
-    "slug": "phil-442",
-    "title": "Topics in Feminist Theory",
-    "dept": "PHIL",
-    "number": "442",
-    "credits": null,
-    "faculty": "Arts",
-    "faculties": [
-      "Arts"
-    ],
-    "terms": [],
-    "description": "Advanced discussion of topical and central themes in feminist theory.",
-    "prerequisites_raw": "Prerequisite: PHIL 242 and one intermediate course in philosophy",
-    "restrictions_raw": "",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-442/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "PHIL 444",
-    "slug": "phil-444",
-    "title": "Early Modern Political Theory",
-    "dept": "PHIL",
-    "number": "444",
-    "credits": null,
-    "faculty": "Arts",
-    "faculties": [
-      "Arts"
-    ],
-    "terms": [],
-    "description": "A survey of political and moral theory from the Reformation to the French Revolution including Luther, Montaigne, Descartes, Hobbes, Locke, Rousseau and Smith.",
-    "prerequisites_raw": "Prerequisite: at least one course in political philosophy",
-    "restrictions_raw": "",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-444/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "PHIL 445",
-    "slug": "phil-445",
-    "title": "19th Century Political Theory",
-    "dept": "PHIL",
-    "number": "445",
-    "credits": null,
-    "faculty": "Arts",
-    "faculties": [
-      "Arts"
-    ],
-    "terms": [],
-    "description": "An examination of various strands of political theory since Rousseau, concentrating on such themes as the understanding of modernity and theories of liberal society.",
-    "prerequisites_raw": "Prerequisite: at least one course in political philosophy",
-    "restrictions_raw": "Restriction: Not open to students who have taken POLI 434",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-445/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "PHIL 446",
-    "slug": "phil-446",
-    "title": "Current Issues in Political Philosophy",
-    "dept": "PHIL",
-    "number": "446",
-    "credits": null,
-    "faculty": "Arts",
-    "faculties": [
-      "Arts"
-    ],
-    "terms": [],
-    "description": "Selected issues in contemporary political philosophy.",
-    "prerequisites_raw": "Prerequisite: at least one course in political philosophy",
-    "restrictions_raw": "",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-446/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "PHIL 450",
-    "slug": "phil-450",
-    "title": "Major Philosophers 1",
-    "dept": "PHIL",
-    "number": "450",
-    "credits": null,
-    "faculty": "Arts",
-    "faculties": [
-      "Arts"
-    ],
-    "terms": [],
-    "description": "This seminar will give detailed attention to the work of one philosopher or to a single philosophical theme addressed by several philosophers. Emphasis will be placed on understanding how the metaphysical, epistemological, and moral views of a figure or figures are internally related. Topic will vary from year to year.",
-    "prerequisites_raw": "Prerequisite: one intermediate course in philosophy",
-    "restrictions_raw": "",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-450/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "PHIL 452",
-    "slug": "phil-452",
-    "title": "Later Greek Philosophy",
-    "dept": "PHIL",
-    "number": "452",
-    "credits": null,
-    "faculty": "Arts",
-    "faculties": [
-      "Arts"
-    ],
-    "terms": [],
-    "description": "An examination of some of the major post-Aristotelian schools of philosophy. Texts from the Peripatetic, Stoic, Epicurean, Sceptical, Platonic, and medical traditions may be considered. Problems in logic, ethics, physics, epistemology, and metaphysics will be addressed.",
-    "prerequisites_raw": "Prerequisite: PHIL 354 or PHIL 355",
-    "restrictions_raw": "",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-452/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "PHIL 453",
-    "slug": "phil-453",
-    "title": "Ancient Metaphysics and Natural Philosophy",
-    "dept": "PHIL",
-    "number": "453",
-    "credits": null,
-    "faculty": "Arts",
-    "faculties": [
-      "Arts"
-    ],
-    "terms": [],
-    "description": "An examination of central themes of ancient metaphysics and/or natural philosophy as treated by two or more contrasting philosophers or philosophical traditions - probably including Plato and/or Aristotle, and possibly including some Hellenistic or post-Hellenistic schools.",
-    "prerequisites_raw": "",
-    "restrictions_raw": "",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-453/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "PHIL 454",
-    "slug": "phil-454",
-    "title": "Ancient Moral Theory",
-    "dept": "PHIL",
-    "number": "454",
-    "credits": null,
-    "faculty": "Arts",
-    "faculties": [
-      "Arts"
-    ],
-    "terms": [],
-    "description": "An examination of central themes of ancient moral theory as treated by two or more contrasting philosophers or philosophical traditions - probably including Plato and/or Aristotle, and possibly some Hellenistic or post-Hellenistic schools.",
-    "prerequisites_raw": "",
-    "restrictions_raw": "",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-454/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "PHIL 460",
-    "slug": "phil-460",
-    "title": "Major Philosophers 2",
-    "dept": "PHIL",
-    "number": "460",
-    "credits": null,
-    "faculty": "Arts",
-    "faculties": [
-      "Arts"
-    ],
-    "terms": [],
-    "description": "This seminar will give detailed attention to the work of one philosopher or to a single philosophical theme addressed by several philosophers. Emphasis will be placed on understanding how the metaphysical, epistemological, and moral views of a figure or figures are internally related.",
-    "prerequisites_raw": "",
-    "restrictions_raw": "",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-460/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "PHIL 470",
-    "slug": "phil-470",
-    "title": "Topics in Contemporary Analytic Philosophy",
-    "dept": "PHIL",
-    "number": "470",
-    "credits": null,
-    "faculty": "Arts",
-    "faculties": [
-      "Arts"
-    ],
-    "terms": [],
-    "description": "An advanced discussion of major themes in the analytic tradition.",
-    "prerequisites_raw": "Prerequisite: PHIL 370, PHIL 415 or written permission of instructor",
-    "restrictions_raw": "",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-470/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "PHIL 474",
-    "slug": "phil-474",
-    "title": "Phenomenology",
-    "dept": "PHIL",
-    "number": "474",
-    "credits": null,
-    "faculty": "Arts",
-    "faculties": [
-      "Arts"
-    ],
-    "terms": [],
-    "description": "A study of phenomenology from a historical and thematic perspective. The course will typically involve the study of central thinkers such as Husserl, Heidegger, or Merleau-Ponty, with an examination of the nature and development of the phenomenological movement.",
-    "prerequisites_raw": "Prerequisite: one intermediate course in philosophy",
-    "restrictions_raw": "",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-474/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "PHIL 475",
-    "slug": "phil-475",
-    "title": "Topics in Contemporary European Philosophy",
-    "dept": "PHIL",
-    "number": "475",
-    "credits": null,
-    "faculty": "Arts",
-    "faculties": [
-      "Arts"
-    ],
-    "terms": [],
-    "description": "Advanced discussion of selected themes in contemporary European philosophy.",
-    "prerequisites_raw": "Prerequisite: one intermediate course in philosophy",
-    "restrictions_raw": "",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-475/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "PHIL 480",
-    "slug": "phil-480",
-    "title": "Topics in the History of Philosophy",
-    "dept": "PHIL",
-    "number": "480",
-    "credits": null,
-    "faculty": "Arts",
-    "faculties": [
-      "Arts"
-    ],
-    "terms": [],
-    "description": "An advanced discussion of some theme and/or problem in the history of philosophy.",
-    "prerequisites_raw": "Prerequisite: one intermediate course in philosophy",
-    "restrictions_raw": "",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-480/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "PHIL 481",
-    "slug": "phil-481",
-    "title": "Topics in Philosophy",
-    "dept": "PHIL",
-    "number": "481",
-    "credits": null,
-    "faculty": "Arts",
-    "faculties": [
-      "Arts"
-    ],
-    "terms": [],
-    "description": "Topics in philosophy.  Topic varies by year.",
-    "prerequisites_raw": "",
-    "restrictions_raw": "",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-481/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "PHIL 497",
-    "slug": "phil-497",
-    "title": "Tutorial 04",
-    "dept": "PHIL",
-    "number": "497",
-    "credits": null,
-    "faculty": "Arts",
-    "faculties": [
-      "Arts"
-    ],
-    "terms": [],
-    "description": "Open to third year Full Honours students in Philosophy, and to other students, with consent of the Department.",
-    "prerequisites_raw": "",
-    "restrictions_raw": "",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-497/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "PHIL 498",
-    "slug": "phil-498",
-    "title": "Tutorial 05",
-    "dept": "PHIL",
-    "number": "498",
-    "credits": null,
-    "faculty": "Arts",
-    "faculties": [
-      "Arts"
-    ],
-    "terms": [],
-    "description": "Open to third year Joint Honours students in Philosophy, and to other students, with consent of the Department.",
-    "prerequisites_raw": "",
-    "restrictions_raw": "",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-498/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "PHIL 499",
-    "slug": "phil-499",
-    "title": "Tutorial 06",
-    "dept": "PHIL",
-    "number": "499",
-    "credits": null,
-    "faculty": "Arts",
-    "faculties": [
-      "Arts"
-    ],
-    "terms": [],
-    "description": "Open to third year Full Honours students in Philosophy, and to other students, with consent of the Department.",
-    "prerequisites_raw": "",
-    "restrictions_raw": "",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-499/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "PHIL 598",
-    "slug": "phil-598",
-    "title": "Tutorial 07",
-    "dept": "PHIL",
-    "number": "598",
-    "credits": null,
-    "faculty": "Arts",
-    "faculties": [
-      "Arts"
-    ],
-    "terms": [],
-    "description": "Individualized guided research on an approved topic in philosophy.",
-    "prerequisites_raw": "",
-    "restrictions_raw": "Restriction(s): Open only to students in the Philosophy Honours and Joint Honours programmes.",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-598/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "PHIL 606",
-    "slug": "phil-606",
-    "title": "Seminar: Philosophy of Mind",
-    "dept": "PHIL",
+    "code": "EDEC 606",
+    "slug": "edec-606",
+    "title": "Self-Study, Autoethnography, and Autobiographical Research",
+    "dept": "EDEC",
     "number": "606",
     "credits": null,
-    "faculty": "Arts",
+    "faculty": "Education",
     "faculties": [
-      "Arts"
+      "Education"
     ],
     "terms": [],
-    "description": "An advanced course devoted to specific topics in the philosophy of mind.",
-    "prerequisites_raw": "Prerequisite(s): Permission of the instructor.",
-    "restrictions_raw": "Restriction(s): Not open to students who have taken PHIL 506.",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-606/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "PHIL 607",
-    "slug": "phil-607",
-    "title": "Pro-Seminar 1",
-    "dept": "PHIL",
-    "number": "607",
-    "credits": null,
-    "faculty": "Arts",
-    "faculties": [
-      "Arts"
-    ],
-    "terms": [],
-    "description": "A series of seminars on selected topics designed for professional training to graduate students. Topics will be selected from the general area of Value Theory.",
+    "description": "Critical and ethical engagement with the relationship between self and other through various auto/biographical approaches to research in education, such as self-study, autoethnography, currere, life writing, artistic practices, writing the self, and memory-work. Exploration of various forms of writing, representation, analysis and critical discussion",
     "prerequisites_raw": "",
     "restrictions_raw": "",
     "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-607/index.html",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-606/index.html",
     "name_variants": []
   },
   {
-    "code": "PHIL 610",
-    "slug": "phil-610",
-    "title": "Seminar on Advanced Logic 2",
-    "dept": "PHIL",
-    "number": "610",
+    "code": "EDEC 612",
+    "slug": "edec-612",
+    "title": "Digital Media and Learning",
+    "dept": "EDEC",
+    "number": "612",
     "credits": null,
-    "faculty": "Arts",
+    "faculty": "Education",
     "faculties": [
-      "Arts"
+      "Education"
     ],
     "terms": [],
-    "description": "Seminar on a particular topic in advanced logic.  Topic varies by year.",
-    "prerequisites_raw": "Prerequisite(s): Permission of the instructor .",
-    "restrictions_raw": "Restriction(s): Not open to students who have taken PHIL 510.",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-610/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "PHIL 611",
-    "slug": "phil-611",
-    "title": "Seminar: Philosophy of Logic and Mathematics",
-    "dept": "PHIL",
-    "number": "611",
-    "credits": null,
-    "faculty": "Arts",
-    "faculties": [
-      "Arts"
-    ],
-    "terms": [],
-    "description": "Seminar on a particular topic in philosophy of logic and mathematics.",
+    "description": "This course addresses emerging theories, pedagogies, and practices related to youth learning through digital media and online participatory cultures. Through direct engagement with multiple forms of digital media and youth, students will consider implications for teaching and learning within and beyond schools.",
     "prerequisites_raw": "",
-    "restrictions_raw": "Restriction(s): Not open to students who have taken PHIL 511.",
+    "restrictions_raw": "",
     "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-611/index.html",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-612/index.html",
     "name_variants": []
   },
   {
-    "code": "PHIL 615",
-    "slug": "phil-615",
-    "title": "Seminar: Philosophy of Language",
-    "dept": "PHIL",
-    "number": "615",
+    "code": "EDEC 616",
+    "slug": "edec-616",
+    "title": "Individual Reading Course",
+    "dept": "EDEC",
+    "number": "616",
     "credits": null,
-    "faculty": "Arts",
+    "faculty": "Education",
     "faculties": [
-      "Arts"
+      "Education"
     ],
     "terms": [],
-    "description": "An advanced course devoted to a topic in the philosophy of language.",
-    "prerequisites_raw": "Prerequisite(s): Permission of the instructor.",
-    "restrictions_raw": "Restriction(s): Not open to students who have taken PHIL 515.",
+    "description": "Individualized guided study of a topic in the teaching of the candidates' specialties selected according to their interest and teaching experience.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
     "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-615/index.html",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-616/index.html",
     "name_variants": []
   },
   {
-    "code": "PHIL 619",
-    "slug": "phil-619",
-    "title": "Seminar: Epistemology",
-    "dept": "PHIL",
-    "number": "619",
+    "code": "EDEC 617",
+    "slug": "edec-617",
+    "title": "Special Topics in Educational Studies",
+    "dept": "EDEC",
+    "number": "617",
     "credits": null,
-    "faculty": "Arts",
+    "faculty": "Education",
     "faculties": [
-      "Arts"
+      "Education"
     ],
     "terms": [],
-    "description": "An advanced course devoted to a topic in the theory of knowledge.",
-    "prerequisites_raw": "Prerequisite(s): Permission of the instructor.",
-    "restrictions_raw": "Restriction(s): Not open to students who have taken PHIL 519.",
+    "description": "Explores important current issues in the field of Educational Studies. (Content varies from year to year).",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
     "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-619/index.html",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-617/index.html",
     "name_variants": []
   },
   {
-    "code": "PHIL 621",
-    "slug": "phil-621",
-    "title": "Seminar: Metaphysics",
-    "dept": "PHIL",
-    "number": "621",
-    "credits": null,
-    "faculty": "Arts",
-    "faculties": [
-      "Arts"
-    ],
-    "terms": [],
-    "description": "An advanced course devoted to a topic in metaphysics.",
-    "prerequisites_raw": "Prerequisite(s): Permission of the instructor.",
-    "restrictions_raw": "Restriction(s): Not open to students who have taken PHIL 521.",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-621/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "PHIL 624",
-    "slug": "phil-624",
-    "title": "Seminar: History and Philosophy of Science",
-    "dept": "PHIL",
+    "code": "EDEC 624",
+    "slug": "edec-624",
+    "title": "Researching, Teaching, Learning and Teacher Education",
+    "dept": "EDEC",
     "number": "624",
     "credits": null,
-    "faculty": "Arts",
+    "faculty": "Education",
     "faculties": [
-      "Arts"
+      "Education"
     ],
     "terms": [],
-    "description": "An advanced course devoted to a topic on the history and philosophy of science.",
+    "description": "Current trends in research on teaching, learning, and teacher education in general and in specific content areas, including specific methods of data collection and analysis that are appropriate for use in studies of teaching practices, learning processes, and their interactions.",
     "prerequisites_raw": "",
     "restrictions_raw": "",
     "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-624/index.html",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-624/index.html",
     "name_variants": []
   },
   {
-    "code": "PHIL 627",
-    "slug": "phil-627",
-    "title": "Seminar: Critical Philosophy of Race",
-    "dept": "PHIL",
+    "code": "EDEC 625",
+    "slug": "edec-625",
+    "title": "MA Seminar in Practice-Based Teacher Education 1",
+    "dept": "EDEC",
+    "number": "625",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Seminar that provides an overview of research in practice-based teacher education, across content areas, and apprenticeship opportunities in teacher preparation contexts.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "Restrictions: Open only to students enrolled in the MA in Education and Society; MA in Leadership; MA in Second Language Education; or permission of instructor",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-625/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDEC 626",
+    "slug": "edec-626",
+    "title": "MA Seminar in Math and Science Education 2",
+    "dept": "EDEC",
+    "number": "626",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Seminar that provides an overview of research in math and science education and apprenticeship opportunities in math or science teacher preparation contexts.",
+    "prerequisites_raw": "Prerequisite: EDEC 625.",
+    "restrictions_raw": "Restrictions: Open only to students enrolled in the M.A. in Education and Society; Science and Math Education program or permission of instructor",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-626/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDEC 627",
+    "slug": "edec-627",
+    "title": "Critical Discourse Studies in Education",
+    "dept": "EDEC",
     "number": "627",
     "credits": null,
-    "faculty": "Arts",
+    "faculty": "Education",
     "faculties": [
-      "Arts"
+      "Education"
     ],
     "terms": [],
-    "description": "An advanced course examining a question, theme, or thinker in the critical philosophy of race.",
+    "description": "Examines critical theories of and approaches to studying discourse, with a focus on the roles of discourse as social and ideological practice in (re-)producing, questioning or challenging power relations, subject positions and established social orders. Emphasis is placed on theory and practice of discourse studies in educational contexts.",
     "prerequisites_raw": "",
     "restrictions_raw": "",
     "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-627/index.html",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-627/index.html",
     "name_variants": []
   },
   {
-    "code": "PHIL 634",
-    "slug": "phil-634",
-    "title": "Seminar: Ethics",
-    "dept": "PHIL",
-    "number": "634",
+    "code": "EDEC 628",
+    "slug": "edec-628",
+    "title": "Literacy - Multilingual/Multicultural Settings",
+    "dept": "EDEC",
+    "number": "628",
     "credits": null,
-    "faculty": "Arts",
+    "faculty": "Education",
     "faculties": [
-      "Arts"
+      "Education"
     ],
     "terms": [],
-    "description": "Seminar on a particular topic in ethics.  Topic varies by year.",
-    "prerequisites_raw": "Prerequisite(s): Permission of the instructor.",
-    "restrictions_raw": "Restriction(s): Not open to students who have taken PHIL 534.",
+    "description": "This course examines the teaching of literacy in a range of multilingual and multicultural settings in schooling and society, primarily from the sociocultural perspectives of self and group identity as well as empowerment within majority-minority group relations.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
     "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-634/index.html",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-628/index.html",
     "name_variants": []
   },
   {
-    "code": "PHIL 635",
-    "slug": "phil-635",
-    "title": "Seminar: History of Ethics",
-    "dept": "PHIL",
+    "code": "EDEC 629",
+    "slug": "edec-629",
+    "title": "Writing: Theory, Research, and Practice",
+    "dept": "EDEC",
+    "number": "629",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "A review of theories and research on the writing process and the development of writing abilities. Implications for classroom practice at the elementary, secondary, and post-secondary levels. Special attention to the design of writing assignments and to developing criteria for assessment and evaluation.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-629/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDEC 630",
+    "slug": "edec-630",
+    "title": "Ethnographic Approaches to Research",
+    "dept": "EDEC",
+    "number": "630",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Ethnography as a qualitative research approach that allows researchers to conduct in-depth studies of complex social and cultural practices. Hands-on experience in ethnographic field work and practice ethnographic research methods are offered. Focus on history and application of a range of ethnographic approaches including traditional, critical, visual, activist, institutional, and collaborative ethnography.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "Restrictions: Not open to students who have taken EDSL 630.",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-630/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDEC 635",
+    "slug": "edec-635",
+    "title": "Research Writing",
+    "dept": "EDEC",
     "number": "635",
     "credits": null,
-    "faculty": "Arts",
+    "faculty": "Education",
     "faculties": [
-      "Arts"
+      "Education"
     ],
     "terms": [],
-    "description": "An advanced course devoted to a topic on the history of ethics.",
+    "description": "The course offers a research-led introduction to processes and practices of research writing. Working to develop their research writing projects, students learn to examine, critically reflect on, and participate in the research writing practices in their fields, guided by current research on the discursive construction of   knowledge.",
     "prerequisites_raw": "",
     "restrictions_raw": "",
     "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-635/index.html",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-635/index.html",
     "name_variants": []
   },
   {
-    "code": "PHIL 636",
-    "slug": "phil-636",
-    "title": "Seminar: Aesthetics",
-    "dept": "PHIL",
-    "number": "636",
+    "code": "EDEC 646",
+    "slug": "edec-646",
+    "title": "Sociocultural and Epistemic Understandings of Science",
+    "dept": "EDEC",
+    "number": "646",
     "credits": null,
-    "faculty": "Arts",
+    "faculty": "Education",
     "faculties": [
-      "Arts"
+      "Education"
     ],
     "terms": [],
-    "description": "An advanced course devoted to a specific topic in the area of aesthetics and/or the philosophy of art.",
-    "prerequisites_raw": "Prerequisite(s): Permission of the instructor.",
-    "restrictions_raw": "Restriction(s): Not open to students who have taken PHIL 536.",
+    "description": "This course presents historical, philosophical and sociocultural perspectives on construction of knowledge in the natural sciences. A particular emphasis will be placed on how social, cultural, and political forces shape the products of scientific practices, the importance of scientific literacy, and the relevance this bears for science education and science education research.",
+    "prerequisites_raw": "Prerequisite(s): Students must have completed, with a grade of C or higher, a minimum of 24 credits in Science courses. We will also consider enrollment from students with experience teaching secondary science.",
+    "restrictions_raw": "Restriction(s): MATL Science and Technology Students, PhD or MA Science Education Students or by permission from the instructor.",
     "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-636/index.html",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-646/index.html",
     "name_variants": []
   },
   {
-    "code": "PHIL 641",
-    "slug": "phil-641",
-    "title": "Seminar: Philosophy of Science",
-    "dept": "PHIL",
-    "number": "641",
+    "code": "EDEC 647",
+    "slug": "edec-647",
+    "title": "Sociocultural and Epistemic Understandings of Mathematics",
+    "dept": "EDEC",
+    "number": "647",
     "credits": null,
-    "faculty": "Arts",
+    "faculty": "Education",
     "faculties": [
-      "Arts"
+      "Education"
     ],
     "terms": [],
-    "description": "An advanced course devoted to a topic in the philosophy of science.",
-    "prerequisites_raw": "Prerequisite: Permission of instructor.",
-    "restrictions_raw": "Restriction: Not open to students who have taken PHIL 541.",
+    "description": "This course presents historical, philosophical and sociocultural perspectives on construction of knowledge in mathematics. An emphasis will also be placed on how social and cultural forces shape mathematical practices, the importance of mathematical literacy, and the relevance this bears for mathematics education and mathematics education research.",
+    "prerequisites_raw": "Prerequisite(s): Students must have completed, with a grade of C or higher, a minimum of 24 credits in Mathematics courses. We will also consider enrollment from students with experience teaching mathematics.",
+    "restrictions_raw": "Restriction(s): MATL Science and Technology Students, PhD or MA Mathematics & Science Education Students or by permission from the instructor.",
     "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-641/index.html",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-647/index.html",
     "name_variants": []
   },
   {
-    "code": "PHIL 642",
-    "slug": "phil-642",
-    "title": "Seminar: Feminist Theory",
-    "dept": "PHIL",
-    "number": "642",
-    "credits": null,
-    "faculty": "Arts",
-    "faculties": [
-      "Arts"
-    ],
-    "terms": [],
-    "description": "An advanced course devoted to a specific topic in feminist theory: e.g., a major figure; or theme, such as sex/gender, embodiment, race, subjectivity, agency, representation, politics, nature/culture, discourse and power; or a feminist approach to the history of philosophy, ethics, social/political philosophy, epistemology, philosophy of science, phenomenology, or metaphysics.",
-    "prerequisites_raw": "Prerequisite(s): Any 400-level, 3-credit course in political philosophy, or permission of the instructor.",
-    "restrictions_raw": "Restriction(s): Not open to students who have taken PHIL 542.",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-642/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "PHIL 643",
-    "slug": "phil-643",
-    "title": "Seminar: Medical Ethics",
-    "dept": "PHIL",
-    "number": "643",
-    "credits": null,
-    "faculty": "Arts",
-    "faculties": [
-      "Arts"
-    ],
-    "terms": [],
-    "description": "An advanced course devoted to a particular philosophical problem as it arises in the context of medical practice or the application of medical technology.",
-    "prerequisites_raw": "Prerequisite(s): Permission of the instructor.",
-    "restrictions_raw": "Restriction(s): Not open to students who have taken PHIL 543.",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-643/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "PHIL 644",
-    "slug": "phil-644",
-    "title": "Political Theory",
-    "dept": "PHIL",
-    "number": "644",
-    "credits": null,
-    "faculty": "Arts",
-    "faculties": [
-      "Arts"
-    ],
-    "terms": [],
-    "description": "Seminar on a particular topic in political theory.",
-    "prerequisites_raw": "",
-    "restrictions_raw": "Restriction(s): Not open to students who have taken PHIL 544.",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-644/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "PHIL 648",
-    "slug": "phil-648",
-    "title": "Seminar: Philosophy of Law",
-    "dept": "PHIL",
+    "code": "EDEC 648",
+    "slug": "edec-648",
+    "title": "Historical Knowledge and Social Change",
+    "dept": "EDEC",
     "number": "648",
     "credits": null,
-    "faculty": "Arts",
+    "faculty": "Education",
     "faculties": [
-      "Arts"
+      "Education"
     ],
     "terms": [],
-    "description": "An advanced course devoted to a particular topic in the philosophy of law. Subject varies from year to year.",
-    "prerequisites_raw": "Prerequisite(s): Permission of the instructor.",
-    "restrictions_raw": "Restriction(s): Not open to students who have taken PHIL 548.",
+    "description": "This course provides a deep understanding of how individuals and societies use history for purposes of giving meaning and acting in social reality. The emphasis is on the workings of historical consciousness for addressing educational and other societal issues of concern. Special attention will be given to exploring how history can be used for fostering positive changes for the betterment of society. The aim is to exercise participants' own historical sense making processes and to help locate their social posture to serve as a springboard for making a difference as future practitioners for improving the quality of a common future life.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
     "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-648/index.html",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-648/index.html",
     "name_variants": []
   },
   {
-    "code": "PHIL 650",
-    "slug": "phil-650",
-    "title": "Seminar: Ancient Philosophy 1",
-    "dept": "PHIL",
+    "code": "EDEC 650",
+    "slug": "edec-650",
+    "title": "Critical Race Studies and Education",
+    "dept": "EDEC",
     "number": "650",
     "credits": null,
-    "faculty": "Arts",
+    "faculty": "Education",
     "faculties": [
-      "Arts"
+      "Education"
     ],
     "terms": [],
-    "description": "Seminar on a particular topic in ancient philosophy. Topic varies by year.",
-    "prerequisites_raw": "",
-    "restrictions_raw": "Restriction(s): Not open to students who have taken PHIL 550.",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-650/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "PHIL 651",
-    "slug": "phil-651",
-    "title": "Seminar: Ancient Philosophy 2",
-    "dept": "PHIL",
-    "number": "651",
-    "credits": null,
-    "faculty": "Arts",
-    "faculties": [
-      "Arts"
-    ],
-    "terms": [],
-    "description": "An advanced course on a philosopher or philosophical issue articulated in antiquity.",
-    "prerequisites_raw": "Prerequisite(s): at least one course in ancient philosophy and the specific requirements of individual instructors.",
-    "restrictions_raw": "Restriction(s): Not open to students who have taken PHIL 551.",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-651/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "PHIL 656",
-    "slug": "phil-656",
-    "title": "Medieval Philosophy",
-    "dept": "PHIL",
-    "number": "656",
-    "credits": null,
-    "faculty": "Arts",
-    "faculties": [
-      "Arts"
-    ],
-    "terms": [],
-    "description": "An advanced course devoted to a particular topic in medieval philosophy. Subject varies from year to year.",
+    "description": "Investigates the relationships among race, racialization, and education. Defines education as the processes through which we claim identities, make knowledge\nclaims, and how we learn to take action in the world. Concerned with 1) how we come to know and produce knowledge through race, 2) the pedagogical processes\nthat normalize racial inequity; and 3) the impact of racializing knowledge and structures for variously racialized persons in educational settings. Surveys a\nrange of intersectional critical race theoretical frameworks particularly in Canada. Relevant for developing a critically-engaged educational practice, for whom race,\nracialization, and social justice are central concerns.",
     "prerequisites_raw": "",
     "restrictions_raw": "",
     "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-656/index.html",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-650/index.html",
     "name_variants": []
   },
   {
-    "code": "PHIL 660",
-    "slug": "phil-660",
-    "title": "Seminar: 17th Century Philosophy",
-    "dept": "PHIL",
-    "number": "660",
+    "code": "EDEC 700",
+    "slug": "edec-700",
+    "title": "Proseminar in Education 1",
+    "dept": "EDEC",
+    "number": "700",
     "credits": null,
-    "faculty": "Arts",
+    "faculty": "Education",
     "faculties": [
-      "Arts"
+      "Education"
     ],
     "terms": [],
-    "description": "An advanced course on a seventeenth-century philosopher or philosophical issue.",
-    "prerequisites_raw": "Prerequisite(s): PHIL 360 or written permission of the instructor.",
-    "restrictions_raw": "Restriction(s): Not open to students who have taken PHIL 560.",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-660/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "PHIL 661",
-    "slug": "phil-661",
-    "title": "Seminar: 18th Century Philosophy",
-    "dept": "PHIL",
-    "number": "661",
-    "credits": null,
-    "faculty": "Arts",
-    "faculties": [
-      "Arts"
-    ],
-    "terms": [],
-    "description": "An advanced course on an eighteenth-century philosopher or philosophical issue.",
-    "prerequisites_raw": "Prerequisite(s): Permission of the instructor.",
-    "restrictions_raw": "Restriction(s): Not open to students who have taken PHIL 561.",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-661/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "PHIL 670",
-    "slug": "phil-670",
-    "title": "Seminar: Contemporary Analytic Philosophy",
-    "dept": "PHIL",
-    "number": "670",
-    "credits": null,
-    "faculty": "Arts",
-    "faculties": [
-      "Arts"
-    ],
-    "terms": [],
-    "description": "An advanced course on some major analytic philosopher, or some issue of central importance in the analytic tradition.",
-    "prerequisites_raw": "Prerequisite(s): Permission of the instructor.",
-    "restrictions_raw": "Restriction(s): Not open to students who have taken PHIL 570.",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-670/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "PHIL 675",
-    "slug": "phil-675",
-    "title": "Seminar: Contemporary European Philosophy",
-    "dept": "PHIL",
-    "number": "675",
-    "credits": null,
-    "faculty": "Arts",
-    "faculties": [
-      "Arts"
-    ],
-    "terms": [],
-    "description": "An advanced course on contemporary European philosophy or some important issue in the Continental tradition.",
-    "prerequisites_raw": "Prerequisite(s): Permission of instructor.",
-    "restrictions_raw": "Restriction(s): Not open to students who have taken PHIL 575.",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-675/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "PHIL 680",
-    "slug": "phil-680",
-    "title": "Seminar: Problems of Philosophy 1",
-    "dept": "PHIL",
-    "number": "680",
-    "credits": null,
-    "faculty": "Arts",
-    "faculties": [
-      "Arts"
-    ],
-    "terms": [],
-    "description": "Seminar on a particular topic in philosophy. Topic varies by year.",
+    "description": "Students will be exposed to a wide range of educational theory and research as faculty members present the theoretical underpinnings, methodologies, and applications of their various programs of research.",
     "prerequisites_raw": "",
-    "restrictions_raw": "Restriction(s): Not open to students who have taken PHIL 580.",
+    "restrictions_raw": "Restriction: Limited to Doctoral students.",
     "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-680/index.html",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-700/index.html",
     "name_variants": []
   },
   {
-    "code": "PHIL 682",
-    "slug": "phil-682",
-    "title": "Pro-Seminar 3",
-    "dept": "PHIL",
-    "number": "682",
-    "credits": null,
-    "faculty": "Arts",
-    "faculties": [
-      "Arts"
-    ],
-    "terms": [],
-    "description": "A series of seminars on selected topics designed to provide professional training to graduate students. Topics will be selected from the general area of Metaphysics/Epistemology.",
-    "prerequisites_raw": "",
-    "restrictions_raw": "",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-682/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "PHIL 685",
-    "slug": "phil-685",
-    "title": "Fundamentals of Logic",
-    "dept": "PHIL",
-    "number": "685",
-    "credits": null,
-    "faculty": "Arts",
-    "faculties": [
-      "Arts"
-    ],
-    "terms": [],
-    "description": "A course in intermediate logic for graduate students in Philosophy, covering such topics as axiomatic systems, formal semantics, consistency, completeness, the limitative results, intuitionistic logic, formal theories of truth, aspects of the development of logic.",
-    "prerequisites_raw": "",
-    "restrictions_raw": "",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-685/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "PHIL 701",
-    "slug": "phil-701",
-    "title": "Candidacy Examination",
-    "dept": "PHIL",
+    "code": "EDEC 701",
+    "slug": "edec-701",
+    "title": "Ph.D. Comprehensive Examination",
+    "dept": "EDEC",
     "number": "701",
     "credits": null,
-    "faculty": "Arts",
+    "faculty": "Education",
     "faculties": [
-      "Arts"
+      "Education"
     ],
     "terms": [],
-    "description": "Preparation and submission of a candidacy research paper that must be passed by all doctoral candidates in order to continue in the doctoral program.",
+    "description": "Comprehensive examination.",
     "prerequisites_raw": "",
-    "restrictions_raw": "Restrictions: Not open to students who have taken PHIL 690.",
+    "restrictions_raw": "",
     "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-701/index.html",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-701/index.html",
     "name_variants": []
   },
   {
-    "code": "PHIL 703",
-    "slug": "phil-703",
-    "title": "Teaching Reflection and Practice",
-    "dept": "PHIL",
+    "code": "EDEC 702",
+    "slug": "edec-702",
+    "title": "Proseminar in Education 2",
+    "dept": "EDEC",
+    "number": "702",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "First-year doctoral students will be exposed to more advanced level of educational theory and research to experience the multidisciplinary nature of educational inquiry.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "Restriction: Limited to Doctoral students",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-702/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDEC 703",
+    "slug": "edec-703",
+    "title": "Ph.D. Colloquium",
+    "dept": "EDEC",
     "number": "703",
     "credits": null,
-    "faculty": "Arts",
+    "faculty": "Education",
     "faculties": [
-      "Arts"
+      "Education"
     ],
     "terms": [],
-    "description": "Course design, development, delivery, and evaluation of a course that the student has been assigned to teach. Aspects of course design and in-class student\nevaluations will be provided by a Faculty mentor.",
-    "prerequisites_raw": "Prerequisite: PHIL 702",
-    "restrictions_raw": "Restriction: Graduate students in philosophy",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-703/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "PHIL 704",
-    "slug": "phil-704",
-    "title": "Dissertation Seminar",
-    "dept": "PHIL",
-    "number": "704",
-    "credits": null,
-    "faculty": "Arts",
-    "faculties": [
-      "Arts"
-    ],
-    "terms": [],
-    "description": "Dissertation planning and seminar.",
-    "prerequisites_raw": "Prerequisites: PHIL 701",
-    "restrictions_raw": "Restrictions: Open only to students enrolled in a Ph.D. program in the Department of Philosophy.",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-704/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "PHIL 705",
-    "slug": "phil-705",
-    "title": "Guided Research in Ethics 1",
-    "dept": "PHIL",
-    "number": "705",
-    "credits": null,
-    "faculty": "Arts",
-    "faculties": [
-      "Arts"
-    ],
-    "terms": [],
-    "description": "Guided research on a theme and/or problem in ethics.",
+    "description": "Second-year doctoral students will have formal and informal opportunities to present their work for critical discussion and dialogue.  Students will also discuss fundamental issues and questions in the field of education.",
     "prerequisites_raw": "",
-    "restrictions_raw": "",
+    "restrictions_raw": "Restriction: Not open to students who have taken EDEC 704.",
     "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-705/index.html",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-703/index.html",
     "name_variants": []
   },
   {
-    "code": "PHIL 706",
-    "slug": "phil-706",
-    "title": "Guided Research in Ethics 2",
-    "dept": "PHIL",
+    "code": "EDEC 706",
+    "slug": "edec-706",
+    "title": "Textual Approaches to Research",
+    "dept": "EDEC",
     "number": "706",
     "credits": null,
-    "faculty": "Arts",
+    "faculty": "Education",
     "faculties": [
-      "Arts"
+      "Education"
     ],
     "terms": [],
-    "description": "Guided research on a theme and/or problem in ethics.",
+    "description": "Survey a range of research strategies including philosophical, theoretical, historical, narrative, and autobiographical methods of textual analysis.",
     "prerequisites_raw": "",
-    "restrictions_raw": "",
+    "restrictions_raw": "Restriction: Limited to Doctoral students",
     "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-706/index.html",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-706/index.html",
     "name_variants": []
   },
   {
-    "code": "PHIL 711",
-    "slug": "phil-711",
-    "title": "Guided Research in Logic 2",
-    "dept": "PHIL",
-    "number": "711",
+    "code": "EDEC 707",
+    "slug": "edec-707",
+    "title": "Interpretive Inquiry",
+    "dept": "EDEC",
+    "number": "707",
     "credits": null,
-    "faculty": "Arts",
+    "faculty": "Education",
     "faculties": [
-      "Arts"
+      "Education"
     ],
     "terms": [],
-    "description": "Guided research on a theme and/or problem in logic",
+    "description": "Focus on issues of voice, reflectivity, and representation when using interpretive frameworks in qualitative research.",
     "prerequisites_raw": "",
-    "restrictions_raw": "",
+    "restrictions_raw": "Restriction: Not open to students who have taken EDEM 679",
     "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-711/index.html",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-707/index.html",
     "name_variants": []
   },
   {
-    "code": "PHIL 720",
-    "slug": "phil-720",
-    "title": "Guided Research: Philosophy of Science 1",
-    "dept": "PHIL",
-    "number": "720",
+    "code": "EDEC 708",
+    "slug": "edec-708",
+    "title": "PhD Seminar in Practice-Based Teacher Education 1",
+    "dept": "EDEC",
+    "number": "708",
     "credits": null,
-    "faculty": "Arts",
+    "faculty": "Education",
     "faculties": [
-      "Arts"
+      "Education"
     ],
     "terms": [],
-    "description": "Guided research on a theme and/or problem in the philosophy of science.",
+    "description": "Seminar that provides an overview of research in practice-based teacher education, across content areas, and apprenticeship opportunities in teacher preparation contexts",
     "prerequisites_raw": "",
-    "restrictions_raw": "",
+    "restrictions_raw": "Restrictions: Open only to students enrolled in the Ph.D. in Educational Studies; Math and Science Education program or permission of instructor.",
     "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-720/index.html",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-708/index.html",
     "name_variants": []
   },
   {
-    "code": "PHIL 721",
-    "slug": "phil-721",
-    "title": "Guided Research: Philosophy of Science 2",
-    "dept": "PHIL",
+    "code": "EDEC 709",
+    "slug": "edec-709",
+    "title": "PhD Seminar in Math and Science Education 2",
+    "dept": "EDEC",
+    "number": "709",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Seminar that provides an overview of research in math and science education and apprenticeship opportunities in math or science teacher preparation contexts.",
+    "prerequisites_raw": "Prerequisite: EDEC 708",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edec-709/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDPE 208",
+    "slug": "edpe-208",
+    "title": "Personality and Social Development",
+    "dept": "EDPE",
+    "number": "208",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Personality, social behavior, and moral development from nursery school up to, but not including, adolescence. Emphasis on aspects of personality and social development that are related to the process of schooling.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "Restriction: Not available for Psychology Major students or any student who has taken or is required to take PSYC 304 in the Psychology Department",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-208/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDPE 300",
+    "slug": "edpe-300",
+    "title": "Educational Psychology",
+    "dept": "EDPE",
+    "number": "300",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Selected theories, models, and concepts relevant to planning and reflecting upon educational practice and improvement. Overview of development, learning, thinking, motivation, individual difference, etc. In relation to applications in classroom teaching and learning, the complementary role of counsellors and psychologists, educational computing and technology. The Youth Protection Act.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-300/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDPE 304",
+    "slug": "edpe-304",
+    "title": "Measurement and Evaluation",
+    "dept": "EDPE",
+    "number": "304",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "The purposes of examinations. Causes of complaints about examinations. Equalizing means and dispersions in distribution of marks. Standardized scores. The percentile system. Essay and objective-type examinations. Taxonomies of educational objectives. Validity and reliability: item analysis.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-304/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDPE 335",
+    "slug": "edpe-335",
+    "title": "Instructional Psychology",
+    "dept": "EDPE",
+    "number": "335",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Psychological processes in instruction and learning, assessment, and curriculum design, based on theories of cognition, motivation, and the social context of instruction.",
+    "prerequisites_raw": "Prerequisites: An introductory course in psychology or EDPE 300",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-335/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDPE 355",
+    "slug": "edpe-355",
+    "title": "Cognition and Education",
+    "dept": "EDPE",
+    "number": "355",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Cognition and learning in educational domains and contexts. Contributions of cognitive science to issues in education including domain-specific and general knowledge and expertise, situated cognition and learning, cognitive apprenticeship, and uses of computers and networks as cognitive tools in educational settings.",
+    "prerequisites_raw": "Prerequisites: PSYC 213 or permission of the instructor",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-355/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDPE 375",
+    "slug": "edpe-375",
+    "title": "Introductory Statistics",
+    "dept": "EDPE",
+    "number": "375",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "This online course provides an introduction to the fundamentals of descriptive and inferential statistics. Topics in descriptive statistics include introduction to statistics, measures of central tendency, variability and correlation. Topics in inferential statistics concentrate on basic procedures in between-group hypothesis testing\nusing dependent and independent t-tests and within-group hypothesis testing using correlation.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-375/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDPE 377",
+    "slug": "edpe-377",
+    "title": "Adolescence and Education",
+    "dept": "EDPE",
+    "number": "377",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Development of personality and social behaviour in adolescence. Problems relating to self-concept, academic achievement, relationships with others, and development of values in a changing culture. Some attention to current criticisms of the school as an agency involved in adolescent development.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-377/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDPE 496",
+    "slug": "edpe-496",
+    "title": "Individual Reading Course",
+    "dept": "EDPE",
+    "number": "496",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Supervised individual reading course on an approved subject.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-496/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDPE 502",
+    "slug": "edpe-502",
+    "title": "Theories of Human Development",
+    "dept": "EDPE",
+    "number": "502",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Life course developmental theories to form a foundation for policy and for empirical and applied work with diverse groups, including disability and other equity-seeking groups.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-502/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDPE 510",
+    "slug": "edpe-510",
+    "title": "Machine Learning in Society",
+    "dept": "EDPE",
+    "number": "510",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "An overview of key topics and broader issues in machine learning. An exploration of machine learning algorithms to make predictions and provide explanations from the decision structures inferred from the data. An introduction to programming languages to exemplify fundamental machine learning algorithms and techniques.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-510/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDPE 515",
+    "slug": "edpe-515",
+    "title": "Gender Identity Development",
+    "dept": "EDPE",
+    "number": "515",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Theoretical models and empirical findings relevant to the development of gender identity. Special attention is given to the influence of peers in school settings. Psychological, physiological, parental, peer and cultural influences on gender identity.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-515/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDPE 535",
+    "slug": "edpe-535",
+    "title": "Instructional Design",
+    "dept": "EDPE",
+    "number": "535",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "This course draws on the fields of learning theory, developmental psychology, and measurement to focus on the tasks of constructing instructional materials. Areas to be considered include behaviour analysis, concept formation, and test construction.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-535/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDPE 550",
+    "slug": "edpe-550",
+    "title": "Consciousness and Virtual Reality",
+    "dept": "EDPE",
+    "number": "550",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "An exploration of the nature and role of consciousness from the virtual reality research perspective, and the implications of virtual reality and cyberspace in education.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "Restriction: Not open to students who have taken EDPE 650.",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-550/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDPE 555",
+    "slug": "edpe-555",
+    "title": "Introduction to Learning Sciences",
+    "dept": "EDPE",
+    "number": "555",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Introduction to foundational theories of the learning sciences. Implications of theory on methodologies for the learning sciences in general, and for educational and instructional contexts in particular.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-555/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDPE 561",
+    "slug": "edpe-561",
+    "title": "Machine Learning: Theory & Applications",
+    "dept": "EDPE",
+    "number": "561",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "An examination of the principles underlying the current practice of machine learning,emphasizing the conceptual underpinnings of the fundamental machine learning algorithms applied to education and other domains. The critical use of data to develop rigorous data models. The mapping of algorithms to learning tasks. The visualization, evaluation, and interpretation of performance measures and results. The identification of model strengths and limitations.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-561/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDPE 575",
+    "slug": "edpe-575",
+    "title": "Statistics for Practitioners",
+    "dept": "EDPE",
+    "number": "575",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Understanding and interpreting basic statistical procedures used in basic and applied research, including graphs, measures of central tendency and variability, hypothesis testing, and correlations, t-tests, and basic ANOVA designs.",
+    "prerequisites_raw": "Prerequisite EDPE 602",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-575/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDPE 595",
+    "slug": "edpe-595",
+    "title": "Seminar in Special Topics 1",
+    "dept": "EDPE",
+    "number": "595",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "The content of the seminar will vary from year to year and will be announced prior to registration. The seminar may be given by a single instructor or by a group, as the occasion warrants.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-595/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDPE 596",
+    "slug": "edpe-596",
+    "title": "Seminar in Special Topics 2",
+    "dept": "EDPE",
+    "number": "596",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Seminar in selected topics in Educational and Counselling Psychology. The topic will vary from year and will be announced prior to registration.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-596/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDPE 602",
+    "slug": "edpe-602",
+    "title": "Uses of Research Findings in Education",
+    "dept": "EDPE",
+    "number": "602",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Basic concepts of educational research for the student who is likely to be a regular consumer of research but only an occasional generator of research and will be able to use common tools of information retrieval.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-602/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDPE 604",
+    "slug": "edpe-604",
+    "title": "Thesis 1",
+    "dept": "EDPE",
+    "number": "604",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Literature survey and thesis planning.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-604/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDPE 605",
+    "slug": "edpe-605",
+    "title": "Research Methods",
+    "dept": "EDPE",
+    "number": "605",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Research methods and designs, planning and evaluating research, relations between research and statistical designs, interdisciplinary and nonquantitative approaches, meta-analysis, and the use of computers beyond computation. Ethics, scholarly writing.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-605/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDPE 607",
+    "slug": "edpe-607",
+    "title": "Thesis 2",
+    "dept": "EDPE",
+    "number": "607",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Preparation of a thesis proposal.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-607/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDPE 609",
+    "slug": "edpe-609",
+    "title": "Selected Topics in Educational Psychology",
+    "dept": "EDPE",
+    "number": "609",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "A detailed examination of recent developments in specific topics of educational psychology. The content of the seminar will vary from year to year and will be announced prior to registration.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-609/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDPE 616",
+    "slug": "edpe-616",
+    "title": "Cognitive Development",
+    "dept": "EDPE",
+    "number": "616",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Assessment of theories of  cognitive development including  Piagetian, neo-Piagetian, and  information-processing approaches.  Theoretical models and empirical  findings, and their application to  educational and other settings.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-616/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDPE 619",
+    "slug": "edpe-619",
+    "title": "Child and Adolescent Therapy",
+    "dept": "EDPE",
+    "number": "619",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Therapeutic models for individual and group interventions for children and adolescents; case histories; gender and cultural minority issues; emphasis on  classical and innovative strategies and methods for school and counselling psychologists.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "Restriction: For School/Applied Child Psychology students only.",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-619/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDPE 620",
+    "slug": "edpe-620",
+    "title": "Developmental Psychopathology",
+    "dept": "EDPE",
+    "number": "620",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Theory, research, and practice in developmental processes in the study of psychopathology, including aberrant behaviour in childhood, at-risk and resilient children, and mental illness.",
+    "prerequisites_raw": "Prerequisites: None",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-620/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDPE 622",
+    "slug": "edpe-622",
+    "title": "Multiculturalism and Gender",
+    "dept": "EDPE",
+    "number": "622",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Multicultural, multilingual and gender issues as they relate to the practising school and counselling psychologist. Implications and their impact in assessment, research, training, and intervention.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "Restriction: Open to School/ Applied Child and Counselling Psychology students only",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-622/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDPE 623",
+    "slug": "edpe-623",
+    "title": "Social-Emotional Development",
+    "dept": "EDPE",
+    "number": "623",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Social-emotional development including temperament, attachment, gender identity, and peer relations. Biological and environmental influences, continuity and change, and qualitative versus quantitative variables.",
+    "prerequisites_raw": "Prerequisites: EDPE 616 or EDPE 620",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-623/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDPE 625",
+    "slug": "edpe-625",
+    "title": "Practicum 1: School Psychology",
+    "dept": "EDPE",
+    "number": "625",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Clinic experiences (normally 8-10 hours/week) (a) conducting assessment batteries, (b) interpreting assessment findings and developing intervention plans, (c) providing remedial services for specific learning domains and practical recommendations, (d) acquiring skills in group intervention techniques. Weekly case review and student progress meetings.",
+    "prerequisites_raw": "Corequisites: EDPC 682D1/D2, EDPE 620.",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-625/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDPE 626",
+    "slug": "edpe-626",
+    "title": "Practicum 2: School Psychology",
+    "dept": "EDPE",
+    "number": "626",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Clinic experiences (normally 8-10 hours/week) building uponEDPE 625: (a) conducting assessment batteries, (b) interpreting assessment findings and developing intervention plans, (c) providing remedial services for specific learning domains and practical recommendations, (d) acquiring skills in group intervention techniques. Weekly case review and student progress meetings. May continue to the end of the public school year.",
+    "prerequisites_raw": "Corequisite: EDPC 682D1/D2",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-626/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDPE 627",
+    "slug": "edpe-627",
+    "title": "Ethical and Professional Practice of Psychology",
+    "dept": "EDPE",
+    "number": "627",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Ethics and the professional and governmental structures regulating the practice of psychology in Quebec, Canada, and North America and their relation to the work of psychologists. Required for licensing as a psychologist.",
+    "prerequisites_raw": "Prerequisite: EDPE 575 or equivalent",
+    "restrictions_raw": "Restriction: Open only to students in M.A. (Thesis) Educational Psychology - School/Applied Child Psychology Stream Program, M.A. (Non-Thesis) Counselling Psychology - Project Program, and M.A. (Thesis) Counselling Psychology Program.",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-627/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDPE 633",
+    "slug": "edpe-633",
+    "title": "Research Internship 1",
+    "dept": "EDPE",
+    "number": "633",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "This course provides students with applied research experience under the supervision of a researcher other than their academic supervisor over the duration of 150 hours. Nature of the research internship will be contracted with the research internship supervisor, documented, and approved by the supervisor and program director.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-633/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDPE 634",
+    "slug": "edpe-634",
+    "title": "Research Internship 2",
+    "dept": "EDPE",
+    "number": "634",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "This course provides students with applied research experience under the supervision of a researcher other than their academic supervisor over the duration of 150 hours. Nature of the research internship will be contracted with the research internship supervisor, documented, and approved by the supervisor and program director.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-634/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDPE 635",
+    "slug": "edpe-635",
+    "title": "Theories of Learning and Instruction",
+    "dept": "EDPE",
+    "number": "635",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "An analysis of the relationship between theory and research about learning and teaching from a historical perspective.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-635/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDPE 636",
+    "slug": "edpe-636",
+    "title": "Motivation and Instruction",
+    "dept": "EDPE",
+    "number": "636",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Instructional effects on motivation and emotions and their implications for educational practice, with particular emphasis on socio-cultural and constructivist practices, classroom interaction, and teacher impact.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-636/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDPE 637",
+    "slug": "edpe-637",
+    "title": "Issues in Health Professions Education",
+    "dept": "EDPE",
+    "number": "637",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "An overview of health professions education issues, including: learning and assessment in the clinical setting, medical core competencies, design, delivery and evaluation of health professions education programs, organization & management of health professions education programs and systems, organizational change and leadership, clinical reasoning and decision making, interdisciplinary education.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-637/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDPE 640",
+    "slug": "edpe-640",
+    "title": "Emerging Technologies for Educational Change",
+    "dept": "EDPE",
+    "number": "640",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Interdisciplinary learning theories; working with and evaluating emerging digital technologies and interfaces that impact teaching and learning.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-640/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDPE 656",
+    "slug": "edpe-656",
+    "title": "Applied Theory/Methods in the Learning Sciences",
+    "dept": "EDPE",
+    "number": "656",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Foundational and current theories and methodologies applied to understanding human\ncognition and learning. An overview of experimental, observational, and physiological\nresearch designs, methods, and analyses.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-656/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDPE 657",
+    "slug": "edpe-657",
+    "title": "Learning, Cognition, and Motivation in Health Sciences Educ",
+    "dept": "EDPE",
+    "number": "657",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Introduction to foundational psychological and educational theories relevant to health sciences education that can account for learning and change and can inform the pedagogical design of courses, programs, and educational environments.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-657/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDPE 658",
+    "slug": "edpe-658",
+    "title": "Introduction to HSE Curriculum and Program Development",
+    "dept": "EDPE",
+    "number": "658",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Instructional design principles and their application to course and program development, highlighting a learner-centered approach to teaching, curriculum design, and program development (e.g., competency-based curriculum) and specific approaches to delivery in diverse health sciences education contexts in which teaching and learning occur (e.g., simulation, classroom, clinical settings).",
+    "prerequisites_raw": "Prerequisite: EDPE 657",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-658/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDPE 659",
+    "slug": "edpe-659",
+    "title": "Introduction to Assessment and Evaluation in HSE",
+    "dept": "EDPE",
+    "number": "659",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Introductory principles and issues related to assessment, and also specific to the workplace-based contexts specific to health sciences education (HSE). Concepts\ninclude: creating and using assessments for decision-making; generating feedback for learners; and examining the quality of assessments, and critical assessment literacy on the uses and interpretations of assessment in HSE. Basic principles of program evaluation, introduction to several frameworks used to guide its design, and key steps in formulating an evaluation plan.",
+    "prerequisites_raw": "Prerequisite: EDPE 658",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-659/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDPE 663",
+    "slug": "edpe-663",
+    "title": "Learning Environments",
+    "dept": "EDPE",
+    "number": "663",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Research on digital environments and tools (e.g., online, mobile) that support learning and developing expertise. Evaluation and application of theory and research on technology-rich educational environments focusing on underlying cognitive and social processes.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-663/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDPE 664",
+    "slug": "edpe-664",
+    "title": "Critical Thinking",
+    "dept": "EDPE",
+    "number": "664",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Foundational and current research on the development of critical thinking in formal and informal educational settings, exploring cognitive, interpersonal, and socio-cultural dimensions. Introduction to methodologies for analyzing data related to cognitive processes.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-664/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDPE 666",
+    "slug": "edpe-666",
+    "title": "Advanced Topics in Learning Sciences",
+    "dept": "EDPE",
+    "number": "666",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Advanced topics on theory and research on the interdisciplinary study of the learning sciences. Focuses on cognitive-psychological and social- psychological foundations of human learning, as well as on the design of learning environments.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-666/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDPE 668",
+    "slug": "edpe-668",
+    "title": "Advanced Seminar in Learning Sciences",
+    "dept": "EDPE",
+    "number": "668",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Critical analysis and synthesis of contemporary theoretical and empirical research in educational psychology and cognate areas. Topics addressed for each offering may change as a function of current debates and issues in the educational literature. Examples of topics would be motivation, assessment, epistemology, self-regulated learning, and metacognition.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-668/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDPE 670",
+    "slug": "edpe-670",
+    "title": "Educational Assessment and Evaluation",
+    "dept": "EDPE",
+    "number": "670",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Theories and models of evaluation as applied to educational programs and instructional systems. Current theories of aligning assessment with curriculum and instruction goals based on the cognitive competencies required in specific practices.",
+    "prerequisites_raw": "Prerequisite: EDPE 635",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-670/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDPE 672",
+    "slug": "edpe-672",
+    "title": "Human Development Seminar 1",
+    "dept": "EDPE",
+    "number": "672",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Theories and developments in the science of human development within the context of research and practice and the evolution of the field at large.",
+    "prerequisites_raw": "Prerequisite: EDPE 502 or permission of the instructor (Minimum Grade/Test score(s) needed is B-).",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-672/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDPE 673",
+    "slug": "edpe-673",
+    "title": "Human Development Seminar 2",
+    "dept": "EDPE",
+    "number": "673",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Continuation of theories and developments in the science of human development within the context of research and practice and evolution of the field at large.",
+    "prerequisites_raw": "Prerequisite: EDPE 672 (Minimum Grade/Test score(s) needed is B-).",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-673/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDPE 676",
+    "slug": "edpe-676",
+    "title": "Intermediate Statistics",
+    "dept": "EDPE",
+    "number": "676",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Concepts and procedures of conducting basic descriptive and inferential statistics, including analysis of variance, correlation, and regression models. Provides experience with data-analysis tools.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-676/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDPE 682",
+    "slug": "edpe-682",
+    "title": "Univariate/Multivariate Analysis",
+    "dept": "EDPE",
+    "number": "682",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "General linear model as a unified data analytic system for estimation and hypothesis testing that subsumes regression, analysis of variance, and analysis of covariance for single dependent variables. Introduction to generalizations involving multiple dependent (criterion) variables. Applications oriented toward education, educational psychology and counselling psychology. Experience with data-analysis tools.",
+    "prerequisites_raw": "Prerequisite: EDPE 676",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-682/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDPE 683",
+    "slug": "edpe-683",
+    "title": "Human Development Seminar 3",
+    "dept": "EDPE",
+    "number": "683",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Recent developments of specific topics in human development.",
+    "prerequisites_raw": "Prerequisite: EDPE 673 (Minimum Grade/Test score(s) needed is B-).",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-683/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDPE 684",
+    "slug": "edpe-684",
+    "title": "Applied Multivariate Statistics",
+    "dept": "EDPE",
+    "number": "684",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Principal methods, models, and hypothesis-testing procedures for the prediction and\nanalysis of patterns, structure, and relationships in multivariate data (e.g., factor and path analysis, structural equation modeling, multi-level modeling). Applications oriented toward education and educational and counselling psychology. Provides experience with data analysis tools.",
+    "prerequisites_raw": "Prerequisite: EDPE 682 or equivalent.",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-684/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDPE 686",
+    "slug": "edpe-686",
+    "title": "Human Development Seminar 4",
+    "dept": "EDPE",
+    "number": "686",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Continuation of recent developments of specific topics in human development.",
+    "prerequisites_raw": "Prerequisite: EDPE 683 (Minimum Grade/Test score(s) needed is B-).",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-686/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDPE 687",
+    "slug": "edpe-687",
+    "title": "Qualitative Methods in Educational Psychology",
+    "dept": "EDPE",
+    "number": "687",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "The logics of design and selection of phenomenology, grounded theory, ethnography, case study and mixed design methods with emphasis on data analysis in light of issues of research purpose, epistemology, reliability and validity.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-687/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDPE 691",
+    "slug": "edpe-691",
+    "title": "Reading Course",
+    "dept": "EDPE",
+    "number": "691",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Supervised readings supervised by a member of staff.  Topics will be chosen to suit individual interests.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-691/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDPE 692",
+    "slug": "edpe-692",
+    "title": "Reading Course",
+    "dept": "EDPE",
+    "number": "692",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Supervised readings supervised by a member of staff.  Topics will be chosen to suit individual interests.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-692/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDPE 693",
+    "slug": "edpe-693",
+    "title": "Thesis 3",
+    "dept": "EDPE",
+    "number": "693",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Thesis research under supervision of a research director.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-693/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDPE 694",
+    "slug": "edpe-694",
+    "title": "Thesis 4",
+    "dept": "EDPE",
+    "number": "694",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Thesis research under supervision of a research director.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-694/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDPE 695",
+    "slug": "edpe-695",
+    "title": "Thesis 5",
+    "dept": "EDPE",
+    "number": "695",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Thesis research under supervision of a research director.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-695/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDPE 696",
+    "slug": "edpe-696",
+    "title": "Thesis 6",
+    "dept": "EDPE",
+    "number": "696",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Thesis research under supervision of a research director.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-696/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDPE 697",
+    "slug": "edpe-697",
+    "title": "Special Activity 1",
+    "dept": "EDPE",
+    "number": "697",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "A project relevant to improving educational practice. It may be an internship, a research project, or an innovation in teaching, supervised by the student's advisor and with the approval of the department. It is completed by the submission of a project report, monograph, or production. For M.Ed. students only.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-697/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDPE 698",
+    "slug": "edpe-698",
+    "title": "Special Activity 2",
+    "dept": "EDPE",
+    "number": "698",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "A project relevant to improving educational practice. It may be an internship, a research project, or an innovation in teaching, supervised by the student's advisor and with the approval of the department. It is completed by the submission of a project report, monograph, or production. For M.Ed. students only.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-698/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDPE 704",
+    "slug": "edpe-704",
+    "title": "Professional Development Seminar 1",
+    "dept": "EDPE",
+    "number": "704",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Professional development topics including literature search strategies, academic writing techniques, employment preparation (academic and non-academic), and current research topics (e.g., publishing, open science). Consideration of\nconceptual and methodological issues relevant to students\u2019 proposed dissertations. Preparation for the comprehensive examination and initial doctoral research proposal.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-704/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDPE 705",
+    "slug": "edpe-705",
+    "title": "Professional Development Seminar 2",
+    "dept": "EDPE",
+    "number": "705",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Professional development topics including literature search strategies, academic writing techniques, employment preparation (academic and non-academic), and current research topics (e.g., publishing, open science). Consideration of conceptual and methodological issues relevant to students\u2019 proposed dissertations. Preparation for the comprehensive examination and initial doctoral research proposal.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "Restrictions: Open to doctoral students only",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-705/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDPE 706",
+    "slug": "edpe-706",
+    "title": "Professional Development Seminar 3",
+    "dept": "EDPE",
+    "number": "706",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Professional development topics including literature search strategies, academic writing techniques, employment preparation (academic and non-academic), and current research topics (e.g., publishing, open science). Consideration of\nconceptual and methodological issues relevant to students\u2019 proposed dissertations. Preparation for the comprehensive examination and initial doctoral research proposal.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "Restrictions: Open to doctoral students only",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-706/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDPE 707",
+    "slug": "edpe-707",
+    "title": "Professional Development Seminar 4",
+    "dept": "EDPE",
+    "number": "707",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Professional development topics including literature search strategies, academic writing techniques, employment preparation (academic and non-academic), and current research topics (e.g., publishing, open science). Consideration of\nconceptual and methodological issues relevant to students\u2019 proposed dissertations. Preparation for the comprehensive examination and initial doctoral research proposal.",
+    "prerequisites_raw": "Prerequisites: EDPE 704 - Advanced Research Seminar 1, EDPE 705 - Advanced Research Seminar 2, EDPE 706 - Advanced Research Seminar 3",
+    "restrictions_raw": "Restrictions: Open to doctoral students only",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-707/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDPE 708",
+    "slug": "edpe-708",
+    "title": "Comprehensive Examination",
+    "dept": "EDPE",
+    "number": "708",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "A four-part evaluation which is normally taken at the end of the Ph.D. 2 year. A detailed description of the examination is provided to all students.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-708/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDPE 710",
+    "slug": "edpe-710",
+    "title": "Consultation in School Psychology",
+    "dept": "EDPE",
+    "number": "710",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Open only to students in School/Applied Child Psychology and with permission, Counselling Psychology and Special Populations Major. A clinical course on the use of consultation in educational and school-related settings. Topics include: consultation theory, the process of evaluations of the consultation process and outcomes, critical study of relevant research and practice. Includes problem identification, problem analysis, treatment implementation, and treatment evaluation of one case.",
+    "prerequisites_raw": "Corequisites: EDPE 625, EDPE 626 or equivalent.",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-710/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDPE 712",
+    "slug": "edpe-712",
+    "title": "Neurological Bases of Behaviour Across Lifespan",
+    "dept": "EDPE",
+    "number": "712",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Neurobiological changes specific to developmental, learning, psychiatric and neurodegenerative conditions with clinical onset across the lifespan examined within environmental and psychosocial contexts. Uses of current neuromodulatory and pharmacological remediation discussed in addition to clinical/educational intervention.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-712/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDPE 713",
+    "slug": "edpe-713",
+    "title": "Language Acquisition Issues 5",
+    "dept": "EDPE",
+    "number": "713",
+    "credits": null,
+    "faculty": "Education",
+    "faculties": [
+      "Education"
+    ],
+    "terms": [],
+    "description": "Seminar on language science controversies and their associating literature, and practical implications in education and learning in general.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-713/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "EDPE 721",
+    "slug": "edpe-721",
+    "title": "School Psychology: Elementary",
+    "dept": "EDPE",
     "number": "721",
     "credits": null,
-    "faculty": "Arts",
+    "faculty": "Education",
     "faculties": [
-      "Arts"
+      "Education"
     ],
     "terms": [],
-    "description": "Guided research on a theme and/or problem in the philosophy of science.",
-    "prerequisites_raw": "",
+    "description": "Open only to Ph.D. students in School/Applied Child Psychology. Field experience. Two days or 16 hours per week supervised by faculty members and a field supervisor in a school providing elementary education. Weekly class meetings. Students must also register for eitherEDPE 722orEDPE 723in the same academic year.",
+    "prerequisites_raw": "Prerequisite: EDPE 626",
     "restrictions_raw": "",
     "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-721/index.html",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-721/index.html",
     "name_variants": []
   },
   {
-    "code": "PHIL 731",
-    "slug": "phil-731",
-    "title": "Guided Research: Philosophy of Religion 2",
-    "dept": "PHIL",
-    "number": "731",
+    "code": "EDPE 722",
+    "slug": "edpe-722",
+    "title": "School Psychology: Secondary",
+    "dept": "EDPE",
+    "number": "722",
     "credits": null,
-    "faculty": "Arts",
+    "faculty": "Education",
     "faculties": [
-      "Arts"
+      "Education"
     ],
     "terms": [],
-    "description": "Guided research on a theme and/or problem in the philosophy of religion.",
-    "prerequisites_raw": "",
+    "description": "Open only to Ph.D. students in School/Applied Child Psychology. Field experience. Two days or 16 hours per week supervised by faculty members and a field supervisor in a school providing secondary education. Weekly class meetings. Students must also register for eitherEDPE 721orEDPE 723in the same academic year.",
+    "prerequisites_raw": "Prerequisite: EDPE 626",
     "restrictions_raw": "",
     "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-731/index.html",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-722/index.html",
     "name_variants": []
   },
   {
-    "code": "PHIL 741",
-    "slug": "phil-741",
-    "title": "Guided Research: Ancient Philosophy 2",
-    "dept": "PHIL",
-    "number": "741",
+    "code": "EDPE 723",
+    "slug": "edpe-723",
+    "title": "School Psychology: Community",
+    "dept": "EDPE",
+    "number": "723",
     "credits": null,
-    "faculty": "Arts",
+    "faculty": "Education",
     "faculties": [
-      "Arts"
+      "Education"
     ],
     "terms": [],
-    "description": "Guided research on a theme and/or problem in ancient philosophy.",
-    "prerequisites_raw": "",
+    "description": "Open only to Ph.D. students in School/Applied Child Psychology. Field experience. Two days or 16 hours per week supervised by faculty members and a field supervisor in an educationally relevant community or institutional setting. Weekly class meetings. Students must also register for eitherEDPE 721orEDPE 722in the same academic year.",
+    "prerequisites_raw": "Prerequisite: EDPE 626",
     "restrictions_raw": "",
     "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-741/index.html",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-723/index.html",
     "name_variants": []
   },
   {
-    "code": "PHIL 760",
-    "slug": "phil-760",
-    "title": "Guided Research: History of Philosophy 1",
-    "dept": "PHIL",
-    "number": "760",
+    "code": "EDPE 725",
+    "slug": "edpe-725",
+    "title": "Internship 1 - School Psychology",
+    "dept": "EDPE",
+    "number": "725",
     "credits": null,
-    "faculty": "Arts",
+    "faculty": "Education",
     "faculties": [
-      "Arts"
+      "Education"
     ],
     "terms": [],
-    "description": "Guided research on a theme and/or problem in the history of philosophy.",
-    "prerequisites_raw": "",
+    "description": "Open only to Ph.D. students in School/Applied Child Psychology. A 2 1/2 day, 10- to 12-month supervised internship (minimum 600 hours) including assessment and diagnosis normally in a school-based setting. This also includes group supervision to discuss cases that arise in internship settings. May be combined withEDPE 726in a single full-time year long internship; this full-time pattern is typical in accredited sites.",
+    "prerequisites_raw": "Prerequisites: EDPE 708 and two of EDPE 721, EDPE 722 or EDPE 723",
     "restrictions_raw": "",
     "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-760/index.html",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-725/index.html",
     "name_variants": []
   },
   {
-    "code": "PHIL 761",
-    "slug": "phil-761",
-    "title": "Guided Research: History of Philosophy 2",
-    "dept": "PHIL",
-    "number": "761",
+    "code": "EDPE 726",
+    "slug": "edpe-726",
+    "title": "Internship 2 - School Psychology",
+    "dept": "EDPE",
+    "number": "726",
     "credits": null,
-    "faculty": "Arts",
+    "faculty": "Education",
     "faculties": [
-      "Arts"
+      "Education"
     ],
     "terms": [],
-    "description": "Guided research on a theme and/or problem in the histoory of philosophy.",
-    "prerequisites_raw": "",
+    "description": "Open only to Ph.D. students in School/Applied Child Psychology. A 2 1/2 day, 10- to 12-month supervised internship (minimum 600 hours) including assessment and diagnosis normally in an educationally relevant community-based centre (e.g., hospital, clinic), group supervision, case discussions. May be combined withEDPE 725in a single full-time year long internship; this full-time pattern is typical in accredited sites.",
+    "prerequisites_raw": "Prerequisites: EDPE 708 and two of EDPE 721, EDPE 722 or EDPE 723",
     "restrictions_raw": "",
     "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-761/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "PHIL 770",
-    "slug": "phil-770",
-    "title": "Guided Research: Philosophy of Politics 1",
-    "dept": "PHIL",
-    "number": "770",
-    "credits": null,
-    "faculty": "Arts",
-    "faculties": [
-      "Arts"
-    ],
-    "terms": [],
-    "description": "Guided research on a theme and/or problem in the philosophy of politics.",
-    "prerequisites_raw": "",
-    "restrictions_raw": "",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-770/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "PHIL 771",
-    "slug": "phil-771",
-    "title": "Guided Research: Philosophy of Politics 2",
-    "dept": "PHIL",
-    "number": "771",
-    "credits": null,
-    "faculty": "Arts",
-    "faculties": [
-      "Arts"
-    ],
-    "terms": [],
-    "description": "Guided research on a theme and/or problem in the philosophy of politics.",
-    "prerequisites_raw": "",
-    "restrictions_raw": "",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-771/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "PHIL 780",
-    "slug": "phil-780",
-    "title": "Guided Research: Epistemology/Metaphysics 1",
-    "dept": "PHIL",
-    "number": "780",
-    "credits": null,
-    "faculty": "Arts",
-    "faculties": [
-      "Arts"
-    ],
-    "terms": [],
-    "description": "Guided research on a theme and/or problem in epistemology/metaphysics.",
-    "prerequisites_raw": "",
-    "restrictions_raw": "",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-780/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "PHIL 781",
-    "slug": "phil-781",
-    "title": "Guided Research: Epistemology/Metaphysics 2",
-    "dept": "PHIL",
-    "number": "781",
-    "credits": null,
-    "faculty": "Arts",
-    "faculties": [
-      "Arts"
-    ],
-    "terms": [],
-    "description": "Guided research on a theme and/or problem in epistemology/metaphysics.",
-    "prerequisites_raw": "",
-    "restrictions_raw": "",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/phil-781/index.html",
+    "url": "https://coursecatalogue.mcgill.ca/courses/edpe-726/index.html",
     "name_variants": []
   }
 ]

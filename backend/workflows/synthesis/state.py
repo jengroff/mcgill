@@ -12,5 +12,6 @@ class SynthesisState(BaseWorkflowState, total=False):
     retrieval_context: list[dict]
     program_context: list[dict]
     graph_context: str
+    structured_context: str
     response: str
     sources: list[dict]

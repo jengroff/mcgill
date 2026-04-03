@@ -1,11 +1,14 @@
-"""Retrieval workflow nodes — keyword, semantic, program, graph, fusion."""
+"""Retrieval workflow nodes — keyword, semantic, program, graph, structured SQL, fusion."""
 
 from __future__ import annotations
 
+import logging
 import re
 import traceback
 
 from backend.workflows.retrieval.state import RetrievalState
+
+logger = logging.getLogger("backend.workflows.retrieval")
 
 
 async def keyword_node(state: RetrievalState) -> RetrievalState:
@@ -61,6 +64,85 @@ async def graph_node(state: RetrievalState) -> RetrievalState:
     except Exception as e:
         return {"graph_context": "", "errors": [f"graph: {e}\n{traceback.format_exc()}"]}
 
+
+_DB_SCHEMA = """
+Tables:
+  faculties (id serial PK, name varchar UNIQUE, slug varchar UNIQUE)
+  departments (id serial PK, code varchar(6) UNIQUE, faculty_id int FK→faculties, name varchar)
+  courses (id serial PK, code varchar UNIQUE, slug varchar, title varchar, dept varchar(6),
+           number varchar, credits real, faculty varchar, terms text[],
+           description text, prerequisites_raw text, restrictions_raw text, notes_raw text,
+           url varchar, name_variants text[], scraped_at timestamptz, updated_at timestamptz)
+  course_faculties (course_id int FK→courses, faculty_id int FK→faculties, PK(course_id,faculty_id))
+  program_pages (id serial PK, faculty_slug varchar, path varchar UNIQUE, title varchar, content text, scraped_at timestamptz)
+
+Relationships:
+  - courses.dept = departments.code (department code, e.g. 'COMP', 'MATH', 'PHIL')
+  - departments.faculty_id → faculties.id (each department belongs to one faculty)
+  - course_faculties links courses to faculties (many-to-many)
+  - courses.faculty is denormalized faculty name (e.g. 'Arts', 'Science', 'Engineering')
+
+Notes:
+  - dept is a short code like 'COMP', 'MATH', 'PHIL'
+  - faculty is the full name like 'Arts', 'Science', 'Engineering'
+  - terms is an array like {'Fall 2025', 'Winter 2026'}
+  - credits is real (numeric), e.g. 3.0 or 6.0
+  - Use ILIKE for case-insensitive text matching
+  - For aggregation queries (counts, top-N, rankings), use GROUP BY with COUNT(*)
+  - To count courses per department in a faculty: GROUP BY dept with WHERE faculty ILIKE '%name%'
+"""
+
+
+async def structured_node(state: RetrievalState) -> RetrievalState:
+    """Text-to-SQL: use Claude to generate a read-only SQL query, execute it, return results."""
+    try:
+        import anthropic
+        from backend.config import settings
+        from backend.db.postgres import get_pool
+
+        client = anthropic.AsyncAnthropic(api_key=settings.anthropic_api_key)
+
+        response = await client.messages.create(
+            model="claude-haiku-4-5-20251001",
+            max_tokens=300,
+            system=(
+                "You are a PostgreSQL query generator for a McGill University course database.\n"
+                f"{_DB_SCHEMA}\n"
+                "Generate a single read-only SELECT query that answers the user's question. "
+                "Return ONLY the SQL — no explanation, no markdown, no backticks. "
+                "If the question cannot be answered with SQL, return exactly: SKIP"
+            ),
+            messages=[{"role": "user", "content": state["query"]}],
+        )
+
+        sql = response.content[0].text.strip().rstrip(";")
+        if sql == "SKIP" or not sql.upper().startswith("SELECT"):
+            return {"structured_context": ""}
+
+        pool = await get_pool()
+        async with pool.acquire() as conn:
+            # Read-only with timeout for safety
+            async with conn.transaction(readonly=True):
+                await conn.execute("SET LOCAL statement_timeout = '5s'")
+                rows = await conn.fetch(sql)
+
+        if not rows:
+            return {"structured_context": f"SQL query returned no results.\nQuery: {sql}"}
+
+        # Format results as readable text
+        columns = list(rows[0].keys())
+        lines = [f"SQL results ({len(rows)} rows):"]
+        lines.append(" | ".join(columns))
+        lines.append("-" * 40)
+        for r in rows[:25]:  # Cap at 25 rows
+            lines.append(" | ".join(str(r[c]) for c in columns))
+        if len(rows) > 25:
+            lines.append(f"... and {len(rows) - 25} more rows")
+
+        return {"structured_context": "\n".join(lines)}
+    except Exception as e:
+        logger.warning(f"Structured query failed: {e}")
+        return {"structured_context": ""}
 
 async def fusion_node(state: RetrievalState) -> RetrievalState:
     """Reciprocal rank fusion across keyword + semantic results."""

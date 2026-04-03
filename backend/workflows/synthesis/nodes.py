@@ -10,6 +10,8 @@ SYSTEM_PROMPT = (
     "You are a McGill University course advisor assistant. "
     "Help students find courses, understand prerequisites, and plan their studies. "
     "Use the provided course data to answer accurately. "
+    "When SQL results are provided in the context, treat them as authoritative data from the database "
+    "and use them directly to answer the question — do not say you lack information. "
     "Be concise and cite specific course codes when relevant."
 )
 
@@ -27,6 +29,11 @@ async def context_pack_node(state: SynthesisState) -> SynthesisState:
         graph_ctx = state.get("graph_context", "")
         if graph_ctx:
             parts.append(graph_ctx)
+
+        # Structured SQL results (counts, aggregates, rankings)
+        structured_ctx = state.get("structured_context", "")
+        if structured_ctx:
+            parts.insert(0, structured_ctx)  # Prioritize structured data
 
         # Program guide context
         for r in state.get("program_context", []):

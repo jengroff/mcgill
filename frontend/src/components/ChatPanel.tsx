@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { Send } from 'lucide-react'
 import Markdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 import { useAppStore } from '../store/appStore'
 import { sendMessage, createSession, sseUrl } from '../api/client'
 
@@ -92,6 +93,7 @@ export default function ChatPanel() {
               }}
             >
               <Markdown
+                remarkPlugins={[remarkGfm]}
                 components={{
                   p: ({ children }) => <p className="mb-1 last:mb-0">{children}</p>,
                   strong: ({ children }) => <strong className="font-semibold">{children}</strong>,
@@ -101,7 +103,28 @@ export default function ChatPanel() {
                     </code>
                   ),
                   ul: ({ children }) => <ul className="list-disc pl-4 mb-1">{children}</ul>,
+                  ol: ({ children }) => <ol className="list-decimal pl-4 mb-1">{children}</ol>,
                   li: ({ children }) => <li className="mb-0.5">{children}</li>,
+                  table: ({ children }) => (
+                    <div className="overflow-x-auto my-2">
+                      <table className="w-full text-xs border-collapse" style={{ border: '1px solid var(--border)' }}>
+                        {children}
+                      </table>
+                    </div>
+                  ),
+                  thead: ({ children }) => (
+                    <thead style={{ background: 'rgba(255,255,255,0.05)' }}>{children}</thead>
+                  ),
+                  th: ({ children }) => (
+                    <th className="px-2 py-1 text-left font-semibold" style={{ borderBottom: '1px solid var(--border)' }}>
+                      {children}
+                    </th>
+                  ),
+                  td: ({ children }) => (
+                    <td className="px-2 py-1" style={{ borderBottom: '1px solid var(--border)' }}>
+                      {children}
+                    </td>
+                  ),
                 }}
               >
                 {msg.content}
