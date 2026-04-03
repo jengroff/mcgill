@@ -16,7 +16,9 @@ from backend.services.scraping.faculties import (
     PROGRAM_PAGES,
     get_active_faculties,
 )
-from backend.services.scraping.parser import parse_course, parse_program_page, extract_variants
+from backend.services.scraping.parser import (
+    parse_course, parse_program_page, extract_variants, discover_sub_pages,
+)
 
 BASE_URL = "https://coursecatalogue.mcgill.ca"
 DATA_DIR = Path(__file__).resolve().parents[3] / "data"
@@ -137,8 +139,12 @@ async def run(
         if max_program_pages is not None:
             active_pages = active_pages[:max_program_pages]
 
+        seen_paths: set[str] = {path for _, path in active_pages}
+
         _progress("programs", f"Scraping {len(active_pages)} program guide pages...", 0, len(active_pages))
-        for i, (fac_slug, path) in enumerate(active_pages):
+        i = 0
+        while i < len(active_pages):
+            fac_slug, path = active_pages[i]
             html = await fetch_page(page, f"{BASE_URL}{path}")
             if html:
                 pv = extract_variants(html, known)
@@ -159,9 +165,16 @@ async def run(
                             fac_slug, path, pg_title, pg_content,
                         )
 
+                # Discover and enqueue sub-program pages
+                for sub_path in discover_sub_pages(html, path):
+                    if sub_path not in seen_paths:
+                        seen_paths.add(sub_path)
+                        active_pages.append((fac_slug, sub_path))
+
             if (i + 1) % 10 == 0 or i == len(active_pages) - 1:
                 _progress("programs", f"Processed {i+1}/{len(active_pages)} program pages", i + 1, len(active_pages))
 
+            i += 1
             await asyncio.sleep(settings.scraper_delay_sec)
 
         # Deduplicate variants, attach to records, and update DB

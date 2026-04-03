@@ -90,6 +90,11 @@ Notes:
   - Use ILIKE for case-insensitive text matching
   - For aggregation queries (counts, top-N, rankings), use GROUP BY with COUNT(*)
   - To count courses per department in a faculty: GROUP BY dept with WHERE faculty ILIKE '%name%'
+  - program_pages.content contains markdown-formatted program requirement pages with
+    section headings (## Required Courses, ## Elective Courses) and course tables.
+    Search with content ILIKE '%COURSE_CODE%' or content ILIKE '%keyword%'.
+  - program_pages.path contains URL slugs, e.g. '%food-science%' for FDSC programs.
+  - program_pages.faculty_slug groups pages by faculty, e.g. 'agri-env-sci', 'science'.
 """
 
 
