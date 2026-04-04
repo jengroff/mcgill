@@ -17,6 +17,14 @@ name: Deploy
 on:
   push:
     branches: [main]
+    paths:
+      - "backend/**"
+      - "frontend/**"
+      - "Dockerfile"
+      - "docker-compose.prod.yml"
+      - "Caddyfile"
+      - "pyproject.toml"
+      - "uv.lock"
 
 env:
   IMAGE_APP: ghcr.io/${{ github.repository }}
