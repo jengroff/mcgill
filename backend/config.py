@@ -23,6 +23,11 @@ class Settings(BaseSettings):
     # PostgreSQL + pgvector
     database_url: str = "postgresql://mcgill:mcgilldev@localhost:5433/mcgill"
 
+    # Auth / JWT
+    jwt_secret_key: str = "change-me-in-production"
+    jwt_algorithm: str = "HS256"
+    jwt_expiry_minutes: int = 1440
+
     # Neo4j
     neo4j_uri: str = "bolt://localhost:7688"
     neo4j_user: str = "neo4j"

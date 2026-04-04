@@ -1,0 +1,67 @@
+# Production compose file for EC2 deployment.
+#
+# Usage:
+#   docker compose -f docker-compose.prod.yml up -d
+#
+# The app image is pulled from GHCR by the CI/CD pipeline.
+# Postgres and Neo4j ports are NOT exposed to the host — they are
+# only reachable by the app container over the internal network.
+#
+# Place a .env file alongside this file with any runtime secrets
+# (API keys, etc.). Database credentials below can also be moved
+# there if desired.
+
+services:
+  app:
+    image: ghcr.io/jtrain/mcgill:latest
+    ports:
+      - "8001:8000"
+    env_file: .env
+    environment:
+      DATABASE_URL: postgresql://mcgill:mcgilldev@postgres:5432/mcgill
+      NEO4J_URI: bolt://neo4j:7687
+      NEO4J_USER: neo4j
+      NEO4J_PASSWORD: mcgilldev
+    depends_on:
+      postgres:
+        condition: service_healthy
+      neo4j:
+        condition: service_healthy
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped
+
+  postgres:
+    image: pgvector/pgvector:pg17
+    environment:
+      POSTGRES_USER: mcgill
+      POSTGRES_PASSWORD: mcgilldev
+      POSTGRES_DB: mcgill
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U mcgill"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    restart: unless-stopped
+
+  neo4j:
+    image: neo4j:5-community
+    environment:
+      NEO4J_AUTH: neo4j/mcgilldev
+      NEO4J_PLUGINS: '["apoc"]'
+    volumes:
+      - neo4j_data:/data
+      - neo4j_logs:/logs
+    healthcheck:
+      test: ["CMD", "neo4j", "status"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+volumes:
+  pgdata:
+  neo4j_data:
+  neo4j_logs:

@@ -115,6 +115,35 @@ BEGIN
 END $$;
 
 CREATE INDEX IF NOT EXISTS idx_courses_tsv ON courses USING GIN(tsv);
+
+CREATE TABLE IF NOT EXISTS users (
+    id            SERIAL PRIMARY KEY,
+    email         VARCHAR(255) UNIQUE NOT NULL,
+    password_hash TEXT NOT NULL,
+    created_at    TIMESTAMPTZ DEFAULT now()
+);
+
+CREATE TABLE IF NOT EXISTS conversations (
+    id         SERIAL PRIMARY KEY,
+    user_id    INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    session_id UUID UNIQUE NOT NULL,
+    title      VARCHAR(256) DEFAULT '',
+    created_at TIMESTAMPTZ DEFAULT now(),
+    updated_at TIMESTAMPTZ DEFAULT now()
+);
+
+CREATE INDEX IF NOT EXISTS idx_conversations_user ON conversations(user_id);
+
+CREATE TABLE IF NOT EXISTS messages (
+    id              SERIAL PRIMARY KEY,
+    conversation_id INTEGER REFERENCES conversations(id) ON DELETE CASCADE,
+    role            VARCHAR(16) NOT NULL,
+    content         TEXT NOT NULL,
+    metadata        JSONB DEFAULT '{}',
+    created_at      TIMESTAMPTZ DEFAULT now()
+);
+
+CREATE INDEX IF NOT EXISTS idx_messages_conversation ON messages(conversation_id);
 """
 
 

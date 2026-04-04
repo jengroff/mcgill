@@ -58,12 +58,14 @@ def create_app() -> FastAPI:
     from backend.api.routes.courses import router as courses_router
     from backend.api.routes.search import router as search_router
     from backend.api.routes.pipeline import router as pipeline_router
+    from backend.api.routes.auth import router as auth_router
     from backend.api.routes.chat import router as chat_router
     from backend.api.routes.ingestion import router as ingestion_router
     from backend.api.routes.curriculum import router as curriculum_router
     from backend.api.routes.planner import router as planner_router
 
     app.include_router(health_router)
+    app.include_router(auth_router, prefix="/api/v1/auth")
     app.include_router(faculties_router, prefix="/api/v1")
     app.include_router(courses_router, prefix="/api/v1")
     app.include_router(search_router, prefix="/api/v1")

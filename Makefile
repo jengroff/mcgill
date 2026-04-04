@@ -1,4 +1,4 @@
-.PHONY: help start install dev up down rebuild rebuild-keep logs serve db db-down frontend frontend-build seed scrape pipeline test test-cov lint format typecheck clean
+.PHONY: help start install dev up down rebuild rebuild-keep logs serve db db-down frontend frontend-build seed scrape pipeline test test-cov lint format typecheck clean deploy-setup
 
 help: ## Show this help
 	@grep -E '^[a-zA-Z_-]+:.*?##' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-18s\033[0m %s\n", $$1, $$2}'
@@ -97,3 +97,11 @@ clean: ## Remove build artifacts
 	find . -type d -name __pycache__ -exec rm -rf {} + 2>/dev/null || true
 	find . -type d -name "*.egg-info" -exec rm -rf {} + 2>/dev/null || true
 	rm -rf dist build .mypy_cache .ruff_cache .pytest_cache htmlcov
+
+deploy-setup: ## Show required GitHub secrets for CI/CD
+	@echo "Configure these GitHub repository secrets:"
+	@echo "  EC2_HOST     — EC2 public IP or hostname"
+	@echo "  EC2_USER     — SSH user (ubuntu or ec2-user)"
+	@echo "  EC2_SSH_KEY  — Private SSH key for EC2"
+	@echo ""
+	@echo "Then push to main to trigger deployment."
