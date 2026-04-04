@@ -84,7 +84,11 @@ class ClaudeVisionAnalyzer:
             layout = data.get("layout_type", "general")
             logger.info(
                 "VLM page %s — layout=%s confidence=%.2f text=%d chars tables=%d",
-                page_number, layout, confidence, len(data.get("text", "")), len(tables),
+                page_number,
+                layout,
+                confidence,
+                len(data.get("text", "")),
+                len(tables),
             )
 
             return PageContent(

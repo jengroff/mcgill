@@ -23,7 +23,9 @@ async def context_pack_node(state: SynthesisState) -> SynthesisState:
 
         # Course context from retrieval
         for r in state.get("retrieval_context", []):
-            parts.append(f"{r.get('code', '')}: {r.get('title', '')}\n{r.get('description', '')}")
+            parts.append(
+                f"{r.get('code', '')}: {r.get('title', '')}\n{r.get('description', '')}"
+            )
 
         # Graph context (prerequisites)
         graph_ctx = state.get("graph_context", "")
@@ -50,7 +52,10 @@ async def context_pack_node(state: SynthesisState) -> SynthesisState:
         # Store packed context in sources field for downstream
         return {"sources": [{"context_text": context_text}]}
     except Exception as e:
-        return {"sources": [], "errors": [f"context_pack: {e}\n{traceback.format_exc()}"]}
+        return {
+            "sources": [],
+            "errors": [f"context_pack: {e}\n{traceback.format_exc()}"],
+        }
 
 
 async def synthesize_node(state: SynthesisState) -> SynthesisState:
@@ -68,7 +73,12 @@ async def synthesize_node(state: SynthesisState) -> SynthesisState:
                 context_text = s["context_text"]
                 break
 
-        messages = [{"role": "user", "content": f"Context:\n{context_text}\n\nQuestion: {state['query']}"}]
+        messages = [
+            {
+                "role": "user",
+                "content": f"Context:\n{context_text}\n\nQuestion: {state['query']}",
+            }
+        ]
 
         # Prepend conversation history
         history = state.get("conversation_history", [])[-6:]

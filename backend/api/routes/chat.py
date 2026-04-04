@@ -36,6 +36,7 @@ class SessionRequest(BaseModel):
 # Helpers — message persistence
 # ---------------------------------------------------------------------------
 
+
 def _generate_title(text: str) -> str:
     """Create a conversation title from the first user message (max 60 chars, word boundary)."""
     text = text.strip().replace("\n", " ")
@@ -70,7 +71,9 @@ async def _persist_message(
         )
 
 
-async def _load_messages_from_db(pool: asyncpg.Pool, conversation_id: int) -> list[dict]:
+async def _load_messages_from_db(
+    pool: asyncpg.Pool, conversation_id: int
+) -> list[dict]:
     async with pool.acquire() as conn:
         rows = await conn.fetch(
             """SELECT role, content FROM messages
@@ -83,6 +86,7 @@ async def _load_messages_from_db(pool: asyncpg.Pool, conversation_id: int) -> li
 # ---------------------------------------------------------------------------
 # Session management
 # ---------------------------------------------------------------------------
+
 
 def _init_session(session_id: str) -> dict:
     if session_id not in _sessions:
@@ -183,7 +187,8 @@ async def ask(
         # Set title from first user message if still empty
         async with pool.acquire() as conn:
             existing = await conn.fetchval(
-                "SELECT title FROM conversations WHERE id = $1", conv_id,
+                "SELECT title FROM conversations WHERE id = $1",
+                conv_id,
             )
         if not existing:
             async with pool.acquire() as conn:
@@ -214,7 +219,9 @@ async def stream(session_id: str, request: Request):
                 except asyncio.QueueEmpty:
                     break
 
-            if session.get("status") == "processing" and session.get("pending_question"):
+            if session.get("status") == "processing" and session.get(
+                "pending_question"
+            ):
                 question = session.pop("pending_question")
                 session["status"] = "streaming"
 
@@ -246,6 +253,7 @@ async def stream(session_id: str, request: Request):
 # ---------------------------------------------------------------------------
 # Conversation history endpoints (protected)
 # ---------------------------------------------------------------------------
+
 
 @router.get("/conversations")
 async def list_conversations(
@@ -312,6 +320,7 @@ async def get_conversation_messages(
 # Intent detection
 # ---------------------------------------------------------------------------
 
+
 def _detect_pipeline_intent(message: str) -> dict | None:
     """Detect if the user wants to trigger a pipeline run.
 
@@ -322,7 +331,16 @@ def _detect_pipeline_intent(message: str) -> dict | None:
 
     lower = message.lower()
 
-    trigger_words = ("scrape", "pipeline", "ingest", "crawl", "fetch", "refresh", "load", "download")
+    trigger_words = (
+        "scrape",
+        "pipeline",
+        "ingest",
+        "crawl",
+        "fetch",
+        "refresh",
+        "load",
+        "download",
+    )
     if not any(w in lower for w in trigger_words):
         return None
 
@@ -330,11 +348,52 @@ def _detect_pipeline_intent(message: str) -> dict | None:
     slug_map = {slug: slug for _, slug, _ in ALL_FACULTIES}
     name_map = {name.lower(): slug for name, slug, _ in ALL_FACULTIES}
 
-    noise = {"the", "a", "an", "for", "on", "of", "run", "please", "can", "you",
-             "hi", "hey", "hello", "could", "would", "do", "start", "begin", "launch",
-             "all", "some", "want", "to", "i", "me", "my", "it", "up", "is",
-             "scrape", "pipeline", "ingest", "crawl", "fetch", "refresh", "load", "download",
-             "faculty", "department", "dept", "courses", "course", "data", "program"}
+    noise = {
+        "the",
+        "a",
+        "an",
+        "for",
+        "on",
+        "of",
+        "run",
+        "please",
+        "can",
+        "you",
+        "hi",
+        "hey",
+        "hello",
+        "could",
+        "would",
+        "do",
+        "start",
+        "begin",
+        "launch",
+        "all",
+        "some",
+        "want",
+        "to",
+        "i",
+        "me",
+        "my",
+        "it",
+        "up",
+        "is",
+        "scrape",
+        "pipeline",
+        "ingest",
+        "crawl",
+        "fetch",
+        "refresh",
+        "load",
+        "download",
+        "faculty",
+        "department",
+        "dept",
+        "courses",
+        "course",
+        "data",
+        "program",
+    }
     words = re.findall(r"[a-z0-9&()/\-]+", lower)
     candidate_words = [w for w in words if w not in noise]
     candidate = " ".join(candidate_words).strip().rstrip(".!?")
@@ -376,6 +435,7 @@ def _detect_pipeline_intent(message: str) -> dict | None:
 # Background pipeline execution
 # ---------------------------------------------------------------------------
 
+
 def _spawn_pipeline(session_id: str, intent: dict) -> str:
     run_id = str(uuid.uuid4())[:8]
     session = _sessions[session_id]
@@ -383,20 +443,26 @@ def _spawn_pipeline(session_id: str, intent: dict) -> str:
 
     faculty = intent.get("faculty_filter")
     dept = intent.get("dept_filter")
-    target_label = f"dept {dept[0]}" if dept else f"faculty {faculty[0]}" if faculty else "all"
+    target_label = (
+        f"dept {dept[0]}" if dept else f"faculty {faculty[0]}" if faculty else "all"
+    )
 
-    queue.put_nowait({
-        "type": "assistant",
-        "content": f"Starting ingest pipeline for **{target_label}** (run `{run_id}`). "
-                   f"This runs in the background — you can keep asking questions.",
-    })
-    queue.put_nowait({
-        "type": "pipeline_status",
-        "run_id": run_id,
-        "phase": "scrape",
-        "status": "running",
-        "label": target_label,
-    })
+    queue.put_nowait(
+        {
+            "type": "assistant",
+            "content": f"Starting ingest pipeline for **{target_label}** (run `{run_id}`). "
+            f"This runs in the background — you can keep asking questions.",
+        }
+    )
+    queue.put_nowait(
+        {
+            "type": "pipeline_status",
+            "run_id": run_id,
+            "phase": "scrape",
+            "status": "running",
+            "label": target_label,
+        }
+    )
 
     task = asyncio.create_task(
         _run_pipeline_bg(session_id, run_id, target_label, faculty, dept)
@@ -445,28 +511,34 @@ async def _run_pipeline_bg(
             summary += f"\n**{len(errors)} errors** occurred during the run."
 
         queue.put_nowait({"type": "assistant", "content": summary})
-        queue.put_nowait({
-            "type": "pipeline_status",
-            "run_id": run_id,
-            "status": "complete",
-            "label": target_label,
-        })
+        queue.put_nowait(
+            {
+                "type": "pipeline_status",
+                "run_id": run_id,
+                "status": "complete",
+                "label": target_label,
+            }
+        )
         session["messages"].append({"role": "assistant", "content": summary})
 
         await _persist_bg_message(session, summary)
 
     except Exception as e:
         logger.exception(f"Background pipeline {run_id} failed")
-        queue.put_nowait({
-            "type": "error",
-            "content": f"Pipeline **{run_id}** failed: {e}",
-        })
-        queue.put_nowait({
-            "type": "pipeline_status",
-            "run_id": run_id,
-            "status": "error",
-            "label": target_label,
-        })
+        queue.put_nowait(
+            {
+                "type": "error",
+                "content": f"Pipeline **{run_id}** failed: {e}",
+            }
+        )
+        queue.put_nowait(
+            {
+                "type": "pipeline_status",
+                "run_id": run_id,
+                "status": "error",
+                "label": target_label,
+            }
+        )
     finally:
         session["bg_tasks"].pop(run_id, None)
 
@@ -474,6 +546,7 @@ async def _run_pipeline_bg(
 # ---------------------------------------------------------------------------
 # Q&A pipeline (retrieval + synthesis)
 # ---------------------------------------------------------------------------
+
 
 async def _run_qa_pipeline(question: str, session_id: str) -> AsyncIterator[dict]:
     from backend.workflows.retrieval.graph import RetrievalOrchestrator
@@ -509,7 +582,9 @@ async def _run_qa_pipeline(question: str, session_id: str) -> AsyncIterator[dict
     answer = synthesis_state.get("response", "")
     if answer:
         yield {"type": "assistant", "content": answer}
-        _sessions[session_id]["messages"].append({"role": "assistant", "content": answer})
+        _sessions[session_id]["messages"].append(
+            {"role": "assistant", "content": answer}
+        )
 
         await _persist_bg_message(_sessions[session_id], answer)
 
@@ -518,6 +593,7 @@ async def _run_qa_pipeline(question: str, session_id: str) -> AsyncIterator[dict
 # Background message persistence helper
 # ---------------------------------------------------------------------------
 
+
 async def _persist_bg_message(session: dict, content: str) -> None:
     """Persist an assistant message to the DB if the session is linked to a conversation."""
     conv_id = session.get("conversation_id")
@@ -525,6 +601,7 @@ async def _persist_bg_message(session: dict, content: str) -> None:
         return
     try:
         from backend.db.postgres import get_pool
+
         pool = await get_pool()
         await _persist_message(pool, conv_id, "assistant", content)
     except Exception:
@@ -535,6 +612,7 @@ async def _persist_bg_message(session: dict, content: str) -> None:
 # Curriculum planner intent detection + background execution
 # ---------------------------------------------------------------------------
 
+
 def _detect_planner_intent(message: str) -> dict | None:
     """Detect if the user wants to build a multi-semester curriculum plan.
 
@@ -542,10 +620,22 @@ def _detect_planner_intent(message: str) -> dict | None:
     """
     lower = message.lower()
 
-    plan_triggers = ("plan my", "build a curriculum", "plan a curriculum", "semester plan",
-                     "course plan", "plan my courses", "plan my schedule", "year plan",
-                     "next year", "next two years", "next 2 years", "schedule for",
-                     "curriculum for", "plan for next")
+    plan_triggers = (
+        "plan my",
+        "build a curriculum",
+        "plan a curriculum",
+        "semester plan",
+        "course plan",
+        "plan my courses",
+        "plan my schedule",
+        "year plan",
+        "next year",
+        "next two years",
+        "next 2 years",
+        "schedule for",
+        "curriculum for",
+        "plan for next",
+    )
     if not any(t in lower for t in plan_triggers):
         return None
 
@@ -575,9 +665,35 @@ def _detect_planner_intent(message: str) -> dict | None:
             break
 
     if not interests:
-        noise = {"plan", "my", "curriculum", "courses", "schedule", "build", "a", "for",
-                 "next", "year", "years", "semester", "semesters", "the", "me", "please",
-                 "can", "you", "i", "want", "to", "would", "like", "create", "make", "two", "2"}
+        noise = {
+            "plan",
+            "my",
+            "curriculum",
+            "courses",
+            "schedule",
+            "build",
+            "a",
+            "for",
+            "next",
+            "year",
+            "years",
+            "semester",
+            "semesters",
+            "the",
+            "me",
+            "please",
+            "can",
+            "you",
+            "i",
+            "want",
+            "to",
+            "would",
+            "like",
+            "create",
+            "make",
+            "two",
+            "2",
+        }
         words = re.findall(r"[a-z]+", lower)
         interests = [w for w in words if w not in noise and len(w) > 2]
 
@@ -593,18 +709,22 @@ def _spawn_planner(session_id: str, intent: dict) -> str:
     semesters = intent.get("semesters", 4)
     label = f"{semesters}-semester plan for {', '.join(interests[:3])}"
 
-    queue.put_nowait({
-        "type": "assistant",
-        "content": f"Building a **{semesters}-semester curriculum plan** based on your interests "
-                   f"in **{', '.join(interests)}**. This may take a minute — the planning agent "
-                   f"is analyzing courses, prerequisites, and term availability.",
-    })
-    queue.put_nowait({
-        "type": "step_update",
-        "phase": "planner",
-        "label": label,
-        "status": "running",
-    })
+    queue.put_nowait(
+        {
+            "type": "assistant",
+            "content": f"Building a **{semesters}-semester curriculum plan** based on your interests "
+            f"in **{', '.join(interests)}**. This may take a minute — the planning agent "
+            f"is analyzing courses, prerequisites, and term availability.",
+        }
+    )
+    queue.put_nowait(
+        {
+            "type": "step_update",
+            "phase": "planner",
+            "label": label,
+            "status": "running",
+        }
+    )
 
     task = asyncio.create_task(
         _run_planner_bg(session_id, run_id, interests, semesters)
@@ -639,26 +759,32 @@ async def _run_planner_bg(
             session["messages"].append({"role": "assistant", "content": plan_md})
             await _persist_bg_message(session, plan_md)
         elif errors:
-            queue.put_nowait({
-                "type": "error",
-                "content": f"Planner encountered errors: {'; '.join(errors)}",
-            })
+            queue.put_nowait(
+                {
+                    "type": "error",
+                    "content": f"Planner encountered errors: {'; '.join(errors)}",
+                }
+            )
 
-        queue.put_nowait({
-            "type": "step_update",
-            "phase": "planner",
-            "label": "Curriculum plan",
-            "status": "done",
-        })
+        queue.put_nowait(
+            {
+                "type": "step_update",
+                "phase": "planner",
+                "label": "Curriculum plan",
+                "status": "done",
+            }
+        )
 
     except Exception as e:
         logger.exception(f"Planner {run_id} failed")
         queue.put_nowait({"type": "error", "content": f"Planner failed: {e}"})
-        queue.put_nowait({
-            "type": "step_update",
-            "phase": "planner",
-            "label": "Curriculum plan",
-            "status": "error",
-        })
+        queue.put_nowait(
+            {
+                "type": "step_update",
+                "phase": "planner",
+                "label": "Curriculum plan",
+                "status": "error",
+            }
+        )
     finally:
         session["bg_tasks"].pop(run_id, None)

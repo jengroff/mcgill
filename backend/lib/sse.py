@@ -11,13 +11,15 @@ def _sse(data: dict) -> str:
 
 
 def progress_event(phase: str, message: str, current: int = 0, total: int = 0) -> str:
-    return _sse({
-        "type": "step_update",
-        "phase": phase,
-        "message": message,
-        "current": current,
-        "total": total,
-    })
+    return _sse(
+        {
+            "type": "step_update",
+            "phase": phase,
+            "message": message,
+            "current": current,
+            "total": total,
+        }
+    )
 
 
 def error_event(message: str) -> str:

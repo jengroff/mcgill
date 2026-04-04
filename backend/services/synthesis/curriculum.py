@@ -53,7 +53,9 @@ class CurriculumAssembler:
                 else:
                     # Try matching against department codes directly
                     upper = key.upper()
-                    all_codes = {p for _, _, prefixes in ALL_FACULTIES for p in prefixes}
+                    all_codes = {
+                        p for _, _, prefixes in ALL_FACULTIES for p in prefixes
+                    }
                     if upper in all_codes:
                         domains.add(upper)
         return sorted(domains)
@@ -69,9 +71,7 @@ class CurriculumAssembler:
                  "categories": dict[str, list[str]], "credits_needed": int}
         """
         from backend.db.postgres import get_pool
-        import json as _json
         import logging
-        import re
 
         logger = logging.getLogger("backend.services.synthesis.curriculum")
 
@@ -83,7 +83,12 @@ class CurriculumAssembler:
             )
 
         if not rows:
-            return {"required": [], "electives": [], "categories": {}, "credits_needed": 0}
+            return {
+                "required": [],
+                "electives": [],
+                "categories": {},
+                "credits_needed": 0,
+            }
 
         # Concatenate all matched pages (parent + sub-program pages)
         combined = "\n\n".join(

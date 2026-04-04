@@ -40,13 +40,18 @@ class WorkflowOrchestrator(ABC):
 
         final_state = initial_state
         async for event in graph.astream_events(initial_state, version="v2"):
-            if event["event"] == "on_chain_end" and event.get("name") in self._node_names():
-                on_event({
-                    "type": "step_update",
-                    "phase": event["name"],
-                    "node": event["name"],
-                    "status": "done",
-                })
+            if (
+                event["event"] == "on_chain_end"
+                and event.get("name") in self._node_names()
+            ):
+                on_event(
+                    {
+                        "type": "step_update",
+                        "phase": event["name"],
+                        "node": event["name"],
+                        "status": "done",
+                    }
+                )
             # Capture final state from the last chain end
             if event["event"] == "on_chain_end" and event.get("data", {}).get("output"):
                 output = event["data"]["output"]

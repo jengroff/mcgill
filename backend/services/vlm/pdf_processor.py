@@ -52,7 +52,9 @@ class PDFProcessor:
         try:
             page_images = self._render_pages_to_images()
             total = len(page_images)
-            logger.info("Rendering %d pages from %s with Claude Vision", total, self.file_name)
+            logger.info(
+                "Rendering %d pages from %s with Claude Vision", total, self.file_name
+            )
             analyzer = ClaudeVisionAnalyzer()
             pages: list[PageContent] = []
             for page_num, image_bytes, media_type in page_images:
@@ -60,7 +62,9 @@ class PDFProcessor:
                 page = analyzer.analyze_page_image(image_bytes, page_num, media_type)
                 if page["confidence"] < VLM_CONFIDENCE_THRESHOLD:
                     logger.warning(
-                        "Low confidence (%.2f) on page %d", page["confidence"], page_num,
+                        "Low confidence (%.2f) on page %d",
+                        page["confidence"],
+                        page_num,
                     )
                 pages.append(page)
             logger.info("VLM complete — %d pages processed", total)
@@ -77,11 +81,13 @@ class PDFProcessor:
             doc = pymupdf.open(stream=self.pdf_bytes, filetype="pdf")
             pages = []
             for i, page in enumerate(doc):
-                pages.append({
-                    "page_number": i + 1,
-                    "text": page.get_text(),
-                    "tables": [],
-                })
+                pages.append(
+                    {
+                        "page_number": i + 1,
+                        "text": page.get_text(),
+                        "tables": [],
+                    }
+                )
             doc.close()
             return pages
         except Exception:
@@ -95,11 +101,13 @@ class PDFProcessor:
         pages = []
         with pdfplumber.open(io.BytesIO(self.pdf_bytes)) as pdf:
             for i, page in enumerate(pdf.pages):
-                pages.append({
-                    "page_number": i + 1,
-                    "text": page.extract_text() or "",
-                    "tables": [],
-                })
+                pages.append(
+                    {
+                        "page_number": i + 1,
+                        "text": page.extract_text() or "",
+                        "tables": [],
+                    }
+                )
         return pages
 
     def _analyze_pages(self, raw_pages: list[dict]) -> list[PageContent]:

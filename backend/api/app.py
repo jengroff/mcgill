@@ -23,6 +23,7 @@ async def lifespan(app: FastAPI) -> AsyncIterator[None]:
 
     logger.info("McGill API starting up")
     import backend.workflows  # noqa: F401 — triggers workflow registration
+
     await init_db()
     await init_neo4j()
     yield
@@ -41,11 +42,15 @@ def create_app() -> FastAPI:
         redoc_url="/redoc" if settings.is_development else None,
     )
 
-    origins = ["*"] if settings.is_development else [
-        "https://mcgill.engroff.ai",
-        "http://localhost:5173",
-        "http://localhost:3000",
-    ]
+    origins = (
+        ["*"]
+        if settings.is_development
+        else [
+            "https://mcgill.engroff.ai",
+            "http://localhost:5173",
+            "http://localhost:3000",
+        ]
+    )
     app.add_middleware(
         CORSMiddleware,
         allow_origins=origins,
@@ -79,6 +84,8 @@ def create_app() -> FastAPI:
     # Serve frontend static files if built
     static_dir = Path(__file__).parent.parent.parent.parent / "frontend" / "dist"
     if static_dir.is_dir():
-        app.mount("/", StaticFiles(directory=str(static_dir), html=True), name="frontend")
+        app.mount(
+            "/", StaticFiles(directory=str(static_dir), html=True), name="frontend"
+        )
 
     return app

@@ -20,7 +20,17 @@ export interface CourseSource {
   title: string
 }
 
+export interface AuthUser {
+  id: number
+  email: string
+  name: string
+}
+
 interface AppState {
+  // Auth
+  user: AuthUser | null
+  token: string | null
+
   // Chat
   sessionId: string | null
   connected: boolean
@@ -33,6 +43,10 @@ interface AppState {
   pipelineRunId: string | null
   pipelineStatus: string | null
 
+  setUser: (user: AuthUser | null) => void
+  setToken: (token: string | null) => void
+  loginUser: (token: string, user: AuthUser) => void
+  logout: () => void
   setSessionId: (id: string) => void
   setConnected: (v: boolean) => void
   updateStep: (phase: number, label: string, status: PhaseStatus) => void
@@ -45,6 +59,8 @@ interface AppState {
 }
 
 const initial = {
+  user: null,
+  token: localStorage.getItem('token'),
   sessionId: null,
   connected: false,
   steps: [],
@@ -57,6 +73,24 @@ const initial = {
 
 export const useAppStore = create<AppState>((set) => ({
   ...initial,
+
+  setUser: (user) => set({ user }),
+  setToken: (token) => {
+    if (token) {
+      localStorage.setItem('token', token)
+    } else {
+      localStorage.removeItem('token')
+    }
+    set({ token })
+  },
+  loginUser: (token, user) => {
+    localStorage.setItem('token', token)
+    set({ token, user })
+  },
+  logout: () => {
+    localStorage.removeItem('token')
+    set({ token: null, user: null })
+  },
 
   setSessionId: (id) => set({ sessionId: id }),
   setConnected: (v) => set({ connected: v }),
@@ -80,5 +114,5 @@ export const useAppStore = create<AppState>((set) => ({
   setSources: (sources) => set({ sources }),
   setPipelineRunId: (id) => set({ pipelineRunId: id }),
   setPipelineStatus: (s) => set({ pipelineStatus: s }),
-  reset: () => set(initial),
+  reset: () => set({ ...initial, token: localStorage.getItem('token') }),
 }))

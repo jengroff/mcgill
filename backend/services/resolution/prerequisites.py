@@ -32,12 +32,14 @@ def parse_prerequisites(
             key = (code, rel)
             if key not in seen:
                 seen.add(key)
-                refs.append(PrerequisiteRef(
-                    source_code=source_code,
-                    target_code=code,
-                    relationship=rel,
-                    raw_text=prerequisites_raw[:200],
-                ))
+                refs.append(
+                    PrerequisiteRef(
+                        source_code=source_code,
+                        target_code=code,
+                        relationship=rel,
+                        raw_text=prerequisites_raw[:200],
+                    )
+                )
 
     # Parse restrictions_raw
     if restrictions_raw:
@@ -48,11 +50,13 @@ def parse_prerequisites(
             key = (code, "RESTRICTED_WITH")
             if key not in seen:
                 seen.add(key)
-                refs.append(PrerequisiteRef(
-                    source_code=source_code,
-                    target_code=code,
-                    relationship="RESTRICTED_WITH",
-                    raw_text=restrictions_raw[:200],
-                ))
+                refs.append(
+                    PrerequisiteRef(
+                        source_code=source_code,
+                        target_code=code,
+                        relationship="RESTRICTED_WITH",
+                        raw_text=restrictions_raw[:200],
+                    )
+                )
 
     return refs

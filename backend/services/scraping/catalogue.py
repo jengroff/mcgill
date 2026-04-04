@@ -6,7 +6,7 @@ import asyncio
 import json
 import re
 from pathlib import Path
-from typing import AsyncGenerator, Callable
+from typing import Callable
 
 from backend.config import settings
 from backend.models.course import CourseCreate
@@ -17,7 +17,10 @@ from backend.services.scraping.faculties import (
     get_active_faculties,
 )
 from backend.services.scraping.parser import (
-    parse_course, parse_program_page, extract_variants, discover_sub_pages,
+    parse_course,
+    parse_program_page,
+    extract_variants,
+    discover_sub_pages,
 )
 
 BASE_URL = "https://coursecatalogue.mcgill.ca"
@@ -45,7 +48,9 @@ async def run(
             if any(p in dept_set for p in prefixes)
         ]
         if not active:
-            raise ValueError(f"No faculties found containing departments: {dept_filter}")
+            raise ValueError(
+                f"No faculties found containing departments: {dept_filter}"
+            )
         active_prefixes = dept_set
     else:
         active = get_active_faculties(faculty_filter)
@@ -67,7 +72,10 @@ async def run(
         if on_progress:
             on_progress(phase, msg, current, total)
 
-    _progress("scrape", f"Starting scrape for {len(active)} faculties, {len(active_prefixes)} dept prefixes")
+    _progress(
+        "scrape",
+        f"Starting scrape for {len(active)} faculties, {len(active_prefixes)} dept prefixes",
+    )
 
     if headless is None:
         headless = settings.scraper_headless
@@ -82,13 +90,20 @@ async def run(
             raise RuntimeError("Could not fetch catalog index")
 
         from bs4 import BeautifulSoup
+
         soup = BeautifulSoup(html, "html.parser")
-        slugs = list(dict.fromkeys(
-            m.group(1)
-            for a in soup.find_all("a", href=True)
-            if (m := re.match(r"^/courses/([a-z]+-\d+[a-z]?)/index\.html$", a["href"]))
-            and m.group(1).split("-")[0].upper() in active_prefixes
-        ))
+        slugs = list(
+            dict.fromkeys(
+                m.group(1)
+                for a in soup.find_all("a", href=True)
+                if (
+                    m := re.match(
+                        r"^/courses/([a-z]+-\d+[a-z]?)/index\.html$", a["href"]
+                    )
+                )
+                and m.group(1).split("-")[0].upper() in active_prefixes
+            )
+        )
         if max_course_pages is not None:
             slugs = slugs[:max_course_pages]
 
@@ -96,6 +111,7 @@ async def run(
 
         # Phase 1b: Scrape individual course pages — upsert to DB immediately
         from backend.db.postgres import get_pool
+
         pool = await get_pool()
 
         records: dict[str, CourseCreate] = {}
@@ -120,18 +136,35 @@ async def run(
                                    restrictions_raw = EXCLUDED.restrictions_raw,
                                    terms = EXCLUDED.terms,
                                    updated_at = now()""",
-                            rec.code, rec.slug, rec.title, rec.dept, rec.number,
-                            rec.credits, rec.faculty, rec.terms, rec.description,
-                            rec.prerequisites_raw, rec.restrictions_raw,
-                            rec.notes_raw, rec.url, rec.name_variants,
+                            rec.code,
+                            rec.slug,
+                            rec.title,
+                            rec.dept,
+                            rec.number,
+                            rec.credits,
+                            rec.faculty,
+                            rec.terms,
+                            rec.description,
+                            rec.prerequisites_raw,
+                            rec.restrictions_raw,
+                            rec.notes_raw,
+                            rec.url,
+                            rec.name_variants,
                         )
 
             if (i + 1) % 50 == 0 or i == len(slugs) - 1:
-                _progress("scrape", f"Scraped {i+1}/{len(slugs)} pages, {len(records)} parsed", i + 1, len(slugs))
+                _progress(
+                    "scrape",
+                    f"Scraped {i + 1}/{len(slugs)} pages, {len(records)} parsed",
+                    i + 1,
+                    len(slugs),
+                )
 
             await asyncio.sleep(settings.scraper_delay_sec)
 
-        _progress("scrape", f"Course scrape done: {len(records)} records saved to database")
+        _progress(
+            "scrape", f"Course scrape done: {len(records)} records saved to database"
+        )
 
         # Phase 1c: Extract name variants from program pages
         known = {r.code for r in records.values()}
@@ -141,7 +174,12 @@ async def run(
 
         seen_paths: set[str] = {path for _, path in active_pages}
 
-        _progress("programs", f"Scraping {len(active_pages)} program guide pages...", 0, len(active_pages))
+        _progress(
+            "programs",
+            f"Scraping {len(active_pages)} program guide pages...",
+            0,
+            len(active_pages),
+        )
         i = 0
         while i < len(active_pages):
             fac_slug, path = active_pages[i]
@@ -162,7 +200,10 @@ async def run(
                                    title = EXCLUDED.title,
                                    content = EXCLUDED.content,
                                    scraped_at = now()""",
-                            fac_slug, path, pg_title, pg_content,
+                            fac_slug,
+                            path,
+                            pg_title,
+                            pg_content,
                         )
 
                 # Discover and enqueue sub-program pages
@@ -172,7 +213,12 @@ async def run(
                         active_pages.append((fac_slug, sub_path))
 
             if (i + 1) % 10 == 0 or i == len(active_pages) - 1:
-                _progress("programs", f"Processed {i+1}/{len(active_pages)} program pages", i + 1, len(active_pages))
+                _progress(
+                    "programs",
+                    f"Processed {i + 1}/{len(active_pages)} program pages",
+                    i + 1,
+                    len(active_pages),
+                )
 
             i += 1
             await asyncio.sleep(settings.scraper_delay_sec)
@@ -186,9 +232,13 @@ async def run(
                 if rec.name_variants:
                     await conn.execute(
                         "UPDATE courses SET name_variants = $1 WHERE code = $2",
-                        rec.name_variants, rec.code,
+                        rec.name_variants,
+                        rec.code,
                     )
-        _progress("variants", f"Updated name variants for {sum(1 for c in courses if c.name_variants)} courses")
+        _progress(
+            "variants",
+            f"Updated name variants for {sum(1 for c in courses if c.name_variants)} courses",
+        )
 
         # Save JSON snapshot
         DATA_DIR.mkdir(parents=True, exist_ok=True)

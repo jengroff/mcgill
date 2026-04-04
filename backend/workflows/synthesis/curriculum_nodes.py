@@ -11,22 +11,32 @@ async def interest_map_node(state: CurriculumState) -> CurriculumState:
     """Map student interests to department domain tags."""
     try:
         from backend.services.synthesis.curriculum import CurriculumAssembler
+
         assembler = CurriculumAssembler()
         tags = assembler.map_interests_to_domains(state.get("student_interests", []))
         return {"domain_tags": tags}
     except Exception as e:
-        return {"domain_tags": [], "errors": [f"interest_map: {e}\n{traceback.format_exc()}"]}
+        return {
+            "domain_tags": [],
+            "errors": [f"interest_map: {e}\n{traceback.format_exc()}"],
+        }
 
 
 async def requirements_node(state: CurriculumState) -> CurriculumState:
     """Resolve program requirements from program pages."""
     try:
         from backend.services.synthesis.curriculum import CurriculumAssembler
+
         assembler = CurriculumAssembler()
-        reqs = await assembler.resolve_program_requirements(state.get("program_slug", ""))
+        reqs = await assembler.resolve_program_requirements(
+            state.get("program_slug", "")
+        )
         return {"program_requirements": reqs}
     except Exception as e:
-        return {"program_requirements": {}, "errors": [f"requirements: {e}\n{traceback.format_exc()}"]}
+        return {
+            "program_requirements": {},
+            "errors": [f"requirements: {e}\n{traceback.format_exc()}"],
+        }
 
 
 async def candidate_retrieval_node(state: CurriculumState) -> CurriculumState:
@@ -34,7 +44,9 @@ async def candidate_retrieval_node(state: CurriculumState) -> CurriculumState:
     try:
         from backend.workflows.retrieval.graph import RetrievalOrchestrator
 
-        query = " ".join(state.get("domain_tags", []) + state.get("student_interests", []))
+        query = " ".join(
+            state.get("domain_tags", []) + state.get("student_interests", [])
+        )
         if not query.strip():
             return {"candidate_courses": []}
 
@@ -42,7 +54,10 @@ async def candidate_retrieval_node(state: CurriculumState) -> CurriculumState:
         result = await retrieval_orch.run(query=query, top_k=20, mode="hybrid")
         return {"candidate_courses": result.get("fused_results", [])}
     except Exception as e:
-        return {"candidate_courses": [], "errors": [f"candidate_retrieval: {e}\n{traceback.format_exc()}"]}
+        return {
+            "candidate_courses": [],
+            "errors": [f"candidate_retrieval: {e}\n{traceback.format_exc()}"],
+        }
 
 
 async def prereq_filter_node(state: CurriculumState) -> CurriculumState:
@@ -85,8 +100,13 @@ async def conflict_node(state: CurriculumState) -> CurriculumState:
     """Detect restriction conflicts among candidate courses."""
     try:
         from backend.services.synthesis.curriculum import CurriculumAssembler
+
         assembler = CurriculumAssembler()
-        codes = [c.get("code", "") for c in state.get("candidate_courses", []) if c.get("code")]
+        codes = [
+            c.get("code", "")
+            for c in state.get("candidate_courses", [])
+            if c.get("code")
+        ]
         conflicts = await assembler.detect_conflicts(codes)
         return {"conflicts": conflicts}
     except Exception as e:
@@ -101,9 +121,9 @@ async def rank_node(state: CurriculumState) -> CurriculumState:
         domain_tags = set(state.get("domain_tags", []))
         required_codes = set(requirements.get("required", []))
         elective_codes = set(requirements.get("electives", []))
-        conflict_codes = {
-            c["source"] for c in state.get("conflicts", [])
-        } | {c["target"] for c in state.get("conflicts", [])}
+        conflict_codes = {c["source"] for c in state.get("conflicts", [])} | {
+            c["target"] for c in state.get("conflicts", [])
+        }
 
         scored: list[dict] = []
         for c in candidates:
@@ -140,7 +160,10 @@ async def rank_node(state: CurriculumState) -> CurriculumState:
         scored.sort(key=lambda x: x["curriculum_score"], reverse=True)
         return {"ranked_courses": scored[:15]}
     except Exception as e:
-        return {"ranked_courses": state.get("candidate_courses", []), "errors": [f"rank: {e}\n{traceback.format_exc()}"]}
+        return {
+            "ranked_courses": state.get("candidate_courses", []),
+            "errors": [f"rank: {e}\n{traceback.format_exc()}"],
+        }
 
 
 async def assemble_node(state: CurriculumState) -> CurriculumState:
@@ -157,10 +180,10 @@ async def assemble_node(state: CurriculumState) -> CurriculumState:
         interests = state.get("student_interests", [])
         completed = state.get("completed_codes", [])
 
-        context = f"""Student interests: {', '.join(interests)}
-Completed courses: {', '.join(completed) if completed else 'None listed'}
-Program requirements: {requirements.get('required', [])}
-Available electives: {requirements.get('electives', [])}
+        context = f"""Student interests: {", ".join(interests)}
+Completed courses: {", ".join(completed) if completed else "None listed"}
+Program requirements: {requirements.get("required", [])}
+Available electives: {requirements.get("electives", [])}
 
 Top recommended courses:
 """
@@ -170,7 +193,9 @@ Top recommended courses:
             score = c.get("curriculum_score", 0)
             prereqs_met = c.get("prereqs_met", True)
             missing = c.get("missing_prereqs", [])
-            context += f"- {code}: {title} (score: {score:.1f}, prereqs met: {prereqs_met}"
+            context += (
+                f"- {code}: {title} (score: {score:.1f}, prereqs met: {prereqs_met}"
+            )
             if missing:
                 context += f", missing: {missing}"
             context += ")\n"
@@ -191,7 +216,7 @@ Top recommended courses:
         )
 
         return {"recommendation": response.content[0].text, "status": "complete"}
-    except Exception as e:
+    except Exception:
         # Fallback: generate a simple list
         ranked = state.get("ranked_courses", [])
         fallback = "Recommended courses:\n\n"

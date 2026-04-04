@@ -10,7 +10,12 @@ from langgraph.graph.state import CompiledStateGraph
 from backend.lib.orchestrator import WorkflowOrchestrator
 from backend.lib.registry import registry, WorkflowConfig
 from backend.workflows.ingestion.state import IngestionState
-from backend.workflows.ingestion.nodes import extract_node, chunk_node, embed_node, store_node
+from backend.workflows.ingestion.nodes import (
+    extract_node,
+    chunk_node,
+    embed_node,
+    store_node,
+)
 
 
 class IngestionOrchestrator(WorkflowOrchestrator):
@@ -54,8 +59,10 @@ class IngestionOrchestrator(WorkflowOrchestrator):
         )
 
 
-registry.register(WorkflowConfig(
-    name="ingestion",
-    orchestrator_class=IngestionOrchestrator,
-    description="PDF / URL ingestion -> chunk -> embed",
-))
+registry.register(
+    WorkflowConfig(
+        name="ingestion",
+        orchestrator_class=IngestionOrchestrator,
+        description="PDF / URL ingestion -> chunk -> embed",
+    )
+)

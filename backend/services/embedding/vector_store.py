@@ -13,16 +13,17 @@ async def insert_chunks(
     pool = await get_pool()
     async with pool.acquire() as conn:
         # Clear existing chunks for this course
-        await conn.execute(
-            "DELETE FROM course_chunks WHERE course_id = $1", course_id
-        )
+        await conn.execute("DELETE FROM course_chunks WHERE course_id = $1", course_id)
 
         for i, (text, emb) in enumerate(zip(chunks, embeddings)):
             emb_str = "[" + ",".join(str(v) for v in emb) + "]"
             await conn.execute(
                 """INSERT INTO course_chunks (course_id, chunk_index, text, embedding)
                    VALUES ($1, $2, $3, $4::vector)""",
-                course_id, i, text, emb_str,
+                course_id,
+                i,
+                text,
+                emb_str,
             )
     return len(chunks)
 
@@ -42,7 +43,8 @@ async def search_similar(
                JOIN courses c ON c.id = cc.course_id
                ORDER BY cc.embedding <=> $1::vector
                LIMIT $2""",
-            emb_str, top_k,
+            emb_str,
+            top_k,
         )
         return [dict(r) for r in rows]
 
@@ -62,7 +64,10 @@ async def insert_program_chunks(
             await conn.execute(
                 """INSERT INTO program_chunks (program_page_id, chunk_index, text, embedding)
                    VALUES ($1, $2, $3, $4::vector)""",
-                program_page_id, i, text, emb_str,
+                program_page_id,
+                i,
+                text,
+                emb_str,
             )
     return len(chunks)
 
@@ -82,7 +87,8 @@ async def search_similar_programs(
                JOIN program_pages pp ON pp.id = pc.program_page_id
                ORDER BY pc.embedding <=> $1::vector
                LIMIT $2""",
-            emb_str, top_k,
+            emb_str,
+            top_k,
         )
         return [dict(r) for r in rows]
 
@@ -101,7 +107,7 @@ async def create_ivfflat_index() -> None:
         if not exists:
             count = await conn.fetchval("SELECT count(*) FROM course_chunks")
             if count > 0:
-                lists = max(1, int(count ** 0.5))
+                lists = max(1, int(count**0.5))
                 await conn.execute(
                     f"""CREATE INDEX idx_chunks_embedding_ivfflat
                         ON course_chunks USING ivfflat (embedding vector_cosine_ops)
@@ -118,7 +124,7 @@ async def create_ivfflat_index() -> None:
         if not exists:
             count = await conn.fetchval("SELECT count(*) FROM program_chunks")
             if count > 0:
-                lists = max(1, int(count ** 0.5))
+                lists = max(1, int(count**0.5))
                 await conn.execute(
                     f"""CREATE INDEX idx_program_chunks_embedding_ivfflat
                         ON program_chunks USING ivfflat (embedding vector_cosine_ops)

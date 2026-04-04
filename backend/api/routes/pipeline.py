@@ -10,7 +10,7 @@ from typing import AsyncIterator
 from fastapi import APIRouter, Request
 from pydantic import BaseModel
 
-from backend.lib.sse import _sse, progress_event, done_event, error_event
+from backend.lib.sse import _sse
 from backend.lib.streaming import sse_response
 
 logger = logging.getLogger("backend.api.pipeline")
@@ -49,6 +49,7 @@ async def pipeline_status(run_id: str):
     run = _runs.get(run_id)
     if not run:
         from fastapi import HTTPException
+
         raise HTTPException(status_code=404, detail="Pipeline run not found")
     return run
 
@@ -74,11 +75,13 @@ async def pipeline_stream(run_id: str, request: Request):
                 seen += 1
 
             if run.get("status") in ("complete", "error"):
-                yield _sse({
-                    "type": "pipeline_done",
-                    "status": run["status"],
-                    "result": run.get("result", {}),
-                })
+                yield _sse(
+                    {
+                        "type": "pipeline_done",
+                        "status": run["status"],
+                        "result": run.get("result", {}),
+                    }
+                )
                 break
 
             await asyncio.sleep(0.3)

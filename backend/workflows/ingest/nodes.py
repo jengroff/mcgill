@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import json
 import logging
 import traceback
 from pathlib import Path
@@ -21,7 +20,10 @@ async def precheck_node(state: IngestState) -> IngestState:
     """
     try:
         from backend.db.postgres import get_pool
-        from backend.services.scraping.faculties import ALL_FACULTIES, get_active_faculties
+        from backend.services.scraping.faculties import (
+            ALL_FACULTIES,
+            get_active_faculties,
+        )
 
         force = state.get("force", False)
         faculty_filter = state.get("faculty_filter")
@@ -35,7 +37,9 @@ async def precheck_node(state: IngestState) -> IngestState:
             if not active:
                 return {
                     "scrape_status": "error",
-                    "errors": [f"precheck: no faculties matched filter {faculty_filter!r}"],
+                    "errors": [
+                        f"precheck: no faculties matched filter {faculty_filter!r}"
+                    ],
                     "skipped_depts": [],
                     "active_depts": [],
                 }
@@ -44,7 +48,9 @@ async def precheck_node(state: IngestState) -> IngestState:
             target_depts = [p for _, _, prefixes in ALL_FACULTIES for p in prefixes]
 
         if force:
-            logger.info("Force flag set — processing all %d departments", len(target_depts))
+            logger.info(
+                "Force flag set — processing all %d departments", len(target_depts)
+            )
             return {
                 "skipped_depts": [],
                 "active_depts": target_depts,
@@ -66,12 +72,14 @@ async def precheck_node(state: IngestState) -> IngestState:
         if skipped:
             logger.info(
                 "Skipping %d already-processed departments: %s",
-                len(skipped), ", ".join(sorted(skipped)),
+                len(skipped),
+                ", ".join(sorted(skipped)),
             )
         if active:
             logger.info(
                 "Processing %d departments: %s",
-                len(active), ", ".join(sorted(active)),
+                len(active),
+                ", ".join(sorted(active)),
             )
 
         return {
@@ -106,6 +114,7 @@ async def scrape_node(state: IngestState) -> IngestState:
 
         # Also insert into PostgreSQL
         from backend.db.postgres import get_pool
+
         pool = await get_pool()
         async with pool.acquire() as conn:
             for c in courses:
@@ -121,10 +130,20 @@ async def scrape_node(state: IngestState) -> IngestState:
                            restrictions_raw = EXCLUDED.restrictions_raw,
                            terms = EXCLUDED.terms,
                            updated_at = now()""",
-                    c.code, c.slug, c.title, c.dept, c.number,
-                    c.credits, c.faculty, c.terms, c.description,
-                    c.prerequisites_raw, c.restrictions_raw,
-                    c.notes_raw, c.url, c.name_variants,
+                    c.code,
+                    c.slug,
+                    c.title,
+                    c.dept,
+                    c.number,
+                    c.credits,
+                    c.faculty,
+                    c.terms,
+                    c.description,
+                    c.prerequisites_raw,
+                    c.restrictions_raw,
+                    c.notes_raw,
+                    c.url,
+                    c.name_variants,
                 )
 
         return {
@@ -156,16 +175,23 @@ async def resolve_node(state: IngestState) -> IngestState:
         async with pool.acquire() as conn:
             if active_depts:
                 rows = await conn.fetch(
-                    "SELECT * FROM courses WHERE dept = ANY($1)", active_depts,
+                    "SELECT * FROM courses WHERE dept = ANY($1)",
+                    active_depts,
                 )
             else:
                 rows = await conn.fetch("SELECT * FROM courses")
 
         courses = [
             CourseCreate(
-                code=r["code"], slug=r["slug"], title=r["title"],
-                dept=r["dept"], number=r["number"], credits=r["credits"],
-                faculty=r["faculty"], faculties=[], terms=r["terms"] or [],
+                code=r["code"],
+                slug=r["slug"],
+                title=r["title"],
+                dept=r["dept"],
+                number=r["number"],
+                credits=r["credits"],
+                faculty=r["faculty"],
+                faculties=[],
+                terms=r["terms"] or [],
                 description=r["description"] or "",
                 prerequisites_raw=r["prerequisites_raw"] or "",
                 restrictions_raw=r["restrictions_raw"] or "",
@@ -212,7 +238,11 @@ async def embed_node(state: IngestState) -> IngestState:
         from backend.db.postgres import get_pool
         from backend.services.embedding.chunker import chunk_course, chunk_program_page
         from backend.services.embedding.voyage import embed_texts
-        from backend.services.embedding.vector_store import insert_chunks, insert_program_chunks, create_ivfflat_index
+        from backend.services.embedding.vector_store import (
+            insert_chunks,
+            insert_program_chunks,
+            create_ivfflat_index,
+        )
 
         pool = await get_pool()
         active_depts = state.get("active_depts")
@@ -255,10 +285,16 @@ async def embed_node(state: IngestState) -> IngestState:
             all_embeddings = embed_texts(batch_texts)
 
             for i, (course_id, start_idx) in enumerate(batch_meta):
-                end_idx = batch_meta[i + 1][1] if i + 1 < len(batch_meta) else len(batch_texts)
+                end_idx = (
+                    batch_meta[i + 1][1]
+                    if i + 1 < len(batch_meta)
+                    else len(batch_texts)
+                )
                 course_chunks = batch_texts[start_idx:end_idx]
                 course_embs = all_embeddings[start_idx:end_idx]
-                total_course_chunks += await insert_chunks(course_id, course_chunks, course_embs)
+                total_course_chunks += await insert_chunks(
+                    course_id, course_chunks, course_embs
+                )
 
         # --- Program page chunks ---
         async with pool.acquire() as conn:
@@ -284,10 +320,14 @@ async def embed_node(state: IngestState) -> IngestState:
             prog_embeddings = embed_texts(prog_texts)
 
             for i, (page_id, start_idx) in enumerate(prog_meta):
-                end_idx = prog_meta[i + 1][1] if i + 1 < len(prog_meta) else len(prog_texts)
+                end_idx = (
+                    prog_meta[i + 1][1] if i + 1 < len(prog_meta) else len(prog_texts)
+                )
                 page_chunks = prog_texts[start_idx:end_idx]
                 page_embs = prog_embeddings[start_idx:end_idx]
-                total_prog_chunks += await insert_program_chunks(page_id, page_chunks, page_embs)
+                total_prog_chunks += await insert_program_chunks(
+                    page_id, page_chunks, page_embs
+                )
 
         await create_ivfflat_index()
 

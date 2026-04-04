@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import asyncio
 import uuid
 
 import asyncpg
@@ -44,6 +43,7 @@ def _unique_email() -> str:
 # Unit tests — password hashing
 # ---------------------------------------------------------------------------
 
+
 class TestPasswordHashing:
     def test_hash_and_verify(self):
         pw = "mysecretpassword"
@@ -67,6 +67,7 @@ class TestPasswordHashing:
 # Unit tests — JWT tokens
 # ---------------------------------------------------------------------------
 
+
 class TestJWT:
     def test_create_and_decode(self):
         import jwt
@@ -88,17 +89,24 @@ class TestJWT:
             "email": "expired@test.mcgill",
             "exp": datetime.now(timezone.utc) - timedelta(hours=1),
         }
-        token = jwt.encode(payload, settings.jwt_secret_key, algorithm=settings.jwt_algorithm)
+        token = jwt.encode(
+            payload, settings.jwt_secret_key, algorithm=settings.jwt_algorithm
+        )
 
         app = create_app()
         with TestClient(app) as c:
-            resp = c.get("/api/v1/auth/me", headers={"Authorization": f"Bearer {token}"})
+            resp = c.get(
+                "/api/v1/auth/me", headers={"Authorization": f"Bearer {token}"}
+            )
             assert resp.status_code == 401
 
     def test_invalid_token(self):
         app = create_app()
         with TestClient(app) as c:
-            resp = c.get("/api/v1/auth/me", headers={"Authorization": "Bearer garbage.token.here"})
+            resp = c.get(
+                "/api/v1/auth/me",
+                headers={"Authorization": "Bearer garbage.token.here"},
+            )
             assert resp.status_code == 401
 
 
@@ -106,12 +114,13 @@ class TestJWT:
 # Integration tests — /api/v1/auth endpoints
 # ---------------------------------------------------------------------------
 
+
 class TestRegister:
     def test_register_returns_token_and_user(self, client, clean_users):
         email = _unique_email()
         resp = client.post(
             "/api/v1/auth/register",
-            json={"email": email, "password": "validpass1"},
+            json={"name": "Test User", "email": email, "password": "validpass1"},
         )
         assert resp.status_code == 200
         data = resp.json()
@@ -121,21 +130,27 @@ class TestRegister:
 
     def test_register_duplicate_email_409(self, client, clean_users):
         email = _unique_email()
-        client.post("/api/v1/auth/register", json={"email": email, "password": "validpass1"})
-        resp = client.post("/api/v1/auth/register", json={"email": email, "password": "validpass1"})
+        client.post(
+            "/api/v1/auth/register",
+            json={"name": "Test User", "email": email, "password": "validpass1"},
+        )
+        resp = client.post(
+            "/api/v1/auth/register",
+            json={"name": "Test User", "email": email, "password": "validpass1"},
+        )
         assert resp.status_code == 409
 
     def test_register_invalid_email_422(self, client, clean_users):
         resp = client.post(
             "/api/v1/auth/register",
-            json={"email": "not-an-email", "password": "validpass1"},
+            json={"name": "Test", "email": "not-an-email", "password": "validpass1"},
         )
         assert resp.status_code == 422
 
     def test_register_short_password_422(self, client, clean_users):
         resp = client.post(
             "/api/v1/auth/register",
-            json={"email": _unique_email(), "password": "short"},
+            json={"name": "Test", "email": _unique_email(), "password": "short"},
         )
         assert resp.status_code == 422
 
@@ -143,7 +158,11 @@ class TestRegister:
         email = _unique_email()
         resp = client.post(
             "/api/v1/auth/register",
-            json={"email": email.upper(), "password": "validpass1"},
+            json={
+                "name": "Test User",
+                "email": email.upper(),
+                "password": "validpass1",
+            },
         )
         assert resp.status_code == 200
         assert resp.json()["user"]["email"] == email.lower()
@@ -152,8 +171,14 @@ class TestRegister:
 class TestLogin:
     def test_login_valid_credentials(self, client, clean_users):
         email = _unique_email()
-        client.post("/api/v1/auth/register", json={"email": email, "password": "validpass1"})
-        resp = client.post("/api/v1/auth/login", json={"email": email, "password": "validpass1"})
+        client.post(
+            "/api/v1/auth/register",
+            json={"name": "Test User", "email": email, "password": "validpass1"},
+        )
+        resp = client.post(
+            "/api/v1/auth/login",
+            json={"name": "Test User", "email": email, "password": "validpass1"},
+        )
         assert resp.status_code == 200
         data = resp.json()
         assert "token" in data
@@ -161,8 +186,13 @@ class TestLogin:
 
     def test_login_wrong_password_401(self, client, clean_users):
         email = _unique_email()
-        client.post("/api/v1/auth/register", json={"email": email, "password": "validpass1"})
-        resp = client.post("/api/v1/auth/login", json={"email": email, "password": "wrongpass1"})
+        client.post(
+            "/api/v1/auth/register",
+            json={"name": "Test User", "email": email, "password": "validpass1"},
+        )
+        resp = client.post(
+            "/api/v1/auth/login", json={"email": email, "password": "wrongpass1"}
+        )
         assert resp.status_code == 401
 
     def test_login_nonexistent_user_401(self, client, clean_users):
@@ -176,9 +206,14 @@ class TestLogin:
 class TestMe:
     def test_me_authenticated(self, client, clean_users):
         email = _unique_email()
-        reg = client.post("/api/v1/auth/register", json={"email": email, "password": "validpass1"})
+        reg = client.post(
+            "/api/v1/auth/register",
+            json={"name": "Test User", "email": email, "password": "validpass1"},
+        )
         token = reg.json()["token"]
-        resp = client.get("/api/v1/auth/me", headers={"Authorization": f"Bearer {token}"})
+        resp = client.get(
+            "/api/v1/auth/me", headers={"Authorization": f"Bearer {token}"}
+        )
         assert resp.status_code == 200
         assert resp.json()["email"] == email
 
@@ -195,10 +230,14 @@ class TestMe:
 # Integration tests — authenticated chat persistence
 # ---------------------------------------------------------------------------
 
+
 class TestChatPersistence:
     def _register(self, client) -> tuple[str, str]:
         email = _unique_email()
-        reg = client.post("/api/v1/auth/register", json={"email": email, "password": "validpass1"})
+        reg = client.post(
+            "/api/v1/auth/register",
+            json={"name": "Test User", "email": email, "password": "validpass1"},
+        )
         return reg.json()["token"], email
 
     def test_authenticated_session_creates_conversation(self, client, clean_users):
@@ -255,7 +294,10 @@ class TestChatPersistence:
         client.post(
             "/api/v1/chat/ask",
             headers={"Authorization": f"Bearer {token}"},
-            json={"message": "Tell me about artificial intelligence courses", "session_id": sid},
+            json={
+                "message": "Tell me about artificial intelligence courses",
+                "session_id": sid,
+            },
         )
 
         convos = client.get(
