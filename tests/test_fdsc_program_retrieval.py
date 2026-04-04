@@ -11,7 +11,6 @@ Requires: `make db` (postgres + neo4j running), FDSC data scraped.
 import re
 
 import pytest
-import pytest_asyncio
 
 pytestmark = pytest.mark.asyncio
 
@@ -41,7 +40,9 @@ class TestFDSCDataPresence:
                 "AND path NOT LIKE '%/en/graduate/%'"
             )
         paths = [r["path"] for r in rows]
-        assert len(paths) >= 5, f"Expected 5+ FDSC sub-program pages, got {len(paths)}: {paths}"
+        assert len(paths) >= 5, (
+            f"Expected 5+ FDSC sub-program pages, got {len(paths)}: {paths}"
+        )
 
     async def test_food_science_option_has_required_courses_table(self, db):
         async with db.acquire() as conn:
@@ -51,7 +52,9 @@ class TestFDSCDataPresence:
             )
         assert content is not None, "Food Science Option page not found"
         assert "## Required Courses" in content, "Missing '## Required Courses' heading"
-        assert "| Course | Title | Credits |" in content, "Missing markdown table header"
+        assert "| Course | Title | Credits |" in content, (
+            "Missing markdown table header"
+        )
         assert "AEMA 310" in content, "Missing AEMA 310 in required courses"
 
     async def test_food_chemistry_option_has_required_courses_table(self, db):
@@ -93,11 +96,15 @@ class TestStructuredRetrieval:
                 "WHERE content ILIKE '%Required Courses%' "
                 "AND path LIKE '%food-science-agricultural-chemistry/%'"
             )
-        assert len(rows) >= 3, f"Expected 3+ pages with required courses, got {len(rows)}"
+        assert len(rows) >= 3, (
+            f"Expected 3+ pages with required courses, got {len(rows)}"
+        )
         # Verify the content contains course codes in tables
         all_content = " ".join(r["content"] for r in rows)
         codes = re.findall(r"\b(FDSC \d{3}[A-Z]?\d?)\b", all_content)
-        assert len(codes) >= 10, f"Expected 10+ FDSC course codes in requirements, got {len(codes)}"
+        assert len(codes) >= 10, (
+            f"Expected 10+ FDSC course codes in requirements, got {len(codes)}"
+        )
 
     async def test_sql_finds_math_related_courses_in_fdsc(self, db):
         """Verify the program pages mention math/stats courses that are
@@ -209,7 +216,9 @@ class TestSynthesisPipeline:
         answer = result.get("response", "")
         assert len(answer) > 50, f"Answer too short: {answer}"
         # Should mention at least some FDSC course codes
-        fdsc_mentions = len([c for c in ["FDSC", "AEMA", "LSCI", "BREE"] if c in answer])
+        fdsc_mentions = len(
+            [c for c in ["FDSC", "AEMA", "LSCI", "BREE"] if c in answer]
+        )
         assert fdsc_mentions >= 1, (
             f"Answer doesn't reference any FDSC-related course codes: {answer[:300]}"
         )
@@ -245,7 +254,9 @@ class TestSynthesisPipeline:
         from backend.workflows.retrieval.graph import RetrievalOrchestrator
         from backend.workflows.synthesis.graph import SynthesisOrchestrator
 
-        query = "list the required courses for the FDSC Food Science Option B.Sc. program"
+        query = (
+            "list the required courses for the FDSC Food Science Option B.Sc. program"
+        )
         retrieval = RetrievalOrchestrator()
         retrieval_state = await retrieval.run(query=query)
 
@@ -261,8 +272,16 @@ class TestSynthesisPipeline:
         answer = result.get("response", "")
         assert len(answer) > 100, f"Answer too short: {answer}"
         # Should mention at least some known required courses
-        expected = ["FDSC 200", "FDSC 251", "FDSC 442", "BREE 324",
-                    "FDSC 213", "LSCI 211", "AEMA 310", "FDSC 330"]
+        expected = [
+            "FDSC 200",
+            "FDSC 251",
+            "FDSC 442",
+            "BREE 324",
+            "FDSC 213",
+            "LSCI 211",
+            "AEMA 310",
+            "FDSC 330",
+        ]
         found = [c for c in expected if c in answer]
         assert len(found) >= 2, (
             f"Answer only mentions {found} of expected {expected}: {answer[:400]}"

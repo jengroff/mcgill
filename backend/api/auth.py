@@ -18,17 +18,23 @@ def verify_password(password: str, hashed: str) -> bool:
     return bcrypt.checkpw(password.encode(), hashed.encode())
 
 
-def create_access_token(user_id: int, email: str) -> str:
+def create_access_token(user_id: int, email: str, name: str = "") -> str:
     payload = {
         "sub": str(user_id),
         "email": email,
-        "exp": datetime.now(timezone.utc) + timedelta(minutes=settings.jwt_expiry_minutes),
+        "name": name,
+        "exp": datetime.now(timezone.utc)
+        + timedelta(minutes=settings.jwt_expiry_minutes),
     }
-    return jwt.encode(payload, settings.jwt_secret_key, algorithm=settings.jwt_algorithm)
+    return jwt.encode(
+        payload, settings.jwt_secret_key, algorithm=settings.jwt_algorithm
+    )
 
 
 def _decode_token(token: str) -> dict:
-    return jwt.decode(token, settings.jwt_secret_key, algorithms=[settings.jwt_algorithm])
+    return jwt.decode(
+        token, settings.jwt_secret_key, algorithms=[settings.jwt_algorithm]
+    )
 
 
 def _extract_token(request: Request) -> str | None:
@@ -41,15 +47,19 @@ def _extract_token(request: Request) -> str | None:
 async def get_current_user(request: Request) -> dict:
     """FastAPI dependency that extracts and validates a JWT from the Authorization header.
 
-    Returns a dict with `id` and `email` keys. Raises **401** if the token is
-    missing, expired, or otherwise invalid.
+    Returns a dict with `id`, `email`, and `name` keys. Raises **401** if the
+    token is missing, expired, or otherwise invalid.
     """
     token = _extract_token(request)
     if not token:
         raise HTTPException(status_code=401, detail="Missing authentication token")
     try:
         payload = _decode_token(token)
-        return {"id": int(payload["sub"]), "email": payload["email"]}
+        return {
+            "id": int(payload["sub"]),
+            "email": payload["email"],
+            "name": payload.get("name", ""),
+        }
     except jwt.ExpiredSignatureError:
         raise HTTPException(status_code=401, detail="Token has expired")
     except (jwt.InvalidTokenError, KeyError, ValueError):
@@ -66,6 +76,10 @@ async def get_optional_user(request: Request) -> dict | None:
         return None
     try:
         payload = _decode_token(token)
-        return {"id": int(payload["sub"]), "email": payload["email"]}
+        return {
+            "id": int(payload["sub"]),
+            "email": payload["email"],
+            "name": payload.get("name", ""),
+        }
     except (jwt.InvalidTokenError, KeyError, ValueError):
         return None

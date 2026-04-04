@@ -12,6 +12,7 @@ router = APIRouter(tags=["Faculties"])
 @router.get("/faculties")
 async def list_faculties():
     from backend.db.postgres import get_pool
+
     pool = await get_pool()
 
     faculties = []
@@ -19,14 +20,17 @@ async def list_faculties():
         async with pool.acquire() as conn:
             count = await conn.fetchval(
                 "SELECT count(*) FROM courses WHERE faculty = $1 OR dept = ANY($2::text[])",
-                name, dept_codes,
+                name,
+                dept_codes,
             )
-        faculties.append({
-            "name": name,
-            "slug": slug,
-            "department_codes": dept_codes,
-            "course_count": count,
-        })
+        faculties.append(
+            {
+                "name": name,
+                "slug": slug,
+                "department_codes": dept_codes,
+                "course_count": count,
+            }
+        )
 
     return faculties
 
@@ -36,6 +40,7 @@ async def get_faculty(slug: str):
     match = next((f for f in ALL_FACULTIES if f[1] == slug), None)
     if not match:
         from fastapi import HTTPException
+
         raise HTTPException(status_code=404, detail="Faculty not found")
 
     name, slug, dept_codes = match
@@ -47,10 +52,12 @@ async def list_departments(slug: str):
     match = next((f for f in ALL_FACULTIES if f[1] == slug), None)
     if not match:
         from fastapi import HTTPException
+
         raise HTTPException(status_code=404, detail="Faculty not found")
 
     name, slug, dept_codes = match
     from backend.db.postgres import get_pool
+
     pool = await get_pool()
 
     departments = []
@@ -63,11 +70,13 @@ async def list_departments(slug: str):
             count = await conn.fetchval(
                 "SELECT count(*) FROM courses WHERE dept = $1", code
             )
-            departments.append({
-                "code": code,
-                "name": row["name"] if row and row["name"] else code,
-                "faculty_slug": slug,
-                "course_count": count,
-            })
+            departments.append(
+                {
+                    "code": code,
+                    "name": row["name"] if row and row["name"] else code,
+                    "faculty_slug": slug,
+                    "course_count": count,
+                }
+            )
 
     return departments

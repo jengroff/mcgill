@@ -56,8 +56,10 @@ class PlannerOrchestrator(WorkflowOrchestrator):
         )
 
 
-registry.register(WorkflowConfig(
-    name="planner",
-    orchestrator_class=PlannerOrchestrator,
-    description="Multi-semester curriculum planner using Claude Agent SDK + VLM",
-))
+registry.register(
+    WorkflowConfig(
+        name="planner",
+        orchestrator_class=PlannerOrchestrator,
+        description="Multi-semester curriculum planner using Claude Agent SDK + VLM",
+    )
+)

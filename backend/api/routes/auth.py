@@ -20,7 +20,13 @@ router = APIRouter(tags=["auth"])
 EMAIL_RE = re.compile(r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
 
 
-class AuthRequest(BaseModel):
+class RegisterRequest(BaseModel):
+    email: str
+    password: str
+    name: str
+
+
+class LoginRequest(BaseModel):
     email: str
     password: str
 
@@ -33,10 +39,11 @@ class AuthResponse(BaseModel):
 class UserResponse(BaseModel):
     id: int
     email: str
+    name: str
 
 
 @router.post("/register", response_model=AuthResponse)
-async def register(body: AuthRequest, pool: asyncpg.Pool = Depends(get_db)):
+async def register(body: RegisterRequest, pool: asyncpg.Pool = Depends(get_db)):
     """Create a new user account.
 
     Validates the email format, hashes the password with bcrypt, and inserts the
@@ -46,26 +53,34 @@ async def register(body: AuthRequest, pool: asyncpg.Pool = Depends(get_db)):
     if not EMAIL_RE.match(body.email):
         raise HTTPException(status_code=422, detail="Invalid email format")
     if len(body.password) < 8:
-        raise HTTPException(status_code=422, detail="Password must be at least 8 characters")
+        raise HTTPException(
+            status_code=422, detail="Password must be at least 8 characters"
+        )
+    if not body.name.strip():
+        raise HTTPException(status_code=422, detail="Name is required")
 
     pw_hash = hash_password(body.password)
 
     try:
         async with pool.acquire() as conn:
             row = await conn.fetchrow(
-                "INSERT INTO users (email, password_hash) VALUES ($1, $2) RETURNING id, email",
+                "INSERT INTO users (email, password_hash, name) VALUES ($1, $2, $3) RETURNING id, email, name",
                 body.email.lower().strip(),
                 pw_hash,
+                body.name.strip(),
             )
     except asyncpg.UniqueViolationError:
         raise HTTPException(status_code=409, detail="Email already registered")
 
-    token = create_access_token(row["id"], row["email"])
-    return {"token": token, "user": {"id": row["id"], "email": row["email"]}}
+    token = create_access_token(row["id"], row["email"], row["name"])
+    return {
+        "token": token,
+        "user": {"id": row["id"], "email": row["email"], "name": row["name"]},
+    }
 
 
 @router.post("/login", response_model=AuthResponse)
-async def login(body: AuthRequest, pool: asyncpg.Pool = Depends(get_db)):
+async def login(body: LoginRequest, pool: asyncpg.Pool = Depends(get_db)):
     """Authenticate with email and password.
 
     Returns a JWT token and user profile on valid credentials. Returns **401**
@@ -73,18 +88,21 @@ async def login(body: AuthRequest, pool: asyncpg.Pool = Depends(get_db)):
     """
     async with pool.acquire() as conn:
         row = await conn.fetchrow(
-            "SELECT id, email, password_hash FROM users WHERE email = $1",
+            "SELECT id, email, password_hash, name FROM users WHERE email = $1",
             body.email.lower().strip(),
         )
 
     if not row or not verify_password(body.password, row["password_hash"]):
         raise HTTPException(status_code=401, detail="Invalid email or password")
 
-    token = create_access_token(row["id"], row["email"])
-    return {"token": token, "user": {"id": row["id"], "email": row["email"]}}
+    token = create_access_token(row["id"], row["email"], row["name"])
+    return {
+        "token": token,
+        "user": {"id": row["id"], "email": row["email"], "name": row["name"]},
+    }
 
 
 @router.get("/me", response_model=UserResponse)
 async def me(user: dict = Depends(get_current_user)):
     """Return the profile of the authenticated user."""
-    return {"id": user["id"], "email": user["email"]}
+    return {"id": user["id"], "email": user["email"], "name": user["name"]}

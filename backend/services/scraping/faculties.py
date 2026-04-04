@@ -3,51 +3,191 @@
 from __future__ import annotations
 
 ALL_FACULTIES: list[tuple[str, str, list[str]]] = [
-    ("Agricultural & Environmental Sciences", "agri-env-sci", [
-        "AGRI", "ANSC", "BIEN", "FDSC", "FMGT", "PARA", "PLNT",
-        "NRSC", "AEBI", "AEMA", "ABEN", "LSCI",
-    ]),
-    ("Arts", "arts", [
-        "ANTH", "ARTH", "CANS", "CLAS", "EAST", "ECON", "ENGL",
-        "PHIL", "POLI", "PSYC", "RELG", "RELI", "HIST", "ISLA",
-        "LING", "JWST", "SOCI", "SWRK", "URBS", "INTD", "WMST",
-        "GERM", "SPAN", "ITAL", "PORT", "RUSS", "CHIN", "JPST", "ARAB", "HEBR",
-    ]),
-    ("Dental Medicine & Oral Health Sciences", "dental", [
-        "DENT", "MDNT", "ORCD",
-    ]),
-    ("Education", "education", [
-        "EDEC", "EDPE", "EDST", "EDSA", "EDKN", "EDLB", "EDLS",
-        "EDPL", "EDUC", "KINE",
-    ]),
-    ("Engineering", "engineering", [
-        "ECSE", "MECH", "CIVE", "MIME", "FACC", "CHEE", "MTLS",
-        "ENVE", "BREE", "MIMI", "ENGR",
-    ]),
-    ("Environment (Bieler School)", "environment", [
-        "ENVB", "ENVR",
-    ]),
-    ("Law", "law", [
-        "LAWS",
-    ]),
-    ("Management (Desautels)", "management", [
-        "ACCT", "FINE", "INSY", "MGCR", "MGMT", "MRKT", "ORGB",
-        "STRA", "BUSA",
-    ]),
-    ("Medicine & Health Sciences", "medicine", [
-        "ANAT", "BIOC", "EPIB", "EXMD", "MEDC", "MICR", "NSCI",
-        "NEUR", "PHAR", "PHGY", "PTOT", "REHB", "ORTH", "MDCN", "NUTR", "SPCH",
-    ]),
-    ("Music (Schulich)", "music", [
-        "MUAR", "MUSP", "MUTH",
-    ]),
-    ("Nursing", "nursing", [
-        "NURS",
-    ]),
-    ("Science", "science", [
-        "ATOC", "BIOL", "CHEM", "COMP", "EART", "GEOG", "MATH",
-        "PHYS", "PSYC", "ANAT", "BIOC", "MICR", "PHAR", "PHGY", "NRSC",
-    ]),
+    (
+        "Agricultural & Environmental Sciences",
+        "agri-env-sci",
+        [
+            "AGRI",
+            "ANSC",
+            "BIEN",
+            "FDSC",
+            "FMGT",
+            "PARA",
+            "PLNT",
+            "NRSC",
+            "AEBI",
+            "AEMA",
+            "ABEN",
+            "LSCI",
+        ],
+    ),
+    (
+        "Arts",
+        "arts",
+        [
+            "ANTH",
+            "ARTH",
+            "CANS",
+            "CLAS",
+            "EAST",
+            "ECON",
+            "ENGL",
+            "PHIL",
+            "POLI",
+            "PSYC",
+            "RELG",
+            "RELI",
+            "HIST",
+            "ISLA",
+            "LING",
+            "JWST",
+            "SOCI",
+            "SWRK",
+            "URBS",
+            "INTD",
+            "WMST",
+            "GERM",
+            "SPAN",
+            "ITAL",
+            "PORT",
+            "RUSS",
+            "CHIN",
+            "JPST",
+            "ARAB",
+            "HEBR",
+        ],
+    ),
+    (
+        "Dental Medicine & Oral Health Sciences",
+        "dental",
+        [
+            "DENT",
+            "MDNT",
+            "ORCD",
+        ],
+    ),
+    (
+        "Education",
+        "education",
+        [
+            "EDEC",
+            "EDPE",
+            "EDST",
+            "EDSA",
+            "EDKN",
+            "EDLB",
+            "EDLS",
+            "EDPL",
+            "EDUC",
+            "KINE",
+        ],
+    ),
+    (
+        "Engineering",
+        "engineering",
+        [
+            "ECSE",
+            "MECH",
+            "CIVE",
+            "MIME",
+            "FACC",
+            "CHEE",
+            "MTLS",
+            "ENVE",
+            "BREE",
+            "MIMI",
+            "ENGR",
+        ],
+    ),
+    (
+        "Environment (Bieler School)",
+        "environment",
+        [
+            "ENVB",
+            "ENVR",
+        ],
+    ),
+    (
+        "Law",
+        "law",
+        [
+            "LAWS",
+        ],
+    ),
+    (
+        "Management (Desautels)",
+        "management",
+        [
+            "ACCT",
+            "FINE",
+            "INSY",
+            "MGCR",
+            "MGMT",
+            "MRKT",
+            "ORGB",
+            "STRA",
+            "BUSA",
+        ],
+    ),
+    (
+        "Medicine & Health Sciences",
+        "medicine",
+        [
+            "ANAT",
+            "BIOC",
+            "EPIB",
+            "EXMD",
+            "MEDC",
+            "MICR",
+            "NSCI",
+            "NEUR",
+            "PHAR",
+            "PHGY",
+            "PTOT",
+            "REHB",
+            "ORTH",
+            "MDCN",
+            "NUTR",
+            "SPCH",
+        ],
+    ),
+    (
+        "Music (Schulich)",
+        "music",
+        [
+            "MUAR",
+            "MUSP",
+            "MUTH",
+        ],
+    ),
+    (
+        "Nursing",
+        "nursing",
+        [
+            "NURS",
+        ],
+    ),
+    (
+        "Science",
+        "science",
+        [
+            "ATOC",
+            "BIOL",
+            "CHEM",
+            "COMP",
+            "EART",
+            "GEOG",
+            "MATH",
+            "PHYS",
+            "PSYC",
+            "ANAT",
+            "BIOC",
+            "MICR",
+            "PHAR",
+            "PHGY",
+            "NRSC",
+        ],
+    ),
 ]
 
 PROGRAM_PAGES: dict[str, list[str]] = {
@@ -154,11 +294,16 @@ def get_active_faculties(
     if faculty_filter is None:
         return ALL_FACULTIES
     allowed = {v.lower() for v in faculty_filter}
-    result = [f for f in ALL_FACULTIES if f[0].lower() in allowed or f[1].lower() in allowed]
+    result = [
+        f for f in ALL_FACULTIES if f[0].lower() in allowed or f[1].lower() in allowed
+    ]
     if result:
         return result
     # Substring match as fallback for partial/inexact faculty names
     return [
-        f for f in ALL_FACULTIES
-        if any(a in f[0].lower() or f[0].lower() in a or a in f[1].lower() for a in allowed)
+        f
+        for f in ALL_FACULTIES
+        if any(
+            a in f[0].lower() or f[0].lower() in a or a in f[1].lower() for a in allowed
+        )
     ]

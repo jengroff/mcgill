@@ -2,7 +2,9 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { BookOpen, ChevronRight } from 'lucide-react'
 import { fetchFaculties } from '../api/client'
+import { useAppStore } from '../store/appStore'
 import SearchBar from '../components/SearchBar'
+import AuthPrompt from '../components/AuthPrompt'
 
 interface FacultyItem {
   name: string
@@ -27,21 +29,27 @@ const FACULTY_ICONS: Record<string, string> = {
 }
 
 export default function BrowsePage() {
+  const user = useAppStore((s) => s.user)
   const [faculties, setFaculties] = useState<FacultyItem[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    if (!user) return
     fetchFaculties()
       .then(setFaculties)
       .catch(() => {})
       .finally(() => setLoading(false))
-  }, [])
+  }, [user])
+
+  if (!user) return <AuthPrompt />
 
   return (
     <div className="h-full overflow-y-auto p-6">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-8">
-          <h1 className="text-2xl font-bold mb-2" style={{ color: 'var(--text-primary)' }}>McGill University</h1>
+          <h1 className="text-2xl font-bold mb-2" style={{ color: 'var(--text-primary)' }}>
+            Welcome back, {user.name.split(' ')[0]}
+          </h1>
           <p className="text-sm" style={{ color: 'var(--text-muted)' }}>Explore faculties, departments, and courses</p>
           <div className="max-w-md mx-auto mt-4">
             <SearchBar />

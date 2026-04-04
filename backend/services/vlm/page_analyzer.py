@@ -9,9 +9,25 @@ from backend.services.vlm.types import PageContent
 logger = logging.getLogger(__name__)
 
 _KEYWORD_MAP: dict[str, list[str]] = {
-    "curriculum_map": ["year 1", "year 2", "semester", "fall", "winter", "u0", "u1", "u2", "u3"],
+    "curriculum_map": [
+        "year 1",
+        "year 2",
+        "semester",
+        "fall",
+        "winter",
+        "u0",
+        "u1",
+        "u2",
+        "u3",
+    ],
     "course_listing": ["credits", "3 credits", "offered", "instructor", "lecture"],
-    "requirements": ["required", "complementary", "elective", "core courses", "minimum"],
+    "requirements": [
+        "required",
+        "complementary",
+        "elective",
+        "core courses",
+        "minimum",
+    ],
     "prerequisite_chart": ["prerequisite", "corequisite", "restriction", "permission"],
 }
 

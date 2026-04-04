@@ -15,9 +15,9 @@ make frontend                 # UI on :5174
 ## Features
 
 - **Browse by faculty/department** — landing page shows all 12 faculties, click into one to see its departments, then drill into individual courses
-- **Per-department scraping** — scrape button on each department triggers the pipeline for just that department's courses
+- **Login with personalized greeting** — first visit prompts signup (name + email + password); returning users see "Welcome back, {name}" with example prompts
 - **Prerequisite chain visualizer** — D3 force-directed graph on each course page showing the full prerequisite/corequisite DAG
-- **User accounts** — register/login with email + password, JWT-based auth, persistent conversation history across sessions
+- **User accounts** — register/login with name + email + password, JWT-based auth, persistent conversation history across sessions
 - **Agentic chat** — ask natural language questions about courses, answered via hybrid retrieval (keyword + semantic + graph) and Claude synthesis over SSE
 - **Chat-driven pipeline** — type "scrape Science" or "run pipeline for COMP" in chat to trigger a full ingest pipeline with streamed progress
 - **Full ingest pipeline** — scrape, resolve, embed in one shot with real-time SSE progress streaming. Skips departments that have already been processed; use `--force` to re-run
@@ -145,7 +145,7 @@ backend/
 | `POST /api/v1/curriculum/recommend` | Generate curriculum recommendations |
 | `POST /api/v1/planner/plan` | Multi-semester curriculum plan (accepts PDF upload) |
 | `POST /api/v1/planner/stream` | SSE stream for planner progress |
-| `POST /api/v1/auth/register` | Create a new user account |
+| `POST /api/v1/auth/register` | Create a new user account (name + email + password) |
 | `POST /api/v1/auth/login` | Authenticate with email + password |
 | `GET /api/v1/auth/me` | Get current user profile (protected) |
 | `POST /api/v1/chat/session` | Create or resume a chat session |
@@ -177,7 +177,7 @@ mcgill curriculum --interests "machine learning" "statistics" --program computer
 
 ## Deployment
 
-Pushing to `main` triggers a GitHub Actions workflow that builds the Docker image, pushes it to GHCR, and deploys to EC2 via SSH.
+Pushing to `main` triggers a GitHub Actions workflow that builds both backend and frontend Docker images, pushes them to GHCR, and deploys to EC2 via SSH. Caddy handles auto-HTTPS via Let's Encrypt for `mcgill.engroff.ai`. The deploy only triggers when relevant files change (`backend/`, `frontend/`, `Dockerfile`, etc.).
 
 **GitHub secrets required** (Settings → Secrets → Actions):
 
@@ -194,4 +194,6 @@ cd ~/mcgill
 docker compose -f docker-compose.prod.yml up -d postgres neo4j
 ```
 
-Subsequent pushes to `main` will only replace the `app` container — databases stay running with their volumes intact.
+Subsequent pushes to `main` will only replace the `app` and `frontend` containers — databases stay running with their volumes intact.
+
+A separate CI workflow (`ci.yml`) runs ruff lint, ty type check, and pytest on every push and PR to `main`.

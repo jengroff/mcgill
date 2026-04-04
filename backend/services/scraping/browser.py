@@ -16,7 +16,9 @@ USER_AGENT = (
 
 
 @asynccontextmanager
-async def browser_context(headless: bool | None = None) -> AsyncGenerator[BrowserContext, None]:
+async def browser_context(
+    headless: bool | None = None,
+) -> AsyncGenerator[BrowserContext, None]:
     if headless is None:
         headless = settings.scraper_headless
     async with async_playwright() as p:

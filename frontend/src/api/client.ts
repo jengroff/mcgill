@@ -1,8 +1,52 @@
 const BASE = ''
 
+function authHeaders(): Record<string, string> {
+  const token = localStorage.getItem('token')
+  return token ? { Authorization: `Bearer ${token}` } : {}
+}
+
+// --- Auth ---
+export async function register(name: string, email: string, password: string) {
+  const res = await fetch(`${BASE}/api/v1/auth/register`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name, email, password }),
+  })
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({ detail: 'Registration failed' }))
+    throw new Error(err.detail || 'Registration failed')
+  }
+  return res.json()
+}
+
+export async function login(email: string, password: string) {
+  const res = await fetch(`${BASE}/api/v1/auth/login`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email, password }),
+  })
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({ detail: 'Login failed' }))
+    throw new Error(err.detail || 'Login failed')
+  }
+  return res.json()
+}
+
+export async function fetchMe() {
+  const res = await fetch(`${BASE}/api/v1/auth/me`, {
+    headers: authHeaders(),
+  })
+  if (!res.ok) throw new Error('Not authenticated')
+  return res.json()
+}
+
 // --- Chat ---
-export async function createSession(): Promise<string> {
-  const res = await fetch(`${BASE}/api/v1/chat/session`, { method: 'POST' })
+export async function createSession(sessionId?: string): Promise<string> {
+  const res = await fetch(`${BASE}/api/v1/chat/session`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...authHeaders() },
+    body: JSON.stringify({ session_id: sessionId }),
+  })
   const data = await res.json()
   return data.session_id
 }
@@ -10,7 +54,7 @@ export async function createSession(): Promise<string> {
 export async function sendMessage(sessionId: string, message: string) {
   await fetch(`${BASE}/api/v1/chat/ask`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', ...authHeaders() },
     body: JSON.stringify({ session_id: sessionId, message }),
   })
 }

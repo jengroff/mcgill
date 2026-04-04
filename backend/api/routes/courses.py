@@ -10,6 +10,7 @@ router = APIRouter(tags=["Courses"])
 @router.get("/departments/{code}/courses")
 async def list_department_courses(code: str):
     from backend.db.postgres import get_pool
+
     pool = await get_pool()
     async with pool.acquire() as conn:
         rows = await conn.fetch(
@@ -30,6 +31,7 @@ async def list_courses(
     offset: int = 0,
 ):
     from backend.db.postgres import get_pool
+
     pool = await get_pool()
 
     conditions = []
@@ -62,7 +64,9 @@ async def list_courses(
                 FROM courses {where}
                 ORDER BY dept, number
                 LIMIT ${idx} OFFSET ${idx + 1}""",
-            *params, limit, offset,
+            *params,
+            limit,
+            offset,
         )
 
     return {"total": total, "courses": [dict(r) for r in rows]}
@@ -71,10 +75,12 @@ async def list_courses(
 @router.get("/courses/{code}")
 async def get_course(code: str):
     from backend.db.postgres import get_pool
+
     pool = await get_pool()
 
     # Normalize code: "COMP-250" or "comp250" → "COMP 250"
     import re
+
     code = code.upper().replace("-", " ")
     m = re.match(r"([A-Z]{2,6})\s*(\d{3,4}[A-Z]?)", code)
     if m:
@@ -91,6 +97,7 @@ async def get_course(code: str):
     # Fetch resolved prerequisites from Neo4j
     try:
         from backend.db.neo4j import run_query
+
         prereqs = await run_query(
             "MATCH (c:Course {code: $code})-[:PREREQUISITE_OF]->(p:Course) RETURN p.code AS code, p.title AS title",
             {"code": code},
@@ -127,7 +134,8 @@ async def get_prerequisite_tree(code: str, depth: int = Query(default=3, le=5)):
 
     result = await run_query(
         """MATCH path = (c:Course {code: $code})-[:PREREQUISITE_OF*1..%d]->(p:Course)
-           RETURN [n IN nodes(path) | {code: n.code, title: n.title}] AS chain""" % depth,
+           RETURN [n IN nodes(path) | {code: n.code, title: n.title}] AS chain"""
+        % depth,
         {"code": code},
     )
     return {"code": code, "chains": [r["chain"] for r in result]}
@@ -136,6 +144,7 @@ async def get_prerequisite_tree(code: str, depth: int = Query(default=3, le=5)):
 @router.get("/graph/tree/{code}")
 async def get_prerequisite_tree_graph(code: str):
     import re
+
     code = code.upper().replace("-", " ")
     m = re.match(r"([A-Z]{2,6})\s*(\d{3,4}[A-Z]?)", code)
     if m:

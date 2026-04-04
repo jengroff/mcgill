@@ -45,7 +45,8 @@ async def seed_from_json(path: Path | None = None) -> int:
                            VALUES ($1, $2)
                            ON CONFLICT (name) DO UPDATE SET slug = EXCLUDED.slug
                            RETURNING id""",
-                        fac_name, slug,
+                        fac_name,
+                        slug,
                     )
                     faculties_seen[fac_name] = row["id"]
 
@@ -61,7 +62,8 @@ async def seed_from_json(path: Path | None = None) -> int:
                        VALUES ($1, $2)
                        ON CONFLICT (code) DO UPDATE SET faculty_id = COALESCE(EXCLUDED.faculty_id, departments.faculty_id)
                        RETURNING id""",
-                    dept, fac_id,
+                    dept,
+                    fac_id,
                 )
                 depts_seen[dept] = row["id"]
 
@@ -79,11 +81,19 @@ async def seed_from_json(path: Path | None = None) -> int:
                        restrictions_raw = EXCLUDED.restrictions_raw,
                        terms = EXCLUDED.terms,
                        updated_at = now()""",
-                c["code"], c["slug"], c["title"], c["dept"], c["number"],
-                c.get("credits"), c.get("faculty", ""),
-                c.get("terms", []), c.get("description", ""),
-                c.get("prerequisites_raw", ""), c.get("restrictions_raw", ""),
-                c.get("notes_raw", ""), c.get("url", ""),
+                c["code"],
+                c["slug"],
+                c["title"],
+                c["dept"],
+                c["number"],
+                c.get("credits"),
+                c.get("faculty", ""),
+                c.get("terms", []),
+                c.get("description", ""),
+                c.get("prerequisites_raw", ""),
+                c.get("restrictions_raw", ""),
+                c.get("notes_raw", ""),
+                c.get("url", ""),
                 c.get("name_variants", []),
             )
 
@@ -99,9 +109,12 @@ async def seed_from_json(path: Path | None = None) -> int:
                             """INSERT INTO course_faculties (course_id, faculty_id)
                                VALUES ($1, $2)
                                ON CONFLICT DO NOTHING""",
-                            course_row["id"], fac_id,
+                            course_row["id"],
+                            fac_id,
                         )
             count += 1
 
-    print(f"Seeded {count} courses, {len(faculties_seen)} faculties, {len(depts_seen)} departments")
+    print(
+        f"Seeded {count} courses, {len(faculties_seen)} faculties, {len(depts_seen)} departments"
+    )
     return count

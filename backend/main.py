@@ -30,26 +30,39 @@ def cli():
     pipeline.add_argument("--dept", action="append", metavar="CODE")
     pipeline.add_argument("--max-course-pages", type=int, default=None)
     pipeline.add_argument("--max-program-pages", type=int, default=None)
-    pipeline.add_argument("--force", action="store_true", help="Re-process departments even if already pipelined")
+    pipeline.add_argument(
+        "--force",
+        action="store_true",
+        help="Re-process departments even if already pipelined",
+    )
 
     # --- seed ---
     sub.add_parser("seed", help="Load courses.json into databases")
 
     # --- ingest-pdf ---
-    ingest_pdf = sub.add_parser("ingest-pdf", help="Ingest a PDF file into program page store")
+    ingest_pdf = sub.add_parser(
+        "ingest-pdf", help="Ingest a PDF file into program page store"
+    )
     ingest_pdf.add_argument("file", help="Path to PDF file")
-    ingest_pdf.add_argument("--faculty", default="", metavar="SLUG", help="Faculty slug")
+    ingest_pdf.add_argument(
+        "--faculty", default="", metavar="SLUG", help="Faculty slug"
+    )
 
     # --- curriculum ---
     curriculum = sub.add_parser("curriculum", help="Generate curriculum recommendation")
-    curriculum.add_argument("--interests", nargs="+", required=True, help="Student interests")
+    curriculum.add_argument(
+        "--interests", nargs="+", required=True, help="Student interests"
+    )
     curriculum.add_argument("--program", default="", help="Program slug")
-    curriculum.add_argument("--completed", nargs="*", default=[], help="Completed course codes")
+    curriculum.add_argument(
+        "--completed", nargs="*", default=[], help="Completed course codes"
+    )
 
     args = parser.parse_args()
 
     if args.command == "serve":
         import uvicorn
+
         uvicorn.run(
             "backend.api.app:create_app",
             factory=True,
@@ -59,23 +72,30 @@ def cli():
         )
     elif args.command == "scrape":
         from backend.services.scraping.catalogue import run as run_scrape
-        asyncio.run(run_scrape(
-            faculty_filter=args.faculty,
-            max_course_pages=args.max_course_pages,
-            max_program_pages=args.max_program_pages,
-            headless=not args.no_headless,
-        ))
+
+        asyncio.run(
+            run_scrape(
+                faculty_filter=args.faculty,
+                max_course_pages=args.max_course_pages,
+                max_program_pages=args.max_program_pages,
+                headless=not args.no_headless,
+            )
+        )
     elif args.command == "pipeline":
         from backend.workflows.ingest.graph import run_pipeline
-        asyncio.run(run_pipeline(
-            faculty_filter=args.faculty,
-            dept_filter=args.dept,
-            max_course_pages=args.max_course_pages,
-            max_program_pages=args.max_program_pages,
-            force=args.force,
-        ))
+
+        asyncio.run(
+            run_pipeline(
+                faculty_filter=args.faculty,
+                dept_filter=args.dept,
+                max_course_pages=args.max_course_pages,
+                max_program_pages=args.max_program_pages,
+                force=args.force,
+            )
+        )
     elif args.command == "seed":
         from backend.db.migrations import seed_from_json
+
         asyncio.run(seed_from_json())
     elif args.command == "ingest-pdf":
         from pathlib import Path

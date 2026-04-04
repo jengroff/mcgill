@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-import json
-
 
 def build_planner_prompt(
     student_profile: dict,

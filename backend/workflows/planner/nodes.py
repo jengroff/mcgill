@@ -40,12 +40,17 @@ async def gather_context_node(state: PlannerState) -> PlannerState:
         requirements: dict = {}
         if program_slug:
             from backend.services.synthesis.curriculum import CurriculumAssembler
+
             assembler = CurriculumAssembler()
             requirements = await assembler.resolve_program_requirements(program_slug)
-        (work / "program_requirements.json").write_text(json.dumps(requirements, indent=2))
+        (work / "program_requirements.json").write_text(
+            json.dumps(requirements, indent=2)
+        )
 
         # --- Candidate courses ---
-        candidates = await _fetch_candidate_courses(interests, program_slug, requirements)
+        candidates = await _fetch_candidate_courses(
+            interests, program_slug, requirements
+        )
         (work / "candidate_courses.json").write_text(json.dumps(candidates, indent=2))
 
         # --- PDF guide via VLM (optional) ---
@@ -53,7 +58,8 @@ async def gather_context_node(state: PlannerState) -> PlannerState:
         pdf_bytes = state.get("pdf_bytes")
         if pdf_bytes:
             guide_pages = _process_guide_pdf(
-                pdf_bytes, state.get("pdf_filename", "guide.pdf"),
+                pdf_bytes,
+                state.get("pdf_filename", "guide.pdf"),
             )
             (work / "guide_pages.json").write_text(json.dumps(guide_pages, indent=2))
 
@@ -117,6 +123,7 @@ async def plan_agent_node(state: PlannerState) -> PlannerState:
 # Helpers
 # ---------------------------------------------------------------------------
 
+
 async def _fetch_candidate_courses(
     interests: list[str],
     program_slug: str,
@@ -151,17 +158,19 @@ async def _fetch_candidate_courses(
                 code = r["code"]
                 if code not in seen_codes:
                     seen_codes.add(code)
-                    candidates.append({
-                        "code": code,
-                        "title": r["title"],
-                        "credits": float(r["credits"]) if r["credits"] else 3.0,
-                        "dept": r["dept"],
-                        "faculty": r["faculty"],
-                        "terms": r["terms"] or [],
-                        "description": (r["description"] or "")[:300],
-                        "prerequisites_raw": r["prerequisites_raw"] or "",
-                        "restrictions_raw": r["restrictions_raw"] or "",
-                    })
+                    candidates.append(
+                        {
+                            "code": code,
+                            "title": r["title"],
+                            "credits": float(r["credits"]) if r["credits"] else 3.0,
+                            "dept": r["dept"],
+                            "faculty": r["faculty"],
+                            "terms": r["terms"] or [],
+                            "description": (r["description"] or "")[:300],
+                            "prerequisites_raw": r["prerequisites_raw"] or "",
+                            "restrictions_raw": r["restrictions_raw"] or "",
+                        }
+                    )
 
     # 2. Required/elective courses from program
     req_codes = requirements.get("required", []) + requirements.get("electives", [])
@@ -180,17 +189,19 @@ async def _fetch_candidate_courses(
             code = r["code"]
             if code not in seen_codes:
                 seen_codes.add(code)
-                candidates.append({
-                    "code": code,
-                    "title": r["title"],
-                    "credits": float(r["credits"]) if r["credits"] else 3.0,
-                    "dept": r["dept"],
-                    "faculty": r["faculty"],
-                    "terms": r["terms"] or [],
-                    "description": (r["description"] or "")[:300],
-                    "prerequisites_raw": r["prerequisites_raw"] or "",
-                    "restrictions_raw": r["restrictions_raw"] or "",
-                })
+                candidates.append(
+                    {
+                        "code": code,
+                        "title": r["title"],
+                        "credits": float(r["credits"]) if r["credits"] else 3.0,
+                        "dept": r["dept"],
+                        "faculty": r["faculty"],
+                        "terms": r["terms"] or [],
+                        "description": (r["description"] or "")[:300],
+                        "prerequisites_raw": r["prerequisites_raw"] or "",
+                        "restrictions_raw": r["restrictions_raw"] or "",
+                    }
+                )
 
     return candidates
 
@@ -265,8 +276,8 @@ async def _fallback_synthesis(state: PlannerState) -> tuple[str, list[dict]]:
     completed = state.get("completed_codes", [])
     target = state.get("target_semesters", 4)
 
-    context = f"""Student interests: {', '.join(interests)}
-Completed courses: {', '.join(completed) if completed else 'None'}
+    context = f"""Student interests: {", ".join(interests)}
+Completed courses: {", ".join(completed) if completed else "None"}
 Target: {target} semesters
 Program requirements: {json.dumps(requirements, indent=2)}
 

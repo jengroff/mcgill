@@ -14,6 +14,7 @@ async def extract_node(state: IngestionState) -> IngestionState:
 
         if source_type == "pdf":
             from backend.services.pdf.extractor import PDFExtractor
+
             extractor = PDFExtractor()
             result = extractor.extract_structured(state["source_bytes"])
             return {
@@ -22,17 +23,23 @@ async def extract_node(state: IngestionState) -> IngestionState:
             }
         elif source_type in ("url", "html"):
             from backend.services.scraping.browser import browser_context, fetch_page
+
             async with browser_context() as ctx:
                 page = await ctx.new_page()
                 html = await fetch_page(page, state["source_path"])
             if html:
                 from backend.services.scraping.parser import parse_program_page
+
                 title, content = parse_program_page(html)
                 return {
                     "raw_text": content,
                     "structured_sections": [{"heading": title, "text": content}],
                 }
-            return {"raw_text": "", "structured_sections": [], "errors": ["Failed to fetch URL"]}
+            return {
+                "raw_text": "",
+                "structured_sections": [],
+                "errors": ["Failed to fetch URL"],
+            }
         else:
             return {"errors": [f"Unknown source_type: {source_type}"]}
     except Exception as e:
@@ -94,11 +101,17 @@ async def store_node(state: IngestionState) -> IngestionState:
                    RETURNING id""",
                 state.get("faculty_slug", ""),
                 state.get("source_path", f"upload/{state.get('run_id', 'unknown')}"),
-                state.get("structured_sections", [{}])[0].get("heading", "Uploaded PDF"),
+                state.get("structured_sections", [{}])[0].get(
+                    "heading", "Uploaded PDF"
+                ),
                 state.get("raw_text", ""),
             )
 
         count = await insert_program_chunks(page_id, chunks, embeddings)
         return {"chunks_stored": count, "status": "complete"}
     except Exception as e:
-        return {"chunks_stored": 0, "status": "error", "errors": [f"store: {e}\n{traceback.format_exc()}"]}
+        return {
+            "chunks_stored": 0,
+            "status": "error",
+            "errors": [f"store: {e}\n{traceback.format_exc()}"],
+        }

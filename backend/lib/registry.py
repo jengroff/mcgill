@@ -25,7 +25,9 @@ class WorkflowRegistry:
 
     def get(self, name: str) -> WorkflowConfig:
         if name not in self._registry:
-            raise KeyError(f"Workflow '{name}' not registered. Available: {list(self._registry)}")
+            raise KeyError(
+                f"Workflow '{name}' not registered. Available: {list(self._registry)}"
+            )
         return self._registry[name]
 
     def list_workflows(self) -> list[str]:

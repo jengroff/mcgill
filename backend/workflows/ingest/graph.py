@@ -8,7 +8,12 @@ from langgraph.graph.state import CompiledStateGraph
 from backend.lib.orchestrator import WorkflowOrchestrator
 from backend.lib.registry import registry, WorkflowConfig
 from backend.workflows.ingest.state import IngestState
-from backend.workflows.ingest.nodes import precheck_node, scrape_node, resolve_node, embed_node
+from backend.workflows.ingest.nodes import (
+    precheck_node,
+    scrape_node,
+    resolve_node,
+    embed_node,
+)
 
 
 def _after_precheck(state: IngestState) -> str:
@@ -74,11 +79,13 @@ class IngestOrchestrator(WorkflowOrchestrator):
         )
 
 
-registry.register(WorkflowConfig(
-    name="ingest",
-    orchestrator_class=IngestOrchestrator,
-    description="Scrape -> resolve -> chunk -> embed",
-))
+registry.register(
+    WorkflowConfig(
+        name="ingest",
+        orchestrator_class=IngestOrchestrator,
+        description="Scrape -> resolve -> chunk -> embed",
+    )
+)
 
 
 async def run_pipeline(
@@ -109,12 +116,14 @@ async def run_pipeline(
 
     skipped = result.get("skipped_depts", [])
     if skipped:
-        print(f"\nSkipped {len(skipped)} already-processed departments: {', '.join(sorted(skipped))}")
+        print(
+            f"\nSkipped {len(skipped)} already-processed departments: {', '.join(sorted(skipped))}"
+        )
     if not result.get("active_depts"):
         print("All departments already processed. Use --force to re-run.")
         return result
 
-    print(f"\nPipeline complete:")
+    print("\nPipeline complete:")
     print(f"  Courses scraped:  {result.get('courses_scraped', 0)}")
     print(f"  Entities created: {result.get('entities_created', 0)}")
     print(f"  Relationships:    {result.get('relationships_created', 0)}")

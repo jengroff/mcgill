@@ -37,10 +37,12 @@ class PDFExtractor:
                     title = stripped
                 else:
                     if current_lines:
-                        sections.append({
-                            "heading": current_heading,
-                            "text": "\n".join(current_lines),
-                        })
+                        sections.append(
+                            {
+                                "heading": current_heading,
+                                "text": "\n".join(current_lines),
+                            }
+                        )
                         current_lines = []
                     current_heading = stripped
             else:
@@ -48,25 +50,38 @@ class PDFExtractor:
 
         # Flush last section
         if current_lines:
-            sections.append({
-                "heading": current_heading,
-                "text": "\n".join(current_lines),
-            })
+            sections.append(
+                {
+                    "heading": current_heading,
+                    "text": "\n".join(current_lines),
+                }
+            )
 
         return {"title": title, "sections": sections}
 
     def _is_heading(self, line: str) -> bool:
         """Detect heading lines using heuristics."""
         # ALL CAPS, at least 3 chars, no period at end
-        if len(line) >= 3 and line == line.upper() and not line.endswith(".") and re.match(r"^[A-Z\s\-:&/]+$", line):
+        if (
+            len(line) >= 3
+            and line == line.upper()
+            and not line.endswith(".")
+            and re.match(r"^[A-Z\s\-:&/]+$", line)
+        ):
             return True
         # Short line (< 80 chars) that looks like a title
-        if len(line) < 80 and line[0].isupper() and not line.endswith(".") and line.count(" ") < 10:
+        if (
+            len(line) < 80
+            and line[0].isupper()
+            and not line.endswith(".")
+            and line.count(" ") < 10
+        ):
             return False  # Too ambiguous — only trust ALL CAPS
         return False
 
     def _extract_with_pymupdf(self, pdf_bytes: bytes) -> str:
         import pymupdf
+
         doc = pymupdf.open(stream=pdf_bytes, filetype="pdf")
         text_parts = []
         for page in doc:
@@ -77,6 +92,7 @@ class PDFExtractor:
     def _extract_with_pdfplumber(self, pdf_bytes: bytes) -> str:
         import io
         import pdfplumber
+
         text_parts = []
         with pdfplumber.open(io.BytesIO(pdf_bytes)) as pdf:
             for page in pdf.pages:

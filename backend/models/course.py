@@ -23,6 +23,7 @@ class CourseBase(BaseModel):
 
 class CourseCreate(CourseBase):
     """Used for scraper output → DB insert."""
+
     pass
 
 

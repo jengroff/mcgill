@@ -4,7 +4,10 @@ from __future__ import annotations
 
 from backend.db.postgres import get_pool
 from backend.services.embedding.voyage import embed_query
-from backend.services.embedding.vector_store import search_similar, search_similar_programs
+from backend.services.embedding.vector_store import (
+    search_similar,
+    search_similar_programs,
+)
 
 
 async def keyword_search(query: str, top_k: int = 10) -> list[dict]:
@@ -17,7 +20,8 @@ async def keyword_search(query: str, top_k: int = 10) -> list[dict]:
                WHERE tsv @@ websearch_to_tsquery('english', $1)
                ORDER BY rank DESC
                LIMIT $2""",
-            query, top_k,
+            query,
+            top_k,
         )
         return [dict(r) for r in rows]
 
@@ -55,9 +59,7 @@ def reciprocal_rank_fusion(
 
     sorted_ids = sorted(scores, key=lambda x: scores[x], reverse=True)[:top_n]
     return [
-        {**items[id_], "rrf_score": scores[id_]}
-        for id_ in sorted_ids
-        if id_ in items
+        {**items[id_], "rrf_score": scores[id_]} for id_ in sorted_ids if id_ in items
     ]
 
 

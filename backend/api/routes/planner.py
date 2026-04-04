@@ -27,7 +27,9 @@ class PlannerResponse(BaseModel):
 async def plan_curriculum(
     student_interests: str = Form(..., description="Comma-separated interests"),
     program_slug: str = Form("", description="Program slug (e.g. 'computer-science')"),
-    completed_codes: str = Form("", description="Comma-separated completed course codes"),
+    completed_codes: str = Form(
+        "", description="Comma-separated completed course codes"
+    ),
     target_semesters: int = Form(4, description="Number of semesters to plan"),
     guide_pdf: UploadFile | None = File(None, description="Optional PDF course guide"),
 ):
@@ -35,7 +37,11 @@ async def plan_curriculum(
     from backend.workflows.planner.graph import PlannerOrchestrator
 
     interests = [s.strip() for s in student_interests.split(",") if s.strip()]
-    completed = [s.strip() for s in completed_codes.split(",") if s.strip()] if completed_codes else []
+    completed = (
+        [s.strip() for s in completed_codes.split(",") if s.strip()]
+        if completed_codes
+        else []
+    )
 
     pdf_bytes = None
     pdf_filename = ""
@@ -73,7 +79,11 @@ async def plan_curriculum_stream(
     from backend.workflows.planner.graph import PlannerOrchestrator
 
     interests = [s.strip() for s in student_interests.split(",") if s.strip()]
-    completed = [s.strip() for s in completed_codes.split(",") if s.strip()] if completed_codes else []
+    completed = (
+        [s.strip() for s in completed_codes.split(",") if s.strip()]
+        if completed_codes
+        else []
+    )
 
     pdf_bytes = None
     pdf_filename = ""
@@ -84,7 +94,14 @@ async def plan_curriculum_stream(
     orchestrator = PlannerOrchestrator()
 
     async def event_generator() -> AsyncIterator[str]:
-        yield _sse({"type": "step_update", "phase": "planner", "label": "Starting planner", "status": "running"})
+        yield _sse(
+            {
+                "type": "step_update",
+                "phase": "planner",
+                "label": "Starting planner",
+                "status": "running",
+            }
+        )
 
         def on_event(event: dict):
             pass  # events are yielded via stream
@@ -104,11 +121,13 @@ async def plan_curriculum_stream(
             if not msg.startswith("[tool:"):
                 yield _sse({"type": "agent_message", "content": msg})
 
-        yield _sse({
-            "type": "plan_complete",
-            "plan_markdown": result.get("plan_markdown", ""),
-            "plan_semesters": result.get("plan_semesters", []),
-            "errors": result.get("errors", []),
-        })
+        yield _sse(
+            {
+                "type": "plan_complete",
+                "plan_markdown": result.get("plan_markdown", ""),
+                "plan_semesters": result.get("plan_semesters", []),
+                "errors": result.get("errors", []),
+            }
+        )
 
     return sse_response(event_generator())

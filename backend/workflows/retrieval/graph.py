@@ -57,7 +57,9 @@ class RetrievalOrchestrator(WorkflowOrchestrator):
 
         return graph.compile()
 
-    def build_initial_state(self, query="", top_k=10, mode="hybrid", **kwargs) -> RetrievalState:
+    def build_initial_state(
+        self, query="", top_k=10, mode="hybrid", **kwargs
+    ) -> RetrievalState:
         return RetrievalState(
             run_id=str(uuid.uuid4()),
             errors=[],
@@ -74,8 +76,10 @@ class RetrievalOrchestrator(WorkflowOrchestrator):
         )
 
 
-registry.register(WorkflowConfig(
-    name="retrieval",
-    orchestrator_class=RetrievalOrchestrator,
-    description="Hybrid dense + sparse retrieval with RRF fusion",
-))
+registry.register(
+    WorkflowConfig(
+        name="retrieval",
+        orchestrator_class=RetrievalOrchestrator,
+        description="Hybrid dense + sparse retrieval with RRF fusion",
+    )
+)

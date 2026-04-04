@@ -67,8 +67,10 @@ class CurriculumOrchestrator(WorkflowOrchestrator):
         )
 
 
-registry.register(WorkflowConfig(
-    name="curriculum",
-    orchestrator_class=CurriculumOrchestrator,
-    description="Curriculum assembly and course recommendation",
-))
+registry.register(
+    WorkflowConfig(
+        name="curriculum",
+        orchestrator_class=CurriculumOrchestrator,
+        description="Curriculum assembly and course recommendation",
+    )
+)

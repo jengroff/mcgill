@@ -53,8 +53,10 @@ class SynthesisOrchestrator(WorkflowOrchestrator):
         )
 
 
-registry.register(WorkflowConfig(
-    name="synthesis",
-    orchestrator_class=SynthesisOrchestrator,
-    description="Curriculum assembly and advisor synthesis",
-))
+registry.register(
+    WorkflowConfig(
+        name="synthesis",
+        orchestrator_class=SynthesisOrchestrator,
+        description="Curriculum assembly and advisor synthesis",
+    )
+)

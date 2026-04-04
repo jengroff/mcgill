@@ -15,12 +15,15 @@ async def search(
 ):
     if mode == "keyword":
         from backend.services.embedding.retrieval import keyword_search
+
         results = await keyword_search(q, top_k=top_k)
     elif mode == "semantic":
         from backend.services.embedding.retrieval import semantic_search
+
         results = await semantic_search(q, top_k=top_k)
     else:
         from backend.services.embedding.retrieval import hybrid_search
+
         results = await hybrid_search(q, top_k=top_k)
 
     return {"query": q, "mode": mode, "results": results}
