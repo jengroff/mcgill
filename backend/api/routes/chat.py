@@ -3,6 +3,7 @@ from __future__ import annotations
 import asyncio
 import json
 import logging
+import re
 import uuid
 from typing import AsyncIterator
 
@@ -317,7 +318,6 @@ def _detect_pipeline_intent(message: str) -> dict | None:
     Uses keyword gate + noise-word stripping to extract faculty/department target.
     Returns `{"faculty_filter": [...], "dept_filter": [...]}` or None.
     """
-    import re
     from backend.services.scraping.faculties import ALL_FACULTIES
 
     lower = message.lower()
@@ -540,8 +540,6 @@ def _detect_planner_intent(message: str) -> dict | None:
 
     Returns `{"interests": [...], "semesters": int}` or None.
     """
-    import re
-
     lower = message.lower()
 
     plan_triggers = ("plan my", "build a curriculum", "plan a curriculum", "semester plan",

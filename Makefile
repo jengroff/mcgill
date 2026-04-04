@@ -39,10 +39,13 @@ up: ## Start all services via Docker
 down: ## Stop all Docker services
 	docker compose down
 
-rebuild: ## Rebuild containers from scratch preserves volumes (Postgres, Neo4j)
+rebuild: ## Rebuild containers from scratch, preserves volumes (Postgres, Neo4j)
 	docker compose down
 	docker compose build --no-cache
 	docker compose up -d --wait
+
+app: # Rebuild app container only
+	docker compose up -d --build app
 
 rebuild-keep: ## Rebuild containers but keep database volumes
 	docker compose down
@@ -73,8 +76,8 @@ seed: ## Load courses.json into databases
 scrape: ## Run scraper (usage: make scrape FACULTY="Science")
 	uv run mcgill scrape $(if $(FACULTY),--faculty "$(FACULTY)",)
 
-pipeline: ## Run full ingest pipeline (usage: make pipeline FACULTY="Science" DEPT="COMP")
-	uv run mcgill pipeline $(if $(FACULTY),--faculty "$(FACULTY)",) $(if $(DEPT),--dept "$(DEPT)",)
+pipeline: ## Run full ingest pipeline (usage: make pipeline FACULTY="Science" DEPT="COMP" FORCE=1)
+	uv run mcgill pipeline $(if $(FACULTY),--faculty "$(FACULTY)",) $(if $(DEPT),--dept "$(DEPT)",) $(if $(FORCE),--force,)
 
 test: ## Run test suite
 	uv run pytest tests/ -v --tb=short

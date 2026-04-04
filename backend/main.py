@@ -30,6 +30,7 @@ def cli():
     pipeline.add_argument("--dept", action="append", metavar="CODE")
     pipeline.add_argument("--max-course-pages", type=int, default=None)
     pipeline.add_argument("--max-program-pages", type=int, default=None)
+    pipeline.add_argument("--force", action="store_true", help="Re-process departments even if already pipelined")
 
     # --- seed ---
     sub.add_parser("seed", help="Load courses.json into databases")
@@ -71,6 +72,7 @@ def cli():
             dept_filter=args.dept,
             max_course_pages=args.max_course_pages,
             max_program_pages=args.max_program_pages,
+            force=args.force,
         ))
     elif args.command == "seed":
         from backend.db.migrations import seed_from_json

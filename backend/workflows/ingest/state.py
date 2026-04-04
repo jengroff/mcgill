@@ -1,5 +1,3 @@
-"""Ingest workflow state — extends BaseWorkflowState."""
-
 from __future__ import annotations
 
 from backend.lib.state import BaseWorkflowState
@@ -11,6 +9,11 @@ class IngestState(BaseWorkflowState, total=False):
     dept_filter: list[str] | None
     max_course_pages: int | None
     max_program_pages: int | None
+    force: bool
+
+    # Pre-check output
+    skipped_depts: list[str]
+    active_depts: list[str]
 
     # Phase 1 output
     courses_scraped: int

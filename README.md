@@ -20,10 +20,24 @@ make frontend                 # UI on :5174
 - **User accounts** — register/login with email + password, JWT-based auth, persistent conversation history across sessions
 - **Agentic chat** — ask natural language questions about courses, answered via hybrid retrieval (keyword + semantic + graph) and Claude synthesis over SSE
 - **Chat-driven pipeline** — type "scrape Science" or "run pipeline for COMP" in chat to trigger a full ingest pipeline with streamed progress
-- **Full ingest pipeline** — scrape, resolve, embed in one shot with real-time SSE progress streaming
+- **Full ingest pipeline** — scrape, resolve, embed in one shot with real-time SSE progress streaming. Skips departments that have already been processed; use `--force` to re-run
 - **PDF ingestion** — upload PDFs to extract, chunk, embed, and store in pgvector
 - **Curriculum recommendations** — provide interests and completed courses, get AI-assembled course plans
 - **Multi-semester planner** — Claude Agent SDK builds a realistic 2–4 semester curriculum plan, with VLM processing for uploaded PDF course guides
+
+### Chat Examples
+
+The chat understands course questions, pipeline commands, and curriculum planning requests. Some examples using the Faculty of Dental Sciences (FDSC):
+
+```
+"What are the prerequisites for FDSC 507?"
+"Which FDSC courses are offered in the winter term?"
+"Compare FDSC 510 and FDSC 603"
+"What 500-level FDSC courses don't require any prerequisites?"
+"Are there any FDSC courses related to biomaterials?"
+"Scrape FDSC"                          → triggers ingest pipeline for the department
+"Plan my courses for 2 semesters, I'm interested in oral health research"
+```
 
 ## Ports
 
@@ -48,7 +62,7 @@ make seed             Load courses.json into databases
 make serve            Start API locally (databases must be running)
 make frontend         Start frontend dev server
 make scrape           Run scraper (optional: make scrape FACULTY="Science")
-make pipeline         Run full ingest pipeline (make pipeline FACULTY="Science" DEPT="COMP")
+make pipeline         Run full ingest pipeline (make pipeline FACULTY="Science" DEPT="COMP" FORCE=1)
 make up               Start all services via Docker
 make down             Stop all Docker services
 make rebuild          Rebuild containers from scratch (wipes volumes)
@@ -146,7 +160,8 @@ backend/
 mcgill serve                          # Start FastAPI server
 mcgill scrape --faculty Science       # Scrape one faculty
 mcgill pipeline --dept COMP           # Full pipeline for a department
-mcgill pipeline --faculty engineering # Full pipeline for a faculty
+mcgill pipeline --faculty engineering # Full pipeline (skips already-processed depts)
+mcgill pipeline --faculty Science --force  # Re-process all depts even if already done
 mcgill seed                           # Load courses.json into databases
 mcgill ingest-pdf syllabus.pdf --faculty science  # Ingest a PDF
 mcgill curriculum --interests "machine learning" "statistics" --program computer-science

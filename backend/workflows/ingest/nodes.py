@@ -1,24 +1,98 @@
-"""LangGraph node functions for the ingest pipeline."""
-
 from __future__ import annotations
 
 import json
+import logging
 import traceback
 from pathlib import Path
 
 from backend.workflows.ingest.state import IngestState
 
+logger = logging.getLogger(__name__)
+
 DATA_DIR = Path(__file__).resolve().parents[3] / "data"
 
 
+async def precheck_node(state: IngestState) -> IngestState:
+    """Determine which departments need processing by checking for existing embeddings.
+
+    A department is considered "pipeline-complete" if it has at least one course
+    with a row in `course_chunks`. Departments that are already complete get
+    skipped unless `force=True`.
+    """
+    try:
+        from backend.db.postgres import get_pool
+        from backend.services.scraping.faculties import ALL_FACULTIES, get_active_faculties
+
+        force = state.get("force", False)
+        faculty_filter = state.get("faculty_filter")
+        dept_filter = state.get("dept_filter")
+
+        # Resolve the target department codes
+        if dept_filter:
+            target_depts = [d.upper() for d in dept_filter]
+        elif faculty_filter:
+            active = get_active_faculties(faculty_filter)
+            target_depts = [p for _, _, prefixes in active for p in prefixes]
+        else:
+            target_depts = [p for _, _, prefixes in ALL_FACULTIES for p in prefixes]
+
+        if force:
+            logger.info("Force flag set — processing all %d departments", len(target_depts))
+            return {
+                "skipped_depts": [],
+                "active_depts": target_depts,
+            }
+
+        pool = await get_pool()
+        async with pool.acquire() as conn:
+            rows = await conn.fetch(
+                """SELECT DISTINCT c.dept FROM courses c
+                   JOIN course_chunks cc ON cc.course_id = c.id
+                   WHERE c.dept = ANY($1)""",
+                target_depts,
+            )
+        completed = {r["dept"] for r in rows}
+
+        active = [d for d in target_depts if d not in completed]
+        skipped = [d for d in target_depts if d in completed]
+
+        if skipped:
+            logger.info(
+                "Skipping %d already-processed departments: %s",
+                len(skipped), ", ".join(sorted(skipped)),
+            )
+        if active:
+            logger.info(
+                "Processing %d departments: %s",
+                len(active), ", ".join(sorted(active)),
+            )
+
+        return {
+            "skipped_depts": skipped,
+            "active_depts": active,
+        }
+    except Exception as e:
+        return {
+            "scrape_status": "error",
+            "errors": [f"precheck: {e}\n{traceback.format_exc()}"],
+            "skipped_depts": [],
+            "active_depts": [],
+        }
+
+
 async def scrape_node(state: IngestState) -> IngestState:
-    """Phase 1: Scrape course catalogue."""
+    """Phase 1: Scrape course catalogue.
+
+    Uses `active_depts` from the pre-check node to scrape only departments
+    that haven't been processed yet.
+    """
     try:
         from backend.services.scraping.catalogue import run as run_scrape
 
+        active_depts = state.get("active_depts")
         courses = await run_scrape(
-            faculty_filter=state.get("faculty_filter"),
-            dept_filter=state.get("dept_filter"),
+            faculty_filter=state.get("faculty_filter") if not active_depts else None,
+            dept_filter=active_depts or state.get("dept_filter"),
             max_course_pages=state.get("max_course_pages"),
             max_program_pages=state.get("max_program_pages"),
         )
@@ -69,10 +143,16 @@ async def resolve_node(state: IngestState) -> IngestState:
             build_relationships,
         )
 
-        # Load courses from DB
         pool = await get_pool()
+        active_depts = state.get("active_depts")
+
         async with pool.acquire() as conn:
-            rows = await conn.fetch("SELECT * FROM courses")
+            if active_depts:
+                rows = await conn.fetch(
+                    "SELECT * FROM courses WHERE dept = ANY($1)", active_depts,
+                )
+            else:
+                rows = await conn.fetch("SELECT * FROM courses")
 
         courses = [
             CourseCreate(
@@ -128,14 +208,23 @@ async def embed_node(state: IngestState) -> IngestState:
         from backend.services.embedding.vector_store import insert_chunks, insert_program_chunks, create_ivfflat_index
 
         pool = await get_pool()
+        active_depts = state.get("active_depts")
 
         # --- Course chunks ---
         async with pool.acquire() as conn:
-            rows = await conn.fetch(
-                """SELECT id, code, title, description, prerequisites_raw,
-                          restrictions_raw, notes_raw, dept, faculty
-                   FROM courses"""
-            )
+            if active_depts:
+                rows = await conn.fetch(
+                    """SELECT id, code, title, description, prerequisites_raw,
+                              restrictions_raw, notes_raw, dept, faculty
+                       FROM courses WHERE dept = ANY($1)""",
+                    active_depts,
+                )
+            else:
+                rows = await conn.fetch(
+                    """SELECT id, code, title, description, prerequisites_raw,
+                              restrictions_raw, notes_raw, dept, faculty
+                       FROM courses"""
+                )
 
         total_course_chunks = 0
         batch_texts: list[str] = []

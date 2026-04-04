@@ -1,5 +1,3 @@
-"""Ingest workflow orchestrator — scrape -> resolve -> embed."""
-
 from __future__ import annotations
 
 import uuid
@@ -10,7 +8,15 @@ from langgraph.graph.state import CompiledStateGraph
 from backend.lib.orchestrator import WorkflowOrchestrator
 from backend.lib.registry import registry, WorkflowConfig
 from backend.workflows.ingest.state import IngestState
-from backend.workflows.ingest.nodes import scrape_node, resolve_node, embed_node
+from backend.workflows.ingest.nodes import precheck_node, scrape_node, resolve_node, embed_node
+
+
+def _after_precheck(state: IngestState) -> str:
+    if state.get("scrape_status") == "error":
+        return END
+    if not state.get("active_depts"):
+        return END
+    return "scrape"
 
 
 def _after_scrape(state: IngestState) -> str:
@@ -33,12 +39,14 @@ class IngestOrchestrator(WorkflowOrchestrator):
     def build_graph(self) -> CompiledStateGraph:
         graph = StateGraph(IngestState)
 
+        graph.add_node("precheck", precheck_node)
         graph.add_node("scrape", scrape_node)
         graph.add_node("resolve", resolve_node)
         graph.add_node("embed", embed_node)
 
-        graph.set_entry_point("scrape")
+        graph.set_entry_point("precheck")
 
+        graph.add_conditional_edges("precheck", _after_precheck)
         graph.add_conditional_edges("scrape", _after_scrape)
         graph.add_conditional_edges("resolve", _after_resolve)
         graph.add_conditional_edges("embed", _after_embed)
@@ -51,6 +59,7 @@ class IngestOrchestrator(WorkflowOrchestrator):
         dept_filter=None,
         max_course_pages=None,
         max_program_pages=None,
+        force=False,
         **kwargs,
     ) -> IngestState:
         return IngestState(
@@ -61,6 +70,7 @@ class IngestOrchestrator(WorkflowOrchestrator):
             dept_filter=dept_filter,
             max_course_pages=max_course_pages,
             max_program_pages=max_program_pages,
+            force=force,
         )
 
 
@@ -76,6 +86,7 @@ async def run_pipeline(
     dept_filter: list[str] | None = None,
     max_course_pages: int | None = None,
     max_program_pages: int | None = None,
+    force: bool = False,
 ) -> IngestState:
     """Run the full ingest pipeline end-to-end (CLI entry point)."""
     from backend.db.postgres import init_db, close_db
@@ -90,10 +101,18 @@ async def run_pipeline(
         dept_filter=dept_filter,
         max_course_pages=max_course_pages,
         max_program_pages=max_program_pages,
+        force=force,
     )
 
     await close_db()
     await close_neo4j()
+
+    skipped = result.get("skipped_depts", [])
+    if skipped:
+        print(f"\nSkipped {len(skipped)} already-processed departments: {', '.join(sorted(skipped))}")
+    if not result.get("active_depts"):
+        print("All departments already processed. Use --force to re-run.")
+        return result
 
     print(f"\nPipeline complete:")
     print(f"  Courses scraped:  {result.get('courses_scraped', 0)}")
