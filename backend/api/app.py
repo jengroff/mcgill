@@ -42,6 +42,7 @@ def create_app() -> FastAPI:
     )
 
     origins = ["*"] if settings.is_development else [
+        "https://mcgill.engroff.ai",
         "http://localhost:5173",
         "http://localhost:3000",
     ]

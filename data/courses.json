@@ -1,973 +1,3610 @@
 [
   {
-    "code": "FDSC 200",
-    "slug": "fdsc-200",
-    "title": "Introduction to Food Science",
-    "dept": "FDSC",
+    "code": "MICR 331",
+    "slug": "micr-331",
+    "title": "Microbial Ecology",
+    "dept": "MICR",
+    "number": "331",
+    "credits": null,
+    "faculty": "Medicine & Health Sciences",
+    "faculties": [
+      "Medicine & Health Sciences",
+      "Science"
+    ],
+    "terms": [],
+    "description": "The ecology of microorganisms, primarily bacteria and archaea, and their roles in\nbiogeochemical cycles. Microbial interactions with the environment, plants, animals and other microbes emphasizing the underlying genetics and physiology. Diversity, evolution (microbial phylogenetics) and the application of molecular biology in microbial ecology.",
+    "prerequisites_raw": "Prerequisite(s): LSCI 230 or AEBI 212 or ENVR 202 or permission of the instructor.",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/micr-331/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "MICR 338",
+    "slug": "micr-338",
+    "title": "Bacterial Molecular Genetics",
+    "dept": "MICR",
+    "number": "338",
+    "credits": null,
+    "faculty": "Medicine & Health Sciences",
+    "faculties": [
+      "Medicine & Health Sciences",
+      "Science"
+    ],
+    "terms": [],
+    "description": "Basic bacterial genetics, DNA damage and repair, mutagenesis, gene cloning, mapping and regulation, molecular biology. Laboratory sessions will provide the student with practical experience in the genetic manipulation of microbes and in molecular biology techniques.",
+    "prerequisites_raw": "Prerequisite: LSCI 230",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/micr-338/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "MICR 341",
+    "slug": "micr-341",
+    "title": "Mechanisms of Pathogenicity",
+    "dept": "MICR",
+    "number": "341",
+    "credits": null,
+    "faculty": "Medicine & Health Sciences",
+    "faculties": [
+      "Medicine & Health Sciences",
+      "Science"
+    ],
+    "terms": [],
+    "description": "A study of the means by which bacteria cause disease in animals and humans. Includes response of host to invading bacteria, bacterial attachment and penetration processes, and modes of actions of exotoxins and endotoxins.",
+    "prerequisites_raw": "Prerequisite: LSCI 230",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/micr-341/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "MICR 450",
+    "slug": "micr-450",
+    "title": "Environmental Microbiology",
+    "dept": "MICR",
+    "number": "450",
+    "credits": null,
+    "faculty": "Medicine & Health Sciences",
+    "faculties": [
+      "Medicine & Health Sciences",
+      "Science"
+    ],
+    "terms": [],
+    "description": "Focus on microbes in the environment. Topics include extreme environments, polar microbiology, biotechnology and bioremediation. Emphasis will be on population studies based upon molecular biological methods.",
+    "prerequisites_raw": "Prerequisites: LSCI 230",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/micr-450/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHAR 200",
+    "slug": "phar-200",
+    "title": "Introduction to Pharmacology 1",
+    "dept": "PHAR",
     "number": "200",
     "credits": null,
-    "faculty": "Agricultural & Environmental Sciences",
+    "faculty": "Medicine & Health Sciences",
     "faculties": [
-      "Agricultural & Environmental Sciences"
+      "Medicine & Health Sciences",
+      "Science"
     ],
     "terms": [],
-    "description": "This course enables one to gain an appreciation of the scope of food science as a discipline. Topics include introductions to chemistry, processing, packaging, analysis, microbiology, product development, sensory evaluation and quality control as they relate to food science.",
+    "description": "The objective of this course is to give U1 Pharmacology Major program students an appreciation of research in Pharmacology. The focus will be on contributions of this research to our understanding of how drugs work, strategies towards the discovery of new drugs, and/or on how use of current drugs may be improved based on this understanding.",
     "prerequisites_raw": "",
-    "restrictions_raw": "",
+    "restrictions_raw": "Restriction(s): Only open to students in the BSc. Major in Pharmacology.",
     "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/fdsc-200/index.html",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phar-200/index.html",
     "name_variants": []
   },
   {
-    "code": "FDSC 213",
-    "slug": "fdsc-213",
-    "title": "Analytical Chemistry 1",
-    "dept": "FDSC",
-    "number": "213",
+    "code": "PHAR 201",
+    "slug": "phar-201",
+    "title": "Introduction to Pharmacology 2",
+    "dept": "PHAR",
+    "number": "201",
     "credits": null,
-    "faculty": "Agricultural & Environmental Sciences",
+    "faculty": "Medicine & Health Sciences",
     "faculties": [
-      "Agricultural & Environmental Sciences"
+      "Medicine & Health Sciences",
+      "Science"
     ],
     "terms": [],
-    "description": "Theoretical aspects of wet chemical techniques including gravimetric and volumetric analyses, redoximetry, and separation techniques.",
-    "prerequisites_raw": "",
-    "restrictions_raw": "",
+    "description": "This course will be a continuation ofPHAR 200, taught in the fall semester. The focus will be on contributions of this research to our understanding of how drugs work, strategies towards the discovery of new drugs, and/or on how use of current drugs may be improved based on this understanding.",
+    "prerequisites_raw": "Prerequisite(s): PHAR 200",
+    "restrictions_raw": "Restriction(s): Only open to students in the BSc. Major in Pharmacology.",
     "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/fdsc-213/index.html",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phar-201/index.html",
     "name_variants": []
   },
   {
-    "code": "FDSC 230",
-    "slug": "fdsc-230",
-    "title": "Organic Chemistry",
-    "dept": "FDSC",
-    "number": "230",
+    "code": "PHAR 300",
+    "slug": "phar-300",
+    "title": "Drug Action",
+    "dept": "PHAR",
+    "number": "300",
     "credits": null,
-    "faculty": "Agricultural & Environmental Sciences",
+    "faculty": "Medicine & Health Sciences",
     "faculties": [
-      "Agricultural & Environmental Sciences"
+      "Medicine & Health Sciences",
+      "Science"
     ],
     "terms": [],
-    "description": "Atomic and molecular structure, modern concepts of bonding, overview of functional groups, conformational analysis, stereochemistry, mechanisms and reactions of aliphatic compounds.",
-    "prerequisites_raw": "Prerequisite(s): AECH 110 or CHEM 110 or equivalent of CHEM NYA in CEGEP.",
+    "description": "Principles of pharmacology and toxicology. Frequently encountered drugs will be used as a focus to illustrate sites and mechanisms of action, distribution, metabolism, elimination and adverse side effects.",
+    "prerequisites_raw": "Prerequisites: BIOL 200, PHGY 209, PHGY 210 and one of BIOL 201 or ANAT/BIOC 212 or permission of instructor.",
     "restrictions_raw": "",
     "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/fdsc-230/index.html",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phar-300/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHAR 301",
+    "slug": "phar-301",
+    "title": "Drugs and Disease",
+    "dept": "PHAR",
+    "number": "301",
+    "credits": null,
+    "faculty": "Medicine & Health Sciences",
+    "faculties": [
+      "Medicine & Health Sciences",
+      "Science"
+    ],
+    "terms": [],
+    "description": "This course further explores the basic principles of pharmacology as illustrated by drugs used in the treatment of disease. Emphasis is placed on drugs used for diseases prevalent in North America.",
+    "prerequisites_raw": "Prerequisite: PHAR 300",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phar-301/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHAR 303",
+    "slug": "phar-303",
+    "title": "Principles of Toxicology",
+    "dept": "PHAR",
+    "number": "303",
+    "credits": null,
+    "faculty": "Medicine & Health Sciences",
+    "faculties": [
+      "Medicine & Health Sciences",
+      "Science"
+    ],
+    "terms": [],
+    "description": "Fundamental mechanisms by which toxic compounds damage a biological system (organelle, cell, organ, organism, ecosystem). Detection and quantification of toxicity and risk/benefit analysis are considered. Selected agents of current risk to human health or the environment are evaluated in depth.",
+    "prerequisites_raw": "Prerequisites: BIOL 200, BIOL 201 or BIOC 212, PHGY 209 and PHGY 210",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phar-303/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHAR 390",
+    "slug": "phar-390",
+    "title": "Laboratory in Pharmacology",
+    "dept": "PHAR",
+    "number": "390",
+    "credits": null,
+    "faculty": "Medicine & Health Sciences",
+    "faculties": [
+      "Medicine & Health Sciences",
+      "Science"
+    ],
+    "terms": [],
+    "description": "This course is a two-week all day practical laboratory course where students will have the opportunity to design their own experiments, write out the experimental lab reports and learn to trouble shoot on their own.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "Restriction(s): Restricted to Pharmacology Honours students, or permission of instructor.",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phar-390/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHAR 396",
+    "slug": "phar-396",
+    "title": "Undergraduate Research Project",
+    "dept": "PHAR",
+    "number": "396",
+    "credits": null,
+    "faculty": "Medicine & Health Sciences",
+    "faculties": [
+      "Medicine & Health Sciences",
+      "Science"
+    ],
+    "terms": [],
+    "description": "Independent research project with a final written report and an oral presentation.",
+    "prerequisites_raw": "Prerequisite(s): Completion of at least one undergraduate term with CGPA of 3.0.",
+    "restrictions_raw": "Restriction(s): Open to students in programs offered by the Faculty of Science.",
+    "notes_raw": "Note: Enrollment may be limited. Students are advised to start the application process well before the start of the term and to plan for an alternative course in the case that no suitable project is available. Individual projects may be suggested each term which may have project-specific prerequisites. Students may also approach professors to devise their own projects. Some projects may be accessible to students in other disciplines. See https://www.mcgill.ca/science/research/undergraduate-research/science-research-courses for more information about available projects and application forms and procedures.",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phar-396/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHAR 397",
+    "slug": "phar-397",
+    "title": "Pharmacology Research Project 2",
+    "dept": "PHAR",
+    "number": "397",
+    "credits": null,
+    "faculty": "Medicine & Health Sciences",
+    "faculties": [
+      "Medicine & Health Sciences",
+      "Science"
+    ],
+    "terms": [],
+    "description": "Research project to be carried out under supervision of a faculty member in the Department of Pharmacology and Therapeutics. Projects should address a testable hypothesis to be tested using the experimental tools available in the supervisor\u2019s lab and probably other facilities at McGill. Hands-on experience with contemporary research in pharmacology and related disciplines.",
+    "prerequisites_raw": "Prerequisite: Successful completion of PHAR 396, a CGPA of at least 3.0, and permission of the instructor.",
+    "restrictions_raw": "Restrictions: Open to students in programs offered by the Faculty of Science with permission of the Course Coordinator. This course cannot be taken under the S/U option.",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phar-397/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHAR 503",
+    "slug": "phar-503",
+    "title": "Drug Discovery and Development 1",
+    "dept": "PHAR",
+    "number": "503",
+    "credits": null,
+    "faculty": "Medicine & Health Sciences",
+    "faculties": [
+      "Medicine & Health Sciences",
+      "Science"
+    ],
+    "terms": [],
+    "description": "Chemistry, mechanisms of action, and steps in drug discovery and development.",
+    "prerequisites_raw": "Prerequisites: PHAR 301 or PHAR 303; or permission of instructor",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phar-503/index.html",
     "name_variants": [
-      "completed, then FDSC 230 Organic Chemistry"
+      "take either PHAR 503 Drug Discovery and Development 1"
     ]
   },
   {
-    "code": "FDSC 231",
-    "slug": "fdsc-231",
-    "title": "Organic Chemistry Lecture",
-    "dept": "FDSC",
-    "number": "231",
+    "code": "PHAR 504",
+    "slug": "phar-504",
+    "title": "Drug Discovery and Development 2",
+    "dept": "PHAR",
+    "number": "504",
     "credits": null,
-    "faculty": "Agricultural & Environmental Sciences",
+    "faculty": "Medicine & Health Sciences",
     "faculties": [
-      "Agricultural & Environmental Sciences"
+      "Medicine & Health Sciences",
+      "Science"
     ],
     "terms": [],
-    "description": "Atomic and molecular structure, modern concepts of bonding, overview of functional groups, conformational analysis, stereochemistry, mechanisms and reactions of\naliphatic and aromatic compounds.",
-    "prerequisites_raw": "Prerequisite: AECH 110 or CHEM 110 or equivalent of CHE NYA in CEGEP",
-    "restrictions_raw": "Restriction: Not open to students who have taken or are taking FDSC 230 or equivalent",
+    "description": "Nobel Prize-winning discoveries as a basis for drug development.",
+    "prerequisites_raw": "Prerequisites: PHAR 301 or PHAR 303; or permission of instructor",
+    "restrictions_raw": "Restriction: U3 and graduate students. Students can register only with permission of coordinators.",
     "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/fdsc-231/index.html",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phar-504/index.html",
     "name_variants": []
   },
   {
-    "code": "FDSC 232",
-    "slug": "fdsc-232",
-    "title": "Organic Chemistry Laboratory",
-    "dept": "FDSC",
-    "number": "232",
+    "code": "PHAR 505",
+    "slug": "phar-505",
+    "title": "Structural Pharmacology",
+    "dept": "PHAR",
+    "number": "505",
     "credits": null,
-    "faculty": "Agricultural & Environmental Sciences",
+    "faculty": "Medicine & Health Sciences",
     "faculties": [
-      "Agricultural & Environmental Sciences"
+      "Medicine & Health Sciences",
+      "Science"
     ],
     "terms": [],
-    "description": "Techniques and experiments in organic chemistry.",
-    "prerequisites_raw": "Prerequisite: AECH 110 or CHEM 110 or equivalent of CHE NYA in CEGEP FDSC 231 or equivalent",
-    "restrictions_raw": "Restriction: Not open to students who have taken or are taking FDSC 230 or equivalent",
+    "description": "The course will cover approaches widely used in the pharmaceuticals industry, such as drug target selection, structure determination and medicinal chemistry. The basics of structural biology will be taught in a very visual and interactive manner, with an emphasis on drug:target interactions and chemical principles relevant to drug design. By the end of the course, the students will become familiar with the structure-based drug discovery process and principles of molecular pharmacology.",
+    "prerequisites_raw": "Prerequisite(s): PHAR 301, BIOC 311 or with permission of instructor",
+    "restrictions_raw": "Restriction(s): Not open to students who have taken or are taking PHAR 503.",
     "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/fdsc-232/index.html",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phar-505/index.html",
     "name_variants": []
   },
   {
-    "code": "FDSC 233",
-    "slug": "fdsc-233",
-    "title": "Physical Chemistry",
-    "dept": "FDSC",
-    "number": "233",
+    "code": "PHAR 508",
+    "slug": "phar-508",
+    "title": "Drug Discovery and Development 3",
+    "dept": "PHAR",
+    "number": "508",
     "credits": null,
-    "faculty": "Agricultural & Environmental Sciences",
+    "faculty": "Medicine & Health Sciences",
     "faculties": [
-      "Agricultural & Environmental Sciences"
+      "Medicine & Health Sciences",
+      "Science"
     ],
     "terms": [],
-    "description": "Introduction to kinetic theory, thermodynamics, properties of liquids and solids, chemical equilibrium and the law of mass action, phase rule, properties of solutions, chemical kinetics.",
+    "description": "The design of biologically-relevant drug screens for molecular targets in a cell, tissue, and in vivo setting. Explore the use of stem cells and tissue-based disease models for the understanding of disease and for drug discovery. Situate modern pharmacology into broader medical and societal issues such as personalized medicine and the ethics associated with research.",
+    "prerequisites_raw": "Prerequisite(s): PHAR 301 (PHAR 503 or PHAR 505 are also highly recommended)",
+    "restrictions_raw": "Restriction(s): Open to U3 students in the minor, major or honours program in Pharmacology.",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phar-508/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHAR 510",
+    "slug": "phar-510",
+    "title": "New Advances in Antimicrobial",
+    "dept": "PHAR",
+    "number": "510",
+    "credits": null,
+    "faculty": "Medicine & Health Sciences",
+    "faculties": [
+      "Medicine & Health Sciences",
+      "Science"
+    ],
+    "terms": [],
+    "description": "Overview on bacteria, insights into bacterial pathogenesis, an understanding of antibiotics, and new developments in antibacterial to beat antibiotic resistance.",
     "prerequisites_raw": "",
+    "restrictions_raw": "Restrictions: Open to U3 students and above. Class capacity is first come first serve, after the first 15 students, the next 10 students priority will be given to MIMM and PHAR students. Not open to students who have taken or are taking MIMM 510.",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phar-510/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHAR 524",
+    "slug": "phar-524",
+    "title": "Clinical Mentorship",
+    "dept": "PHAR",
+    "number": "524",
+    "credits": null,
+    "faculty": "Medicine & Health Sciences",
+    "faculties": [
+      "Medicine & Health Sciences",
+      "Science"
+    ],
+    "terms": [],
+    "description": "Interaction with clinicians and clinician scientists in the field of medicine and health sciences, focusing on understanding disease from their perspective.",
+    "prerequisites_raw": "Prerequisites: FMED 525 or permission of the instructor",
     "restrictions_raw": "",
     "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/fdsc-233/index.html",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phar-524/index.html",
     "name_variants": []
   },
   {
-    "code": "FDSC 251",
-    "slug": "fdsc-251",
-    "title": "Food Chemistry 1",
-    "dept": "FDSC",
-    "number": "251",
-    "credits": null,
-    "faculty": "Agricultural & Environmental Sciences",
-    "faculties": [
-      "Agricultural & Environmental Sciences"
-    ],
-    "terms": [],
-    "description": "A study of the chemistry and functionality of the major components comprising food systems, such as water, proteins, carbohydrates and lipids. The relationship of these components to food stability will be studied in terms of degradative reactions and processing.",
-    "prerequisites_raw": "Prerequisite: FDSC 211 or LSCI 211",
-    "restrictions_raw": "",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/fdsc-251/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "FDSC 300",
-    "slug": "fdsc-300",
-    "title": "Principles of Food Analysis 1",
-    "dept": "FDSC",
-    "number": "300",
-    "credits": null,
-    "faculty": "Agricultural & Environmental Sciences",
-    "faculties": [
-      "Agricultural & Environmental Sciences"
-    ],
-    "terms": [],
-    "description": "The fundamentals of food analysis are presented with the emphasis on the major components of foods. Topics include: food components, sampling, method selection, official methods, proximate analysis, moisture, protein, fat, ash, fiber, carbohydrates, vitamins and nutraceutical compounds.",
-    "prerequisites_raw": "Corequisite: FDSC 251 or permission of instructor.",
-    "restrictions_raw": "",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/fdsc-300/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "FDSC 305",
-    "slug": "fdsc-305",
-    "title": "Food Chemistry 2",
-    "dept": "FDSC",
-    "number": "305",
-    "credits": null,
-    "faculty": "Agricultural & Environmental Sciences",
-    "faculties": [
-      "Agricultural & Environmental Sciences"
-    ],
-    "terms": [],
-    "description": "A study of the chemistry and functionality of the minor components comprising food systems, such as enzymes, anthocyanins, carotenoids, additives, vitamins and essential oils. The relationship of these components to food stability in terms of degradative reactions and processing.",
-    "prerequisites_raw": "Prerequisite: FDSC 251",
-    "restrictions_raw": "",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/fdsc-305/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "FDSC 310",
-    "slug": "fdsc-310",
-    "title": "Post Harvest Fruit and Vegetable Technology",
-    "dept": "FDSC",
-    "number": "310",
-    "credits": null,
-    "faculty": "Agricultural & Environmental Sciences",
-    "faculties": [
-      "Agricultural & Environmental Sciences"
-    ],
-    "terms": [],
-    "description": "The post harvest chemistry and physiology of horticultural crops as they affect quality and marketability, handling methods pre and post harvest, principles and practices in cooling, storage, transportation and packaging.",
-    "prerequisites_raw": "",
-    "restrictions_raw": "",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/fdsc-310/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "FDSC 315",
-    "slug": "fdsc-315",
-    "title": "Separation Techniques in Food Analysis 1",
-    "dept": "FDSC",
-    "number": "315",
-    "credits": null,
-    "faculty": "Agricultural & Environmental Sciences",
-    "faculties": [
-      "Agricultural & Environmental Sciences"
-    ],
-    "terms": [],
-    "description": "A detailed treatment on the principal chromotographic and electrophoretic techniques that are associated with the analysis of carbohydrate, lipid, protein constituents of food.",
-    "prerequisites_raw": "Prerequisite: FDSC 300 or permission of instructor.",
-    "restrictions_raw": "",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/fdsc-315/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "FDSC 319",
-    "slug": "fdsc-319",
-    "title": "Food Commodities",
-    "dept": "FDSC",
-    "number": "319",
-    "credits": null,
-    "faculty": "Agricultural & Environmental Sciences",
-    "faculties": [
-      "Agricultural & Environmental Sciences"
-    ],
-    "terms": [],
-    "description": "The relationship between the chemistry of food constituents present in common commodities, such as milk, meat, eggs, cereals, oilseeds etc. and the common processing technologies associated with their transformation into stable food products.",
-    "prerequisites_raw": "Prerequisite: FDSC 251 or permission of instructor",
-    "restrictions_raw": "",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/fdsc-319/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "FDSC 330",
-    "slug": "fdsc-330",
-    "title": "Food Processing",
-    "dept": "FDSC",
-    "number": "330",
-    "credits": null,
-    "faculty": "Agricultural & Environmental Sciences",
-    "faculties": [
-      "Agricultural & Environmental Sciences"
-    ],
-    "terms": [],
-    "description": "The principles and practices of food processing with an emphasis on canning, freezing, and dehydration. A survey of the newer methods of food preservation such as irradiation, reverse osmosis etc.",
-    "prerequisites_raw": "Prerequisite: FDSC 251",
-    "restrictions_raw": "",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/fdsc-330/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "FDSC 334",
-    "slug": "fdsc-334",
-    "title": "Analysis of Food Toxins and Toxicants",
-    "dept": "FDSC",
-    "number": "334",
-    "credits": null,
-    "faculty": "Agricultural & Environmental Sciences",
-    "faculties": [
-      "Agricultural & Environmental Sciences"
-    ],
-    "terms": [],
-    "description": "Toxins and toxicant residues in food including heavy metals, persistant organic pollutants (POPS) and microbial toxins are explored from an analytical perspective; new methods and strategies of analysis are emphasized.",
-    "prerequisites_raw": "Prerequisite: FDSC 213 or permission of instructor.",
-    "restrictions_raw": "",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/fdsc-334/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "FDSC 400",
-    "slug": "fdsc-400",
-    "title": "Food Packaging",
-    "dept": "FDSC",
-    "number": "400",
-    "credits": null,
-    "faculty": "Agricultural & Environmental Sciences",
-    "faculties": [
-      "Agricultural & Environmental Sciences"
-    ],
-    "terms": [],
-    "description": "An integrated approach to the materials used for the packaging of food products, considering the physical, chemical and functional characteristics of such materials and their utility, relative to the chemistry of the food system they are designed to enclose and preserve.",
-    "prerequisites_raw": "Prerequisite: FDSC 305",
-    "restrictions_raw": "",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/fdsc-400/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "FDSC 405",
-    "slug": "fdsc-405",
-    "title": "Food Product Development",
-    "dept": "FDSC",
-    "number": "405",
-    "credits": null,
-    "faculty": "Agricultural & Environmental Sciences",
-    "faculties": [
-      "Agricultural & Environmental Sciences"
-    ],
-    "terms": [],
-    "description": "Fundamental principles of food product development from an innovative concept to the marketplace. Emphasis will be on the application of basic knowledge of food chemistry, food technology and related disciplines in developing new products or improving the existing ones.",
-    "prerequisites_raw": "",
-    "restrictions_raw": "",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/fdsc-405/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "FDSC 442",
-    "slug": "fdsc-442",
-    "title": "Food Microbiology",
-    "dept": "FDSC",
-    "number": "442",
-    "credits": null,
-    "faculty": "Agricultural & Environmental Sciences",
-    "faculties": [
-      "Agricultural & Environmental Sciences"
-    ],
-    "terms": [],
-    "description": "Topics in Food Microbiology including an overview of the natural flora and microbiological spoilage of food products, methods of control and shelf-life extension, methods of detection and control food-borne pathogens and the use of suitable microorganisms in the production of a variety of food products.",
-    "prerequisites_raw": "Prerequisite: MICR 230 or LSCI 230 or permission of instructor.",
-    "restrictions_raw": "Restriction: Not open to students who have completed MICR 442.",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/fdsc-442/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "FDSC 475",
-    "slug": "fdsc-475",
-    "title": "Introduction to Cannabis and Cannabinoids",
-    "dept": "FDSC",
-    "number": "475",
-    "credits": null,
-    "faculty": "Agricultural & Environmental Sciences",
-    "faculties": [
-      "Agricultural & Environmental Sciences"
-    ],
-    "terms": [],
-    "description": "The chemistry, metabolic pathways of formation, biological activity, and health benefits of phytochemicals in cannabis plants. Extraction, classification, and analysis of bioactive components in cannabis plants.",
-    "prerequisites_raw": "Corequisites: PLNT 470, FDSC 476, and FDSC 477",
-    "restrictions_raw": "Restriction: Open only to students enrolled in the Diploma in Commercial Cannabis",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/fdsc-475/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "FDSC 476",
-    "slug": "fdsc-476",
-    "title": "Contaminants in Cannabis",
-    "dept": "FDSC",
-    "number": "476",
-    "credits": null,
-    "faculty": "Agricultural & Environmental Sciences",
-    "faculties": [
-      "Agricultural & Environmental Sciences"
-    ],
-    "terms": [],
-    "description": "Basic concepts of various contaminants in cannabis. Sources, basic biology/chemistry, classification and testing, method validation and quality assurance procedures to avoid microbial/chemical contamination.",
-    "prerequisites_raw": "Corequisites: PLNT 470, FDSC 475, FDSC 477",
-    "restrictions_raw": "Restriction: Open only to students enrolled in the Diploma in Commercial Cannabis",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/fdsc-476/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "FDSC 477",
-    "slug": "fdsc-477",
-    "title": "Introduction to Cannabis Product Design",
-    "dept": "FDSC",
-    "number": "477",
-    "credits": null,
-    "faculty": "Agricultural & Environmental Sciences",
-    "faculties": [
-      "Agricultural & Environmental Sciences"
-    ],
-    "terms": [],
-    "description": "Fundamental principles needed to develop new food products from conceptualization through design, formulation and production, as applied to cannabis products. The technical challenges associated with the formulation of cannabis-based products, as well as the considerations for an optimal formulation.",
-    "prerequisites_raw": "Corequisites: PLNT 470, FDSC 475, FDSC 476",
-    "restrictions_raw": "Restriction: Only open to students enrolled in the Diploma in Commercial Cannabis",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/fdsc-477/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "FDSC 480",
-    "slug": "fdsc-480",
-    "title": "Food Industry Internship",
-    "dept": "FDSC",
-    "number": "480",
-    "credits": null,
-    "faculty": "Agricultural & Environmental Sciences",
-    "faculties": [
-      "Agricultural & Environmental Sciences"
-    ],
-    "terms": [],
-    "description": "Intership with an approved host organization in the food industry.",
-    "prerequisites_raw": "",
-    "restrictions_raw": "",
-    "notes_raw": "Note: Open to students who have a minimum of 60 credits in the Double Major Food Science/Nutritional Sciences or permission of department.",
-    "url": "https://coursecatalogue.mcgill.ca/courses/fdsc-480/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "FDSC 490",
-    "slug": "fdsc-490",
-    "title": "Research Project 1",
-    "dept": "FDSC",
-    "number": "490",
-    "credits": null,
-    "faculty": "Agricultural & Environmental Sciences",
-    "faculties": [
-      "Agricultural & Environmental Sciences"
-    ],
-    "terms": [],
-    "description": "A course designed to give final year undergraduate students research experience.",
-    "prerequisites_raw": "",
-    "restrictions_raw": "",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/fdsc-490/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "FDSC 491",
-    "slug": "fdsc-491",
-    "title": "Research Project 2",
-    "dept": "FDSC",
-    "number": "491",
-    "credits": null,
-    "faculty": "Agricultural & Environmental Sciences",
-    "faculties": [
-      "Agricultural & Environmental Sciences"
-    ],
-    "terms": [],
-    "description": "A laboratory research project.",
-    "prerequisites_raw": "",
-    "restrictions_raw": "Restriction: Registration by Department permission only.",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/fdsc-491/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "FDSC 497",
-    "slug": "fdsc-497",
-    "title": "Professional Seminar: Food",
-    "dept": "FDSC",
-    "number": "497",
-    "credits": null,
-    "faculty": "Agricultural & Environmental Sciences",
-    "faculties": [
-      "Agricultural & Environmental Sciences"
-    ],
-    "terms": [],
-    "description": "A capstone course which requires a student to research a topic relevant to an industrial aspect of Food Science, prepare a report and communicate that information to a peer audience in a succinct and professional manner.",
-    "prerequisites_raw": "",
-    "restrictions_raw": "",
-    "notes_raw": "Note: Open to students who have completed a minimum of 75 credits in the dual degree/concurrent program in Food Science/Nutritional Science or permission of Department.",
-    "url": "https://coursecatalogue.mcgill.ca/courses/fdsc-497/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "FDSC 515",
-    "slug": "fdsc-515",
-    "title": "Enzymology",
-    "dept": "FDSC",
-    "number": "515",
-    "credits": null,
-    "faculty": "Agricultural & Environmental Sciences",
-    "faculties": [
-      "Agricultural & Environmental Sciences"
-    ],
-    "terms": [],
-    "description": "Selected advanced topics on the biophysical and kinetic aspects of enzymatic reactions, particularly the fundamentals and applications of laws of biothermodynamics, biochemical equilibrium, electrochemistry and biochemical kinetics as related to the enzymatic reactions.",
-    "prerequisites_raw": "Prerequisites: FDSC 211 or LSCI 211 and FDSC 233 or permission of instructor",
-    "restrictions_raw": "",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/fdsc-515/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "FDSC 516",
-    "slug": "fdsc-516",
-    "title": "Flavour Chemistry",
-    "dept": "FDSC",
-    "number": "516",
-    "credits": null,
-    "faculty": "Agricultural & Environmental Sciences",
-    "faculties": [
-      "Agricultural & Environmental Sciences"
-    ],
-    "terms": [],
-    "description": "The chemistry of the flavour constituents of foods, thermal and enzymatic generation, mechanistic pathways of formation, analysis synthesis and applications in food.",
-    "prerequisites_raw": "Prerequisite: FDSC 305 or permission of instructor",
-    "restrictions_raw": "Restriction: Not open to students who have taken FDSC 410",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/fdsc-516/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "FDSC 519",
-    "slug": "fdsc-519",
-    "title": "Advanced Food Processing",
-    "dept": "FDSC",
-    "number": "519",
-    "credits": null,
-    "faculty": "Agricultural & Environmental Sciences",
-    "faculties": [
-      "Agricultural & Environmental Sciences"
-    ],
-    "terms": [],
-    "description": "Advanced technologies associated with food processing studied in more detail. Topics include food irradiation, reverse osmosis, super critical fluid extraction and extrusion.",
-    "prerequisites_raw": "Prerequisite: FDSC 330",
-    "restrictions_raw": "",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/fdsc-519/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "FDSC 520",
-    "slug": "fdsc-520",
-    "title": "Biophysical Chemistry of Food",
-    "dept": "FDSC",
-    "number": "520",
-    "credits": null,
-    "faculty": "Agricultural & Environmental Sciences",
-    "faculties": [
-      "Agricultural & Environmental Sciences"
-    ],
-    "terms": [],
-    "description": "This course will cover recent advances in the application of spectroscopic techniques, including infrared, Raman, near-infrared, circular dichroism, and fluorescence spectroscopy, to the study of biomolecules of relevance to food. Particular emphasis will be placed on the molecular basis of structure-function and structure-functionality relationships.",
-    "prerequisites_raw": "Prerequisite: FDSC 233",
-    "restrictions_raw": "",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/fdsc-520/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "FDSC 525",
-    "slug": "fdsc-525",
-    "title": "Food Quality Assurance",
-    "dept": "FDSC",
-    "number": "525",
-    "credits": null,
-    "faculty": "Agricultural & Environmental Sciences",
-    "faculties": [
-      "Agricultural & Environmental Sciences"
-    ],
-    "terms": [],
-    "description": "The principles and practices required for the development, maintenance and monitoring of systems for food quality and food safety. The concepts and practices of Hazard Analysis Critical Control Point;ISO 9000; Total Quality Management; Statistical Sampling Plans, Statistical Process Control; Tools of Quality; Government Regulations.",
-    "prerequisites_raw": "Prerequisite: AEMA 310 or permission of instructor",
-    "restrictions_raw": "Restriction: Not open to students who have taken FDSC 425",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/fdsc-525/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "FDSC 536",
-    "slug": "fdsc-536",
-    "title": "Food Traceability",
-    "dept": "FDSC",
-    "number": "536",
-    "credits": null,
-    "faculty": "Agricultural & Environmental Sciences",
-    "faculties": [
-      "Agricultural & Environmental Sciences"
-    ],
-    "terms": [],
-    "description": "Concepts and processes associated with the identification, tracking and tracing food forward and backward through the food continuum.",
-    "prerequisites_raw": "Prerequisite: FDSC 425 or permission of instructor.",
-    "restrictions_raw": "",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/fdsc-536/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "FDSC 537",
-    "slug": "fdsc-537",
-    "title": "Nutraceutical Chemistry",
-    "dept": "FDSC",
-    "number": "537",
-    "credits": null,
-    "faculty": "Agricultural & Environmental Sciences",
-    "faculties": [
-      "Agricultural & Environmental Sciences"
-    ],
-    "terms": [],
-    "description": "The origin, classification, mechanism of action and chemical properties of potential and established nutraceutical compounds and their applications in functional foods.",
-    "prerequisites_raw": "Prerequisites: FDSC 211 or LSCI 211, FDSC 230 and FDSC 233 or permission of instructor.",
-    "restrictions_raw": "",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/fdsc-537/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "FDSC 538",
-    "slug": "fdsc-538",
-    "title": "Food Science in Perspective",
-    "dept": "FDSC",
-    "number": "538",
-    "credits": null,
-    "faculty": "Agricultural & Environmental Sciences",
-    "faculties": [
-      "Agricultural & Environmental Sciences"
-    ],
-    "terms": [],
-    "description": "Food industry, food properties, nutritive aspects, quality factors, and key preservation processes, with self-study linking these elements directly to specific commodities and product groups, their characteristics, chemistry and distinct manufacturing processes.",
-    "prerequisites_raw": "",
-    "restrictions_raw": "Restriction: Not open to students with an undergraduate degree in Food Science or currently majoring in Food Science. Open to U3 students and above.",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/fdsc-538/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "FDSC 540",
-    "slug": "fdsc-540",
-    "title": "Sensory Evaluation of Foods",
-    "dept": "FDSC",
+    "code": "PHAR 540",
+    "slug": "phar-540",
+    "title": "Advances in Industrial Biotechnology",
+    "dept": "PHAR",
     "number": "540",
     "credits": null,
-    "faculty": "Agricultural & Environmental Sciences",
+    "faculty": "Medicine & Health Sciences",
     "faculties": [
-      "Agricultural & Environmental Sciences"
+      "Medicine & Health Sciences",
+      "Science"
     ],
     "terms": [],
-    "description": "Principles and procedures for sensory evaluation of food products, applications of sensory tests, their strengths and weaknesses, factors affecting their responses, data analysis and interpretation of results. Analysis of sensory data in relation to the instrumental analyses will also be emphasized.",
-    "prerequisites_raw": "Prerequisite: FDSC 305 or NUTR 346, or permission of the instructor",
-    "restrictions_raw": "",
+    "description": "Introduction to emerging technologies and research advances in biotechnologies. Topics include semisynthetic production of drugs and drug candidates through large-scale fermentation, next generation synthesis of DNA and whole genes, green toxicology, single-molecule diagnostics, orphan-drug re-purposing, and next- generation genomic analyses in drug development. Translational research, issues of\nentrepreneurship, sustainability, and ethics are also covered.",
+    "prerequisites_raw": "Prerequisite: CHEM 222 (or equivalent) and BIOL 200 or CHEM 332",
+    "restrictions_raw": "Restriction: U3 Students or higher. Not open to students who have taken or are taking CHEM 540.",
     "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/fdsc-540/index.html",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phar-540/index.html",
     "name_variants": []
   },
   {
-    "code": "FDSC 545",
-    "slug": "fdsc-545",
-    "title": "Advances in Food Microbiology",
-    "dept": "FDSC",
-    "number": "545",
+    "code": "PHAR 562",
+    "slug": "phar-562",
+    "title": "Neuropharmacology",
+    "dept": "PHAR",
+    "number": "562",
     "credits": null,
-    "faculty": "Agricultural & Environmental Sciences",
+    "faculty": "Medicine & Health Sciences",
     "faculties": [
-      "Agricultural & Environmental Sciences"
+      "Medicine & Health Sciences",
+      "Science"
     ],
     "terms": [],
-    "description": "An advanced level food microbiology course providing a perspective on advanced topics in food microbiology (microbial biofilms, antimicrobial resistance, bacterial endospores) and describing the fundamental principles of advanced techniques in food microbiology (microbiological, biochemical, immunological, genetics methods).",
-    "prerequisites_raw": "Prerequisite: MICR 230 or LSCI 230, or permission of instructor",
-    "restrictions_raw": "",
+    "description": "Topics in pharmacology with an emphasis on molecular mechanisms of drug-action and cellular targets in the nervous system.",
+    "prerequisites_raw": "Prerequisite: PHAR 301 or with permission of instructor.",
+    "restrictions_raw": "Restriction: Open to U3 students in the minor, major or honours program in Pharmacology, or with permission of instructor.",
     "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/fdsc-545/index.html",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phar-562/index.html",
     "name_variants": []
   },
   {
-    "code": "FDSC 555",
-    "slug": "fdsc-555",
-    "title": "Comparative Food Law",
-    "dept": "FDSC",
-    "number": "555",
+    "code": "PHAR 563",
+    "slug": "phar-563",
+    "title": "Endocrine Pharmacology",
+    "dept": "PHAR",
+    "number": "563",
     "credits": null,
-    "faculty": "Agricultural & Environmental Sciences",
+    "faculty": "Medicine & Health Sciences",
     "faculties": [
-      "Agricultural & Environmental Sciences"
+      "Medicine & Health Sciences",
+      "Science"
     ],
     "terms": [],
-    "description": "An introduction to food law. The transformations that food law is undergoing as a consequence of social, economic and technological changes, the regulation of food risks and consumers' rights to be informed (labeling, health claims, nutritional information).",
+    "description": "This advanced course covers selected topics in pharmacology of reproductive, endocrine, and metabolic disorders.",
+    "prerequisites_raw": "Prerequisite: PHAR 301 or permission of the instructor(s)",
+    "restrictions_raw": "Restriction: Open to U3 students in the minor, major or honours program in Pharmacology, or with permission of instructor.",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phar-563/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHAR 565",
+    "slug": "phar-565",
+    "title": "Epigenetic Drugs and Targets",
+    "dept": "PHAR",
+    "number": "565",
+    "credits": null,
+    "faculty": "Medicine & Health Sciences",
+    "faculties": [
+      "Medicine & Health Sciences",
+      "Science"
+    ],
+    "terms": [],
+    "description": "This course covers therapeutics targeting epigenetic mechanisms. Although only a handful of epigenetic drugs are in widespread use, further development of such agents is a very active area of research as it has the potential to directly target aberrant gene expression. This course will examine both the current use and potential of epigenetic drugs in treatment of cancer, neurological diseases, immune disorders, and cardiovascular disease. The concept of epigenetics as mediating gene-environment interaction will also be discussed.",
+    "prerequisites_raw": "Prerequisite(s): PHAR 301.",
+    "restrictions_raw": "Restrictions: Not open to students who have taken or are taking HGEN 673.",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phar-565/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHAR 590",
+    "slug": "phar-590",
+    "title": "Advanced Research Methods in Pharmacology",
+    "dept": "PHAR",
+    "number": "590",
+    "credits": null,
+    "faculty": "Medicine & Health Sciences",
+    "faculties": [
+      "Medicine & Health Sciences",
+      "Science"
+    ],
+    "terms": [],
+    "description": "Investigation into the signaling, regulation and modulation of a large family of receptors of fundamental importance in pharmacology.",
+    "prerequisites_raw": "Corequisites: PHAR 599 or PHAR 598, or permission of the instructor.",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phar-590/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHAR 598",
+    "slug": "phar-598",
+    "title": "Honours Pharmacology Research Project",
+    "dept": "PHAR",
+    "number": "598",
+    "credits": null,
+    "faculty": "Medicine & Health Sciences",
+    "faculties": [
+      "Medicine & Health Sciences",
+      "Science"
+    ],
+    "terms": [],
+    "description": "Supervised Honours Research Project in Pharmacology.  Students are expected to obtain hands-on research experience in their supervisor's laboratory.  They are also required to submit a written report in the form of a scientific manuscript and present a ten minute seminar.",
     "prerequisites_raw": "",
     "restrictions_raw": "",
     "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/fdsc-555/index.html",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phar-598/index.html",
     "name_variants": []
   },
   {
-    "code": "FDSC 624",
-    "slug": "fdsc-624",
-    "title": "Current Food Safety Issues",
-    "dept": "FDSC",
-    "number": "624",
+    "code": "PHAR 599",
+    "slug": "phar-599",
+    "title": "Pharmacology Research Project",
+    "dept": "PHAR",
+    "number": "599",
     "credits": null,
-    "faculty": "Agricultural & Environmental Sciences",
+    "faculty": "Medicine & Health Sciences",
     "faculties": [
-      "Agricultural & Environmental Sciences"
+      "Medicine & Health Sciences",
+      "Science"
     ],
     "terms": [],
-    "description": "Examining current and emerging food safety issues and concerns as they occur, including food recalls, in the context of food safety hazards and health risk, food laws and regulations, food industry standards and practices.",
+    "description": "Mechanisms involved in different pathologies and drug actions.",
     "prerequisites_raw": "",
-    "restrictions_raw": "",
+    "restrictions_raw": "Restrictions: U3 students with permission of instructors; students should consult instructors 3 - 4 weeks before registration.",
     "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/fdsc-624/index.html",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phar-599/index.html",
     "name_variants": []
   },
   {
-    "code": "FDSC 626",
-    "slug": "fdsc-626",
-    "title": "Food Safety Risk Assessment",
-    "dept": "FDSC",
-    "number": "626",
+    "code": "PHAR 602",
+    "slug": "phar-602",
+    "title": "Principles of Pharmacology",
+    "dept": "PHAR",
+    "number": "602",
     "credits": null,
-    "faculty": "Agricultural & Environmental Sciences",
+    "faculty": "Medicine & Health Sciences",
     "faculties": [
-      "Agricultural & Environmental Sciences"
+      "Medicine & Health Sciences",
+      "Science"
     ],
     "terms": [],
-    "description": "Food safety risk assessment as a key component of the risk analysis framework. Various aspects of the risk assessment process including planning, conducting and reviewing a risk assessment.",
+    "description": "Overview of core principles in pharmacology, with an emphasis on advanced concepts and state-of-the-art current research.  Molecular mechanisms for interactions of drugs with their receptors, pharmacokinetics, drug design, and toxicology.",
     "prerequisites_raw": "",
-    "restrictions_raw": "",
+    "restrictions_raw": "Restriction: This course is restricted to graduate students in Pharmacology and Therapeutics. Others require permission of the course coordinator.",
     "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/fdsc-626/index.html",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phar-602/index.html",
     "name_variants": []
   },
   {
-    "code": "FDSC 634",
-    "slug": "fdsc-634",
-    "title": "Food Toxins and Toxicants",
-    "dept": "FDSC",
-    "number": "634",
+    "code": "PHAR 609",
+    "slug": "phar-609",
+    "title": "Research Professionalism for Pharmacologists",
+    "dept": "PHAR",
+    "number": "609",
     "credits": null,
-    "faculty": "Agricultural & Environmental Sciences",
+    "faculty": "Medicine & Health Sciences",
     "faculties": [
-      "Agricultural & Environmental Sciences"
+      "Medicine & Health Sciences",
+      "Science"
     ],
     "terms": [],
-    "description": "Toxins and toxicant residues in food are explored from an analytical perspective. New techniques of analysis and strategies are emphasized.",
-    "prerequisites_raw": "Prerequisite: FDSC 213 or permission of instructor.",
-    "restrictions_raw": "",
+    "description": "Discussion of good research practices in Pharmacology, including scientific conduct and misconduct, mentorship, authorship, peer review, research on animal and human subjects, and intellectual property.",
+    "prerequisites_raw": "Prerequisite(s): Any Pharmacology 500 level excluding PHAR 598 and 599.",
+    "restrictions_raw": "Restriction(s): First year graduate students in Pharmacology or with permission of the instructor.",
     "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/fdsc-634/index.html",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phar-609/index.html",
     "name_variants": []
   },
   {
-    "code": "FDSC 651",
-    "slug": "fdsc-651",
-    "title": "Principles of Food Analysis 2",
-    "dept": "FDSC",
-    "number": "651",
+    "code": "PHAR 610",
+    "slug": "phar-610",
+    "title": "Scientific Communication for Pharmacologists",
+    "dept": "PHAR",
+    "number": "610",
     "credits": null,
-    "faculty": "Agricultural & Environmental Sciences",
+    "faculty": "Medicine & Health Sciences",
     "faculties": [
-      "Agricultural & Environmental Sciences"
+      "Medicine & Health Sciences",
+      "Science"
     ],
     "terms": [],
-    "description": "The fundamentals of food analysis are presented with the emphasis on the major food components.  Topics include: sampling, method selection, official methods, proximate analysis, moisture, protein, fat, ash, fiber, carbohydrates, vitamins, nutraceutical compounds and infra-red analyses.",
-    "prerequisites_raw": "Prerequisite: Permission of instructor.",
-    "restrictions_raw": "",
+    "description": "This is a hands-on course with a strong emphasis on developing scientific writing and oral communication skills in Pharmacology.",
+    "prerequisites_raw": "Prerequisite(s): Any Pharmacology 500 level excluding PHAR 598 and 599.",
+    "restrictions_raw": "Restriction(s): First year graduate students in Pharmacology or with permission of the instructor.",
     "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/fdsc-651/index.html",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phar-610/index.html",
     "name_variants": []
   },
   {
-    "code": "FDSC 652",
-    "slug": "fdsc-652",
-    "title": "Separation Techniques in Food Analysis 2",
-    "dept": "FDSC",
-    "number": "652",
+    "code": "PHAR 670",
+    "slug": "phar-670",
+    "title": "Principles of Environmental Health Sciences 1",
+    "dept": "PHAR",
+    "number": "670",
     "credits": null,
-    "faculty": "Agricultural & Environmental Sciences",
+    "faculty": "Medicine & Health Sciences",
     "faculties": [
-      "Agricultural & Environmental Sciences"
+      "Medicine & Health Sciences",
+      "Science"
     ],
     "terms": [],
-    "description": "Advanced detailed treatment of the principal chromatographic and electrophoretic techniques associated with the analysis of carbohydrate, lipid and protein constituents of food.",
-    "prerequisites_raw": "Prerequisite: Permission of instructor.",
-    "restrictions_raw": "",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/fdsc-652/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "FDSC 690",
-    "slug": "fdsc-690",
-    "title": "M.Sc. Literature Review",
-    "dept": "FDSC",
-    "number": "690",
-    "credits": null,
-    "faculty": "Agricultural & Environmental Sciences",
-    "faculties": [
-      "Agricultural & Environmental Sciences"
-    ],
-    "terms": [],
-    "description": "Master of Science literature review.",
+    "description": "Topics in environmental health sciences:  principles of exposure assessment and of toxicology.",
     "prerequisites_raw": "",
-    "restrictions_raw": "",
+    "restrictions_raw": "Restriction(s): Open to graduate students pursuing a career in Environmental Health Sciences or with permission of the course instructor. Not open to students who have taken or are taking EPIB 684 or EXMD 670 or NRSC 670.",
     "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/fdsc-690/index.html",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phar-670/index.html",
     "name_variants": []
   },
   {
-    "code": "FDSC 691",
-    "slug": "fdsc-691",
-    "title": "M.Sc. Research Protocol",
-    "dept": "FDSC",
-    "number": "691",
+    "code": "PHAR 671",
+    "slug": "phar-671",
+    "title": "Principles of Environmental Health Sciences 2",
+    "dept": "PHAR",
+    "number": "671",
     "credits": null,
-    "faculty": "Agricultural & Environmental Sciences",
+    "faculty": "Medicine & Health Sciences",
     "faculties": [
-      "Agricultural & Environmental Sciences"
+      "Medicine & Health Sciences",
+      "Science"
     ],
     "terms": [],
-    "description": "Master of Science research protocol.",
+    "description": "Topics in environmental health sciences: principles of environmental epidemiology.",
     "prerequisites_raw": "",
-    "restrictions_raw": "",
+    "restrictions_raw": "Restriction(s): Open to graduate students in the Environmental Health Sciences or permission of the course instructor. Not open to students who have taken or are taking EPIB 685 or EXMD 671 or NRSC 671.",
     "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/fdsc-691/index.html",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phar-671/index.html",
     "name_variants": []
   },
   {
-    "code": "FDSC 692",
-    "slug": "fdsc-692",
-    "title": "M.Sc. Thesis",
-    "dept": "FDSC",
-    "number": "692",
-    "credits": null,
-    "faculty": "Agricultural & Environmental Sciences",
-    "faculties": [
-      "Agricultural & Environmental Sciences"
-    ],
-    "terms": [],
-    "description": "Master of Science research portion of the M.Sc. thesis based on results obtained from the research phase of the M.Sc. thesis. Satisfactory completion of the M.Sc. Thesis, approval by reviewers and acceptance by Graduate and Postdoctoral Studies is required to pass the course.",
-    "prerequisites_raw": "",
-    "restrictions_raw": "",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/fdsc-692/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "FDSC 695",
-    "slug": "fdsc-695",
-    "title": "M.Sc. Graduate Seminar 1",
-    "dept": "FDSC",
-    "number": "695",
-    "credits": null,
-    "faculty": "Agricultural & Environmental Sciences",
-    "faculties": [
-      "Agricultural & Environmental Sciences"
-    ],
-    "terms": [],
-    "description": "Presentation on a selected topic, research proposal or research results based on progress in degree work (M.Sc.1).",
-    "prerequisites_raw": "",
-    "restrictions_raw": "",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/fdsc-695/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "FDSC 696",
-    "slug": "fdsc-696",
-    "title": "M.Sc. Graduate Seminar 2",
-    "dept": "FDSC",
+    "code": "PHAR 696",
+    "slug": "phar-696",
+    "title": "Thesis Preparation",
+    "dept": "PHAR",
     "number": "696",
     "credits": null,
-    "faculty": "Agricultural & Environmental Sciences",
+    "faculty": "Medicine & Health Sciences",
     "faculties": [
-      "Agricultural & Environmental Sciences"
+      "Medicine & Health Sciences",
+      "Science"
     ],
     "terms": [],
-    "description": "Presentation on a selected topic, research proposal or research results based on progress in degree work (M.Sc.2).",
+    "description": "Preparatory work towards the Master's thesis.",
     "prerequisites_raw": "",
     "restrictions_raw": "",
     "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/fdsc-696/index.html",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phar-696/index.html",
     "name_variants": []
   },
   {
-    "code": "FDSC 697",
-    "slug": "fdsc-697",
-    "title": "M.Sc. Project Part 1",
-    "dept": "FDSC",
+    "code": "PHAR 697",
+    "slug": "phar-697",
+    "title": "Thesis Preparation 1",
+    "dept": "PHAR",
     "number": "697",
     "credits": null,
-    "faculty": "Agricultural & Environmental Sciences",
+    "faculty": "Medicine & Health Sciences",
     "faculties": [
-      "Agricultural & Environmental Sciences"
+      "Medicine & Health Sciences",
+      "Science"
     ],
     "terms": [],
-    "description": "A critical review of the current state of knowledge of some aspect of Food Science or Technology.",
+    "description": "Preparatory work towards the Master's thesis.",
     "prerequisites_raw": "",
-    "restrictions_raw": "Restriction: Must be registered in the M.Sc. in Food Science and Agricultural Chemistry; Non-Thesis Food Science.",
+    "restrictions_raw": "",
     "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/fdsc-697/index.html",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phar-697/index.html",
     "name_variants": []
   },
   {
-    "code": "FDSC 698",
-    "slug": "fdsc-698",
-    "title": "M.Sc. Project Part 2",
-    "dept": "FDSC",
+    "code": "PHAR 698",
+    "slug": "phar-698",
+    "title": "Thesis Preparation 2",
+    "dept": "PHAR",
     "number": "698",
     "credits": null,
-    "faculty": "Agricultural & Environmental Sciences",
+    "faculty": "Medicine & Health Sciences",
     "faculties": [
-      "Agricultural & Environmental Sciences"
+      "Medicine & Health Sciences",
+      "Science"
     ],
     "terms": [],
-    "description": "A critical review of the current state of knowledge of some aspects of Food Science or Technology.",
-    "prerequisites_raw": "Prerequisite: FDSC 697.",
-    "restrictions_raw": "Restriction: Must be registered in the M.Sc. in Food Science and Agricultural Chemistry; Non-Thesis-Food Science.",
+    "description": "Preparatory work towards the Master's thesis.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
     "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/fdsc-698/index.html",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phar-698/index.html",
     "name_variants": []
   },
   {
-    "code": "FDSC 700",
-    "slug": "fdsc-700",
-    "title": "Comprehensive Preliminary Examination",
-    "dept": "FDSC",
+    "code": "PHAR 699",
+    "slug": "phar-699",
+    "title": "Thesis Preparation 3",
+    "dept": "PHAR",
+    "number": "699",
+    "credits": null,
+    "faculty": "Medicine & Health Sciences",
+    "faculties": [
+      "Medicine & Health Sciences",
+      "Science"
+    ],
+    "terms": [],
+    "description": "Preparatory work towards the Master's thesis.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phar-699/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHAR 701",
+    "slug": "phar-701",
+    "title": "Ph.D. Comprehensive Exam",
+    "dept": "PHAR",
+    "number": "701",
+    "credits": null,
+    "faculty": "Medicine & Health Sciences",
+    "faculties": [
+      "Medicine & Health Sciences",
+      "Science"
+    ],
+    "terms": [],
+    "description": "An examination that must be passed by all doctoral candidates in order to continue in the doctoral program. This is an oral presentation followed by an oral examination by the student's advisory committee and members of the department faculty.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phar-701/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHAR 702",
+    "slug": "phar-702",
+    "title": "Topics in Pharmacology 1",
+    "dept": "PHAR",
+    "number": "702",
+    "credits": null,
+    "faculty": "Medicine & Health Sciences",
+    "faculties": [
+      "Medicine & Health Sciences",
+      "Science"
+    ],
+    "terms": [],
+    "description": "Topics in pharmacology.",
+    "prerequisites_raw": "Prerequisite: Permission of the Instructor.",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phar-702/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHAR 703",
+    "slug": "phar-703",
+    "title": "Topics in Pharmacology 2",
+    "dept": "PHAR",
+    "number": "703",
+    "credits": null,
+    "faculty": "Medicine & Health Sciences",
+    "faculties": [
+      "Medicine & Health Sciences",
+      "Science"
+    ],
+    "terms": [],
+    "description": "Topics in pharmacology.",
+    "prerequisites_raw": "Prerequisite: Permission of the Instructor.",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phar-703/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHAR 704",
+    "slug": "phar-704",
+    "title": "Topics in Pharmacology 3",
+    "dept": "PHAR",
+    "number": "704",
+    "credits": null,
+    "faculty": "Medicine & Health Sciences",
+    "faculties": [
+      "Medicine & Health Sciences",
+      "Science"
+    ],
+    "terms": [],
+    "description": "Topics in pharmacology.",
+    "prerequisites_raw": "Prerequisite: Permission of the Instructor.",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phar-704/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHAR 705",
+    "slug": "phar-705",
+    "title": "Topics in Pharmacology 4",
+    "dept": "PHAR",
+    "number": "705",
+    "credits": null,
+    "faculty": "Medicine & Health Sciences",
+    "faculties": [
+      "Medicine & Health Sciences",
+      "Science"
+    ],
+    "terms": [],
+    "description": "Topics in pharmacology.",
+    "prerequisites_raw": "Prerequisite: Permission of the Instructor.",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phar-705/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHAR 706",
+    "slug": "phar-706",
+    "title": "Topics in Pharmacology 5",
+    "dept": "PHAR",
+    "number": "706",
+    "credits": null,
+    "faculty": "Medicine & Health Sciences",
+    "faculties": [
+      "Medicine & Health Sciences",
+      "Science"
+    ],
+    "terms": [],
+    "description": "Topics in pharmacology.",
+    "prerequisites_raw": "Prerequisite: Permission of the Instructor.",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phar-706/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHAR 707",
+    "slug": "phar-707",
+    "title": "Topics in Pharmacology 6",
+    "dept": "PHAR",
+    "number": "707",
+    "credits": null,
+    "faculty": "Medicine & Health Sciences",
+    "faculties": [
+      "Medicine & Health Sciences",
+      "Science"
+    ],
+    "terms": [],
+    "description": "Topics in pharmacology.",
+    "prerequisites_raw": "Prerequisite: Permission of the Instructor.",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phar-707/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHAR 712",
+    "slug": "phar-712",
+    "title": "Statistics for Pharmacologists",
+    "dept": "PHAR",
+    "number": "712",
+    "credits": null,
+    "faculty": "Medicine & Health Sciences",
+    "faculties": [
+      "Medicine & Health Sciences",
+      "Science"
+    ],
+    "terms": [],
+    "description": "Basic theoretical and practical aspects of statistics for pharmacologists.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "Restriction: This course is restricted to graduate students in Pharmacology and Therapeutics. Others require permission of the course coordinator.",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phar-712/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHGY 200",
+    "slug": "phgy-200",
+    "title": "Cutting-Edge Research in Physiology",
+    "dept": "PHGY",
+    "number": "200",
+    "credits": null,
+    "faculty": "Medicine & Health Sciences",
+    "faculties": [
+      "Medicine & Health Sciences",
+      "Science"
+    ],
+    "terms": [],
+    "description": "An overview of physiology through an examination of current research topics and experimental approaches. Emphasis is placed on applications of physiology to modern medicine and careers in physiology.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "Restriction(s): Open to students registered in Core Liberal Physiology, Major Physiology and Honours Physiology programs.",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phgy-200/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHGY 209",
+    "slug": "phgy-209",
+    "title": "Mammalian Physiology 1",
+    "dept": "PHGY",
+    "number": "209",
+    "credits": null,
+    "faculty": "Medicine & Health Sciences",
+    "faculties": [
+      "Medicine & Health Sciences",
+      "Science"
+    ],
+    "terms": [],
+    "description": "Physiology of body fluids, blood, body defense mechanisms, muscle, peripheral, central, and autonomic nervous systems.",
+    "prerequisites_raw": "Prerequisites: BIOL 112, CHEM 110, CHEM 120, PHYS 101 or PHYS 131, and PHYS 102 or PHYS 142. Pre-/co-requisites: BIOL 200, CHEM 212 or equivalent.",
+    "restrictions_raw": "Restriction: For students in the Faculty of Science, and other students by permission of the instructor",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phgy-209/index.html",
+    "name_variants": [
+      "take either PHGY 209 Mammalian Physiology 1"
+    ]
+  },
+  {
+    "code": "PHGY 210",
+    "slug": "phgy-210",
+    "title": "Mammalian Physiology 2",
+    "dept": "PHGY",
+    "number": "210",
+    "credits": null,
+    "faculty": "Medicine & Health Sciences",
+    "faculties": [
+      "Medicine & Health Sciences",
+      "Science"
+    ],
+    "terms": [],
+    "description": "Physiology of cardiovascular, respiratory, digestive, endocrine and renal systems.",
+    "prerequisites_raw": "Prerequisites: BIOL 112, CHEM 110, CHEM 120, PHYS 101 or PHYS 131, and PHYS 102 or PHYS 142. Pre-/co-requisite: BIOL 200, BIOL 201, BIOC 212, CHEM 212 or equivalent.",
+    "restrictions_raw": "Restriction: For students in the Faculty of Science, and other students by permission of the instructor",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phgy-210/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHGY 212",
+    "slug": "phgy-212",
+    "title": "Introductory Physiology Laboratory 1",
+    "dept": "PHGY",
+    "number": "212",
+    "credits": null,
+    "faculty": "Medicine & Health Sciences",
+    "faculties": [
+      "Medicine & Health Sciences",
+      "Science"
+    ],
+    "terms": [],
+    "description": "Exercises illustrating fundamental principles in physiology: Biological Signals Acquisitions, Blood, Immunology, Neurophysiology, Neuromuscular Physiology.",
+    "prerequisites_raw": "Corequisite: PHGY 209.",
+    "restrictions_raw": "Restrictions: Required for Physiology students enrolled in PHGY 209. Open to BA &Sc. students and to others by permission of the instructor. Not open to students who have taken PHGY 212D1/D2.",
+    "notes_raw": "Note: For students in a Physiology program, PHGY 212 should be taken concurrently with PHGY 209.",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phgy-212/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHGY 213",
+    "slug": "phgy-213",
+    "title": "Introductory Physiology Laboratory 2",
+    "dept": "PHGY",
+    "number": "213",
+    "credits": null,
+    "faculty": "Medicine & Health Sciences",
+    "faculties": [
+      "Medicine & Health Sciences",
+      "Science"
+    ],
+    "terms": [],
+    "description": "Exercises illustrating fundamental principles in physiology: Central Nervous System, Cardiovascular, Respiration, Exercise Physiology, Molecular Endocrinology.",
+    "prerequisites_raw": "Corequisite: PHGY 210.",
+    "restrictions_raw": "Restrictions: Required for Physiology students enrolled in PHGY 210. Open to BA &Sc. students and to others by permission of the instructor. Not open to students who have taken PHGY 212D1/D2.",
+    "notes_raw": "Note: For students in a Physiology program, PHGY 213 should be taken concurrently with PHGY 210.",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phgy-213/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHGY 311",
+    "slug": "phgy-311",
+    "title": "Channels, Synapses and Hormones",
+    "dept": "PHGY",
+    "number": "311",
+    "credits": null,
+    "faculty": "Medicine & Health Sciences",
+    "faculties": [
+      "Medicine & Health Sciences",
+      "Science"
+    ],
+    "terms": [],
+    "description": "In-depth presentation of experimental results and hypotheses on cellular communication in the nervous system and the endocrine system.",
+    "prerequisites_raw": "Prerequisite: PHGY 209 or permission of the instructor.",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phgy-311/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHGY 312",
+    "slug": "phgy-312",
+    "title": "Respiratory, Renal, and Cardiovascular Physiology",
+    "dept": "PHGY",
+    "number": "312",
+    "credits": null,
+    "faculty": "Medicine & Health Sciences",
+    "faculties": [
+      "Medicine & Health Sciences",
+      "Science"
+    ],
+    "terms": [],
+    "description": "In-depth presentation of experimental results and hypotheses underlying our current understanding of topics in renal, respiratory and cardiovascular functions explored beyond the introductory level.",
+    "prerequisites_raw": "Prerequisites: PHGY 209 and PHGY 210 or equivalent, PHGY 311 or permission of the instructor",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phgy-312/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHGY 313",
+    "slug": "phgy-313",
+    "title": "Blood, Gastrointestinal, and Immune Systems Physiology",
+    "dept": "PHGY",
+    "number": "313",
+    "credits": null,
+    "faculty": "Medicine & Health Sciences",
+    "faculties": [
+      "Medicine & Health Sciences",
+      "Science"
+    ],
+    "terms": [],
+    "description": "In-depth presentation of experimental results and hypotheses underlying our current understanding of topics in immunology, blood and fluids, and gastrointestinal physiology.",
+    "prerequisites_raw": "Prerequisites: PHGY 209 and PHGY 210 or equivalent, PHGY 311 or permission of the instructor",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phgy-313/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHGY 314",
+    "slug": "phgy-314",
+    "title": "Integrative Neuroscience",
+    "dept": "PHGY",
+    "number": "314",
+    "credits": null,
+    "faculty": "Medicine & Health Sciences",
+    "faculties": [
+      "Medicine & Health Sciences",
+      "Science"
+    ],
+    "terms": [],
+    "description": "In depth presentation of experimental results and hypotheses underlying our current understanding of how single neurons and ensembles of neurons encode sensory information, generate movement, and control cognitive functions such as emotion, learning, and memory, during voluntary behaviours.",
+    "prerequisites_raw": "Prerequisites: PHGY 209",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phgy-314/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHGY 351",
+    "slug": "phgy-351",
+    "title": "Research Techniques: Physiology",
+    "dept": "PHGY",
+    "number": "351",
+    "credits": null,
+    "faculty": "Medicine & Health Sciences",
+    "faculties": [
+      "Medicine & Health Sciences",
+      "Science"
+    ],
+    "terms": [],
+    "description": "Provides an overview of common research methods in Physiology, including critical analysis and practical experience with some of the methods. Topics include research ethics of animal experimentation, data analysis, membrane biophysics, radioimmunoassay, ion sensitive dyes, immunocytochemistry, localization techniques, protein transport, cell sorting and molecular biology.",
+    "prerequisites_raw": "Corequisites: PHGY 312 and PHGY 313",
+    "restrictions_raw": "Restriction: Honours Physiology students",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phgy-351/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHGY 396",
+    "slug": "phgy-396",
+    "title": "Undergraduate Research Project",
+    "dept": "PHGY",
+    "number": "396",
+    "credits": null,
+    "faculty": "Medicine & Health Sciences",
+    "faculties": [
+      "Medicine & Health Sciences",
+      "Science"
+    ],
+    "terms": [],
+    "description": "Independent research project with a final written report.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "Restrictions: This course cannot be taken under the S/U option. Departmental permission required. Students cannot be supervised by the same instructor for two 396 Science courses. Open to students in programs offered by the Faculty of Science only.",
+    "notes_raw": "Note: Enrolment may be limited. Students are advised to start the application process well before the start of the term and to plan for an alternative course in the case that no suitable project is available. Individual projects may be suggested each term which may have project-specific prerequisites. Students may also approach professors to devise their own projects. Some projects may be accessible to students in other disciplines. See https://www.mcgill.ca/science/research/undergraduate-research/science-research-courses for more information about available projects and application forms and procedures.",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phgy-396/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHGY 425",
+    "slug": "phgy-425",
+    "title": "Analyzing Physiological Systems",
+    "dept": "PHGY",
+    "number": "425",
+    "credits": null,
+    "faculty": "Medicine & Health Sciences",
+    "faculties": [
+      "Medicine & Health Sciences",
+      "Science"
+    ],
+    "terms": [],
+    "description": "An introduction to quantitative analysis of physiological data, both to the mode of thinking and to a set of tools that allows accurate predictions of biological systems. Examples will range from oscillating genetic networks to understanding higher brain function. Modelling and data analysis through examples and exercises will be emphasized.",
+    "prerequisites_raw": "Prerequisite: PHGY 311, PHGY 314, BIOL 200 or permission from instructor.",
+    "restrictions_raw": "",
+    "notes_raw": "Note: Enrolment limited to 20 students.",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phgy-425/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHGY 451",
+    "slug": "phgy-451",
+    "title": "Advanced Neurophysiology",
+    "dept": "PHGY",
+    "number": "451",
+    "credits": null,
+    "faculty": "Medicine & Health Sciences",
+    "faculties": [
+      "Medicine & Health Sciences",
+      "Science"
+    ],
+    "terms": [],
+    "description": "Topics of current interest in neurophysiology including the development of neurons and synapses, physiology of ionic channels, presynaptic and postsynaptic events in synaptic transmission and neuronal interactions in CNS function.",
+    "prerequisites_raw": "Prerequisite: PHGY 311 or equivalent",
+    "restrictions_raw": "Restriction: Departmental approval required",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phgy-451/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHGY 488",
+    "slug": "phgy-488",
+    "title": "Stem Cell Biology",
+    "dept": "PHGY",
+    "number": "488",
+    "credits": null,
+    "faculty": "Medicine & Health Sciences",
+    "faculties": [
+      "Medicine & Health Sciences",
+      "Science"
+    ],
+    "terms": [],
+    "description": "The main concepts in stem cell biology: embryonic stem cells, induced pluripotent stem cells, cancer stem cells, stem cells populations of many adult tissues, applications of stem cell biology and ethical issues surrounding stem cell use in research and medicine.  The major experimental methods and laboratory techniques in stem cell biology.",
+    "prerequisites_raw": "Prerequisite(s): PHGY 313 or by permission of instructor.",
+    "restrictions_raw": "Restriction(s): Not open to students who are taking or have taken ANAT 416.",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phgy-488/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHGY 499",
+    "slug": "phgy-499",
+    "title": "Independent Study in Physiology",
+    "dept": "PHGY",
+    "number": "499",
+    "credits": null,
+    "faculty": "Medicine & Health Sciences",
+    "faculties": [
+      "Medicine & Health Sciences",
+      "Science"
+    ],
+    "terms": [],
+    "description": "Supervised research project in physiology.",
+    "prerequisites_raw": "Prerequisites: PHGY 311, PHGY 312, PHGY 313, PHGY 314. Note: A form from the Student Affairs Officer, Room 1022, McIntyre Medical Bldg., must be completed prior to registration.",
+    "restrictions_raw": "Restriction: Open only to final year Physiology students",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phgy-499/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHGY 502",
+    "slug": "phgy-502",
+    "title": "Exercise Physiology",
+    "dept": "PHGY",
+    "number": "502",
+    "credits": null,
+    "faculty": "Medicine & Health Sciences",
+    "faculties": [
+      "Medicine & Health Sciences",
+      "Science"
+    ],
+    "terms": [],
+    "description": "Behaviour of physiological processes in response to physical effort, in areas such as structural basis of muscle contraction, thermoregulation during exercise, mechanics and energetics of muscle contraction, fuel utilization, fatigue, physiological adjustments during exercise and influence of training.",
+    "prerequisites_raw": "Prerequisites: PHGY 311, PHGY 312, and PHGY 313",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phgy-502/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHGY 508",
+    "slug": "phgy-508",
+    "title": "Advanced Renal Physiology",
+    "dept": "PHGY",
+    "number": "508",
+    "credits": null,
+    "faculty": "Medicine & Health Sciences",
+    "faculties": [
+      "Medicine & Health Sciences",
+      "Science"
+    ],
+    "terms": [],
+    "description": "Advanced concepts in selected areas of kidney physiology, including the glomerulus, renal cell biology, kidney development, membrane and epithelial transport, hormones and autacoids, kidney transplantation, bioengineering and regenerative medicine.",
+    "prerequisites_raw": "Prerequisite (Undergraduate): PHGY 312 or the equivalent",
+    "restrictions_raw": "Restriction: Open to advanced undergraduate and graduate students",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phgy-508/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHGY 513",
+    "slug": "phgy-513",
+    "title": "Translational Immunology",
+    "dept": "PHGY",
+    "number": "513",
+    "credits": null,
+    "faculty": "Medicine & Health Sciences",
+    "faculties": [
+      "Medicine & Health Sciences",
+      "Science"
+    ],
+    "terms": [],
+    "description": "Advanced key concepts in immunology as they relate to health and disease, including infectious diseases, non-infectious diseases and autoimmunity, and cancer immunology.",
+    "prerequisites_raw": "Prerequisite: MIMM 314 or PHGY 313 or permission of the instructor",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phgy-513/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHGY 515",
+    "slug": "phgy-515",
+    "title": "Blood-Brain Barrier in Health and Disease",
+    "dept": "PHGY",
+    "number": "515",
+    "credits": null,
+    "faculty": "Medicine & Health Sciences",
+    "faculties": [
+      "Medicine & Health Sciences",
+      "Science"
+    ],
+    "terms": [],
+    "description": "Molecular and cellular mechanisms underlying the organization and regulation of the blood-brain barrier, highlighting neurological diseases associated with the blood-brain barrier breakdown and give an overview of experimental approaches to study blood-brain barrier.",
+    "prerequisites_raw": "Prerequisite: PHGY 313 or PHGY 314 and permission of the instructor",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phgy-515/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHGY 516",
+    "slug": "phgy-516",
+    "title": "Physiology of Blood",
+    "dept": "PHGY",
+    "number": "516",
+    "credits": null,
+    "faculty": "Medicine & Health Sciences",
+    "faculties": [
+      "Medicine & Health Sciences",
+      "Science"
+    ],
+    "terms": [],
+    "description": "Bone marrow hematopoiesis, with emphasis on regulation of stem cell proliferation and differentiation along hematopoietic pathways. Formation and differentiation of red and white blood cells and some of the diseases associated with hematopoiesis will be covered. Emphasis will be given to the molecular mechanisms involved in the normal and pathological conditions.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phgy-516/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHGY 518",
+    "slug": "phgy-518",
+    "title": "Artificial Cells",
+    "dept": "PHGY",
+    "number": "518",
+    "credits": null,
+    "faculty": "Medicine & Health Sciences",
+    "faculties": [
+      "Medicine & Health Sciences",
+      "Science"
+    ],
+    "terms": [],
+    "description": "Physiology, biotechnology, chemistry and biomedical application of artificial cells, blood substitutes, immobilized enzymes, microorganisms and cells, hemoperfusion, artificial kidneys, and drug delivery systems.PHGY 517and PHGY 518 when taken together, will give a complete picture of this field. However, the student can select one of these.",
+    "prerequisites_raw": "Prerequisite (Undergraduate): permission of instructors.",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phgy-518/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHGY 520",
+    "slug": "phgy-520",
+    "title": "Ion Channels",
+    "dept": "PHGY",
+    "number": "520",
+    "credits": null,
+    "faculty": "Medicine & Health Sciences",
+    "faculties": [
+      "Medicine & Health Sciences",
+      "Science"
+    ],
+    "terms": [],
+    "description": "A discussion of the principal theories and interesting new developments in the study of ion channels. Based on a textbook, computer exercises and critical reading and presentation of research papers. Topics include: Properties of voltage-and ligand-gated channels, single channel analysis, structure and function of ion channels.",
+    "prerequisites_raw": "Prerequisite: PHGY 311",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phgy-520/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHGY 524",
+    "slug": "phgy-524",
+    "title": "Chronobiology",
+    "dept": "PHGY",
+    "number": "524",
+    "credits": null,
+    "faculty": "Medicine & Health Sciences",
+    "faculties": [
+      "Medicine & Health Sciences",
+      "Science"
+    ],
+    "terms": [],
+    "description": "An introduction to the field of chronobiology. The aim is to provide basic instruction on different\ntypes of biological rhythms, with particular focus on circadian rhythms.",
+    "prerequisites_raw": "Prerequisites: PHGY 209 and PHGY 210 (or NSCI 200 and NSCI 201), and a relevant 300-level course (PHGY 311, or PHGY 314, or PSYC 318, or BIOC 311, or other, with permission of course coordinator).",
+    "restrictions_raw": "Restriction: Course for senior undergraduate (U3) and graduate students",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phgy-524/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHGY 525",
+    "slug": "phgy-525",
+    "title": "Cortical Plasticity",
+    "dept": "PHGY",
+    "number": "525",
+    "credits": null,
+    "faculty": "Medicine & Health Sciences",
+    "faculties": [
+      "Medicine & Health Sciences",
+      "Science"
+    ],
+    "terms": [],
+    "description": "An examination of cortical plasticity following peripheral and central nervous damage from a systems/cognitive neuroscience perspective. Focus is on sensory systems and animal models, including the following topics: ocular dominance columns, retinal lesions, blindness, deafness, cochlear implants, barrel fields, amputation, stroke, and hemispherectomy. Experimental approaches to be considered include: electrophysiological recording, psychophysics, behaviour, and functional imaging.",
+    "prerequisites_raw": "Prerequisites: NSCI 200 or PHGY 314 or permission of the instructor",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phgy-525/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHGY 531",
+    "slug": "phgy-531",
+    "title": "Topics in Applied Immunology",
+    "dept": "PHGY",
+    "number": "531",
+    "credits": null,
+    "faculty": "Medicine & Health Sciences",
+    "faculties": [
+      "Medicine & Health Sciences",
+      "Science"
+    ],
+    "terms": [],
+    "description": "Seminar format course in which experts in immunologic mechanisms of resistance against a variety of infectious diseases, including AIDS, malaria, and tuberculosis oversee student moderators in their presentation of recent scientific literature in the field.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "Restriction: Permission of the instructor. U3 InterDept. Honours Immunology students and graduate students with strong immunology background i.e. PHGY 513 and BIOC 503",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phgy-531/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHGY 550",
+    "slug": "phgy-550",
+    "title": "Molecular Physiology of Bone",
+    "dept": "PHGY",
+    "number": "550",
+    "credits": null,
+    "faculty": "Medicine & Health Sciences",
+    "faculties": [
+      "Medicine & Health Sciences",
+      "Science"
+    ],
+    "terms": [],
+    "description": "Students will develop a working knowledge of cartilage and bone. Discussion topics will include: molecular and cellular environment of bone; heritable and acquired skeletal defects; research models used to study metabolic bone disease.",
+    "prerequisites_raw": "Prerequisites: PHGY 311, and BIOL 202 or equivalent",
+    "restrictions_raw": "Restriction: U3 Physiology students, and graduate students in biomedical departments; others by permission of the instructor",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phgy-550/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHGY 552",
+    "slug": "phgy-552",
+    "title": "Cellular and Molecular Physiology",
+    "dept": "PHGY",
+    "number": "552",
+    "credits": null,
+    "faculty": "Medicine & Health Sciences",
+    "faculties": [
+      "Medicine & Health Sciences",
+      "Science"
+    ],
+    "terms": [],
+    "description": "Discussions of recent significant advances in our understanding of the gene products involved in diverse cellular signalling pathways. Topics will include cell-surface hormone receptors, nuclear steroid hormone receptors, and ion channels and transporters. Students will present and critically evaluate experimental approaches, results and interpretations of selected research publications.",
+    "prerequisites_raw": "Prerequisite: PHGY 311",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phgy-552/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHGY 556",
+    "slug": "phgy-556",
+    "title": "Topics in Systems Neuroscience",
+    "dept": "PHGY",
+    "number": "556",
+    "credits": null,
+    "faculty": "Medicine & Health Sciences",
+    "faculties": [
+      "Medicine & Health Sciences",
+      "Science"
+    ],
+    "terms": [],
+    "description": "Topics of current interest in systems neurophysiology and behavioural neuroscience including: the neural representation of sensory information and motor behaviours, models of sensory motor integration, and the computational analysis of problems in motor control and perception. Students will be expected to present and critically discuss journal articles in class.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "Restriction: Not open to students who have taken PHGY 456",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phgy-556/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHGY 560",
+    "slug": "phgy-560",
+    "title": "Light Microscopy-Life Science",
+    "dept": "PHGY",
+    "number": "560",
+    "credits": null,
+    "faculty": "Medicine & Health Sciences",
+    "faculties": [
+      "Medicine & Health Sciences",
+      "Science"
+    ],
+    "terms": [],
+    "description": "Introduction to optics, light microscopy imaging and data analysis for life scientists.",
+    "prerequisites_raw": "Prerequisites: BIOL 301 or permission of instructors.",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phgy-560/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHGY 601",
+    "slug": "phgy-601",
+    "title": "M.Sc. Proposal Seminar",
+    "dept": "PHGY",
+    "number": "601",
+    "credits": null,
+    "faculty": "Medicine & Health Sciences",
+    "faculties": [
+      "Medicine & Health Sciences",
+      "Science"
+    ],
+    "terms": [],
+    "description": "Seminar presentation to Supervisory Committee and students on the Master's thesis proposal.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phgy-601/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHGY 602",
+    "slug": "phgy-602",
+    "title": "Literature Search and Research Proposal",
+    "dept": "PHGY",
+    "number": "602",
+    "credits": null,
+    "faculty": "Medicine & Health Sciences",
+    "faculties": [
+      "Medicine & Health Sciences",
+      "Science"
+    ],
+    "terms": [],
+    "description": "Independent work under the supervision of the thesis advisor including literature search and research leading to thesis proposal.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phgy-602/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHGY 603",
+    "slug": "phgy-603",
+    "title": "Systems Biology and Biophysics",
+    "dept": "PHGY",
+    "number": "603",
+    "credits": null,
+    "faculty": "Medicine & Health Sciences",
+    "faculties": [
+      "Medicine & Health Sciences",
+      "Science"
+    ],
+    "terms": [],
+    "description": "Introduction to classical and current topics in biophysics and systems biology in order to model the control of gene expression and intracellular signal transduction, as well as gene spread in populations.",
+    "prerequisites_raw": "Prerequisite: Knowledge of differential equations at the MATH 315 level or equivalent.",
+    "restrictions_raw": "",
+    "notes_raw": "Notes: Enrolment is limited to 20 students per semester. The course is 1.5 hours of lecture and 1.5 hours of seminar per week. Readings will focus on classic and current journal articles.",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phgy-603/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHGY 604",
+    "slug": "phgy-604",
+    "title": "Responsible Conduct in Research",
+    "dept": "PHGY",
+    "number": "604",
+    "credits": null,
+    "faculty": "Medicine & Health Sciences",
+    "faculties": [
+      "Medicine & Health Sciences",
+      "Science"
+    ],
+    "terms": [],
+    "description": "This course provides students with information on the following areas: 1) an ethics overview; 2) scientific conduct and misconduct; 3) research authorship and peer review; and 4) research on human and animal subjects.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phgy-604/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHGY 607",
+    "slug": "phgy-607",
+    "title": "Laboratory Research 1",
+    "dept": "PHGY",
+    "number": "607",
+    "credits": null,
+    "faculty": "Medicine & Health Sciences",
+    "faculties": [
+      "Medicine & Health Sciences",
+      "Science"
+    ],
+    "terms": [],
+    "description": "Laboratory research leading to the thesis.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phgy-607/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHGY 608",
+    "slug": "phgy-608",
+    "title": "Laboratory Research 2",
+    "dept": "PHGY",
+    "number": "608",
+    "credits": null,
+    "faculty": "Medicine & Health Sciences",
+    "faculties": [
+      "Medicine & Health Sciences",
+      "Science"
+    ],
+    "terms": [],
+    "description": "Laboratory research leading to the thesis.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phgy-608/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHGY 620",
+    "slug": "phgy-620",
+    "title": "Progress in Research",
+    "dept": "PHGY",
+    "number": "620",
+    "credits": null,
+    "faculty": "Medicine & Health Sciences",
+    "faculties": [
+      "Medicine & Health Sciences",
+      "Science"
+    ],
+    "terms": [],
+    "description": "Progress in research in preparation of thesis.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phgy-620/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHGY 621",
+    "slug": "phgy-621",
+    "title": "Thesis 1",
+    "dept": "PHGY",
+    "number": "621",
+    "credits": null,
+    "faculty": "Medicine & Health Sciences",
+    "faculties": [
+      "Medicine & Health Sciences",
+      "Science"
+    ],
+    "terms": [],
+    "description": "Written and oral presentation of thesis proposal to the research Supervisory Committee.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phgy-621/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHGY 622",
+    "slug": "phgy-622",
+    "title": "Thesis 2",
+    "dept": "PHGY",
+    "number": "622",
+    "credits": null,
+    "faculty": "Medicine & Health Sciences",
+    "faculties": [
+      "Medicine & Health Sciences",
+      "Science"
+    ],
+    "terms": [],
+    "description": "Written and oral preparation of the thesis.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phgy-622/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHGY 623",
+    "slug": "phgy-623",
+    "title": "M.Sc. Final Seminar",
+    "dept": "PHGY",
+    "number": "623",
+    "credits": null,
+    "faculty": "Medicine & Health Sciences",
+    "faculties": [
+      "Medicine & Health Sciences",
+      "Science"
+    ],
+    "terms": [],
+    "description": "Final seminar presentation to students supervisory committee prior to thesis submission.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phgy-623/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHGY 701",
+    "slug": "phgy-701",
+    "title": "Ph.D. Comprehensive Examination",
+    "dept": "PHGY",
+    "number": "701",
+    "credits": null,
+    "faculty": "Medicine & Health Sciences",
+    "faculties": [
+      "Medicine & Health Sciences",
+      "Science"
+    ],
+    "terms": [],
+    "description": "The Ph.D. comprehensive exam will be completed between 12-18 months of commencing the program and is designed to ensure that the student's research encompasses the i) acquisition of a comprehensive knowledge of scientific literature; ii) the development of experimental skills and technical expertise with a deep understanding of the experimental design thus iii) ensuring a high degree of scholarship in the thesis submission.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phgy-701/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHGY 703",
+    "slug": "phgy-703",
+    "title": "Ph.D. Progress Seminar 1",
+    "dept": "PHGY",
+    "number": "703",
+    "credits": null,
+    "faculty": "Medicine & Health Sciences",
+    "faculties": [
+      "Medicine & Health Sciences",
+      "Science"
+    ],
+    "terms": [],
+    "description": "The Progress Seminar is a \"work in progress\" seminar on what the student has accomplished to date. Following completion of the comprehensive exam, the seminar should be presented to the student's supervisory committee as a formal presentation of approximately 30 minutes followed by a question and discussion period.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phgy-703/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHGY 704",
+    "slug": "phgy-704",
+    "title": "Ph.D. Progress Seminar 2",
+    "dept": "PHGY",
+    "number": "704",
+    "credits": null,
+    "faculty": "Medicine & Health Sciences",
+    "faculties": [
+      "Medicine & Health Sciences",
+      "Science"
+    ],
+    "terms": [],
+    "description": "A \"work in progress\" seminar, intended as a report on student progress following the Thesis Proposal Seminar.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phgy-704/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHGY 720",
+    "slug": "phgy-720",
+    "title": "Ph.D. Seminar Course 1",
+    "dept": "PHGY",
+    "number": "720",
+    "credits": null,
+    "faculty": "Medicine & Health Sciences",
+    "faculties": [
+      "Medicine & Health Sciences",
+      "Science"
+    ],
+    "terms": [],
+    "description": "Required for Ph.D. students. Coordinated in conjunction with the weekly Departmental seminar series, students will meet for one hour before each seminar to critically discuss papers on the subject of the weekly seminar. Students will take turns introducing the papers and leading discussions on an overview of the research topic, some of the methodologies, results and conclusions.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phgy-720/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHGY 721",
+    "slug": "phgy-721",
+    "title": "Ph.D. Seminar Course 2",
+    "dept": "PHGY",
+    "number": "721",
+    "credits": null,
+    "faculty": "Medicine & Health Sciences",
+    "faculties": [
+      "Medicine & Health Sciences",
+      "Science"
+    ],
+    "terms": [],
+    "description": "Required for Ph.D. students. Coordinated in conjunction with the weekly Departmental seminar series, students will meet for one hour before each seminar to critically discuss papers on the subject of the weekly seminar. Students will take turns introducing the papers and leading discussions on an overview of the research topic, some of the methodologies, results and conclusions.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phgy-721/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHGY 722",
+    "slug": "phgy-722",
+    "title": "Ph.D. Seminar Course 3",
+    "dept": "PHGY",
+    "number": "722",
+    "credits": null,
+    "faculty": "Medicine & Health Sciences",
+    "faculties": [
+      "Medicine & Health Sciences",
+      "Science"
+    ],
+    "terms": [],
+    "description": "Required for Ph.D. students. Coordinated in conjunction with the weekly Departmental seminar series, students will meet for one hour before each seminar to critically discuss papers on the subject of the weekly seminar. Students will take turns introducing the papers and leading discussions on an overview of the research topic, some of the methodologies, results and conclusions.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phgy-722/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHGY 723",
+    "slug": "phgy-723",
+    "title": "Ph.D. Seminar Course 4",
+    "dept": "PHGY",
+    "number": "723",
+    "credits": null,
+    "faculty": "Medicine & Health Sciences",
+    "faculties": [
+      "Medicine & Health Sciences",
+      "Science"
+    ],
+    "terms": [],
+    "description": "Required for Ph.D. students. Coordinated in conjunction with the weekly Departmental seminar series, students will meet for one hour before each seminar to critically discuss papers on the subject of the weekly seminar. Students will take turns introducing the papers and leading discussions on an overview of the research topic, some of the methodologies, results and conclusions.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phgy-723/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHGY 724",
+    "slug": "phgy-724",
+    "title": "Ph.D. Seminar Course 5",
+    "dept": "PHGY",
+    "number": "724",
+    "credits": null,
+    "faculty": "Medicine & Health Sciences",
+    "faculties": [
+      "Medicine & Health Sciences",
+      "Science"
+    ],
+    "terms": [],
+    "description": "Required for Ph.D. students. Coordinated in conjunction with the weekly Departmental seminar series, students will meet for one hour before each seminar to critically discuss papers on the subject of the weekly seminar. Students will take turns introducing the papers and leading discussions on an overview of the research topic, some of the methodologies, results and conclusions.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phgy-724/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHGY 725",
+    "slug": "phgy-725",
+    "title": "Ph.D. Seminar Course 6",
+    "dept": "PHGY",
+    "number": "725",
+    "credits": null,
+    "faculty": "Medicine & Health Sciences",
+    "faculties": [
+      "Medicine & Health Sciences",
+      "Science"
+    ],
+    "terms": [],
+    "description": "Required for Ph.D. students. Coordinated in conjunction with the weekly Departmental seminar series, students will meet for one hour before each seminar to critically discuss papers on the subject of the weekly seminar. Students will take turns introducing the papers and leading discussions on an overview of the research topic, some of the methodologies, results and conclusions.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phgy-725/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 101",
+    "slug": "phys-101",
+    "title": "Introductory Physics - Mechanics",
+    "dept": "PHYS",
+    "number": "101",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "An introductory course in physics without calculus, covering mechanics (kinematics, dynamics, energy, and rotational motion), oscillations and waves, sound, light, and wave optics.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "Restriction: Not open to students taking or having taken PHYS 131, CEGEP objective 00UR or equivalent",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-101/index.html",
+    "name_variants": [
+      "complete one of either PHYS 101 Introductory Physics - Mechanics"
+    ]
+  },
+  {
+    "code": "PHYS 102",
+    "slug": "phys-102",
+    "title": "Introductory Physics - Electromagnetism",
+    "dept": "PHYS",
+    "number": "102",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "Electric field and potential. D.C. circuits and measurements. Capacitance. Magnetic field and induction. Electromagnetic waves and geometrical optics.",
+    "prerequisites_raw": "Corequisite: MATH 139 or higher level calculus course.",
+    "restrictions_raw": "Restriction: Not open to students taking or having taken PHYS 142, CEGEP objective 00UR or equivalent",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-102/index.html",
+    "name_variants": [
+      "complete one of either PHYS 102 Introductory Physics - Electromagnetism"
+    ]
+  },
+  {
+    "code": "PHYS 107",
+    "slug": "phys-107",
+    "title": "Mechanics Laboratory (Life Sciences)",
+    "dept": "PHYS",
+    "number": "107",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "The laboratory component ofPHYS 101.",
+    "prerequisites_raw": "Prerequisite: Lecture component of PHYS 101 or equivalent",
+    "restrictions_raw": "Restriction: Not open to students who have taken or are taking PHYS 101",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-107/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 108",
+    "slug": "phys-108",
+    "title": "E&M Laboratory (Life Sciences)",
+    "dept": "PHYS",
+    "number": "108",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "The laboratory component ofPHYS 102.",
+    "prerequisites_raw": "Prerequisite: Lecture component of PHYS 102 or equivalent",
+    "restrictions_raw": "Restriction: Not open to students who have taken or are taking PHYS 102",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-108/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 117",
+    "slug": "phys-117",
+    "title": "Mechanics Laboratory",
+    "dept": "PHYS",
+    "number": "117",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "The laboratory component ofPHYS 131.",
+    "prerequisites_raw": "Prerequisite: Lecture component of PHYS 131 or equivalent",
+    "restrictions_raw": "Restriction: Not open to students who have taken or are taking PHYS 131",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-117/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 118",
+    "slug": "phys-118",
+    "title": "E & M Laboratory",
+    "dept": "PHYS",
+    "number": "118",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "The laboratory component ofPHYS 142.",
+    "prerequisites_raw": "Prerequisite: Lecture component of PHYS 142 or equivalent",
+    "restrictions_raw": "Restriction: Not open to students who have taken or are taking PHYS 142",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-118/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 131",
+    "slug": "phys-131",
+    "title": "Mechanics and Waves",
+    "dept": "PHYS",
+    "number": "131",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "The basic laws and principles of Newtonian mechanics; oscillations, waves, and wave optics.",
+    "prerequisites_raw": "Corequisite: MATH 139 or higher level calculus course.",
+    "restrictions_raw": "Restriction(s): Not open to students who have taken or are taking PHYS 101, or who have taken CEGEP objective 00UR or equivalent.",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-131/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 142",
+    "slug": "phys-142",
+    "title": "Electromagnetism and Optics",
+    "dept": "PHYS",
+    "number": "142",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "The basic laws of electricity and magnetism; geometrical optics.",
+    "prerequisites_raw": "Corequisite: MATH 141 or higher level calculus course.",
+    "restrictions_raw": "Restriction: Not open to students who have taken or are taking PHYS 102, or who have taken CEGEP objective 00US or equivalent.",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-142/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 180",
+    "slug": "phys-180",
+    "title": "Space, Time and Matter",
+    "dept": "PHYS",
+    "number": "180",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "A nonmathematical, conceptual look at physics, beginning with the idea of space and time, continuing with the historical development of Newtonian mechanics of celestial motion, electricity and magnetism, ether and light, Einstein's special and general theories of relativity, quantum mechanics, matter and antimatter, cosmology and the big bang.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "Restrictions: Not open to students in a Physics program. Not open to students who have taken PHYS 200.",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-180/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 181",
+    "slug": "phys-181",
+    "title": "Everyday Physics",
+    "dept": "PHYS",
+    "number": "181",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "The day-to-day physics behind the materials and phenomena around us. Demonstrations of the intriguing properties of materials and the simple physical theories explaining them.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-181/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 182",
+    "slug": "phys-182",
+    "title": "Our Evolving Universe",
+    "dept": "PHYS",
+    "number": "182",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "An elementary course on astronomy and astrophysics. Positional astronomy and finding your way about the sky. Our evolving picture of the universe. Properties and origins of the solar system. The Big Bang and modern cosmology.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "Restriction: Not open to students in a Physics program. Not open to students who have taken PHYS 204 or PHYS 205.",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-182/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 183",
+    "slug": "phys-183",
+    "title": "The Milky Way Inside and Out",
+    "dept": "PHYS",
+    "number": "183",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "An elementary course on astronomy. Star origins and star formation, supernovae, white dwarfs, neutron stars, and black holes. Galaxies, their structure and their interactions. Stellar clusters, the interstellar medium. Galactic classification and galaxy evolution.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "Restriction: Not open to students in a Physics program. Not open to students who have taken PHYS 204 or PHYS 206.",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-183/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 186",
+    "slug": "phys-186",
+    "title": "Astrobiology",
+    "dept": "PHYS",
+    "number": "186",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "Astrobiology is the study of life throughout the universe. The course will cover the search for, and characterization of, habitable worlds. We will explore the formation and evolution of stars and planets, the astronomical and geological factors that impact a planet's habitability, the evolution of life on Earth, and the potential for biological evolution beyond an organism's planet of origin.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "Restriction(s): Not open to students who have taken or are taking EPSC 182, ANAT 182, or EPSC 186.",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-186/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 224",
+    "slug": "phys-224",
+    "title": "Physics of Music",
+    "dept": "PHYS",
+    "number": "224",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "An introduction to the physics of music. Properties of sound and their perception as pitch, loudness, and timbre. Dissonance, consonance, and musical intervals and tuning. Physics of sound propagation and reflection. Resonance. Acoustic properties of pipes, strings, bars, and membranes, and sound production in wind, string, and percussion instruments. The human voice. Room reverberation and acoustics. Directional characteristics of sound sources.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "Restriction: Not open to students who have taken PHYS 225",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-224/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 228",
+    "slug": "phys-228",
+    "title": "Energy and the Environment",
+    "dept": "PHYS",
+    "number": "228",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "Energy fundamentals, generation of electricity, heat engines, fossil fuel production and consumption, local and global effects, economic impact, transportation, and pollution and environmental impact of energy use. Non-renewable energy sources (fossil fuels, nuclear) and renewable sources (solar, wind, hydro, geothermal).",
+    "prerequisites_raw": "Prerequisites: CEGEP Physics or PHYS 102 or PHYS 142 or permission of the instructor",
+    "restrictions_raw": "Restrictions: Not open to students who have taken PHYS 184.",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-228/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 230",
+    "slug": "phys-230",
+    "title": "Dynamics of Simple Systems",
+    "dept": "PHYS",
+    "number": "230",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "Translational motion under Newton's laws; forces, momentum, work/energy theorem. Special relativity; Lorentz transforms, relativistic mechanics, mass/energy equivalence. Topics in rotational dynamics. Noninertial frames.",
+    "prerequisites_raw": "Corequisite: MATH 222",
+    "restrictions_raw": "Restriction: Not open to students taking or having passed PHYS 251",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-230/index.html",
+    "name_variants": [
+      "take PHYS 230 Dynamics of Simple Systems"
+    ]
+  },
+  {
+    "code": "PHYS 232",
+    "slug": "phys-232",
+    "title": "Heat and Waves",
+    "dept": "PHYS",
+    "number": "232",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "The laws of thermodynamics and their consequences. Thermodynamics of P-V-T systems and simple heat engines. Free, driven, and damped harmonic oscillators. Coupled systems and normal modes. Fourier methods. Wave motion and dispersion. The wave equation.",
+    "prerequisites_raw": "Prerequisites: CEGEP Physics or PHYS 142, and CEGEP chemistry or CHEM 120, and PHYS 230.",
+    "restrictions_raw": "Restriction: Not open to students taking or having passed PHYS 253",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-232/index.html",
+    "name_variants": [
+      "take PHYS 232 Heat and Waves"
+    ]
+  },
+  {
+    "code": "PHYS 241",
+    "slug": "phys-241",
+    "title": "Signal Processing",
+    "dept": "PHYS",
+    "number": "241",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "Linear circuit elements, resonance, network theorems, diodes, transistors, amplifiers, feedback, integrated circuits.",
+    "prerequisites_raw": "Prerequisite: CEGEP physics or PHYS 142.",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-241/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 242",
+    "slug": "phys-242",
+    "title": "Electricity and Magnetism",
+    "dept": "PHYS",
+    "number": "242",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "Properties of electromagnetic fields, dipole and quadropole fields and their interactions, chemical binding of molecules, electromagnetic properties of materials, Maxwell's equations and properties of electromagnetic waves, propagation of waves in media.",
+    "prerequisites_raw": "Prerequisites: CEGEP Physics, MATH 222",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-242/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 251",
+    "slug": "phys-251",
+    "title": "Honours Classical Mechanics 1",
+    "dept": "PHYS",
+    "number": "251",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "Newton's laws, work energy, angular momentum. Harmonic oscillator, forced oscillations. Inertial forces, rotating frames. Central forces, centre of mass, planetary orbits, Kepler's laws.",
+    "prerequisites_raw": "Corequisite: MATH 222",
+    "restrictions_raw": "Restriction: Not open to students taking or having taken PHYS 230.",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-251/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 253",
+    "slug": "phys-253",
+    "title": "Thermal Physics",
+    "dept": "PHYS",
+    "number": "253",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "Energy, work, heat; first law. Temperature, entropy; second law. Absolute zero; third law. Equilibrium, equations of state, gases, liquids, solids, magnets; phase transitions.",
+    "prerequisites_raw": "Corequisite: MATH 222",
+    "restrictions_raw": "Restriction: Not open to students taking or having taken PHYS 232.",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-253/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 257",
+    "slug": "phys-257",
+    "title": "Experimental Methods 1",
+    "dept": "PHYS",
+    "number": "257",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "Introductory laboratory work and data analysis as related to mechanics, optics and thermodynamics. Introduction to computers as they are employed for laboratory work, for data analysis and for numerical computation. Previous experience with computers is an asset, but is not required.",
+    "prerequisites_raw": "Corequisite: PHYS 230 or PHYS 251",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-257/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 258",
+    "slug": "phys-258",
+    "title": "Experimental Methods 2",
+    "dept": "PHYS",
+    "number": "258",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "Advanced laboratory work and data analysis as related to mechanics, optics and thermodynamics. Computers will be employed routinely for data analysis and for numerical computation, and, particularly, to facilitate the use of Fourier methods.",
+    "prerequisites_raw": "Prerequisite: PHYS 257",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-258/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 260",
+    "slug": "phys-260",
+    "title": "Modern Physics and Relativity",
+    "dept": "PHYS",
+    "number": "260",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "History of special relativity; Lorentz transformations: kinematics and dynamics; transformation of electric and magnetic forces; introduction to topics in modern physics.",
+    "prerequisites_raw": "Corequisite: MATH 222",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-260/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 319",
+    "slug": "phys-319",
+    "title": "Introduction to Biophysics",
+    "dept": "PHYS",
+    "number": "319",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "Emerging physical approaches and quantitative measurement techniques are providing new insights into longstanding biological questions. This course will present underlying physical theory, quantitative measurement techniques, and significant findings in molecular and cellular biophysics. Principles covered include Brownian motion, low Reynolds-number environments, forces relevant to cells and molecules, chemical potentials, and free energies. These principles are applied to enzymes as molecular machines, membranes, DNA, and RNA.",
+    "prerequisites_raw": "Prerequisites: BIOL 200 or BIOL 219; MATH 222; PHYS 230 and (PHYS 232 or PHYS 253), or permission of the instructor.",
+    "restrictions_raw": "Restriction: Not open to students who have taken or are taking BIOL 319",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-319/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 321",
+    "slug": "phys-321",
+    "title": "Data Science and Observational Astrophysics",
+    "dept": "PHYS",
+    "number": "321",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "Data analysis methods as applied in experimental physics, with an emphasis on applications in observational astrophysics. An introduction to Bayesian\ninference, model selection, Markov Chain Monte Carlo, common probability distributions, jackknives and null tests, as they are used in the analysis of observational data from across the electromagnetic spectrum.",
+    "prerequisites_raw": "Prerequisite(s): COMP 208; PHYS 257",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-321/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 328",
+    "slug": "phys-328",
+    "title": "Electronics",
+    "dept": "PHYS",
+    "number": "328",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "Semiconductor devices, basic transistor circuits, operational amplifiers, combinatorial and sequential logic, integrated circuits, analogue to digital converters. The laboratory component covers design, construction and testing of basic electronic circuits.",
+    "prerequisites_raw": "Prerequisite: PHYS 241 or permission of instructor",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-328/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 329",
+    "slug": "phys-329",
+    "title": "Statistical Physics with Biophysical Applications",
+    "dept": "PHYS",
+    "number": "329",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "This interdisciplinary course introduces Statistical Physics illustrated with modern biophysical applications. Principles covered include partition functions, Boltzmann distribution, bosons, fermions, Bose Einstein condensates, Ferni gases, chemical potential, thermodynamical forces, biochemical kinetics, and an introduction to noise and phase transitions in biology.",
+    "prerequisites_raw": "Prerequisite(s): [BIOL 219 and (PHYS 253 or PHYS 232 or CHEM 345)] or permission of the instructor",
+    "restrictions_raw": "Restriction(s): Not opened to students having taken PHYS 333, PHYS 362, or CHEM 365",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-329/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 331",
+    "slug": "phys-331",
+    "title": "Topics in Classical Mechanics",
+    "dept": "PHYS",
+    "number": "331",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "Forced and damped oscillators, Newtonian mechanics in three dimensions, rotational motion, Lagrangian and Hamiltonian mechanics, small vibrations, normal modes. Nonlinear dynamics and chaos.",
+    "prerequisites_raw": "Corequisite: MATH 315",
+    "restrictions_raw": "Restriction: Not open to students having passed PHYS 451 or PHYS 351",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-331/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 333",
+    "slug": "phys-333",
+    "title": "Thermal and Statistical Physics",
+    "dept": "PHYS",
+    "number": "333",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "Introductory equilibrium statistical mechanics. Quantum states, probabilities, ensemble averages. Entropy, temperature, Boltzmann factor, chemical potential. Photons and phonons. Fermi-Dirac and Bose-Einstein distributions; applications.",
+    "prerequisites_raw": "Prerequisite: PHYS 232",
+    "restrictions_raw": "Restriction: Not open to students taking or having passed PHYS 362",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-333/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 339",
+    "slug": "phys-339",
+    "title": "Measurements Laboratory in General Physics",
+    "dept": "PHYS",
+    "number": "339",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "Introduction to modern techniques of measurement. The use of computers in performing and analysing experiments. Data reduction, statistical methods, report writing. Extensive use of computers is made in this laboratory; therefore some familiarity with computers and computing is an advantage.",
+    "prerequisites_raw": "Prerequisite: PHYS 241 or permission of instructor",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-339/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 340",
+    "slug": "phys-340",
+    "title": "Majors Electricity and Magnetism",
+    "dept": "PHYS",
+    "number": "340",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "The electrostatic field and scalar potential. Dielectric properties of matter. Energy in the electrostatic field. Methods for solving problems in electrostatics. The magnetic field. Induction and inductance. Energy in the magnetic field. Magnetic properties of matter. Maxwell's equations. The dipole approximation.",
+    "prerequisites_raw": "Corequisite: MATH 314",
+    "restrictions_raw": "Restriction: Not open to students who have passed PHYS 242 or PHYS 350",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-340/index.html",
+    "name_variants": [
+      "take either PHYS 340 Majors Electricity and Magnetism"
+    ]
+  },
+  {
+    "code": "PHYS 342",
+    "slug": "phys-342",
+    "title": "Majors Electromagnetic Waves",
+    "dept": "PHYS",
+    "number": "342",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "Maxwell's equations. The wave equation. The electromagnetic wave, reflection, refraction, polarization. Guided waves. Transmission lines and wave guides. Vector potential. Radiation. The elemental dipole; the half-wave dipole; vertical dipole; folded dipoles; Yagi antennas. Accelerating charged particles.",
+    "prerequisites_raw": "Prerequisites: PHYS 340 or PHYS 242, Mathematics MATH 314, MATH 315",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-342/index.html",
+    "name_variants": [
+      "take either PHYS 342 Majors Electromagnetic Waves"
+    ]
+  },
+  {
+    "code": "PHYS 346",
+    "slug": "phys-346",
+    "title": "Majors Quantum Physics",
+    "dept": "PHYS",
+    "number": "346",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "De Broglie waves, Bohr atom. Schroedinger equation, wave functions, observables. One dimensional potentials. Schroedinger equation in three dimensions. Angular momentum, hydrogen atom. Spin, experimental consequences.",
+    "prerequisites_raw": "Prerequisite: PHYS 230 and PHYS 232, or PHYS 251",
+    "restrictions_raw": "Restriction: Not open to students who have taken PHYS 357, PHYS 446, or PHYS 457.",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-346/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 350",
+    "slug": "phys-350",
+    "title": "Honours Electricity and Magnetism",
+    "dept": "PHYS",
+    "number": "350",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "Fundamental laws of electric and magnetic fields in both integral and differential form.",
+    "prerequisites_raw": "Prerequisites: MATH 248, MATH 325.",
+    "restrictions_raw": "Restriction: Not open to students having taken PHYS 340",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-350/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 351",
+    "slug": "phys-351",
+    "title": "Honours Classical Mechanics 2",
+    "dept": "PHYS",
+    "number": "351",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "Rigid bodies, angular momentum, gyroscope, moment of inertia, principal axes, Euler's equations. Coupled oscillations and normal modes. Lagrangian mechanics and applications. Hamiltonian mechanics. Topics in advanced analytical mechanics.",
+    "prerequisites_raw": "Prerequisite: PHYS 251.",
+    "restrictions_raw": "Restriction: Not open to students who have taken PHYS 451.",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-351/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 352",
+    "slug": "phys-352",
+    "title": "Honours Electromagnetic Waves",
+    "dept": "PHYS",
+    "number": "352",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "Vector and scalar potentials; plane waves in homogeneous media; refraction and reflection; guided waves; radiation from simple systems; dipole and quadrupole radiation; introduction to fields of moving charges; synchrotron radiation; Bremsstrahlung.",
+    "prerequisites_raw": "Prerequisite: PHYS 350.",
+    "restrictions_raw": "Restriction: Honours students, or permission of the instructor",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-352/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 357",
+    "slug": "phys-357",
+    "title": "Honours Quantum Physics 1",
+    "dept": "PHYS",
+    "number": "357",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "Experimental basis for quantum mechanics; wave-packets; uncertainty principle. Hilbert space formalism. Schrodinger equation: eigenvalues and eigenvectors: applications to 1-d problems including the infinite and finite potential wells and the harmonic oscillator. Tunneling. Time independent perturbation theory.",
+    "prerequisites_raw": "Prerequisites: MATH 223 or equivalent, and one of PHYS 230, PHYS 251, or CIVE 281",
+    "restrictions_raw": "Restriction: Not open to students taking or having passed PHYS 346",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-357/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 362",
+    "slug": "phys-362",
+    "title": "Statistical Mechanics",
+    "dept": "PHYS",
+    "number": "362",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "Quantum states and ensemble averages. Fermi-Dirac, Bose-Einstein and Boltzmann distribution functions and their applications.",
+    "prerequisites_raw": "Prerequisites: MATH 248 or equivalents, PHYS 253.",
+    "restrictions_raw": "Restriction: Not open to students taking or having passed PHYS 333",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-362/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 396",
+    "slug": "phys-396",
+    "title": "Undergraduate Research Project",
+    "dept": "PHYS",
+    "number": "396",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "Independent research project with a final written report.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "Restrictions: This course cannot be taken under the S/U option. Departmental permission required. Students cannot be supervised by the same instructor for two 396 Science courses. Open to students in programs offered by the Faculty of Science only.",
+    "notes_raw": "Note: Enrolment may be limited. Students are advised to start the application process well before the start of the term and to plan for an alternative course in the case that no suitable project is available. Individual projects may be suggested each term which may have project-specific prerequisites. Students may also approach professors to devise their own projects. Some projects may be accessible to students in other disciplines. See ? https://www.mcgill.ca/science/research/undergraduate-research/science-research-courses for more information about available projects and application forms and procedures.",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-396/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 404",
+    "slug": "phys-404",
+    "title": "Climate Physics",
+    "dept": "PHYS",
+    "number": "404",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "This course covers the essentials of climate physics through the lens of one-dimensional, vertical atmospheric models. This includes shortwave and longwave radiative transfer, convection, phase changes, clouds, greenhouse gases, and atmospheric escape. This is an adequate level of detail for understanding Earth's climate, paleoclimate, anthropogenic climate change, or pursing studies of Solar System planets and extrasolar planets.",
+    "prerequisites_raw": "Prerequisite(s): PHYS 230 or PHYS 251, PHYS 232 or PHYS 253, MATH 315 or MATH 325, and MATH 222",
+    "restrictions_raw": "Restriction(s): Not open to students who have taken ATOC 404",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-404/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 432",
+    "slug": "phys-432",
+    "title": "Physics of Fluids",
+    "dept": "PHYS",
+    "number": "432",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "The physical properties of fluids. The kinematics and dynamics of flow. The effects of viscosity and turbulence. Applications of fluid mechanics in biophysics, geophysics and engineering.",
+    "prerequisites_raw": "Prerequisites: PHYS 230, MATH 223, MATH 314, MATH 315",
+    "restrictions_raw": "Restriction: Not open to students who have taken PHYS 332.",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-432/index.html",
+    "name_variants": [
+      "take either PHYS 432 Physics of Fluids"
+    ]
+  },
+  {
+    "code": "PHYS 434",
+    "slug": "phys-434",
+    "title": "Optics",
+    "dept": "PHYS",
+    "number": "434",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "Fundamental concepts of optics, including applications and modern developments. Light propagation in media; geometric optics and optical instruments; polarization and coherence properties of light; interference and interferometry; diffraction theory and applications in spectrometry and imaging; Gaussian beams, Fourier optics and photonic band structure. A laboratory component provides hands-on experience in optical setup design, construction and testing of concepts introduced in lectures.",
+    "prerequisites_raw": "Corequisite: PHYS 342 or PHYS 352, or permission of the instructor",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-434/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 447",
+    "slug": "phys-447",
+    "title": "Majors Quantum Physics 2",
+    "dept": "PHYS",
+    "number": "447",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "Angular momentum and spin, identical particles, multi-electron atoms, perturbation theory, radiation. Selected applications from condensed matter, nuclear and elementary particle physics.",
+    "prerequisites_raw": "Prerequisite(s): PHYS 346",
+    "restrictions_raw": "Restriction(s): Not open to students who have taken or are taking PHYS 457.",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-447/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 449",
+    "slug": "phys-449",
+    "title": "Majors Research Project",
+    "dept": "PHYS",
+    "number": "449",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "A supervised research project.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "Restrictions: U2 or U3 students in a Physics program, or permission of the instructor.",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-449/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 457",
+    "slug": "phys-457",
+    "title": "Honours Quantum Physics 2",
+    "dept": "PHYS",
+    "number": "457",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "Angular momentum and spin operators. Operator methods in quantum mechanics. Coupling of spin and angular momenta. Variational principles and elements of time dependent perturbation theory (the Golden Rule). Solution of the Schrodinger equation in three dimensions. Applications to the hydrogen and helium atoms and to simple problems in atomic and molecular physics.",
+    "prerequisites_raw": "Prerequisite: PHYS 357",
+    "restrictions_raw": "Restriction: Not open to students who have taken PHYS 346",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-457/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 469",
+    "slug": "phys-469",
+    "title": "Advanced Physics Laboratory 2",
+    "dept": "PHYS",
+    "number": "469",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "Advanced level experiments in physics including quantum effects and some properties of condensed matter physics and modern physics.",
+    "prerequisites_raw": "Corequisite: PHYS 457 or PHYS 447 or permission of the instructor.",
+    "restrictions_raw": "Restriction: Open to honours and majors physics students",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-469/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 478",
+    "slug": "phys-478",
+    "title": "Short Research Project",
+    "dept": "PHYS",
+    "number": "478",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "Supervised research project in physics.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "Note: Students are expected to find an appropriate instructor for their project.",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-478/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 479",
+    "slug": "phys-479",
+    "title": "Physics Research Project",
+    "dept": "PHYS",
+    "number": "479",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "A supervised research project.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "Restriction: U2 or U3 students in a Physics program, or permission of the instructor.",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-479/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 489",
+    "slug": "phys-489",
+    "title": "Special Project",
+    "dept": "PHYS",
+    "number": "489",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "A project incorporating aspects of both physics and computer science, under the joint supervision of the two departments. The Physics aspect may be either laboratory-based or theoretical in nature. The Computational aspect will involve the development and implementation of algorithms arising from the investigation.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "Restriction: Only open to students in their final year of the Joint Major in Physics and Computer Science after consultation with the adviser(s) for the program",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-489/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 512",
+    "slug": "phys-512",
+    "title": "Computational Physics with Applications",
+    "dept": "PHYS",
+    "number": "512",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "Computational methods in Physics illustrated with realworld applications.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-512/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 514",
+    "slug": "phys-514",
+    "title": "General Relativity",
+    "dept": "PHYS",
+    "number": "514",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "Transition from special to general relativity. Non-Euclidian geometry. The basic laws of Physics in co-variant form, Einstein's equations. Gravitational waves; neutron stars; black holes; cosmology.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "Restriction: U3 Honours students and graduate students, or permission of the instructor.",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-514/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 519",
+    "slug": "phys-519",
+    "title": "Advanced Biophysics",
+    "dept": "PHYS",
+    "number": "519",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "An advanced biophysics course, with a special emphasis on stochastic and out of equilibrium physical processes in living matter.",
+    "prerequisites_raw": "Prerequisites: (PHYS 329 or PHYS 333 or PHYS 362 or MATH 437) and (PHYS 340 or PHYS 350), or permission of the instructor.",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-519/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 521",
+    "slug": "phys-521",
+    "title": "Astrophysics",
+    "dept": "PHYS",
+    "number": "521",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "An advanced course in modern astrophysics, covering topics such as the basic tools of astronomy (statistics, mathematical methods, computational tools, and instrumentation); stellar astrophysics (properties, structure, atmospheres, binaries/exoplanets); the interstellar medium, star formation, stellar evolution and endpoints (white dwarfs, neutron stars, black holes); and the Milky Way, galaxies, and cosmology.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "Restriction: U3 students and graduate students, or permission of the instructor",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-521/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 534",
+    "slug": "phys-534",
+    "title": "Nanoscience and Nanotechnology",
+    "dept": "PHYS",
+    "number": "534",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "Topics include scanning probe microscopy, chemical self-assembly, computer modelling, and microfabrication/micromachining.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "Restriction: U3 or graduate students in Physics, Chemistry, or Engineering, or permission of the instructor.",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-534/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 551",
+    "slug": "phys-551",
+    "title": "Quantum Theory",
+    "dept": "PHYS",
+    "number": "551",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "General formulation, scattering theory, WKBJ approximation, time-dependent perturbation, theory and applications, angular momentum, relativistic wave equations.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "Restriction: U3 Honours students and graduate students, or permission of the instructor",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-551/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 557",
+    "slug": "phys-557",
+    "title": "Nuclear Physics",
+    "dept": "PHYS",
+    "number": "557",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "General nuclear properties, nucleon-nucleon interaction and scattering theory, radioactivity, nuclear models, nuclear reactions.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "Restriction: U3 Honours students, graduate students, or permission of the instructor",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-557/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 558",
+    "slug": "phys-558",
+    "title": "Solid State Physics",
+    "dept": "PHYS",
+    "number": "558",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "Properties of crystals; free electron model, band structure; metals, insulators and semi-conductors; phonons; magnetism; selected additional topics in solid-state (e.g. ferroelectrics, elementary transport theory).",
+    "prerequisites_raw": "",
+    "restrictions_raw": "Restriction: U3 Honours students, graduate students, or permission of the instructor",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-558/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 559",
+    "slug": "phys-559",
+    "title": "Advanced Statistical Mechanics",
+    "dept": "PHYS",
+    "number": "559",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "Scattering and structure factors. Review of thermodynamics and statistical mechanics; correlation functions (static); mean field theory; critical phenomena; broken symmetry; fluctuations, roughening.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "Restriction: U3 Honours students, graduate students, or permission of the instructor",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-559/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 562",
+    "slug": "phys-562",
+    "title": "Electromagnetic Theory",
+    "dept": "PHYS",
+    "number": "562",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "Electrostatics, dielectrics, magnetostatics, timevarying fields, relativity, radiating systems, fields of moving charges.",
+    "prerequisites_raw": "Prerequisites (Graduate): U1 or U2 Honours Physics or permission of instructor.",
+    "restrictions_raw": "Restriction: U3 Honours students, graduate students, or permission of the instructor",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-562/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 567",
+    "slug": "phys-567",
+    "title": "Particle Physics",
+    "dept": "PHYS",
+    "number": "567",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "Survey of elementary particles; hadrons, leptons and hadrons' constituents (quarks). Invariance principles and conservation laws. Detectors and accelerators. Phenomenology of strong, electromagnetic and weak interactions.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "Restriction: U3 Honours students, graduate students, or permission of the instructor",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-567/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 601",
+    "slug": "phys-601",
+    "title": "Introduction to Graduate Studies in Physics 1",
+    "dept": "PHYS",
+    "number": "601",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "Foundational skills in research and communication, including graduate student orientation, research integrityand ethics, proposal writing, science communication both oral and written for a general audience, outreach and equity, diversity, and inclusion, best practices in teaching assistantship.",
+    "prerequisites_raw": "Prerequisite(s): Permission of the Instructor",
+    "restrictions_raw": "Restriction(s): Open only to students in a graduate degree program in Physics.",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-601/index.html",
+    "name_variants": [
+      "completed PHYS 601 and PHYS 602 as part of the McGill M"
+    ]
+  },
+  {
+    "code": "PHYS 602",
+    "slug": "phys-602",
+    "title": "Introduction to Graduate Studies in Physics 2",
+    "dept": "PHYS",
+    "number": "602",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "Core skills in reading, writing, critical thinking and career opportunities. Preparation for the comprehensive oral exams, paper reviews, writing and responding to referee reports, conference presentations, scientific programming, and data management and visualization.",
+    "prerequisites_raw": "Prerequisite(s): Permission of the Instructor",
+    "restrictions_raw": "Restriction(s): Open only to students in a graduate degree program in Physics.",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-602/index.html",
+    "name_variants": [
+      "completed PHYS 601 and PHYS 602 as part of the McGill M"
+    ]
+  },
+  {
+    "code": "PHYS 606",
+    "slug": "phys-606",
+    "title": "Selected Topics: Contemporary Physics 1",
+    "dept": "PHYS",
+    "number": "606",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "Selected topics in contemporary physics.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-606/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 607",
+    "slug": "phys-607",
+    "title": "Selected Topics: Contemporary Physics 2",
+    "dept": "PHYS",
+    "number": "607",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "Selected topics in contemporary physics.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-607/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 610",
+    "slug": "phys-610",
+    "title": "Quantum Field Theory 1",
+    "dept": "PHYS",
+    "number": "610",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "Relativistic wave equations for spin-0, spin-1/2, and spin-1 particles. Review of Lagrangian and Hamiltonian formalisms for classical mechanics. Canonical, Feynman path-integral, and Schwinger external-source quantization techniques. Relativistic quantum field theories for free spin-0, spin-1/2, and spin-1 particles. Interactions, perturbation theory, and Feynman diagrams.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-610/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 620",
+    "slug": "phys-620",
+    "title": "Experimental Methods of Subatomic Physics",
+    "dept": "PHYS",
+    "number": "620",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "Basic techniques of experimentation in nuclear and particle physics. Accelerators, beam optics, detection systems, major experiments, Monte-Carlo simulation, data acquisition and data analysis.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-620/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 632",
+    "slug": "phys-632",
+    "title": "Seminar in  Astrophysics 1",
+    "dept": "PHYS",
+    "number": "632",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "Seminar on special topics in astrophysics.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "Restrictions: Enrolled in M.Sc. or Ph.D. degree program or permission of instructor. Not open to students who have taken PHYS 614.",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-632/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 633",
+    "slug": "phys-633",
+    "title": "Seminar in Astrophysics 2",
+    "dept": "PHYS",
+    "number": "633",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "Seminar on special topics in astrophysics.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "Restrictions: Enrolled in M.Sc. or Ph.D. degree program or permission of instructor. Not open to students who have taken PHYS 615.",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-633/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 641",
+    "slug": "phys-641",
+    "title": "Observational Techniques of Modern Astrophysics",
+    "dept": "PHYS",
+    "number": "641",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "Mechanical, electrical, optical, and analytic techniques used in modern astrophysics research.  Electromagnetic, gravitational and particle-based observing.  Relevant and topical observational problems, contact with forefront of observational research.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "Restriction: Enrolment in M.Sc. or Ph.D. program, or permission of the instructor.",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-641/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 642",
+    "slug": "phys-642",
+    "title": "Radiative Processes in Astrophysics",
+    "dept": "PHYS",
+    "number": "642",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "Why astrophysical sources look the way they do, and how to understand why we see what we see in astronomy.  Fundamental physical processes that produce and modify radiation from astrophysical sources, and how they apply to different astronomical examples.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "Restriction: Enrolment in M.Sc./Ph.D. program, or permission of the instructor.",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-642/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 643",
+    "slug": "phys-643",
+    "title": "Astrophysical Fluids",
+    "dept": "PHYS",
+    "number": "643",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "Physics of astrophysical fluids; how it determines the behaviour, formation, evolution, dissipation and death of astrophysical systems, including objects in hydrostatic balance, such as stars, or with inflows and outflows, such as disks and jets.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "Restriction: Enrolment in M.Sc./Ph.D. program, or permission of the instructor.",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-643/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 644",
+    "slug": "phys-644",
+    "title": "Galaxies and Cosmology",
+    "dept": "PHYS",
+    "number": "644",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "Our current understanding of the universe, and tools that are used in developing this understanding.  Large scale properties of galaxies in a cosmological context; the most important features of the expanding universe.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "Restriction: Enrolment in M.Sc./Ph.D. program, or permission of the instructor.",
+    "notes_raw": "Note: General relativity not a prerequisite.",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-644/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 645",
+    "slug": "phys-645",
+    "title": "High Energy Astrophysics",
+    "dept": "PHYS",
+    "number": "645",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "Physical bases for phenomena associated with strong gravity and high-energy processes in astrophysical contexts. X-rays, gamma-rays, nuclear processes, strong gravity and magnetic fields. Shocks, acceleration, and jets.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "Restrictions: Enrolled in M.Sc. or Ph.D. degree program or permission of instructor. Not open to students who have taken PHYS 621.",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-645/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 657",
+    "slug": "phys-657",
+    "title": "Classical Condensed Matter",
+    "dept": "PHYS",
+    "number": "657",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "Coarse-grained dynamical models of condensed matter systems and their application to non-equilibrium phase transformations. Topics include: spontaneously broken symmetry, slow dynamics, phase field models, classical density functional theory, amplitude models, perturbation methods, interface dynamics, phase stability, topological defects in solids and microstructure evolution.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-657/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 658",
+    "slug": "phys-658",
+    "title": "Advanced Condensed Matter",
+    "dept": "PHYS",
+    "number": "658",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "Superconductivity: phenomenology; electron-phonon interaction; BCS theory; gap structure; Ginzburg-Landau formulation; magnetic, transport and thermodynamic properties; vortices; superfluids; unconventional superconductors. Magnetism: local vs itinerant magnetism; magnetic ordering; spin fluctuations; neutron and magnetic X-ray scattering; magnetism at surfaces; frustration. Additional topic amongst: quantum Hall effect; localization; quasicrystals; glasses; etc.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-658/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 659",
+    "slug": "phys-659",
+    "title": "Experimental Condensed Matter",
+    "dept": "PHYS",
+    "number": "659",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "To obtain an active understanding of the principles, the possibilities and the limitations of various experimental techniques. Possible topics include vacuum and low-temperature techniques; transport, thermal, magnetization and de Haas van Alphen measurements; scattering techniques; Mossbauer spectroscopy, NMR, scanning probe microscopy, electron microscopy; surface science methods.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-659/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 660",
+    "slug": "phys-660",
+    "title": "Quantum Condensed Matter",
+    "dept": "PHYS",
+    "number": "660",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "Second quantization and quantum mean-field theory. Hartree-Fock theory, Fermi liquids. Broken-symmetry quantum phases: magnetism, charge density waves, Wigner crystals, superfluids, superconductivity. Introduction to mesoscopic physics and quantum transport. Introduction to renormalization techniques within the context of Kondo physics.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-660/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 673",
+    "slug": "phys-673",
+    "title": "Quantum Field Theory 2",
+    "dept": "PHYS",
+    "number": "673",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "Loop diagrams, renormalization, Abelian and nonabelian gauge theory, QCD, introduction to the Standard Model.",
+    "prerequisites_raw": "Prerequisite: PHYS 610 or permission of instructor.",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-673/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 690",
+    "slug": "phys-690",
+    "title": "M.Sc. Thesis",
+    "dept": "PHYS",
+    "number": "690",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "Independent thesis research work.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-690/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 691",
+    "slug": "phys-691",
+    "title": "Thesis Preparation",
+    "dept": "PHYS",
+    "number": "691",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "Directed study of research papers and experimental or theoretical techniques in the student's designated area of research under the supervision of the graduate studies committee of the Department.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-691/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 692",
+    "slug": "phys-692",
+    "title": "Thesis Project",
+    "dept": "PHYS",
+    "number": "692",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "Independent work under the direction of the student's supervisor on a research problem in the student's designated area of research leading to a project report or seminar.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-692/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 693",
+    "slug": "phys-693",
+    "title": "M.Sc. Research",
+    "dept": "PHYS",
+    "number": "693",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "Independent work under the direction of the student's supervisor on a research problem in the student's designated area of research leading to a project report or seminar.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-693/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 700",
+    "slug": "phys-700",
+    "title": "Preliminary Ph.D. Examination",
+    "dept": "PHYS",
     "number": "700",
     "credits": null,
-    "faculty": "Agricultural & Environmental Sciences",
+    "faculty": "Science",
     "faculties": [
-      "Agricultural & Environmental Sciences"
+      "Science"
     ],
     "terms": [],
     "description": "An examination that must be passed by all doctoral candidates in order to continue in the doctoral program.",
     "prerequisites_raw": "",
     "restrictions_raw": "",
     "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/fdsc-700/index.html",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-700/index.html",
     "name_variants": []
   },
   {
-    "code": "FDSC 725",
-    "slug": "fdsc-725",
-    "title": "Advanced Topics in Food Science",
-    "dept": "FDSC",
-    "number": "725",
+    "code": "PHYS 717",
+    "slug": "phys-717",
+    "title": "Many-body Physics",
+    "dept": "PHYS",
+    "number": "717",
     "credits": null,
-    "faculty": "Agricultural & Environmental Sciences",
+    "faculty": "Science",
     "faculties": [
-      "Agricultural & Environmental Sciences"
+      "Science"
     ],
     "terms": [],
-    "description": "Selected subjects related to advancements taking place in the discipline of Food Science will be studied to gain an in-depth understanding of their principles, application and potential impact.",
-    "prerequisites_raw": "",
-    "restrictions_raw": "Restrictions: Restricted to Ph.D. students in Food Science. Not open to students who have taken FDSC 625.",
-    "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/fdsc-725/index.html",
-    "name_variants": []
-  },
-  {
-    "code": "FDSC 797",
-    "slug": "fdsc-797",
-    "title": "Ph.D. Graduate Seminar 1",
-    "dept": "FDSC",
-    "number": "797",
-    "credits": null,
-    "faculty": "Agricultural & Environmental Sciences",
-    "faculties": [
-      "Agricultural & Environmental Sciences"
-    ],
-    "terms": [],
-    "description": "Presentation on a selected topic, research proposal or research results based on progress in degree work (Ph.D.).",
+    "description": "Real-time and imaginary-time Green functions; Diagrammatic perturbation theory; Quantum linear response and Kubo formulae; Path-integral techniques; Fermi gas; Impurity averaging; Interacting electron gas; Magnetism; Phonons & electron-phonon interaction; Superconductivity; Luttinger liquids",
     "prerequisites_raw": "",
     "restrictions_raw": "",
     "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/fdsc-797/index.html",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-717/index.html",
     "name_variants": []
   },
   {
-    "code": "FDSC 798",
-    "slug": "fdsc-798",
-    "title": "Ph.D. Graduate Seminar 2",
-    "dept": "FDSC",
-    "number": "798",
+    "code": "PHYS 718",
+    "slug": "phys-718",
+    "title": "Special Topics: Solid State Physics 1",
+    "dept": "PHYS",
+    "number": "718",
     "credits": null,
-    "faculty": "Agricultural & Environmental Sciences",
+    "faculty": "Science",
     "faculties": [
-      "Agricultural & Environmental Sciences"
+      "Science"
     ],
     "terms": [],
-    "description": "Presentation on a selected topic, research proposal or research results based on progress in degree work (Ph.D.).",
+    "description": "Specialized discussion of some current problems in solid state physics.",
     "prerequisites_raw": "",
     "restrictions_raw": "",
     "notes_raw": "",
-    "url": "https://coursecatalogue.mcgill.ca/courses/fdsc-798/index.html",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-718/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 719",
+    "slug": "phys-719",
+    "title": "Special Topics: Solid State Physics 2",
+    "dept": "PHYS",
+    "number": "719",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "Specialized discussion of some current problems in solid state physics.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-719/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 729",
+    "slug": "phys-729",
+    "title": "Special Topics in Nuclear Physics",
+    "dept": "PHYS",
+    "number": "729",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "Specialized discussion of some current problems in nuclear physics.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-729/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 730",
+    "slug": "phys-730",
+    "title": "Special Topics: High Energy Physics 1",
+    "dept": "PHYS",
+    "number": "730",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "Specialized discussion of some current problems in theoretical particle physics.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-730/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 731",
+    "slug": "phys-731",
+    "title": "Special Topics: High Energy Physics 2",
+    "dept": "PHYS",
+    "number": "731",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "Specialized discussion of some current problems in theoretical particle physics.",
+    "prerequisites_raw": "",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-731/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 741",
+    "slug": "phys-741",
+    "title": "Superstring Theory",
+    "dept": "PHYS",
+    "number": "741",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "Introduction to the main concepts and tools of modern string theory. Overview of the perturbative worldsheet description of bosonic and supersymmetric string theories. Various concepts in two dimensional conformal field theory. Introduction to the non-perturbative physics of string theory, including D-branes, compactifications and duality.",
+    "prerequisites_raw": "Prerequisite: PHYS 610.",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-741/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 743",
+    "slug": "phys-743",
+    "title": "Very Early Universe",
+    "dept": "PHYS",
+    "number": "743",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "Introduction to key tools used in current research in theoretical cosmology, including (i) Review of Standard Big Bang Cosmology, (ii) Inflationary Universe Models, (iii) Theory of Cosmological Perturbations, (iv) Quantum Field Theory Methods of Cosmology. (v) Topological Defects in Cosmology, (vi) Superstring Cosmology.",
+    "prerequisites_raw": "Corequisite: PHYS 610, Quantum Field Theory 1.",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-743/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 744",
+    "slug": "phys-744",
+    "title": "Finite Temperature Field Theory",
+    "dept": "PHYS",
+    "number": "744",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "Tools of finite temperature (relativistic) field theory. Thermodynamics, introducing bosonic and fermionic Euclidean path integrals. Pressure in a free theory, the perturbative expansion, thermal masses, and symmetry restoration.\nSchwinger-Keldysh contour path integral and its perturbative expansion. Collective phenomena such as dispersion corrections, plasma oscillations, Debye screening and Landau damping.",
+    "prerequisites_raw": "Prerequisite: PHYS 610.",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-744/index.html",
+    "name_variants": []
+  },
+  {
+    "code": "PHYS 745",
+    "slug": "phys-745",
+    "title": "Supersymmetry and Supergravity",
+    "dept": "PHYS",
+    "number": "745",
+    "credits": null,
+    "faculty": "Science",
+    "faculties": [
+      "Science"
+    ],
+    "terms": [],
+    "description": "Introduction to supersymmetry and supergravity, including the Minimal Supersymmetric Standard Model (MSSM).  Basic formalism of supersymmetry (SUSY) transformations and the superfield formalism, simple SUSY models, the MSSM and its phenomenology, mechanisms for breaking supersymmetry, introduction to 4-D supergravity.",
+    "prerequisites_raw": "Prerequisite: PHYS 610.",
+    "restrictions_raw": "",
+    "notes_raw": "",
+    "url": "https://coursecatalogue.mcgill.ca/courses/phys-745/index.html",
     "name_variants": []
   }
 ]
