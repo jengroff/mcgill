@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import asyncio
 import uuid
 
 from langgraph.graph import StateGraph, END
@@ -13,36 +14,45 @@ from backend.workflows.retrieval.state import RetrievalState
 from backend.workflows.retrieval.nodes import (
     keyword_node,
     semantic_node,
-    program_node,
     graph_node,
     structured_node,
     fusion_node,
 )
 
 
-def _after_retrieval(state: RetrievalState) -> str:
-    """All retrieval nodes route to fusion."""
-    return "fusion"
+async def parallel_retrieval_node(state: RetrievalState) -> RetrievalState:
+    """Run keyword, semantic, graph, and structured retrieval in parallel."""
+    results = await asyncio.gather(
+        keyword_node(state),
+        semantic_node(state),
+        graph_node(state),
+        structured_node(state),
+        return_exceptions=True,
+    )
+
+    merged: dict = {}
+    errors: list[str] = []
+    for r in results:
+        if isinstance(r, Exception):
+            errors.append(str(r))
+        elif isinstance(r, dict):
+            errors.extend(r.pop("errors", []))
+            merged.update(r)
+
+    if errors:
+        merged["errors"] = errors
+    return merged
 
 
 class RetrievalOrchestrator(WorkflowOrchestrator):
     def build_graph(self) -> CompiledStateGraph:
         graph = StateGraph(RetrievalState)
 
-        # Parallel retrieval nodes
-        graph.add_node("keyword", keyword_node)
-        graph.add_node("semantic", semantic_node)
-        graph.add_node("program", program_node)
-        graph.add_node("graph", graph_node)
-        graph.add_node("structured", structured_node)
+        graph.add_node("retrieve", parallel_retrieval_node)
         graph.add_node("fusion", fusion_node)
 
-        graph.set_entry_point("keyword")
-        graph.add_edge("keyword", "semantic")
-        graph.add_edge("semantic", "program")
-        graph.add_edge("program", "graph")
-        graph.add_edge("graph", "structured")
-        graph.add_edge("structured", "fusion")
+        graph.set_entry_point("retrieve")
+        graph.add_edge("retrieve", "fusion")
         graph.add_edge("fusion", END)
 
         return graph.compile()

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import asyncio
 import logging
 import re
 import traceback
@@ -22,23 +23,30 @@ async def keyword_node(state: RetrievalState) -> RetrievalState:
 
 
 async def semantic_node(state: RetrievalState) -> RetrievalState:
-    """Dense vector semantic search on course chunks."""
+    """Dense vector semantic search on course chunks + program pages.
+
+    Embeds the query once and runs both searches with the shared vector,
+    avoiding a redundant Voyage API call.
+    """
     try:
-        from backend.services.embedding.retrieval import semantic_search
-        results = await semantic_search(state["query"], top_k=state.get("top_k", 10))
-        return {"semantic_results": results}
+        from backend.services.embedding.voyage import embed_query
+        from backend.services.embedding.vector_store import search_similar, search_similar_programs
+
+        query_emb = embed_query(state["query"])
+        top_k = state.get("top_k", 10)
+
+        course_results, program_results = await asyncio.gather(
+            search_similar(query_emb, top_k),
+            search_similar_programs(query_emb, 5),
+        )
+        return {"semantic_results": course_results, "program_results": program_results}
     except Exception as e:
-        return {"semantic_results": [], "errors": [f"semantic: {e}\n{traceback.format_exc()}"]}
+        return {"semantic_results": [], "program_results": [], "errors": [f"semantic: {e}\n{traceback.format_exc()}"]}
 
 
 async def program_node(state: RetrievalState) -> RetrievalState:
-    """Semantic search on program guide pages."""
-    try:
-        from backend.services.embedding.retrieval import program_search
-        results = await program_search(state["query"], top_k=5)
-        return {"program_results": results}
-    except Exception as e:
-        return {"program_results": [], "errors": [f"program: {e}\n{traceback.format_exc()}"]}
+    """No-op — program search is handled by semantic_node to share the embedding call."""
+    return {}
 
 
 async def graph_node(state: RetrievalState) -> RetrievalState:

@@ -32,6 +32,13 @@ async def precheck_node(state: IngestState) -> IngestState:
             target_depts = [d.upper() for d in dept_filter]
         elif faculty_filter:
             active = get_active_faculties(faculty_filter)
+            if not active:
+                return {
+                    "scrape_status": "error",
+                    "errors": [f"precheck: no faculties matched filter {faculty_filter!r}"],
+                    "skipped_depts": [],
+                    "active_depts": [],
+                }
             target_depts = [p for _, _, prefixes in active for p in prefixes]
         else:
             target_depts = [p for _, _, prefixes in ALL_FACULTIES for p in prefixes]

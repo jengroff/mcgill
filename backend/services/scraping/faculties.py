@@ -154,4 +154,11 @@ def get_active_faculties(
     if faculty_filter is None:
         return ALL_FACULTIES
     allowed = {v.lower() for v in faculty_filter}
-    return [f for f in ALL_FACULTIES if f[0].lower() in allowed or f[1].lower() in allowed]
+    result = [f for f in ALL_FACULTIES if f[0].lower() in allowed or f[1].lower() in allowed]
+    if result:
+        return result
+    # Substring match as fallback for partial/inexact faculty names
+    return [
+        f for f in ALL_FACULTIES
+        if any(a in f[0].lower() or f[0].lower() in a or a in f[1].lower() for a in allowed)
+    ]
