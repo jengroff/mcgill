@@ -1,4 +1,4 @@
-# CI/CD: Build Docker image and deploy to EC2
+# CI/CD: Build Docker images and deploy to EC2
 #
 # Required GitHub repository secrets:
 #   EC2_HOST    — EC2 public IP or hostname
@@ -10,7 +10,7 @@
 #
 # On the EC2 host, docker-compose.prod.yml should be present in the
 # project directory. Postgres and Neo4j run independently — only the
-# app container is replaced on each deploy.
+# app and frontend containers are replaced on each deploy.
 
 name: Deploy
 
@@ -19,11 +19,12 @@ on:
     branches: [main]
 
 env:
-  IMAGE: ghcr.io/${{ github.repository }}
+  IMAGE_APP: ghcr.io/${{ github.repository }}
+  IMAGE_FRONTEND: ghcr.io/${{ github.repository }}-frontend
 
 jobs:
   build:
-    name: Build & push image
+    name: Build & push images
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -47,16 +48,27 @@ jobs:
         id: vars
         run: echo "sha_short=$(git rev-parse --short HEAD)" >> "$GITHUB_OUTPUT"
 
-      - name: Build and push image
+      - name: Build and push app image
         uses: docker/build-push-action@v6
         with:
           context: .
           push: true
           tags: |
-            ${{ env.IMAGE }}:latest
-            ${{ env.IMAGE }}:${{ steps.vars.outputs.sha_short }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+            ${{ env.IMAGE_APP }}:latest
+            ${{ env.IMAGE_APP }}:${{ steps.vars.outputs.sha_short }}
+          cache-from: type=gha,scope=app
+          cache-to: type=gha,mode=max,scope=app
+
+      - name: Build and push frontend image
+        uses: docker/build-push-action@v6
+        with:
+          context: ./frontend
+          push: true
+          tags: |
+            ${{ env.IMAGE_FRONTEND }}:latest
+            ${{ env.IMAGE_FRONTEND }}:${{ steps.vars.outputs.sha_short }}
+          cache-from: type=gha,scope=frontend
+          cache-to: type=gha,mode=max,scope=frontend
 
   deploy:
     name: Deploy to EC2
@@ -76,14 +88,15 @@ jobs:
             # Log in to GHCR (the token is passed as the password)
             echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
-            # Pull the new image
-            docker pull ${{ env.IMAGE }}:latest
+            # Pull new images
+            docker pull ${{ env.IMAGE_APP }}:latest
+            docker pull ${{ env.IMAGE_FRONTEND }}:latest
 
             # Navigate to the project directory
             cd ~/mcgill
 
-            # Restart only the app service — databases stay running
-            docker compose -f docker-compose.prod.yml up -d --no-deps --force-recreate app
+            # Restart app and frontend — databases stay running
+            docker compose -f docker-compose.prod.yml up -d --no-deps --force-recreate app frontend caddy
 
             # Remove old dangling images to reclaim disk space
             docker image prune -f

@@ -17,14 +17,25 @@ services:
     ports:
       - "80:80"
       - "443:443"
+    dns:
+      - 8.8.8.8
+      - 1.1.1.1
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
       - caddy_data:/data
       - caddy_config:/config
     restart: unless-stopped
 
+  frontend:
+    image: ghcr.io/jengroff/mcgill-frontend:latest
+    expose:
+      - "5174"
+    depends_on:
+      - app
+    restart: unless-stopped
+
   app:
-    image: ghcr.io/jtrain/mcgill:latest
+    image: ghcr.io/jengroff/mcgill:latest
     expose:
       - "8000"
     env_file: .env
