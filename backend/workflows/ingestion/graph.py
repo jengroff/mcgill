@@ -20,7 +20,7 @@ from backend.workflows.ingestion.nodes import (
 
 class IngestionOrchestrator(WorkflowOrchestrator):
     def build_graph(self) -> CompiledStateGraph:
-        graph = StateGraph(IngestionState)
+        graph = StateGraph(IngestionState)  # type: ignore[arg-type]
 
         graph.add_node("extract", extract_node)
         graph.add_node("chunk", chunk_node)

@@ -66,7 +66,7 @@ async def precheck_node(state: IngestState) -> IngestState:
             )
         completed = {r["dept"] for r in rows}
 
-        active = [d for d in target_depts if d not in completed]
+        active = [d for d in target_depts if d not in completed]  # type: ignore[misc]
         skipped = [d for d in target_depts if d in completed]
 
         if skipped:
@@ -79,12 +79,12 @@ async def precheck_node(state: IngestState) -> IngestState:
             logger.info(
                 "Processing %d departments: %s",
                 len(active),
-                ", ".join(sorted(active)),
+                ", ".join(sorted(active)),  # type: ignore[arg-type]
             )
 
         return {
             "skipped_depts": skipped,
-            "active_depts": active,
+            "active_depts": active,  # type: ignore[typeddict-item]
         }
     except Exception as e:
         return {

@@ -98,7 +98,8 @@ async def run(
                 for a in soup.find_all("a", href=True)
                 if (
                     m := re.match(
-                        r"^/courses/([a-z]+-\d+[a-z]?)/index\.html$", a["href"]
+                        r"^/courses/([a-z]+-\d+[a-z]?)/index\.html$",
+                        a["href"],  # type: ignore[arg-type]
                     )
                 )
                 and m.group(1).split("-")[0].upper() in active_prefixes

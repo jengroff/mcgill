@@ -1,4 +1,4 @@
-.PHONY: help start install dev up down rebuild rebuild-keep logs serve db db-down frontend frontend-build seed scrape pipeline test test-cov lint format typecheck clean deploy-setup
+.PHONY: help start install dev up down rebuild rebuild-keep logs serve db db-down frontend frontend-build rust-build rust-test bench seed scrape pipeline test test-cov lint format typecheck clean deploy-setup
 
 help: ## Show this help
 	@grep -E '^[a-zA-Z_-]+:.*?##' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-18s\033[0m %s\n", $$1, $$2}'
@@ -69,6 +69,15 @@ frontend: ## Start frontend dev server
 
 frontend-build: ## Production build of frontend
 	cd frontend && npm run build
+
+rust-build: ## Build Rust extension (release)
+	uv run maturin develop --release
+
+rust-test: ## Run Rust unit tests
+	cargo test
+
+bench: rust-build ## Run benchmark suite (Rust vs Python jaro_winkler)
+	uv run python benchmark.py
 
 seed: ## Load courses.json into databases
 	uv run mcgill seed

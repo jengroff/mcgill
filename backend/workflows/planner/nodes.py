@@ -301,5 +301,5 @@ Available courses ({len(candidates)} total):
         messages=[{"role": "user", "content": context}],
     )
 
-    plan_md = response.content[0].text
+    plan_md = response.content[0].text  # type: ignore[union-attr]
     return plan_md, []

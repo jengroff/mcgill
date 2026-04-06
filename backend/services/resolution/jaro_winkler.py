@@ -1,17 +1,10 @@
-"""Jaro-Winkler entity resolution using rapidfuzz."""
-
 from __future__ import annotations
 
-from rapidfuzz.distance import JaroWinkler
-
+from backend.accel import jaro_winkler as jaro_winkler_similarity
 from backend.models.graph import EntityResolution
 from backend.services.resolution.normalize import normalize_name
 
 DEFAULT_THRESHOLD = 0.75
-
-
-def jaro_winkler_similarity(a: str, b: str) -> float:
-    return JaroWinkler.similarity(a, b)
 
 
 def resolve_name(

@@ -1,15 +1,22 @@
-# Production compose file for EC2 deployment.
+# Production compose file for deployment.
 #
 # Usage:
 #   docker compose -f docker-compose.prod.yml up -d
 #
-# Caddy handles HTTPS via Let's Encrypt for mcgill.engroff.ai.
+# Caddy handles HTTPS via Let's Encrypt.
 # Postgres and Neo4j ports are NOT exposed to the host — they are
 # only reachable by the app container over the internal network.
 #
 # Place a .env file alongside this file with any runtime secrets
-# (API keys, etc.). Database credentials below can also be moved
-# there if desired.
+# (API keys, JWT_SECRET_KEY, etc.). Database credentials below can
+# also be moved there if desired.
+#
+# ── Fork checklist ──
+# 1. Update the Caddyfile with your own domain
+# 2. Change the GHCR image paths below to your own registry
+# 3. Set ALLOWED_ORIGINS in .env to your production domain
+# 4. Set a strong JWT_SECRET_KEY in .env
+# 5. Change the default database passwords below (or move to .env)
 
 services:
   caddy:

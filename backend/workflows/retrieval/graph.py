@@ -41,12 +41,12 @@ async def parallel_retrieval_node(state: RetrievalState) -> RetrievalState:
 
     if errors:
         merged["errors"] = errors
-    return merged
+    return merged  # type: ignore[return-value]
 
 
 class RetrievalOrchestrator(WorkflowOrchestrator):
     def build_graph(self) -> CompiledStateGraph:
-        graph = StateGraph(RetrievalState)
+        graph = StateGraph(RetrievalState)  # type: ignore[arg-type]
 
         graph.add_node("retrieve", parallel_retrieval_node)
         graph.add_node("fusion", fusion_node)

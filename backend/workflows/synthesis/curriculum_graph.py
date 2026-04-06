@@ -23,7 +23,7 @@ from backend.workflows.synthesis.curriculum_nodes import (
 
 class CurriculumOrchestrator(WorkflowOrchestrator):
     def build_graph(self) -> CompiledStateGraph:
-        graph = StateGraph(CurriculumState)
+        graph = StateGraph(CurriculumState)  # type: ignore[arg-type]
 
         graph.add_node("interest_map", interest_map_node)
         graph.add_node("requirements", requirements_node)

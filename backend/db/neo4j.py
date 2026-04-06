@@ -33,7 +33,7 @@ async def init_neo4j() -> None:
     driver = await get_driver()
     async with driver.session() as session:
         for stmt in CONSTRAINTS + INDEXES:
-            await session.run(stmt)
+            await session.run(stmt)  # type: ignore[arg-type]
 
 
 async def close_neo4j() -> None:
@@ -46,5 +46,5 @@ async def close_neo4j() -> None:
 async def run_query(query: str, parameters: dict | None = None) -> list[dict]:
     driver = await get_driver()
     async with driver.session() as session:
-        result = await session.run(query, parameters or {})
+        result = await session.run(query, parameters or {})  # type: ignore[arg-type]
         return [record.data() async for record in result]

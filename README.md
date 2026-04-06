@@ -41,7 +41,7 @@ The chat understands course questions, pipeline commands, and curriculum plannin
 
 ## Ports
 
-Offset from defaults to avoid conflicts with other projects on this machine.
+Non-default ports to avoid common conflicts.
 
 | Service        | Port  |
 |----------------|-------|
@@ -68,6 +68,9 @@ make down             Stop all Docker services
 make rebuild          Rebuild containers from scratch (wipes volumes)
 make rebuild-keep     Rebuild containers, keep database volumes
 make logs             Tail Docker logs
+make rust-build       Build Rust extension (release)
+make rust-test        Run Rust unit tests
+make bench            Benchmark Rust vs Python jaro_winkler
 make test             Run test suite
 make lint             Check linting
 make format           Auto-fix lint + format
@@ -94,9 +97,10 @@ backend/
 │   ├── synthesis/         Chat synthesis + Curriculum assembly
 │   └── planner/           Multi-semester curriculum planner (Agent SDK + VLM)
 │
+├── accel.py        Rust/Python fallback for Jaro-Winkler (PyO3)
 ├── services/       Stateless domain services (no workflow/lib imports)
 │   ├── scraping/          Browser, parser, catalogue, faculties registry
-│   ├── resolution/        Jaro-Winkler, entity graph, prerequisites
+│   ├── resolution/        Entity graph, prerequisites, fuzzy matching
 │   ├── embedding/         Chunker, Voyage AI, vector store, retrieval
 │   ├── pdf/               PDF text extraction (pymupdf + pdfplumber)
 │   ├── vlm/               Vision Language Model for PDF course guide processing
@@ -169,11 +173,23 @@ mcgill curriculum --interests "machine learning" "statistics" --program computer
 
 ## Stack
 
-- **Backend**: Python 3.12, FastAPI, LangGraph, Claude Agent SDK, asyncpg, neo4j, rapidfuzz, Voyage AI, Anthropic
+- **Backend**: Python 3.12, FastAPI, LangGraph, Claude Agent SDK, asyncpg, neo4j, Rust/PyO3 (Jaro-Winkler), Voyage AI, Anthropic
 - **Frontend**: React 19, TypeScript, Vite, Tailwind CSS 4, Zustand, react-router-dom, D3
 - **Databases**: PostgreSQL 17 + pgvector, Neo4j 5
 - **Auth**: JWT (PyJWT), bcrypt
 - **Infra**: uv, Docker Compose, GitHub Actions CI/CD → GHCR → EC2
+
+## Rust Extension
+
+The entity resolution service uses a Rust-accelerated Jaro-Winkler implementation via PyO3. The extension is optional — without it, a pure-Python fallback is used automatically.
+
+```bash
+make rust-build    # compile release build (~8 seconds)
+make rust-test     # run Rust unit tests
+make bench         # benchmark Rust vs pure Python
+```
+
+The Docker image compiles the Rust extension at build time. For local development, run `make rust-build` once after cloning.
 
 ## Deployment
 
@@ -187,6 +203,8 @@ Pushing to `main` triggers a GitHub Actions workflow that builds both backend an
 | `EC2_USER` | SSH user (`ubuntu` or `ec2-user`) |
 | `EC2_SSH_KEY` | Private SSH key for the instance |
 
+Set `ALLOWED_ORIGINS` in your `.env` to your production domain (e.g. `https://yourdomain.com`) and generate a strong `JWT_SECRET_KEY`.
+
 **EC2 setup** — Docker and docker compose must be installed. Place `docker-compose.prod.yml` and `.env` in `~/mcgill/`, then start databases once:
 
 ```bash
@@ -196,4 +214,4 @@ docker compose -f docker-compose.prod.yml up -d postgres neo4j
 
 Subsequent pushes to `main` will only replace the `app` and `frontend` containers — databases stay running with their volumes intact.
 
-A separate CI workflow (`ci.yml`) runs ruff lint, ty type check, and pytest on every push and PR to `main`.
+A separate CI workflow (`ci.yml`) runs ruff lint, mypy type check, and pytest on every push and PR to `main`.

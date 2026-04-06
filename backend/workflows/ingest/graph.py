@@ -42,7 +42,7 @@ def _after_embed(state: IngestState) -> str:
 
 class IngestOrchestrator(WorkflowOrchestrator):
     def build_graph(self) -> CompiledStateGraph:
-        graph = StateGraph(IngestState)
+        graph = StateGraph(IngestState)  # type: ignore[arg-type]
 
         graph.add_node("precheck", precheck_node)
         graph.add_node("scrape", scrape_node)
@@ -117,11 +117,11 @@ async def run_pipeline(
     skipped = result.get("skipped_depts", [])
     if skipped:
         print(
-            f"\nSkipped {len(skipped)} already-processed departments: {', '.join(sorted(skipped))}"
+            f"\nSkipped {len(skipped)} already-processed departments: {', '.join(sorted(skipped))}"  # type: ignore[arg-type, call-overload]
         )
     if not result.get("active_depts"):
         print("All departments already processed. Use --force to re-run.")
-        return result
+        return result  # type: ignore[return-value]
 
     print("\nPipeline complete:")
     print(f"  Courses scraped:  {result.get('courses_scraped', 0)}")
@@ -133,4 +133,4 @@ async def run_pipeline(
         for e in result["errors"]:
             print(f"    - {e[:200]}")
 
-    return result
+    return result  # type: ignore[return-value]

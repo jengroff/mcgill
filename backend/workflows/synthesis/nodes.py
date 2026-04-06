@@ -89,10 +89,10 @@ async def synthesize_node(state: SynthesisState) -> SynthesisState:
             model=settings.claude_model,
             max_tokens=1024,
             system=SYSTEM_PROMPT,
-            messages=messages,
+            messages=messages,  # type: ignore[arg-type]
         )
 
-        answer = response.content[0].text
+        answer = response.content[0].text  # type: ignore[union-attr]
         return {"response": answer, "status": "complete"}
 
     except Exception as e:

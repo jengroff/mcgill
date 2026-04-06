@@ -33,6 +33,9 @@ class Settings(BaseSettings):
     neo4j_user: str = "neo4j"
     neo4j_password: str = "mcgilldev"
 
+    # CORS
+    allowed_origins: str = ""
+
     # Scraper
     scraper_delay_sec: float = 1.0
     scraper_headless: bool = True

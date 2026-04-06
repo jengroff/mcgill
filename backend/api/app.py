@@ -36,21 +36,18 @@ def create_app() -> FastAPI:
     app = FastAPI(
         title="McGill Course Explorer API",
         description="Scrape, resolve, embed, and query McGill University course data",
-        version="0.1.0",
+        version="0.5.0",
         lifespan=lifespan,
         docs_url="/docs" if settings.is_development else None,
         redoc_url="/redoc" if settings.is_development else None,
     )
 
-    origins = (
-        ["*"]
-        if settings.is_development
-        else [
-            "https://mcgill.engroff.ai",
-            "http://localhost:5173",
-            "http://localhost:3000",
-        ]
-    )
+    if settings.allowed_origins:
+        origins = [o.strip() for o in settings.allowed_origins.split(",")]
+    elif settings.is_development:
+        origins = ["*"]
+    else:
+        origins = ["http://localhost:5173", "http://localhost:3000"]
     app.add_middleware(
         CORSMiddleware,
         allow_origins=origins,

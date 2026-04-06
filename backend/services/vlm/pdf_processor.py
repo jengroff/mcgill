@@ -80,7 +80,7 @@ class PDFProcessor:
 
             doc = pymupdf.open(stream=self.pdf_bytes, filetype="pdf")
             pages = []
-            for i, page in enumerate(doc):
+            for i, page in enumerate(doc):  # type: ignore[arg-type, var-annotated]
                 pages.append(
                     {
                         "page_number": i + 1,

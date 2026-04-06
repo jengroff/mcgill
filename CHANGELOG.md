@@ -1,10 +1,39 @@
 # Changelog
 
+## 0.6.0 — 2026-04-06
+
+### Added
+- Rust-accelerated Jaro-Winkler string similarity via PyO3 with pure-Python fallback (`backend/accel.py`)
+- `benchmark.py` for measuring Rust vs pure Python fuzzy matching performance
+- Makefile targets `rust-build`, `rust-test`, `bench` for Rust development workflow
+
+### Changed
+- Replaced `rapidfuzz` dependency with self-contained Rust + Python Jaro-Winkler implementation
+- Build system switched to maturin for native extension support
+- CI installs Rust toolchain and enforces minimum 40% test coverage (`--cov-fail-under=40`)
+- Deploy workflow triggers on `src/**` and `Cargo.toml` changes
+
+## 0.5.0 — 2026-04-05
+
+### Added
+- MIT license
+- `CONTRIBUTING.md` with development setup and submission guidelines
+- `SECURITY.md` with vulnerability reporting instructions
+- `ALLOWED_ORIGINS` environment variable for configurable CORS origins
+- `JWT_SECRET_KEY` and `ALLOWED_ORIGINS` entries in `.env.example`
+- Fork checklist in `docker-compose.prod.yml` header comment
+
+### Changed
+- Replaced `ty` type checker with `mypy` — pre-commit hook, CI workflow, and dev dependencies updated
+- CORS origins are now read from `ALLOWED_ORIGINS` env var instead of being hardcoded
+- Removed internal integration docs (Stroma, Stanchion) that referenced private projects
+- FastAPI app version now stays in sync with `pyproject.toml`
+
 ## 0.4.0 — 2026-04-04
 
 ### Added
 - Login/signup prompt on first visit — new users must create an account (name + email + password) before browsing
-- `name` field on user accounts, displayed as a personalized greeting ("Welcome back, Josh") on the browse page
+- `name` field on user accounts, displayed as a personalized greeting ("Welcome back, {name}") on the browse page
 - Example prompts on the auth screen to help new users understand what they can ask
 - User's first name and logout button shown in the header
 - Token persistence via localStorage with auto-restore on page reload

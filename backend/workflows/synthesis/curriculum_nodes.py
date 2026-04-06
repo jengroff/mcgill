@@ -52,7 +52,7 @@ async def candidate_retrieval_node(state: CurriculumState) -> CurriculumState:
 
         retrieval_orch = RetrievalOrchestrator()
         result = await retrieval_orch.run(query=query, top_k=20, mode="hybrid")
-        return {"candidate_courses": result.get("fused_results", [])}
+        return {"candidate_courses": result.get("fused_results", [])}  # type: ignore[typeddict-item]
     except Exception as e:
         return {
             "candidate_courses": [],
@@ -215,7 +215,7 @@ Top recommended courses:
             messages=[{"role": "user", "content": context}],
         )
 
-        return {"recommendation": response.content[0].text, "status": "complete"}
+        return {"recommendation": response.content[0].text, "status": "complete"}  # type: ignore[union-attr]
     except Exception:
         # Fallback: generate a simple list
         ranked = state.get("ranked_courses", [])

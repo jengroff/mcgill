@@ -59,11 +59,11 @@ class ClaudeVisionAnalyzer:
             response = client.messages.create(
                 model=self.model,
                 max_tokens=4096,
-                messages=[
+                messages=[  # type: ignore[arg-type]
                     {
                         "role": "user",
                         "content": [
-                            {
+                            {  # type: ignore[list-item]
                                 "type": "image",
                                 "source": {
                                     "type": "base64",
@@ -76,7 +76,7 @@ class ClaudeVisionAnalyzer:
                     }
                 ],
             )
-            raw = response.content[0].text
+            raw = response.content[0].text  # type: ignore[union-attr]
             data = self._parse_json_response(raw)
 
             tables = data.get("tables", [])
@@ -120,12 +120,12 @@ class ClaudeVisionAnalyzer:
         cleaned = re.sub(r"\n?```\s*$", "", cleaned)
         cleaned = cleaned.strip()
         try:
-            return json.loads(cleaned)
+            return json.loads(cleaned)  # type: ignore[no-any-return]
         except json.JSONDecodeError:
             match = re.search(r"\{.*\}", cleaned, re.DOTALL)
             if match:
                 try:
-                    return json.loads(match.group())
+                    return json.loads(match.group())  # type: ignore[no-any-return]
                 except json.JSONDecodeError:
                     pass
             logger.warning("Failed to parse VLM JSON response")

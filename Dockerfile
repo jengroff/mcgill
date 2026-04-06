@@ -12,10 +12,15 @@ COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /usr/local/bin/
 RUN apt-get update && apt-get install -y --no-install-recommends \
     curl && rm -rf /var/lib/apt/lists/*
 
+# Rust toolchain for PyO3 native extension
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+ENV PATH="/root/.cargo/bin:${PATH}"
+
 WORKDIR /app
 
 # Install dependencies first (cached until pyproject.toml or uv.lock change)
-COPY pyproject.toml uv.lock ./
+COPY pyproject.toml uv.lock Cargo.toml ./
+COPY src/lib.rs src/lib.rs
 RUN uv sync --frozen --no-install-project
 
 # Copy source and install the project itself

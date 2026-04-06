@@ -61,8 +61,8 @@ async def plan_curriculum(
 
     return PlannerResponse(
         status=result.get("status", "complete"),
-        plan_markdown=result.get("plan_markdown", ""),
-        plan_semesters=result.get("plan_semesters", []),
+        plan_markdown=result.get("plan_markdown", ""),  # type: ignore[arg-type]
+        plan_semesters=result.get("plan_semesters", []),  # type: ignore[arg-type]
         errors=result.get("errors", []),
     )
 
@@ -117,7 +117,7 @@ async def plan_curriculum_stream(
         )
 
         # Stream agent messages
-        for msg in result.get("agent_messages", []):
+        for msg in result.get("agent_messages", []):  # type: ignore[attr-defined]
             if not msg.startswith("[tool:"):
                 yield _sse({"type": "agent_message", "content": msg})
 

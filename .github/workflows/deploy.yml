@@ -20,6 +20,8 @@ on:
     paths:
       - "backend/**"
       - "frontend/**"
+      - "src/**"
+      - "Cargo.toml"
       - "Dockerfile"
       - "docker-compose.prod.yml"
       - "Caddyfile"

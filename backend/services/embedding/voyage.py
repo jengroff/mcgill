@@ -35,7 +35,7 @@ def embed_texts(texts: list[str], input_type: str = "document") -> list[list[flo
     for i in range(0, len(texts), BATCH_SIZE):
         batch = texts[i : i + BATCH_SIZE]
         result = client.embed(batch, model=MODEL, input_type=input_type)
-        all_embeddings.extend(result.embeddings)
+        all_embeddings.extend(result.embeddings)  # type: ignore[arg-type]
 
     return all_embeddings
 

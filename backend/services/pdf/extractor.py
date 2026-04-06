@@ -84,7 +84,7 @@ class PDFExtractor:
 
         doc = pymupdf.open(stream=pdf_bytes, filetype="pdf")
         text_parts = []
-        for page in doc:
+        for page in doc:  # type: ignore[attr-defined]
             text_parts.append(page.get_text())
         doc.close()
         return "\n".join(text_parts)

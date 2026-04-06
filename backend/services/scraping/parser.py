@@ -53,7 +53,7 @@ def parse_course(slug: str, html: str, faculty_names: list[str]) -> CourseCreate
         elif t.startswith("Note"):
             notes = t
 
-    dh = content.find(re.compile(r"^h[23]$"), string=re.compile("Description", re.I))
+    dh = content.find(re.compile(r"^h[23]$"), string=re.compile("Description", re.I))  # type: ignore[call-overload]
     if dh and (nxt := dh.find_next_sibling()):
         description = nxt.get_text(strip=True)
     else:
@@ -76,7 +76,7 @@ def parse_course(slug: str, html: str, faculty_names: list[str]) -> CourseCreate
         faculty=faculty_str,
         faculties=list(faculty_names),
         terms=terms,
-        description=description,
+        description=description,  # type: ignore[arg-type]
         prerequisites_raw=prereq,
         restrictions_raw=restrict,
         notes_raw=notes,
@@ -180,7 +180,7 @@ def discover_sub_pages(html: str, parent_path: str) -> list[str]:
     prefix = parent_path.rstrip("/") + "/"
     found: list[str] = []
     for a in area.find_all("a", href=True):
-        href: str = a["href"]
+        href: str = a["href"]  # type: ignore[assignment]
         # Only internal relative links that extend the parent path
         if href.startswith(prefix) and href != prefix:
             # Normalise to path with trailing slash

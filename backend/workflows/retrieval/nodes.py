@@ -145,7 +145,7 @@ async def structured_node(state: RetrievalState) -> RetrievalState:
             messages=[{"role": "user", "content": state["query"]}],
         )
 
-        sql = response.content[0].text.strip().rstrip(";")
+        sql = response.content[0].text.strip().rstrip(";")  # type: ignore[union-attr]
         if sql == "SKIP" or not sql.upper().startswith("SELECT"):
             return {"structured_context": ""}
 

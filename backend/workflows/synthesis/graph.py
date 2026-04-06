@@ -15,7 +15,7 @@ from backend.workflows.synthesis.nodes import context_pack_node, synthesize_node
 
 class SynthesisOrchestrator(WorkflowOrchestrator):
     def build_graph(self) -> CompiledStateGraph:
-        graph = StateGraph(SynthesisState)
+        graph = StateGraph(SynthesisState)  # type: ignore[arg-type]
 
         graph.add_node("context_pack", context_pack_node)
         graph.add_node("synthesize", synthesize_node)

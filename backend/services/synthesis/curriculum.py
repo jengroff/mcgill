@@ -135,7 +135,7 @@ class CurriculumAssembler:
             messages=[{"role": "user", "content": truncated}],
         )
 
-        raw = response.content[0].text.strip()
+        raw = response.content[0].text.strip()  # type: ignore[union-attr]
         # Strip markdown code fences if present
         if raw.startswith("```"):
             raw = raw.split("\n", 1)[1] if "\n" in raw else raw[3:]
@@ -143,7 +143,7 @@ class CurriculumAssembler:
                 raw = raw[:-3]
             raw = raw.strip()
 
-        return _json.loads(raw)
+        return _json.loads(raw)  # type: ignore[no-any-return]
 
     @staticmethod
     def _extract_requirements_regex(content: str) -> dict:

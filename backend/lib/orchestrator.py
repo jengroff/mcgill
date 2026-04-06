@@ -27,7 +27,7 @@ class WorkflowOrchestrator(ABC):
         graph = self.build_graph()
         initial_state = self.build_initial_state(**kwargs)
         result = await graph.ainvoke(initial_state)
-        return result
+        return result  # type: ignore[return-value]
 
     async def stream(
         self,
@@ -58,7 +58,7 @@ class WorkflowOrchestrator(ABC):
                 if isinstance(output, dict):
                     final_state = {**final_state, **output}
 
-        return final_state
+        return final_state  # type: ignore[return-value]
 
     def _node_names(self) -> set[str]:
         """Return the set of node names for filtering stream events.

@@ -15,7 +15,7 @@ from backend.workflows.planner.nodes import gather_context_node, plan_agent_node
 
 class PlannerOrchestrator(WorkflowOrchestrator):
     def build_graph(self) -> CompiledStateGraph:
-        graph = StateGraph(PlannerState)
+        graph = StateGraph(PlannerState)  # type: ignore[arg-type]
 
         graph.add_node("gather_context", gather_context_node)
         graph.add_node("plan_agent", plan_agent_node)
@@ -44,7 +44,7 @@ class PlannerOrchestrator(WorkflowOrchestrator):
             program_slug=program_slug,
             completed_codes=completed_codes or [],
             target_semesters=target_semesters,
-            pdf_bytes=pdf_bytes,
+            pdf_bytes=pdf_bytes,  # type: ignore[typeddict-item]
             pdf_filename=pdf_filename,
             guide_pages=[],
             program_requirements={},

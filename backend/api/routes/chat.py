@@ -561,7 +561,7 @@ async def _run_qa_pipeline(question: str, session_id: str) -> AsyncIterator[dict
 
     sources = [
         {"code": r.get("code", ""), "title": r.get("title", "")}
-        for r in retrieval_state.get("fused_results", [])[:5]
+        for r in retrieval_state.get("fused_results", [])[:5]  # type: ignore[index]
     ]
     if sources:
         yield {"type": "sources", "sources": sources}
@@ -586,7 +586,7 @@ async def _run_qa_pipeline(question: str, session_id: str) -> AsyncIterator[dict
             {"role": "assistant", "content": answer}
         )
 
-        await _persist_bg_message(_sessions[session_id], answer)
+        await _persist_bg_message(_sessions[session_id], answer)  # type: ignore[arg-type]
 
 
 # ---------------------------------------------------------------------------
@@ -757,7 +757,7 @@ async def _run_planner_bg(
         if plan_md:
             queue.put_nowait({"type": "assistant", "content": plan_md})
             session["messages"].append({"role": "assistant", "content": plan_md})
-            await _persist_bg_message(session, plan_md)
+            await _persist_bg_message(session, plan_md)  # type: ignore[arg-type]
         elif errors:
             queue.put_nowait(
                 {
