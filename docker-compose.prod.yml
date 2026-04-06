@@ -66,6 +66,8 @@ services:
       POSTGRES_USER: mcgill
       POSTGRES_PASSWORD: mcgilldev
       POSTGRES_DB: mcgill
+    ports:
+      - "127.0.0.1:5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
     healthcheck:
