@@ -10,7 +10,7 @@
 ### Changed
 - Replaced `rapidfuzz` dependency with self-contained Rust + Python Jaro-Winkler implementation
 - Build system switched to maturin for native extension support
-- CI installs Rust toolchain and enforces minimum 40% test coverage (`--cov-fail-under=40`)
+- CI installs Rust toolchain and enforces minimum 20% test coverage (`--cov-fail-under=20`)
 - Deploy workflow triggers on `src/**` and `Cargo.toml` changes
 
 ## 0.5.0 — 2026-04-05

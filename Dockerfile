@@ -24,6 +24,7 @@ COPY src/lib.rs src/lib.rs
 RUN uv sync --frozen --no-install-project
 
 # Copy source and install the project itself
+COPY README.md ./
 COPY backend/ backend/
 RUN uv sync --frozen --no-editable
 
