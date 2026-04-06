@@ -14,6 +14,7 @@ from backend.api.auth import (
     verify_password,
 )
 from backend.config import settings
+from tests.conftest import requires_postgres
 
 
 @pytest.fixture
@@ -80,6 +81,7 @@ class TestJWT:
         assert payload["email"] == "user@test.mcgill"
         assert "exp" in payload
 
+    @requires_postgres
     def test_expired_token(self):
         import jwt
         from datetime import datetime, timedelta, timezone
@@ -100,6 +102,7 @@ class TestJWT:
             )
             assert resp.status_code == 401
 
+    @requires_postgres
     def test_invalid_token(self):
         app = create_app()
         with TestClient(app) as c:
@@ -115,6 +118,7 @@ class TestJWT:
 # ---------------------------------------------------------------------------
 
 
+@requires_postgres
 class TestRegister:
     def test_register_returns_token_and_user(self, client, clean_users):
         email = _unique_email()
@@ -168,6 +172,7 @@ class TestRegister:
         assert resp.json()["user"]["email"] == email.lower()
 
 
+@requires_postgres
 class TestLogin:
     def test_login_valid_credentials(self, client, clean_users):
         email = _unique_email()
@@ -203,6 +208,7 @@ class TestLogin:
         assert resp.status_code == 401
 
 
+@requires_postgres
 class TestMe:
     def test_me_authenticated(self, client, clean_users):
         email = _unique_email()
@@ -231,6 +237,7 @@ class TestMe:
 # ---------------------------------------------------------------------------
 
 
+@requires_postgres
 class TestChatPersistence:
     def _register(self, client) -> tuple[str, str]:
         email = _unique_email()

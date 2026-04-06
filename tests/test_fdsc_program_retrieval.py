@@ -12,6 +12,8 @@ import re
 
 import pytest
 
+from tests.conftest import requires_anthropic, requires_postgres
+
 pytestmark = pytest.mark.asyncio
 
 
@@ -20,6 +22,7 @@ pytestmark = pytest.mark.asyncio
 # ---------------------------------------------------------------------------
 
 
+@requires_postgres
 class TestFDSCDataPresence:
     """Verify the scraped FDSC program pages are in postgres with
     structured markdown content (tables, section headings)."""
@@ -83,6 +86,7 @@ class TestFDSCDataPresence:
 # ---------------------------------------------------------------------------
 
 
+@requires_postgres
 class TestStructuredRetrieval:
     """The structured_node uses Claude Haiku to generate SQL. Verify that
     direct SQL queries against program_pages return FDSC requirement data."""
@@ -137,6 +141,8 @@ class TestStructuredRetrieval:
 # ---------------------------------------------------------------------------
 
 
+@requires_postgres
+@requires_anthropic
 class TestRetrievalPipeline:
     """Run the full RetrievalOrchestrator and verify program requirement
     data surfaces for FDSC queries."""
@@ -189,6 +195,8 @@ class TestRetrievalPipeline:
 # ---------------------------------------------------------------------------
 
 
+@requires_postgres
+@requires_anthropic
 class TestSynthesisPipeline:
     """Run retrieval + synthesis and verify the final answer references
     actual FDSC program requirement data."""
@@ -293,6 +301,8 @@ class TestSynthesisPipeline:
 # ---------------------------------------------------------------------------
 
 
+@requires_postgres
+@requires_anthropic
 class TestCurriculumExtraction:
     """Test the CurriculumAssembler requirement extraction against
     the FDSC program pages in the database."""
