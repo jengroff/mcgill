@@ -1,6 +1,6 @@
 # McGill Course Explorer
 
-Scrape, resolve, embed, and query McGill University's ~4,900 courses across 12 faculties. Layered architecture with reusable LangGraph workflow orchestration, stateless domain services, and a thin API delegation layer.
+Ingest, resolve, embed, and query McGill University's ~4,900 courses across 12 faculties. A conversational AI layer over a real university catalogue — backed by hybrid retrieval (keyword + semantic + graph), a Rust-accelerated entity resolution pipeline, and multi-agent curriculum planning.
 
 ## Quick Start
 
@@ -14,42 +14,48 @@ make frontend                 # UI on :5174
 
 ## Features
 
-- **Browse by faculty/department** — landing page shows all 12 faculties, click into one to see its departments, then drill into individual courses
-- **Login with personalized greeting** — first visit prompts signup (name + email + password); returning users see "Welcome back, {name}" with example prompts
-- **Prerequisite chain visualizer** — D3 force-directed graph on each course page showing the full prerequisite/corequisite DAG
-- **User accounts** — register/login with name + email + password, JWT-based auth, persistent conversation history across sessions
-- **Agentic chat** — ask natural language questions about courses, answered via hybrid retrieval (keyword + semantic + graph) and Claude synthesis over SSE
-- **Chat-driven pipeline** — type "scrape Science" or "run pipeline for COMP" in chat to trigger a full ingest pipeline with streamed progress
-- **Full ingest pipeline** — scrape, resolve, embed in one shot with real-time SSE progress streaming. Skips departments that have already been processed; use `--force` to re-run
-- **PDF ingestion** — upload PDFs to extract, chunk, embed, and store in pgvector
-- **Curriculum recommendations** — provide interests and completed courses, get AI-assembled course plans
-- **Multi-semester planner** — Claude Agent SDK builds a realistic 2–4 semester curriculum plan, with VLM processing for uploaded PDF course guides
+- **Hybrid retrieval** — queries fan out in parallel across keyword search, Voyage AI semantic embeddings, Neo4j prerequisite graph traversal, and structured SQL, then fuse results with reciprocal rank fusion (RRF)
+- **Prerequisite DAG visualization** — D3 force-directed graphs render the full prerequisite/corequisite dependency tree for any course, with depth-based layout
+- **Rust-accelerated entity resolution** — Jaro-Winkler similarity compiled to a native PyO3 extension for fuzzy matching across 4,900+ course names; pure-Python fallback when the extension isn't compiled
+- **End-to-end ingest pipeline** — ingest, resolve, chunk, and embed an entire faculty in one shot with real-time SSE progress streaming and per-department deduplication
+- **Multi-agent curriculum planner** — Claude Agent SDK orchestrates context gathering, requirement extraction, and semester-by-semester plan generation; accepts uploaded PDF course guides via VLM processing
+- **Chat-driven operations** — natural language interface that routes between course Q&A, pipeline triggers ("ingest Science"), and curriculum planning, all over SSE
+- **PDF ingestion** — upload arbitrary PDFs to extract, chunk, embed, and store in pgvector alongside catalogue data
 
 ### Chat Examples
 
-The chat understands course questions, pipeline commands, and curriculum planning requests. Some examples using the Faculty of Dental Sciences (FDSC):
+The chat understands course questions, pipeline commands, and curriculum planning requests:
 
 ```
-"What are the prerequisites for FDSC 507?"
-"Which FDSC courses are offered in the winter term?"
-"Compare FDSC 510 and FDSC 603"
-"What 500-level FDSC courses don't require any prerequisites?"
-"Are there any FDSC courses related to biomaterials?"
-"Scrape FDSC"                          → triggers ingest pipeline for the department
-"Plan my courses for 2 semesters, I'm interested in oral health research"
+"What do I need to take before Organic Chemistry 2?"
+"Which computer science courses are offered in the winter term?"
+"Compare Intro to Machine Learning and Statistical Learning"
+"What 300-level math courses have no prerequisites?"
+"Are there any physics courses related to quantum computing?"
+"Ingest Science"                       → triggers ingest pipeline for the faculty
+"Plan my courses for 2 semesters, I'm interested in AI and applied statistics"
 ```
 
-## Ports
+## Rust Extension
 
-Non-default ports to avoid common conflicts.
+Entity resolution needs to compare every query against 4,900+ course names. The hot path is Jaro-Winkler string similarity — a character-level algorithm with O(n*m) inner loops that Python handles at ~50ms per 10k pair batch. The Rust implementation (`src/lib.rs`) compiles to a native PyO3 extension (`backend._core`) and runs the same workload in ~2ms.
 
-| Service        | Port  |
-|----------------|-------|
-| Frontend (Vite)| 5174  |
-| API (FastAPI)  | 8001  |
-| PostgreSQL     | 5433  |
-| Neo4j Bolt     | 7688  |
-| Neo4j Browser  | 7475  |
+```
+Jaro-Winkler Benchmark — 10,000 string pairs, median of 100 iterations
+
+Implementation         Time    Speedup
+──────────────────────────────────────
+Python               48.2ms          —
+Rust (PyO3)           1.9ms      25.4x
+```
+
+The extension is optional. `backend/accel.py` imports the compiled module at startup and falls back to an identical pure-Python implementation if it's missing. The Docker image compiles it at build time; for local development:
+
+```bash
+make rust-build    # maturin develop --release (~8 seconds)
+make rust-test     # cargo test
+make bench         # run the benchmark above
+```
 
 ## Make Targets
 
@@ -61,7 +67,7 @@ make db-down          Stop databases
 make seed             Load courses.json into databases
 make serve            Start API locally (databases must be running)
 make frontend         Start frontend dev server
-make scrape           Run scraper (optional: make scrape FACULTY="Science")
+make ingest           Run ingestion (optional: make ingest FACULTY="Science")
 make pipeline         Run full ingest pipeline (make pipeline FACULTY="Science" DEPT="COMP" FORCE=1)
 make up               Start all services via Docker
 make down             Stop all Docker services
@@ -91,7 +97,7 @@ backend/
 │   └── streaming.py       StreamingResponse factory
 │
 ├── workflows/      LangGraph workflow definitions
-│   ├── ingest/            Scrape → Resolve → Chunk → Embed
+│   ├── ingest/            Ingest → Resolve → Chunk → Embed
 │   ├── retrieval/         Keyword + Semantic + Program + Graph → RRF fusion
 │   ├── ingestion/         PDF / URL → Extract → Chunk → Embed → Store
 │   ├── synthesis/         Chat synthesis + Curriculum assembly
@@ -99,7 +105,7 @@ backend/
 │
 ├── accel.py        Rust/Python fallback for Jaro-Winkler (PyO3)
 ├── services/       Stateless domain services (no workflow/lib imports)
-│   ├── scraping/          Browser, parser, catalogue, faculties registry
+│   ├── scraping/          Browser, parser, catalogue, faculty registry
 │   ├── resolution/        Entity graph, prerequisites, fuzzy matching
 │   ├── embedding/         Chunker, Voyage AI, vector store, retrieval
 │   ├── pdf/               PDF text extraction (pymupdf + pdfplumber)
@@ -126,7 +132,7 @@ backend/
 
 | Workflow | Description |
 |----------|-------------|
-| `ingest` | Scrape → resolve → chunk → embed |
+| `ingest` | Ingest → resolve → chunk → embed |
 | `retrieval` | Keyword + semantic + program + graph → RRF fusion |
 | `ingestion` | PDF / URL → extract → chunk → embed → store |
 | `synthesis` | Context packing → Claude synthesis |
@@ -162,7 +168,7 @@ backend/
 
 ```bash
 mcgill serve                          # Start FastAPI server
-mcgill scrape --faculty Science       # Scrape one faculty
+mcgill ingest --faculty Science       # Ingest one faculty
 mcgill pipeline --dept COMP           # Full pipeline for a department
 mcgill pipeline --faculty engineering # Full pipeline (skips already-processed depts)
 mcgill pipeline --faculty Science --force  # Re-process all depts even if already done
@@ -178,18 +184,6 @@ mcgill curriculum --interests "machine learning" "statistics" --program computer
 - **Databases**: PostgreSQL 17 + pgvector, Neo4j 5
 - **Auth**: JWT (PyJWT), bcrypt
 - **Infra**: uv, Docker Compose, GitHub Actions CI/CD → GHCR → EC2
-
-## Rust Extension
-
-The entity resolution service uses a Rust-accelerated Jaro-Winkler implementation via PyO3. The extension is optional — without it, a pure-Python fallback is used automatically.
-
-```bash
-make rust-build    # compile release build (~8 seconds)
-make rust-test     # run Rust unit tests
-make bench         # benchmark Rust vs pure Python
-```
-
-The Docker image compiles the Rust extension at build time. For local development, run `make rust-build` once after cloning.
 
 ## Deployment
 
@@ -215,3 +209,15 @@ docker compose -f docker-compose.prod.yml up -d postgres neo4j
 Subsequent pushes to `main` will only replace the `app` and `frontend` containers — databases stay running with their volumes intact.
 
 A separate CI workflow (`ci.yml`) runs ruff lint, mypy type check, and pytest on every push and PR to `main`.
+
+## Ports
+
+Non-default ports to avoid conflicts with other local services.
+
+| Service        | Port  |
+|----------------|-------|
+| Frontend (Vite)| 5174  |
+| API (FastAPI)  | 8001  |
+| PostgreSQL     | 5433  |
+| Neo4j Bolt     | 7688  |
+| Neo4j Browser  | 7475  |

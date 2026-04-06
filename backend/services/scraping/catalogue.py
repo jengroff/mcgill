@@ -1,9 +1,8 @@
-"""Main course catalogue scraper — orchestrates browser, parsing, and storage."""
-
 from __future__ import annotations
 
 import asyncio
 import json
+import logging
 import re
 from pathlib import Path
 from typing import Callable
@@ -22,6 +21,8 @@ from backend.services.scraping.parser import (
     extract_variants,
     discover_sub_pages,
 )
+
+logger = logging.getLogger(__name__)
 
 BASE_URL = "https://coursecatalogue.mcgill.ca"
 DATA_DIR = Path(__file__).resolve().parents[3] / "data"
@@ -68,7 +69,7 @@ async def run(
             dept_to_faculties.setdefault(p, []).append(name)
 
     def _progress(phase: str, msg: str, current: int = 0, total: int = 0):
-        print(f"[{phase}] {msg}")
+        logger.info("[%s] %s", phase, msg)
         if on_progress:
             on_progress(phase, msg, current, total)
 

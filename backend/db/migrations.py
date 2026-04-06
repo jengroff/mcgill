@@ -1,12 +1,13 @@
-"""Database initialization and seed data loading."""
-
 from __future__ import annotations
 
 import json
+import logging
 from pathlib import Path
 
 from backend.db.postgres import get_pool, init_db
 from backend.db.neo4j import init_neo4j
+
+logger = logging.getLogger(__name__)
 
 
 SEED_FILE = Path(__file__).resolve().parents[3] / "data" / "courses.json"
@@ -20,7 +21,7 @@ async def run_migrations() -> None:
 async def seed_from_json(path: Path | None = None) -> int:
     path = path or SEED_FILE
     if not path.exists():
-        print(f"Seed file not found: {path}")
+        logger.warning("Seed file not found: %s", path)
         return 0
 
     with open(path) as f:
@@ -114,7 +115,10 @@ async def seed_from_json(path: Path | None = None) -> int:
                         )
             count += 1
 
-    print(
-        f"Seeded {count} courses, {len(faculties_seen)} faculties, {len(depts_seen)} departments"
+    logger.info(
+        "Seeded %d courses, %d faculties, %d departments",
+        count,
+        len(faculties_seen),
+        len(depts_seen),
     )
     return count

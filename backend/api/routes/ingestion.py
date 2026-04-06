@@ -23,9 +23,6 @@ async def ingest_pdf(
     pdf_bytes = await file.read()
     orchestrator = IngestionOrchestrator()
 
-    def on_event(event: dict):
-        pass  # TODO: wire up SSE streaming for progress
-
     result = await orchestrator.run(
         source_type="pdf",
         source_path=file.filename or "upload.pdf",

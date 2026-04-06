@@ -17,8 +17,6 @@
 
 ### Added
 - MIT license
-- `CONTRIBUTING.md` with development setup and submission guidelines
-- `SECURITY.md` with vulnerability reporting instructions
 - `ALLOWED_ORIGINS` environment variable for configurable CORS origins
 - `JWT_SECRET_KEY` and `ALLOWED_ORIGINS` entries in `.env.example`
 - Fork checklist in `docker-compose.prod.yml` header comment
