@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
-import { Plus, FileText, Trash2, Upload, X, ChevronDown, ChevronRight } from 'lucide-react'
+import { Link } from 'react-router-dom'
+import { Plus, FileText, Trash2, Upload, X, ChevronDown, ChevronRight, Sparkles, Loader2 } from 'lucide-react'
 import Markdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { useAppStore } from '../store/appStore'
@@ -16,8 +17,10 @@ import {
   uploadPlanDocument,
   deletePlanDocument,
   fetchPrograms,
+  fetchCourseBatch,
+  generatePlan,
 } from '../api/client'
-import type { PlanDetail, PlanSemester, FacultyPrograms } from '../api/client'
+import type { PlanDetail, PlanSemester, FacultyPrograms, CourseInfo } from '../api/client'
 import AuthPrompt from '../components/AuthPrompt'
 
 export default function PlannerPage() {
@@ -327,6 +330,27 @@ function PlanDetailView({ plan, showDocs, onToggleDocs }: { plan: PlanDetail; sh
   const { setActivePlan } = usePlanStore()
   const [addingTerm, setAddingTerm] = useState('')
   const [addingCourse, setAddingCourse] = useState<{ semId: number; code: string } | null>(null)
+  const [courseDetails, setCourseDetails] = useState<Record<string, CourseInfo>>({})
+  const [generating, setGenerating] = useState(false)
+
+  useEffect(() => {
+    const allCodes = plan.semesters.flatMap((s) => s.courses)
+    const missing = allCodes.filter((c) => !courseDetails[c])
+    if (missing.length > 0) {
+      fetchCourseBatch(missing).then((details) =>
+        setCourseDetails((prev) => ({ ...prev, ...details }))
+      ).catch(() => {})
+    }
+  }, [plan.semesters])
+
+  async function handleGenerate() {
+    setGenerating(true)
+    try {
+      const updated = await generatePlan(plan.id)
+      setActivePlan(updated)
+    } catch { /* ignore */ }
+    setGenerating(false)
+  }
 
   async function handleAddSemester() {
     if (!addingTerm.trim()) return
@@ -407,6 +431,20 @@ function PlanDetailView({ plan, showDocs, onToggleDocs }: { plan: PlanDetail; sh
           </p>
         </div>
         <div className="flex items-center gap-2">
+          <button
+            onClick={handleGenerate}
+            disabled={generating || plan.semesters.length === 0}
+            className="flex items-center gap-1 px-3 py-1 rounded-lg text-xs cursor-pointer"
+            style={{
+              background: 'var(--accent)',
+              color: '#fff',
+              border: 'none',
+              opacity: generating || plan.semesters.length === 0 ? 0.5 : 1,
+            }}
+          >
+            {generating ? <Loader2 size={12} className="animate-spin" /> : <Sparkles size={12} />}
+            {generating ? 'Analyzing...' : plan.plan_markdown ? 'Regenerate' : 'Explain Plan'}
+          </button>
           <select
             value={plan.status}
             onChange={(e) => handleStatusChange(e.target.value)}
@@ -485,23 +523,38 @@ function PlanDetailView({ plan, showDocs, onToggleDocs }: { plan: PlanDetail; sh
               </div>
             </div>
 
-            <div className="flex flex-wrap gap-2">
-              {sem.courses.map((code) => (
-                <div
-                  key={code}
-                  className="flex items-center gap-1 px-2 py-1 rounded text-xs group"
-                  style={{ background: 'var(--bg-elevated)', color: 'var(--text-primary)', border: '1px solid var(--border)' }}
-                >
-                  {code}
-                  <button
-                    onClick={() => handleRemoveCourse(sem, code)}
-                    className="opacity-0 group-hover:opacity-100 cursor-pointer"
-                    style={{ background: 'none', border: 'none', color: 'var(--text-muted)', padding: 0 }}
+            <div className="space-y-1.5">
+              {sem.courses.map((code) => {
+                const info = courseDetails[code]
+                return (
+                  <div
+                    key={code}
+                    className="flex items-center gap-2 px-3 py-2 rounded-lg text-xs group"
+                    style={{ background: 'var(--bg-elevated)', border: '1px solid var(--border)' }}
                   >
-                    <X size={10} />
-                  </button>
-                </div>
-              ))}
+                    <Link
+                      to={`/course/${code.replace(' ', '-')}`}
+                      className="flex-1 min-w-0 no-underline"
+                      style={{ color: 'var(--text-primary)' }}
+                    >
+                      <span className="font-mono font-semibold" style={{ color: 'var(--accent)' }}>{code}</span>
+                      {info && (
+                        <span className="ml-1.5" style={{ color: 'var(--text-muted)' }}>
+                          {info.title}
+                          {info.credits != null && <> &middot; {info.credits} cr</>}
+                        </span>
+                      )}
+                    </Link>
+                    <button
+                      onClick={() => handleRemoveCourse(sem, code)}
+                      className="opacity-0 group-hover:opacity-100 cursor-pointer flex-shrink-0"
+                      style={{ background: 'none', border: 'none', color: 'var(--text-muted)', padding: 0 }}
+                    >
+                      <X size={12} />
+                    </button>
+                  </div>
+                )
+              })}
 
               {addingCourse?.semId === sem.id ? (
                 <input

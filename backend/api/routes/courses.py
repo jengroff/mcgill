@@ -1,8 +1,45 @@
 from __future__ import annotations
 
 from fastapi import APIRouter, HTTPException, Query
+from pydantic import BaseModel
 
 router = APIRouter(tags=["Courses"])
+
+
+class BatchCoursesRequest(BaseModel):
+    codes: list[str]
+
+
+@router.post("/courses/batch")
+async def batch_courses(body: BatchCoursesRequest) -> dict[str, dict]:
+    """Look up multiple courses by code in a single request.
+
+    Returns a map of code to `{title, credits, terms, description, dept, faculty}`
+    for each code found. Missing codes are silently omitted.
+    """
+    if not body.codes:
+        return {}
+
+    from backend.db.postgres import get_pool
+
+    pool = await get_pool()
+    async with pool.acquire() as conn:
+        rows = await conn.fetch(
+            """SELECT code, title, credits, terms, description, dept, faculty
+               FROM courses WHERE code = ANY($1)""",
+            body.codes,
+        )
+    return {
+        r["code"]: {
+            "title": r["title"],
+            "credits": float(r["credits"]) if r["credits"] else None,
+            "terms": r["terms"] or [],
+            "description": (r["description"] or "")[:200],
+            "dept": r["dept"],
+            "faculty": r["faculty"],
+        }
+        for r in rows
+    }
 
 
 @router.get("/departments/{code}/courses")

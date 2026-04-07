@@ -20,7 +20,7 @@ make frontend                 # UI on :5174
 - **Prerequisite DAG visualization** — D3 force-directed graphs render the full prerequisite/corequisite dependency tree for any course, with depth-based layout
 - **Rust-accelerated entity resolution** — Jaro-Winkler similarity compiled to a native PyO3 extension for fuzzy matching across 4,900+ course names; pure-Python fallback when the extension isn't compiled
 - **End-to-end ingest pipeline** — ingest, resolve, chunk, and embed an entire faculty in one shot with real-time SSE progress streaming and per-department deduplication
-- **Curriculum planner** — dedicated Planner page with plan list, semester grid, and document drawer; selecting a faculty and program auto-populates semesters with required courses, correct credits, and Fall/Winter term assignments from scraped program data; plans are fully editable (add/remove courses and semesters); upload transcripts and AP score reports as context; trigger AI generation for deeper prerequisite-aware scheduling
+- **Curriculum planner** — dedicated Planner page with plan list, semester grid, and document drawer; selecting a faculty and program auto-populates semesters with required courses, correct credits, and Fall/Winter term assignments from scraped program data; courses display titles, credits, and link to detail pages; "Explain Plan" button triggers the Claude Agent SDK planner to generate a detailed rationale explaining each course, prerequisite chains, workload balance, and alternatives; plans are fully editable (add/remove courses and semesters); upload transcripts and AP score reports as context
 - **Department website directory** — 70+ department website URLs and student resources (student societies, library guides, advisor contacts) injected into synthesis context, so the advisor can reference official department pages, the Food Science Association, library subject guides, and named foundation year contacts
 - **Foundation program awareness** — Foundation Year program pages are explicitly scraped for Ag & Env Sci, Science, Arts, and Arts & Science faculties; synthesis prompt understands non-CEGEP students need a Foundation Program, mentions AP/IB exemptions, and cites specific contact emails
 - **Chat-driven operations** — natural language interface that routes between course Q&A, pipeline triggers ("ingest Science"), and curriculum planning, all over SSE
@@ -160,6 +160,7 @@ backend/
 | `POST /api/v1/curriculum/recommend` | Generate curriculum recommendations |
 | `POST /api/v1/planner/plan` | Multi-semester curriculum plan (accepts PDF upload) |
 | `POST /api/v1/planner/stream` | SSE stream for planner progress |
+| `POST /api/v1/courses/batch` | Batch lookup of course details by code |
 | `GET /api/v1/programs` | List available programs grouped by faculty |
 | `GET /api/v1/plans` | List user's curriculum plans (protected) |
 | `POST /api/v1/plans` | Create a plan (auto-populates semesters when program is selected) |

@@ -100,6 +100,26 @@ export async function fetchPrereqTree(code: string) {
   return res.json()
 }
 
+export interface CourseInfo {
+  title: string
+  credits: number | null
+  terms: string[]
+  description: string
+  dept: string
+  faculty: string
+}
+
+export async function fetchCourseBatch(codes: string[]): Promise<Record<string, CourseInfo>> {
+  if (!codes.length) return {}
+  const res = await fetch(`${BASE}/api/v1/courses/batch`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ codes }),
+  })
+  if (!res.ok) return {}
+  return res.json()
+}
+
 // --- Pipeline ---
 export async function triggerPipeline(config: {
   faculty_filter?: string[]
@@ -284,6 +304,15 @@ export async function deletePlanDocument(planId: number, docId: number): Promise
     headers: authHeaders(),
   })
   if (!res.ok) throw new Error('Failed to delete document')
+}
+
+export async function generatePlan(planId: number): Promise<PlanDetail> {
+  const res = await fetch(`${BASE}/api/v1/plans/${planId}/generate`, {
+    method: 'POST',
+    headers: authHeaders(),
+  })
+  if (!res.ok) throw new Error('Failed to generate plan')
+  return res.json()
 }
 
 // --- Health ---

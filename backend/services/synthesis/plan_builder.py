@@ -26,10 +26,16 @@ class PlanBuilder:
         `[{"term": str, "sort_order": int, "courses": list[str], "total_credits": float}]`
         """
         requirements = await self._get_requirements(program_slug)
-        all_codes = requirements.get("required", []) + requirements.get("electives", [])
+        combined = requirements.get("required", []) + requirements.get("electives", [])
 
+        # Deduplicate while preserving order (required courses first)
+        seen: set[str] = set()
+        all_codes: list[str] = []
         completed_set = {c.upper().strip() for c in completed_codes}
-        all_codes = [c for c in all_codes if c not in completed_set]
+        for code in combined:
+            if code not in seen and code not in completed_set:
+                seen.add(code)
+                all_codes.append(code)
 
         if not all_codes:
             return self._empty_semesters(start_term, target_semesters)

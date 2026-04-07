@@ -10,9 +10,15 @@
 - Management (Desautels) faculty visible on the browse page
 - 40 missing department prefixes added to the faculty registry — Mac campus foundation prefixes (AECH, AEPH, AEHM, AEIS), Mac campus departments (AGEC, BTEC, ENTO, FAES, FMTP, SOIL, WILD, WOOD, etc.), cross-faculty departments (BINF, BMDE, EPSC, MIMM, HGEN, PPHS, etc.)
 
+- **Batch course lookup** — `POST /api/v1/courses/batch` accepts a list of codes and returns details (title, credits, terms, description) for all matched courses in one request
+- **"Explain Plan" button** — triggers the existing planner workflow (Claude Agent SDK) to generate a rationale for the auto-populated plan, explaining each course's purpose, prerequisite chains, workload balance, and alternatives
+- **Rich course display in planner** — semester courses now show title and credits alongside the code, and are clickable links to the full course detail page
+
 ### Changed
 - `POST /api/v1/plans` accepts `start_term` parameter and auto-populates semesters when `program_slug` is provided
 - Program page chunker keeps markdown tables intact so course requirement lists are retrieved as complete tables instead of fragmented rows
+- Planner agent prompt rewritten with a warm, direct advisory voice — explains courses in plain language, flags workload concerns, suggests alternatives, and provides practical registration tips
+- Auto-populated plans no longer contain duplicate courses
 
 ## 0.8.0 — 2026-04-06
 
