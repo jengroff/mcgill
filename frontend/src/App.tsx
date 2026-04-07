@@ -1,6 +1,8 @@
 import { useEffect, useRef } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Header from './components/Header'
+import AuthPrompt from './components/AuthPrompt'
+import Toasts from './components/Toasts'
 import BrowsePage from './pages/BrowsePage'
 import FacultyPage from './pages/FacultyPage'
 import DepartmentPage from './pages/DepartmentPage'
@@ -60,10 +62,12 @@ export default function App() {
     return () => { esRef.current?.close() }
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
+  const user = useAppStore((s) => s.user)
+
   return (
     <div className="h-screen flex flex-col" style={{ background: 'var(--bg-primary)' }}>
       <Header />
-      <main className="flex-1 overflow-hidden">
+      <main className="flex-1 overflow-hidden relative">
         <Routes>
           <Route path="/" element={<BrowsePage />} />
           <Route path="/faculty/:slug" element={<FacultyPage />} />
@@ -72,7 +76,16 @@ export default function App() {
           <Route path="/chat" element={<ChatPage />} />
           <Route path="/planner" element={<PlannerPage />} />
         </Routes>
+        {!user && (
+          <div
+            className="absolute inset-0 z-50 flex items-center justify-center"
+            style={{ background: 'rgba(0, 0, 0, 0.6)', backdropFilter: 'blur(4px)' }}
+          >
+            <AuthPrompt />
+          </div>
+        )}
       </main>
+      <Toasts />
     </div>
   )
 }

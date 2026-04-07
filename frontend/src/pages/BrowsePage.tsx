@@ -4,7 +4,6 @@ import { BookOpen, ChevronRight } from 'lucide-react'
 import { fetchFaculties } from '../api/client'
 import { useAppStore } from '../store/appStore'
 import SearchBar from '../components/SearchBar'
-import AuthPrompt from '../components/AuthPrompt'
 
 interface FacultyItem {
   name: string
@@ -33,18 +32,22 @@ const HIDDEN_FACULTIES = new Set([
 
 export default function BrowsePage() {
   const user = useAppStore((s) => s.user)
+  const addToast = useAppStore((s) => s.addToast)
   const [faculties, setFaculties] = useState<FacultyItem[]>([])
   const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
-    if (!user) return
+  function loadFaculties() {
+    setLoading(true)
     fetchFaculties()
       .then(setFaculties)
-      .catch(() => {})
+      .catch(() => addToast('Failed to load faculties', 'error', { label: 'Retry', fn: loadFaculties }))
       .finally(() => setLoading(false))
-  }, [user])
+  }
 
-  if (!user) return <AuthPrompt />
+  useEffect(() => {
+    if (!user) return
+    loadFaculties()
+  }, [user])
 
   return (
     <div className="h-full overflow-y-auto p-6">

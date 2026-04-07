@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { ArrowLeft } from 'lucide-react'
 import { fetchDepartmentCourses } from '../api/client'
+import { useAppStore } from '../store/appStore'
 import CourseCard from '../components/CourseCard'
 
 interface CourseItem {
@@ -15,14 +16,16 @@ interface CourseItem {
 
 export default function DepartmentPage() {
   const { code } = useParams<{ code: string }>()
+  const addToast = useAppStore((s) => s.addToast)
   const [courses, setCourses] = useState<CourseItem[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     if (!code) return
+    setLoading(true)
     fetchDepartmentCourses(code)
       .then(setCourses)
-      .catch(() => {})
+      .catch(() => addToast('Failed to load courses', 'error', { label: 'Retry', fn: () => window.location.reload() }))
       .finally(() => setLoading(false))
   }, [code])
 

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { ArrowLeft, BookOpen, Clock, AlertCircle, GitBranch } from 'lucide-react'
 import { fetchCourse, fetchPrereqTree } from '../api/client'
+import { useAppStore } from '../store/appStore'
 import PrereqGraph from '../components/PrereqGraph'
 
 interface CourseDetail {
@@ -24,15 +25,17 @@ interface CourseDetail {
 
 export default function CoursePage() {
   const { code } = useParams<{ code: string }>()
+  const addToast = useAppStore((s) => s.addToast)
   const [course, setCourse] = useState<CourseDetail | null>(null)
   const [loading, setLoading] = useState(true)
   const [treeData, setTreeData] = useState<{ root: string; nodes: any[]; edges: any[] } | null>(null)
 
   useEffect(() => {
     if (!code) return
+    setLoading(true)
     fetchCourse(code)
       .then(setCourse)
-      .catch(() => {})
+      .catch(() => addToast(`Failed to load course ${code}`, 'error', { label: 'Retry', fn: () => window.location.reload() }))
       .finally(() => setLoading(false))
     fetchPrereqTree(code).then(setTreeData).catch(() => {})
   }, [code])

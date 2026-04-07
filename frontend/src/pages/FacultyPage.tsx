@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { ChevronRight, ArrowLeft, BookOpen } from 'lucide-react'
 import { fetchDepartments, fetchFaculty } from '../api/client'
+import { useAppStore } from '../store/appStore'
 
 interface DeptItem {
   code: string
@@ -12,18 +13,20 @@ interface DeptItem {
 
 export default function FacultyPage() {
   const { slug } = useParams<{ slug: string }>()
+  const addToast = useAppStore((s) => s.addToast)
   const [faculty, setFaculty] = useState<{ name: string; slug: string } | null>(null)
   const [departments, setDepartments] = useState<DeptItem[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     if (!slug) return
+    setLoading(true)
     Promise.all([fetchFaculty(slug), fetchDepartments(slug)])
       .then(([fac, deps]) => {
         setFaculty(fac)
         setDepartments(deps)
       })
-      .catch(() => {})
+      .catch(() => addToast('Failed to load faculty details', 'error', { label: 'Retry', fn: () => window.location.reload() }))
       .finally(() => setLoading(false))
   }, [slug])
 

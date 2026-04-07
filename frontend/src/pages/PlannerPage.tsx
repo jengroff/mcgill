@@ -24,10 +24,10 @@ import {
   sseUrl,
 } from '../api/client'
 import type { PlanDetail, PlanSemester, FacultyPrograms, CourseInfo } from '../api/client'
-import AuthPrompt from '../components/AuthPrompt'
 
 export default function PlannerPage() {
   const user = useAppStore((s) => s.user)
+  const addToast = useAppStore((s) => s.addToast)
   const { plans, activePlan, loading, setPlans, setActivePlan, setLoading } = usePlanStore()
   const [showNewPlan, setShowNewPlan] = useState(false)
   const [showDocs, setShowDocs] = useState(false)
@@ -37,11 +37,11 @@ export default function PlannerPage() {
     setLoading(true)
     fetchPlans()
       .then(setPlans)
-      .catch(() => {})
+      .catch(() => addToast('Failed to load plans'))
       .finally(() => setLoading(false))
   }, [user])
 
-  if (!user) return <AuthPrompt />
+  if (!user) return null
 
   async function handleCreatePlan(opts: {
     title: string
@@ -49,16 +49,20 @@ export default function PlannerPage() {
     programSlug?: string
     startTerm?: string
   }) {
-    const plan = await createPlan({
-      title: opts.title || 'My Course Plan',
-      student_interests: opts.interests ? opts.interests.split(',').map((s) => s.trim()) : [],
-      program_slug: opts.programSlug || undefined,
-      start_term: opts.startTerm || undefined,
-    })
-    setActivePlan(plan)
-    setShowNewPlan(false)
-    const updated = await fetchPlans()
-    setPlans(updated)
+    try {
+      const plan = await createPlan({
+        title: opts.title || 'My Course Plan',
+        student_interests: opts.interests ? opts.interests.split(',').map((s) => s.trim()) : [],
+        program_slug: opts.programSlug || undefined,
+        start_term: opts.startTerm || undefined,
+      })
+      setActivePlan(plan)
+      setShowNewPlan(false)
+      const updated = await fetchPlans()
+      setPlans(updated)
+    } catch {
+      addToast('Failed to create plan')
+    }
   }
 
   async function handleSelectPlan(id: number) {
@@ -66,12 +70,14 @@ export default function PlannerPage() {
     try {
       const plan = await fetchPlan(id)
       setActivePlan(plan)
-    } catch { /* ignore */ }
+    } catch {
+      addToast('Failed to load plan')
+    }
     setLoading(false)
   }
 
   async function handleDeletePlan(id: number) {
-    await deletePlan(id)
+    try { await deletePlan(id) } catch { addToast('Failed to delete plan'); return }
     if (activePlan?.id === id) setActivePlan(null)
     const updated = await fetchPlans()
     setPlans(updated)
@@ -336,6 +342,7 @@ function NewPlanForm({ onCreate, onCancel }: {
 
 function PlanDetailView({ plan, showDocs, onToggleDocs }: { plan: PlanDetail; showDocs: boolean; onToggleDocs: () => void }) {
   const { setActivePlan } = usePlanStore()
+  const addToast = useAppStore((s) => s.addToast)
   const [addingTerm, setAddingTerm] = useState('')
   const [addingCourse, setAddingCourse] = useState<{ semId: number; code: string } | null>(null)
   const [courseDetails, setCourseDetails] = useState<Record<string, CourseInfo>>({})
@@ -356,7 +363,9 @@ function PlanDetailView({ plan, showDocs, onToggleDocs }: { plan: PlanDetail; sh
     try {
       const updated = await generatePlan(plan.id)
       setActivePlan(updated)
-    } catch { /* ignore */ }
+    } catch {
+      addToast('Plan generation failed — check that the API key is configured', 'error', { label: 'Retry', fn: handleGenerate })
+    }
     setGenerating(false)
   }
 
@@ -409,13 +418,21 @@ function PlanDetailView({ plan, showDocs, onToggleDocs }: { plan: PlanDetail; sh
   async function handleUpload(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0]
     if (!file) return
-    const doc = await uploadPlanDocument(plan.id, file)
-    setActivePlan({ ...plan, documents: [...plan.documents, doc] })
+    try {
+      const doc = await uploadPlanDocument(plan.id, file)
+      setActivePlan({ ...plan, documents: [...plan.documents, doc] })
+    } catch {
+      addToast(`Failed to upload ${file.name}`)
+    }
   }
 
   async function handleDeleteDoc(docId: number) {
-    await deletePlanDocument(plan.id, docId)
-    setActivePlan({ ...plan, documents: plan.documents.filter((d) => d.id !== docId) })
+    try {
+      await deletePlanDocument(plan.id, docId)
+      setActivePlan({ ...plan, documents: plan.documents.filter((d) => d.id !== docId) })
+    } catch {
+      addToast('Failed to delete document')
+    }
   }
 
   async function handleStatusChange(status: string) {

@@ -26,6 +26,13 @@ export interface AuthUser {
   name: string
 }
 
+export interface Toast {
+  id: string
+  message: string
+  type: 'error' | 'info'
+  action?: { label: string; fn: () => void }
+}
+
 interface AppState {
   // Auth
   user: AuthUser | null
@@ -43,6 +50,9 @@ interface AppState {
   pipelineRunId: string | null
   pipelineStatus: string | null
 
+  // Toasts
+  toasts: Toast[]
+
   setUser: (user: AuthUser | null) => void
   setToken: (token: string | null) => void
   loginUser: (token: string, user: AuthUser) => void
@@ -55,6 +65,8 @@ interface AppState {
   setSources: (s: CourseSource[]) => void
   setPipelineRunId: (id: string | null) => void
   setPipelineStatus: (s: string | null) => void
+  addToast: (message: string, type?: 'error' | 'info', action?: { label: string; fn: () => void }) => void
+  dismissToast: (id: string) => void
   reset: () => void
 }
 
@@ -69,6 +81,7 @@ const initial = {
   sources: [],
   pipelineRunId: null,
   pipelineStatus: null,
+  toasts: [] as Toast[],
 }
 
 export const useAppStore = create<AppState>((set) => ({
@@ -114,5 +127,11 @@ export const useAppStore = create<AppState>((set) => ({
   setSources: (sources) => set({ sources }),
   setPipelineRunId: (id) => set({ pipelineRunId: id }),
   setPipelineStatus: (s) => set({ pipelineStatus: s }),
+  addToast: (message, type = 'error', action) => {
+    const id = crypto.randomUUID()
+    set((s) => ({ toasts: [...s.toasts, { id, message, type, action }] }))
+    setTimeout(() => set((s) => ({ toasts: s.toasts.filter((t) => t.id !== id) })), 5000)
+  },
+  dismissToast: (id) => set((s) => ({ toasts: s.toasts.filter((t) => t.id !== id) })),
   reset: () => set({ ...initial, token: localStorage.getItem('token') }),
 }))
