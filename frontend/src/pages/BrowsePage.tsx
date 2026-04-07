@@ -19,13 +19,13 @@ const FACULTY_ICONS: Record<string, string> = {
   'arts': 'A',
   'music': 'Mu',
   'agri-env-sci': 'Ag',
+  'management': 'Mg',
 }
 
 const HIDDEN_FACULTIES = new Set([
   'education',
   'law',
   'nursing',
-  'management',
   'medicine',
   'environment',
   'dental',
