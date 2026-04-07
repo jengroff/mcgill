@@ -54,7 +54,7 @@ export default function BrowsePage() {
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-8">
           <h1 className="text-2xl font-bold mb-2" style={{ color: 'var(--text-primary)' }}>
-            Welcome back, {user.name.split(' ')[0]}
+            Welcome back{user ? `, ${user.name.split(' ')[0]}` : ''}
           </h1>
           <p className="text-sm" style={{ color: 'var(--text-muted)' }}>Explore faculties, departments, and courses</p>
           <div className="max-w-md mx-auto mt-4">
