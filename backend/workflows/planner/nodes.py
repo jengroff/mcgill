@@ -119,6 +119,62 @@ async def plan_agent_node(state: PlannerState) -> PlannerState:
         }
 
 
+async def persist_plan_node(state: PlannerState) -> PlannerState:
+    """Persist planner results back to the plans table when plan_id is set."""
+    plan_id = state.get("plan_id")
+    if not plan_id:
+        return {}
+
+    try:
+        from backend.db.postgres import get_pool
+
+        pool = await get_pool()
+        plan_md = state.get("plan_markdown", "")
+        semesters = state.get("plan_semesters", [])
+
+        async with pool.acquire() as conn:
+            await conn.execute(
+                """UPDATE plans SET plan_markdown = $1, status = 'active', updated_at = now()
+                   WHERE id = $2""",
+                plan_md,
+                plan_id,
+            )
+
+            # Replace existing semesters with new ones
+            await conn.execute("DELETE FROM plan_semesters WHERE plan_id = $1", plan_id)
+            for i, sem in enumerate(semesters):
+                courses_list = []
+                for c in sem.get("courses", []):
+                    if isinstance(c, dict):
+                        courses_list.append(c.get("code", ""))
+                    else:
+                        courses_list.append(str(c))
+
+                total_credits = sem.get("total_credits", 0)
+                if not total_credits and isinstance(sem.get("courses"), list):
+                    total_credits = sum(
+                        c.get("credits", 3)
+                        for c in sem["courses"]
+                        if isinstance(c, dict)
+                    )
+
+                await conn.execute(
+                    """INSERT INTO plan_semesters (plan_id, term, sort_order, courses, total_credits)
+                       VALUES ($1, $2, $3, $4, $5)""",
+                    plan_id,
+                    sem.get("term", f"Semester {i + 1}"),
+                    i,
+                    [c for c in courses_list if c],
+                    float(total_credits),
+                )
+
+        logger.info("Persisted plan %d with %d semesters", plan_id, len(semesters))
+        return {}
+    except Exception as e:
+        logger.exception("Failed to persist plan %s", plan_id)
+        return {"errors": [f"persist_plan: {e}"]}
+
+
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------

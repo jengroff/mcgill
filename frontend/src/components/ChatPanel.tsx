@@ -3,43 +3,12 @@ import { Send } from 'lucide-react'
 import Markdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { useAppStore } from '../store/appStore'
-import { sendMessage, createSession, sseUrl } from '../api/client'
+import { sendMessage } from '../api/client'
 
 export default function ChatPanel() {
-  const { sessionId, setSessionId, setConnected, messages, addMessage, sending, setSending, updateStep, setSources } = useAppStore()
+  const { sessionId, messages, addMessage, sending, setSending } = useAppStore()
   const [input, setInput] = useState('')
   const bottomRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    let es: EventSource | null = null
-
-    async function connect() {
-      const sid = sessionId ?? await createSession()
-      if (!sessionId) setSessionId(sid)
-
-      es = new EventSource(sseUrl(sid))
-      es.onopen = () => setConnected(true)
-      es.onerror = () => setConnected(false)
-
-      es.onmessage = (ev) => {
-        try {
-          const data = JSON.parse(ev.data)
-          if (data.type === 'assistant') {
-            addMessage('assistant', data.content)
-          } else if (data.type === 'step_update') {
-            updateStep(data.phase, data.label, data.status)
-          } else if (data.type === 'error') {
-            addMessage('system', data.content)
-          } else if (data.type === 'sources') {
-            setSources(data.sources ?? [])
-          }
-        } catch { /* ignore */ }
-      }
-    }
-
-    connect()
-    return () => { es?.close() }
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' })

@@ -204,8 +204,37 @@ async def resolve_node(state: IngestState) -> IngestState:
 
         known_codes = {c.code for c in courses}
 
-        # Build faculty and department nodes
+        # Build faculty and department nodes (Neo4j)
         await build_faculty_nodes()
+
+        # Populate Postgres faculties + departments from registry
+        from backend.services.scraping.faculties import (
+            ALL_FACULTIES,
+            DEPARTMENT_WEBSITES,
+        )
+
+        async with pool.acquire() as conn:
+            for fac_name, fac_slug, dept_codes in ALL_FACULTIES:
+                row = await conn.fetchrow(
+                    """INSERT INTO faculties (name, slug)
+                       VALUES ($1, $2)
+                       ON CONFLICT (name) DO UPDATE SET slug = EXCLUDED.slug
+                       RETURNING id""",
+                    fac_name,
+                    fac_slug,
+                )
+                fac_id = row["id"]
+                for code in dept_codes:
+                    await conn.execute(
+                        """INSERT INTO departments (code, faculty_id, website)
+                           VALUES ($1, $2, $3)
+                           ON CONFLICT (code) DO UPDATE SET
+                               faculty_id = COALESCE(EXCLUDED.faculty_id, departments.faculty_id),
+                               website = COALESCE(EXCLUDED.website, departments.website)""",
+                        code,
+                        fac_id,
+                        DEPARTMENT_WEBSITES.get(code),
+                    )
 
         # Build course nodes
         entity_count = await build_course_nodes(courses)

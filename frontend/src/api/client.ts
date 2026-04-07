@@ -124,6 +124,147 @@ export async function fetchPipelineStatus(runId: string) {
   return res.json()
 }
 
+// --- Plans ---
+export interface PlanSummary {
+  id: number
+  title: string
+  program_slug: string | null
+  status: string
+  target_semesters: number
+  created_at: string
+  updated_at: string
+}
+
+export interface PlanSemester {
+  id: number
+  plan_id: number
+  term: string
+  sort_order: number
+  courses: string[]
+  total_credits: number
+}
+
+export interface PlanDocument {
+  id: number
+  plan_id: number
+  filename: string
+  content_type: string
+  uploaded_at: string
+}
+
+export interface PlanDetail extends PlanSummary {
+  student_interests: string[]
+  completed_codes: string[]
+  plan_markdown: string
+  semesters: PlanSemester[]
+  documents: PlanDocument[]
+  conversation_ids: number[]
+}
+
+export async function fetchPlans(): Promise<PlanSummary[]> {
+  const res = await fetch(`${BASE}/api/v1/plans`, { headers: authHeaders() })
+  if (!res.ok) throw new Error('Failed to fetch plans')
+  return res.json()
+}
+
+export async function createPlan(body: {
+  title?: string
+  program_slug?: string
+  target_semesters?: number
+  student_interests?: string[]
+  completed_codes?: string[]
+}): Promise<PlanDetail> {
+  const res = await fetch(`${BASE}/api/v1/plans`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...authHeaders() },
+    body: JSON.stringify(body),
+  })
+  if (!res.ok) throw new Error('Failed to create plan')
+  return res.json()
+}
+
+export async function fetchPlan(planId: number): Promise<PlanDetail> {
+  const res = await fetch(`${BASE}/api/v1/plans/${planId}`, { headers: authHeaders() })
+  if (!res.ok) throw new Error('Failed to fetch plan')
+  return res.json()
+}
+
+export async function updatePlan(planId: number, body: Record<string, unknown>): Promise<PlanDetail> {
+  const res = await fetch(`${BASE}/api/v1/plans/${planId}`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json', ...authHeaders() },
+    body: JSON.stringify(body),
+  })
+  if (!res.ok) throw new Error('Failed to update plan')
+  return res.json()
+}
+
+export async function deletePlan(planId: number): Promise<void> {
+  const res = await fetch(`${BASE}/api/v1/plans/${planId}`, {
+    method: 'DELETE',
+    headers: authHeaders(),
+  })
+  if (!res.ok) throw new Error('Failed to delete plan')
+}
+
+export async function addSemester(planId: number, body: {
+  term: string
+  sort_order: number
+  courses?: string[]
+  total_credits?: number
+}): Promise<PlanSemester> {
+  const res = await fetch(`${BASE}/api/v1/plans/${planId}/semesters`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...authHeaders() },
+    body: JSON.stringify(body),
+  })
+  if (!res.ok) throw new Error('Failed to add semester')
+  return res.json()
+}
+
+export async function updateSemester(planId: number, semId: number, body: {
+  term: string
+  sort_order: number
+  courses: string[]
+  total_credits: number
+}): Promise<PlanSemester> {
+  const res = await fetch(`${BASE}/api/v1/plans/${planId}/semesters/${semId}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json', ...authHeaders() },
+    body: JSON.stringify(body),
+  })
+  if (!res.ok) throw new Error('Failed to update semester')
+  return res.json()
+}
+
+export async function deleteSemester(planId: number, semId: number): Promise<void> {
+  const res = await fetch(`${BASE}/api/v1/plans/${planId}/semesters/${semId}`, {
+    method: 'DELETE',
+    headers: authHeaders(),
+  })
+  if (!res.ok) throw new Error('Failed to delete semester')
+}
+
+export async function uploadPlanDocument(planId: number, file: File): Promise<PlanDocument> {
+  const form = new FormData()
+  form.append('file', file)
+  const res = await fetch(`${BASE}/api/v1/plans/${planId}/documents`, {
+    method: 'POST',
+    headers: authHeaders(),
+    body: form,
+  })
+  if (!res.ok) throw new Error('Failed to upload document')
+  return res.json()
+}
+
+export async function deletePlanDocument(planId: number, docId: number): Promise<void> {
+  const res = await fetch(`${BASE}/api/v1/plans/${planId}/documents/${docId}`, {
+    method: 'DELETE',
+    headers: authHeaders(),
+  })
+  if (!res.ok) throw new Error('Failed to delete document')
+}
+
 // --- Health ---
 export async function fetchHealth() {
   const res = await fetch(`${BASE}/health`)

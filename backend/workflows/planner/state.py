@@ -7,6 +7,8 @@ from backend.lib.state import BaseWorkflowState
 
 class PlannerState(BaseWorkflowState, total=False):
     # Input
+    plan_id: int | None  # if set, persist results back to this plan
+    user_id: int | None
     student_interests: list[str]
     program_slug: str
     completed_codes: list[str]

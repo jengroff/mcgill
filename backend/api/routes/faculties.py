@@ -64,7 +64,7 @@ async def list_departments(slug: str):
     async with pool.acquire() as conn:
         for code in dept_codes:
             row = await conn.fetchrow(
-                "SELECT d.code, d.name FROM departments d WHERE d.code = $1",
+                "SELECT d.code, d.name, d.website FROM departments d WHERE d.code = $1",
                 code,
             )
             count = await conn.fetchval(
@@ -74,6 +74,7 @@ async def list_departments(slug: str):
                 {
                     "code": code,
                     "name": row["name"] if row and row["name"] else code,
+                    "website": row["website"] if row else None,
                     "faculty_slug": slug,
                     "course_count": count,
                 }

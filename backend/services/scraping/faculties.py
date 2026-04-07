@@ -194,6 +194,7 @@ PROGRAM_PAGES: dict[str, list[str]] = {
     "agri-env-sci": [
         "/en/undergraduate/agri-env-sci/",
         "/en/undergraduate/agri-env-sci/programs/",
+        "/en/undergraduate/agri-env-sci/programs/foundation/",
         "/en/undergraduate/agri-env-sci/programs/animal-science/",
         "/en/undergraduate/agri-env-sci/programs/food-science-agricultural-chemistry/",
         "/en/undergraduate/agri-env-sci/programs/natural-resource-sciences/",
@@ -206,6 +207,8 @@ PROGRAM_PAGES: dict[str, list[str]] = {
     "arts": [
         "/en/undergraduate/arts/",
         "/en/undergraduate/arts/programs/",
+        "/en/undergraduate/arts/degree-requirements/about-program/",
+        "/en/undergraduate/arts/degree-requirements/about-program/foundation-program-general-ba/",
         "/en/undergraduate/arts/programs/economics/",
         "/en/undergraduate/arts/programs/political-science/",
         "/en/undergraduate/arts/programs/psychology/",
@@ -214,6 +217,12 @@ PROGRAM_PAGES: dict[str, list[str]] = {
         "/en/undergraduate/arts/programs/philosophy/",
         "/en/undergraduate/arts/programs/linguistics/",
         "/en/graduate/arts/",
+    ],
+    "arts-science": [
+        "/en/undergraduate/arts-science/",
+        "/en/undergraduate/arts-science/overview-programs-offered/",
+        "/en/undergraduate/arts-science/overview-programs-offered/basc-foundation-year-program/",
+        "/en/undergraduate/arts-science/overview-programs-offered/basc-foundation-year-program/foundation-year-program-basc/",
     ],
     "dental": [
         "/en/undergraduate/dental/",
@@ -268,6 +277,8 @@ PROGRAM_PAGES: dict[str, list[str]] = {
     "science": [
         "/en/undergraduate/science/",
         "/en/undergraduate/science/programs/",
+        "/en/undergraduate/science/overview-programs-offered/sci-foundation-program/",
+        "/en/undergraduate/science/overview-programs-offered/sci-foundation-program/foundation-year/",
         "/en/undergraduate/science/programs/biology/",
         "/en/undergraduate/science/programs/chemistry-programs/",
         "/en/undergraduate/science/programs/computer-science-programs/",
@@ -285,6 +296,180 @@ PROGRAM_PAGES: dict[str, list[str]] = {
         "/en/graduate/science/physics/",
         "/en/graduate/science/psychology/",
     ],
+}
+
+
+DEPARTMENT_WEBSITES: dict[str, str] = {
+    # Agricultural & Environmental Sciences
+    "AGRI": "https://www.mcgill.ca/macdonald/",
+    "ANSC": "https://www.mcgill.ca/animal/",
+    "FDSC": "https://www.mcgill.ca/foodscience/",
+    "PLNT": "https://www.mcgill.ca/plant/",
+    "NRSC": "https://www.mcgill.ca/nrs/",
+    "AEBI": "https://www.mcgill.ca/bioeng/",
+    "LSCI": "https://www.mcgill.ca/lifesciences/",
+    "ABEN": "https://www.mcgill.ca/bioeng/",
+    "BIEN": "https://www.mcgill.ca/bioeng/",
+    "BREE": "https://www.mcgill.ca/bioeng/",
+    "PARA": "https://www.mcgill.ca/parasitology/",
+    "NUTR": "https://www.mcgill.ca/humannutrition/",
+    # Arts
+    "ANTH": "https://www.mcgill.ca/anthropology/",
+    "ECON": "https://www.mcgill.ca/economics/",
+    "ENGL": "https://www.mcgill.ca/english/",
+    "HIST": "https://www.mcgill.ca/history/",
+    "LING": "https://www.mcgill.ca/linguistics/",
+    "PHIL": "https://www.mcgill.ca/philosophy/",
+    "POLI": "https://www.mcgill.ca/politicalscience/",
+    "PSYC": "https://www.mcgill.ca/psychology/",
+    "SOCI": "https://www.mcgill.ca/sociology/",
+    "ARTH": "https://www.mcgill.ca/ahcs/",
+    "CLAS": "https://www.mcgill.ca/classics/",
+    "RELG": "https://www.mcgill.ca/religiousstudies/",
+    "SWRK": "https://www.mcgill.ca/socialwork/",
+    # Engineering
+    "ECSE": "https://www.mcgill.ca/ece/",
+    "MECH": "https://www.mcgill.ca/mecheng/",
+    "CIVE": "https://www.mcgill.ca/civil/",
+    "CHEE": "https://www.mcgill.ca/chemeng/",
+    "MIME": "https://www.mcgill.ca/minmet/",
+    "MTLS": "https://www.mcgill.ca/minmet/",
+    # Science
+    "BIOL": "https://www.mcgill.ca/biology/",
+    "CHEM": "https://www.mcgill.ca/chemistry/",
+    "COMP": "https://www.cs.mcgill.ca/",
+    "MATH": "https://www.mcgill.ca/mathstat/",
+    "PHYS": "https://www.physics.mcgill.ca/",
+    "ATOC": "https://www.mcgill.ca/meteo/",
+    "EART": "https://www.mcgill.ca/eps/",
+    "GEOG": "https://www.mcgill.ca/geography/",
+    # Medicine & Health Sciences
+    "ANAT": "https://www.mcgill.ca/anatomy/",
+    "BIOC": "https://www.mcgill.ca/biochemistry/",
+    "EPIB": "https://www.mcgill.ca/epi-biostat-occh/",
+    "MICR": "https://www.mcgill.ca/microimm/",
+    "PHAR": "https://www.mcgill.ca/pharma/",
+    "PHGY": "https://www.mcgill.ca/physiology/",
+    "NEUR": "https://www.mcgill.ca/neuro/",
+    "NSCI": "https://www.mcgill.ca/neuro/",
+    # Management (Desautels)
+    "ACCT": "https://www.mcgill.ca/desautels/",
+    "FINE": "https://www.mcgill.ca/desautels/",
+    "MGCR": "https://www.mcgill.ca/desautels/",
+    "MGMT": "https://www.mcgill.ca/desautels/",
+    "MRKT": "https://www.mcgill.ca/desautels/",
+    "ORGB": "https://www.mcgill.ca/desautels/",
+    # Other faculties
+    "LAWS": "https://www.mcgill.ca/law/",
+    "DENT": "https://www.mcgill.ca/dentistry/",
+    "NURS": "https://www.mcgill.ca/nursing/",
+    "MUAR": "https://www.mcgill.ca/music/",
+    "MUSP": "https://www.mcgill.ca/music/",
+    "MUTH": "https://www.mcgill.ca/music/",
+    "EDUC": "https://www.mcgill.ca/education/",
+    "KINE": "https://www.mcgill.ca/edu-kpe/",
+    "ENVR": "https://www.mcgill.ca/bieler/",
+    "ENVB": "https://www.mcgill.ca/bieler/",
+}
+
+
+DEPARTMENT_RESOURCES: dict[str, dict[str, str | list[str]]] = {
+    "FDSC": {
+        "student_society": "McGill Food Science Association (FSA)",
+        "student_society_url": "https://mcgillfsa.wixsite.com/home",
+        "library_guide": "https://libraryguides.mcgill.ca/food-science",
+        "foundation_email": "foundationyear.macdonald@mcgill.ca",
+        "freshman_advisor_email": "freshmanadvisor.macdonald@mcgill.ca",
+        "campus": "Macdonald Campus",
+        "building": "Macdonald-Stewart Building, Room MS1-033",
+    },
+    "ANSC": {
+        "foundation_email": "foundationyear.macdonald@mcgill.ca",
+        "freshman_advisor_email": "freshmanadvisor.macdonald@mcgill.ca",
+        "campus": "Macdonald Campus",
+    },
+    "PLNT": {
+        "foundation_email": "foundationyear.macdonald@mcgill.ca",
+        "freshman_advisor_email": "freshmanadvisor.macdonald@mcgill.ca",
+        "campus": "Macdonald Campus",
+    },
+    "NRSC": {
+        "foundation_email": "foundationyear.macdonald@mcgill.ca",
+        "freshman_advisor_email": "freshmanadvisor.macdonald@mcgill.ca",
+        "campus": "Macdonald Campus",
+    },
+    "ABEN": {
+        "foundation_email": "foundationyear.macdonald@mcgill.ca",
+        "freshman_advisor_email": "freshmanadvisor.macdonald@mcgill.ca",
+        "campus": "Macdonald Campus",
+    },
+    "BIEN": {
+        "foundation_email": "foundationyear.macdonald@mcgill.ca",
+        "freshman_advisor_email": "freshmanadvisor.macdonald@mcgill.ca",
+        "campus": "Macdonald Campus",
+    },
+    "BREE": {
+        "foundation_email": "foundationyear.macdonald@mcgill.ca",
+        "freshman_advisor_email": "freshmanadvisor.macdonald@mcgill.ca",
+        "campus": "Macdonald Campus",
+    },
+    "LSCI": {
+        "foundation_email": "foundationyear.macdonald@mcgill.ca",
+        "freshman_advisor_email": "freshmanadvisor.macdonald@mcgill.ca",
+        "campus": "Macdonald Campus",
+    },
+    "COMP": {
+        "student_society": "Computer Science Undergraduate Society (CSUS)",
+        "student_society_url": "https://csus.cs.mcgill.ca/",
+        "library_guide": "https://libraryguides.mcgill.ca/computer-science",
+    },
+    "MATH": {
+        "student_society": "Mathematics and Statistics Students' Association (MASSA)",
+        "library_guide": "https://libraryguides.mcgill.ca/math-stats",
+    },
+    "PHYS": {
+        "student_society": "McGill Physics Students' Association (MPSA)",
+        "library_guide": "https://libraryguides.mcgill.ca/physics",
+    },
+    "BIOL": {
+        "student_society": "Biology Students' Association (BSA)",
+        "library_guide": "https://libraryguides.mcgill.ca/biology",
+    },
+    "CHEM": {
+        "student_society": "Chemistry Students' Association (ChemSA)",
+        "library_guide": "https://libraryguides.mcgill.ca/chemistry",
+    },
+    "PSYC": {
+        "student_society": "Psychology Students' Association (PSA)",
+        "library_guide": "https://libraryguides.mcgill.ca/psychology",
+    },
+    "ECSE": {
+        "student_society": "Electrical, Computer and Software Engineering Students' Society (ECSESS)",
+    },
+    "MECH": {
+        "student_society": "Mechanical Engineering Students' Association (MESA)",
+    },
+}
+
+FACULTY_RESOURCES: dict[str, dict[str, str]] = {
+    "agri-env-sci": {
+        "students_society": "Macdonald Campus Students' Society (MCSS)",
+        "students_society_url": "https://mcssmcgill.ca/",
+        "foundation_email": "foundationyear.macdonald@mcgill.ca",
+        "foundation_page": "https://coursecatalogue.mcgill.ca/en/undergraduate/agri-env-sci/programs/foundation/",
+    },
+    "science": {
+        "foundation_page": "https://coursecatalogue.mcgill.ca/en/undergraduate/science/overview-programs-offered/sci-foundation-program/foundation-year/",
+        "foundation_planner": "https://www.mcgill.ca/science/files/science/bachelor_of_science_foundation_program_planner.pdf",
+        "foundation_checklist": "https://www.mcgill.ca/science/undergraduate/accepted/checklist/firstyear/foundation",
+    },
+    "arts": {
+        "foundation_page": "https://coursecatalogue.mcgill.ca/en/undergraduate/arts/degree-requirements/about-program/foundation-program-general-ba/",
+    },
+    "arts-science": {
+        "foundation_page": "https://coursecatalogue.mcgill.ca/en/undergraduate/arts-science/overview-programs-offered/basc-foundation-year-program/foundation-year-program-basc/",
+        "foundation_checklist": "https://www.mcgill.ca/science/undergraduate/accepted/checklist/firstyear/bascfreshman",
+    },
 }
 
 

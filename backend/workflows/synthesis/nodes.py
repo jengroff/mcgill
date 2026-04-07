@@ -12,20 +12,48 @@ SYSTEM_PROMPT = (
     "Use the provided course data to answer accurately. "
     "When SQL results are provided in the context, treat them as authoritative data from the database "
     "and use them directly to answer the question — do not say you lack information. "
-    "Be concise and cite specific course codes when relevant."
+    "Be concise and cite specific course codes when relevant.\n\n"
+    "When department or faculty resources (websites, student societies, library guides, "
+    "advisor emails) are available in the context, include the most relevant ones so "
+    "students have actionable next steps — not just generic 'contact an advisor' advice.\n\n"
+    "For students asking about freshman-year or first-year requirements:\n"
+    "- Students entering from outside Quebec's CEGEP system typically must complete a "
+    "Foundation Program (30 credits) before the main degree. The Foundation Program "
+    "covers biology, chemistry, physics, and mathematics.\n"
+    "- If Foundation Year course data is in the context, list the specific courses.\n"
+    "- Students with AP Exams, IB, A-Levels, or the French Baccalaureate may receive "
+    "exemptions for some or all Foundation courses — always mention this caveat.\n"
+    "- Include the foundation year contact email if available in the context.\n"
+    "- Link to the Foundation Program page on the McGill Course Catalogue and the "
+    "department website when available."
 )
+
+
+def _lookup_dept_websites(dept_codes: set[str]) -> dict[str, str]:
+    """Look up department website URLs from the static registry."""
+    from backend.services.scraping.faculties import DEPARTMENT_WEBSITES
+
+    return {
+        code: DEPARTMENT_WEBSITES[code]
+        for code in dept_codes
+        if code in DEPARTMENT_WEBSITES
+    }
 
 
 async def context_pack_node(state: SynthesisState) -> SynthesisState:
     """Assemble retrieval context into a Claude-ready string."""
     try:
         parts: list[str] = []
+        dept_codes: set[str] = set()
 
         # Course context from retrieval
         for r in state.get("retrieval_context", []):
             parts.append(
                 f"{r.get('code', '')}: {r.get('title', '')}\n{r.get('description', '')}"
             )
+            code = r.get("code", "")
+            if code and " " in code:
+                dept_codes.add(code.split()[0])
 
         # Graph context (prerequisites)
         graph_ctx = state.get("graph_context", "")
@@ -43,6 +71,43 @@ async def context_pack_node(state: SynthesisState) -> SynthesisState:
             text = r.get("text", "")
             if text:
                 parts.append(f"[{title}]\n{text}")
+
+        # Department website URLs + resources
+        websites = _lookup_dept_websites(dept_codes)
+        if websites:
+            lines = ["Department websites:"]
+            for code, url in sorted(websites.items()):
+                lines.append(f"  {code}: {url}")
+            parts.append("\n".join(lines))
+
+        # Department and faculty resources (student societies, advisor contacts, etc.)
+        from backend.services.scraping.faculties import (
+            DEPARTMENT_RESOURCES,
+            FACULTY_RESOURCES,
+            ALL_FACULTIES,
+        )
+
+        resource_lines: list[str] = []
+        faculty_slugs: set[str] = set()
+        for code in dept_codes:
+            if code in DEPARTMENT_RESOURCES:
+                res = DEPARTMENT_RESOURCES[code]
+                resource_lines.append(f"  {code} resources:")
+                for key, val in res.items():
+                    resource_lines.append(f"    {key}: {val}")
+            for _, slug, prefixes in ALL_FACULTIES:
+                if code in prefixes:
+                    faculty_slugs.add(slug)
+
+        for slug in faculty_slugs:
+            if slug in FACULTY_RESOURCES:
+                fac_res = FACULTY_RESOURCES[slug]
+                resource_lines.append(f"  Faculty {slug} resources:")
+                for key, val in fac_res.items():
+                    resource_lines.append(f"    {key}: {val}")
+
+        if resource_lines:
+            parts.append("Student resources:\n" + "\n".join(resource_lines))
 
         # Trim to rough token budget (~8k chars ≈ ~2k tokens)
         context_text = "\n---\n".join(parts)

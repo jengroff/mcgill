@@ -1,5 +1,42 @@
 # Changelog
 
+## 0.8.0 — 2026-04-06
+
+### Added
+- **Planner page** — dedicated UI for creating, editing, and managing curriculum plans with a three-panel layout (plan list, semester grid, document drawer)
+- **Plan persistence** — `plans`, `plan_semesters`, `plan_documents`, `plan_conversations` tables store curriculum plans as first-class entities with semester-by-semester course assignments
+- **Plan CRUD API** — full REST endpoints for plans (`/api/v1/plans`), semesters, document upload, and conversation linking
+- **Plan document repository** — upload transcripts, AP score reports, and course guides per plan; PDF text is auto-extracted on upload
+- **Plan generation endpoint** — `POST /api/v1/plans/{id}/generate` triggers the planner workflow and persists structured results (semesters + courses) back to the plan
+- **Planner workflow persistence** — `persist_plan_node` saves agent output (markdown + structured semesters) to the plans table after generation
+- **Planner nav link** in header with CalendarDays icon
+- Food chemistry and food science added to curriculum interest mapping
+
+### Changed
+- Planner graph now runs 3 nodes: gather_context → plan_agent → persist_plan
+- `PlannerState` accepts `plan_id` and `user_id` for plan-scoped generation
+
+## 0.7.0 — 2026-04-06
+
+### Added
+- Department website URLs — `departments` table now stores a `website` column populated from a static mapping of ~60 McGill department URLs
+- Department and faculty student resources layer — student societies, library subject guides, advisor contacts, and foundation year emails injected into synthesis context
+- Foundation Year program seed URLs added to scraper for Ag & Env Sci, Science, Arts, and Arts & Science faculties — the scraper now explicitly captures Foundation Program course listings instead of relying on sub-page discovery
+- Arts & Science faculty added to `PROGRAM_PAGES` with foundation year URLs
+- Synthesis prompt updated with AP/IB/A-Level exemption awareness, actionable advisor contacts, and foundation year program handling
+- Department `website` field exposed in `GET /api/v1/faculties/{slug}/departments` responses
+- SSE connection established on app load so Live indicator is active on all tabs, not just Chat
+- UI-only faculty filtering — Education, Law, Nursing, Management, Environment, Dental, and Medicine hidden from the browse page
+
+### Changed
+- Pipeline (`resolve_node`) now populates Postgres `faculties` and `departments` tables directly from the registry — seeding is no longer a prerequisite for department data
+- Department website lookup in synthesis uses the static mapping directly instead of querying the DB
+- Text-to-SQL schema description updated to include `departments.website` for structured queries
+- `seed_from_json` migration populates department website URLs on seed
+- SSE connection moved from `ChatPanel` to `App.tsx` for app-wide availability
+- Auto-migration adds `departments.website` column on startup for existing databases
+- Test suite expanded from 4 → 122 passing unit tests covering parser, prerequisite resolution, chunking, faculty registry, curriculum interest mapping, and student resources
+
 ## 0.6.0 — 2026-04-06
 
 ### Added

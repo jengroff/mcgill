@@ -7,10 +7,12 @@ Ingest, resolve, embed, and query McGill University's ~4,900 courses across 12 f
 ```bash
 cp .env.example .env          # fill in API keys
 make db                       # start Postgres + Neo4j
-make seed                     # load courses from data/courses.json
+make pipeline FACULTY="Science"  # scrape, resolve, embed (populates all tables)
 make serve                    # API on :8001
 make frontend                 # UI on :5174
 ```
+
+`make seed` is available as a shortcut to load pre-scraped data from `data/courses.json`, but the pipeline is the primary path and populates everything including faculties, departments, and department website URLs.
 
 ## Features
 
@@ -18,7 +20,9 @@ make frontend                 # UI on :5174
 - **Prerequisite DAG visualization** — D3 force-directed graphs render the full prerequisite/corequisite dependency tree for any course, with depth-based layout
 - **Rust-accelerated entity resolution** — Jaro-Winkler similarity compiled to a native PyO3 extension for fuzzy matching across 4,900+ course names; pure-Python fallback when the extension isn't compiled
 - **End-to-end ingest pipeline** — ingest, resolve, chunk, and embed an entire faculty in one shot with real-time SSE progress streaming and per-department deduplication
-- **Multi-agent curriculum planner** — Claude Agent SDK orchestrates context gathering, requirement extraction, and semester-by-semester plan generation; accepts uploaded PDF course guides via VLM processing
+- **Curriculum planner** — dedicated Planner page with plan list, semester grid, and document drawer; create plans, add/remove courses per semester, upload transcripts and AP score reports as context; trigger AI generation that analyzes prerequisites, term availability, and credit balance to build a full semester-by-semester plan persisted to the database
+- **Department website directory** — 60+ department website URLs and student resources (student societies, library guides, advisor contacts) injected into synthesis context, so the advisor can reference official department pages, the Food Science Association, library subject guides, and named foundation year contacts
+- **Foundation program awareness** — Foundation Year program pages are explicitly scraped for Ag & Env Sci, Science, Arts, and Arts & Science faculties; synthesis prompt understands non-CEGEP students need a Foundation Program, mentions AP/IB exemptions, and cites specific contact emails
 - **Chat-driven operations** — natural language interface that routes between course Q&A, pipeline triggers ("ingest Science"), and curriculum planning, all over SSE
 - **PDF ingestion** — upload arbitrary PDFs to extract, chunk, embed, and store in pgvector alongside catalogue data
 
@@ -32,6 +36,7 @@ The chat understands course questions, pipeline commands, and curriculum plannin
 "Compare Intro to Machine Learning and Statistical Learning"
 "What 300-level math courses have no prerequisites?"
 "Are there any physics courses related to quantum computing?"
+"I'm an incoming freshman in Food Science — what do I need to take?"
 "Ingest Science"                       → triggers ingest pipeline for the faculty
 "Plan my courses for 2 semesters, I'm interested in AI and applied statistics"
 ```
@@ -155,6 +160,15 @@ backend/
 | `POST /api/v1/curriculum/recommend` | Generate curriculum recommendations |
 | `POST /api/v1/planner/plan` | Multi-semester curriculum plan (accepts PDF upload) |
 | `POST /api/v1/planner/stream` | SSE stream for planner progress |
+| `GET /api/v1/plans` | List user's curriculum plans (protected) |
+| `POST /api/v1/plans` | Create a new plan |
+| `GET /api/v1/plans/{id}` | Full plan detail with semesters, documents, linked conversations |
+| `PATCH /api/v1/plans/{id}` | Update plan fields (title, status, interests, etc.) |
+| `POST /api/v1/plans/{id}/generate` | Trigger AI planner and persist results |
+| `POST /api/v1/plans/{id}/semesters` | Add a semester to a plan |
+| `PUT /api/v1/plans/{id}/semesters/{sid}` | Update semester courses |
+| `POST /api/v1/plans/{id}/documents` | Upload a document (transcript, AP scores, etc.) |
+| `POST /api/v1/plans/{id}/conversations/{cid}` | Link a chat conversation to a plan |
 | `POST /api/v1/auth/register` | Create a new user account (name + email + password) |
 | `POST /api/v1/auth/login` | Authenticate with email + password |
 | `GET /api/v1/auth/me` | Get current user profile (protected) |
@@ -209,6 +223,23 @@ docker compose -f docker-compose.prod.yml up -d postgres neo4j
 Subsequent pushes to `main` will only replace the `app` and `frontend` containers — databases stay running with their volumes intact.
 
 A separate CI workflow (`ci.yml`) runs ruff lint, mypy type check, and pytest on every push and PR to `main`.
+
+## Tests
+
+122 unit tests covering core functionality with zero external dependencies (no Postgres, Neo4j, or API keys required):
+
+| Module | Tests | Coverage |
+|--------|-------|----------|
+| `test_parser.py` | 30 | HTML parsing, program page markdown conversion, table rendering, sub-page discovery, variant extraction |
+| `test_prerequisites.py` | 13 | Prerequisite/corequisite/restriction extraction, deduplication, self-reference filtering |
+| `test_chunker.py` | 20 | Sentence splitting, course chunking with windowing and overlap, program page chunking |
+| `test_registry.py` | 30 | Faculty registry, department websites, student resources, foundation page seeds, curriculum interest mapping |
+| `test_auth.py` | 25 | Password hashing, JWT, registration, login, chat persistence (4 unit + 21 integration) |
+| `test_fdsc_program_retrieval.py` | 17 | End-to-end FDSC program retrieval and synthesis (integration, requires Postgres + Anthropic) |
+
+```bash
+make test             # run all tests
+```
 
 ## Ports
 

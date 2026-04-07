@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Header from './components/Header'
 import BrowsePage from './pages/BrowsePage'
@@ -6,13 +6,21 @@ import FacultyPage from './pages/FacultyPage'
 import DepartmentPage from './pages/DepartmentPage'
 import CoursePage from './pages/CoursePage'
 import ChatPage from './pages/ChatPage'
+import PlannerPage from './pages/PlannerPage'
 import { useAppStore } from './store/appStore'
-import { fetchMe } from './api/client'
+import { fetchMe, createSession, sseUrl } from './api/client'
 
 export default function App() {
   const token = useAppStore((s) => s.token)
   const setUser = useAppStore((s) => s.setUser)
   const logout = useAppStore((s) => s.logout)
+  const sessionId = useAppStore((s) => s.sessionId)
+  const setSessionId = useAppStore((s) => s.setSessionId)
+  const setConnected = useAppStore((s) => s.setConnected)
+  const addMessage = useAppStore((s) => s.addMessage)
+  const updateStep = useAppStore((s) => s.updateStep)
+  const setSources = useAppStore((s) => s.setSources)
+  const esRef = useRef<EventSource | null>(null)
 
   useEffect(() => {
     if (!token) return
@@ -20,6 +28,37 @@ export default function App() {
       .then(setUser)
       .catch(() => logout())
   }, [token])
+
+  // Establish SSE connection on app load so Live indicator works on all tabs
+  useEffect(() => {
+    async function connect() {
+      const sid = sessionId ?? await createSession()
+      if (!sessionId) setSessionId(sid)
+
+      const es = new EventSource(sseUrl(sid))
+      esRef.current = es
+      es.onopen = () => setConnected(true)
+      es.onerror = () => setConnected(false)
+
+      es.onmessage = (ev) => {
+        try {
+          const data = JSON.parse(ev.data)
+          if (data.type === 'assistant') {
+            addMessage('assistant', data.content)
+          } else if (data.type === 'step_update') {
+            updateStep(data.phase, data.label, data.status)
+          } else if (data.type === 'error') {
+            addMessage('system', data.content)
+          } else if (data.type === 'sources') {
+            setSources(data.sources ?? [])
+          }
+        } catch { /* ignore */ }
+      }
+    }
+
+    connect()
+    return () => { esRef.current?.close() }
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className="h-screen flex flex-col" style={{ background: 'var(--bg-primary)' }}>
@@ -31,6 +70,7 @@ export default function App() {
           <Route path="/dept/:code" element={<DepartmentPage />} />
           <Route path="/course/:code" element={<CoursePage />} />
           <Route path="/chat" element={<ChatPage />} />
+          <Route path="/planner" element={<PlannerPage />} />
         </Routes>
       </main>
     </div>

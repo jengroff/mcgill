@@ -17,16 +17,19 @@ const FACULTY_ICONS: Record<string, string> = {
   'engineering': 'E',
   'science': 'S',
   'arts': 'A',
-  'management': 'M',
-  'medicine': 'H',
-  'education': 'Ed',
-  'law': 'L',
   'music': 'Mu',
-  'nursing': 'N',
-  'dental': 'D',
-  'environment': 'Ev',
   'agri-env-sci': 'Ag',
 }
+
+const HIDDEN_FACULTIES = new Set([
+  'education',
+  'law',
+  'nursing',
+  'management',
+  'medicine',
+  'environment',
+  'dental',
+])
 
 export default function BrowsePage() {
   const user = useAppStore((s) => s.user)
@@ -60,7 +63,7 @@ export default function BrowsePage() {
           <div className="text-center py-8" style={{ color: 'var(--text-muted)' }}>Loading faculties...</div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {faculties.map((f) => (
+            {faculties.filter((f) => !HIDDEN_FACULTIES.has(f.slug)).map((f) => (
               <Link
                 key={f.slug}
                 to={`/faculty/${f.slug}`}

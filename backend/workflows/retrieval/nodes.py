@@ -93,7 +93,7 @@ async def graph_node(state: RetrievalState) -> RetrievalState:
 _DB_SCHEMA = """
 Tables:
   faculties (id serial PK, name varchar UNIQUE, slug varchar UNIQUE)
-  departments (id serial PK, code varchar(6) UNIQUE, faculty_id int FK→faculties, name varchar)
+  departments (id serial PK, code varchar(6) UNIQUE, faculty_id int FK→faculties, name varchar, website varchar)
   courses (id serial PK, code varchar UNIQUE, slug varchar, title varchar, dept varchar(6),
            number varchar, credits real, faculty varchar, terms text[],
            description text, prerequisites_raw text, restrictions_raw text, notes_raw text,
@@ -120,6 +120,8 @@ Notes:
     Search with content ILIKE '%COURSE_CODE%' or content ILIKE '%keyword%'.
   - program_pages.path contains URL slugs, e.g. '%food-science%' for FDSC programs.
   - program_pages.faculty_slug groups pages by faculty, e.g. 'agri-env-sci', 'science'.
+  - departments.website contains the department's main website URL (e.g. 'https://www.mcgill.ca/foodscience/').
+    Join courses.dept = departments.code to look up department websites.
 """
 
 

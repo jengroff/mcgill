@@ -10,7 +10,11 @@ from langgraph.graph.state import CompiledStateGraph
 from backend.lib.orchestrator import WorkflowOrchestrator
 from backend.lib.registry import registry, WorkflowConfig
 from backend.workflows.planner.state import PlannerState
-from backend.workflows.planner.nodes import gather_context_node, plan_agent_node
+from backend.workflows.planner.nodes import (
+    gather_context_node,
+    plan_agent_node,
+    persist_plan_node,
+)
 
 
 class PlannerOrchestrator(WorkflowOrchestrator):
@@ -19,10 +23,12 @@ class PlannerOrchestrator(WorkflowOrchestrator):
 
         graph.add_node("gather_context", gather_context_node)
         graph.add_node("plan_agent", plan_agent_node)
+        graph.add_node("persist_plan", persist_plan_node)
 
         graph.set_entry_point("gather_context")
         graph.add_edge("gather_context", "plan_agent")
-        graph.add_edge("plan_agent", END)
+        graph.add_edge("plan_agent", "persist_plan")
+        graph.add_edge("persist_plan", END)
 
         return graph.compile()
 
@@ -34,12 +40,16 @@ class PlannerOrchestrator(WorkflowOrchestrator):
         target_semesters=4,
         pdf_bytes=None,
         pdf_filename="",
+        plan_id=None,
+        user_id=None,
         **kwargs,
     ) -> PlannerState:
         return PlannerState(
             run_id=str(uuid.uuid4()),
             errors=[],
             status="pending",
+            plan_id=plan_id,
+            user_id=user_id,
             student_interests=student_interests or [],
             program_slug=program_slug,
             completed_codes=completed_codes or [],

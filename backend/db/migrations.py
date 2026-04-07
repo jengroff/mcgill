@@ -6,6 +6,7 @@ from pathlib import Path
 
 from backend.db.postgres import get_pool, init_db
 from backend.db.neo4j import init_neo4j
+from backend.services.scraping.faculties import DEPARTMENT_WEBSITES
 
 logger = logging.getLogger(__name__)
 
@@ -59,12 +60,15 @@ async def seed_from_json(path: Path | None = None) -> int:
                 fac_name = c.get("faculty", "")
                 fac_id = faculties_seen.get(fac_name)
                 row = await conn.fetchrow(
-                    """INSERT INTO departments (code, faculty_id)
-                       VALUES ($1, $2)
-                       ON CONFLICT (code) DO UPDATE SET faculty_id = COALESCE(EXCLUDED.faculty_id, departments.faculty_id)
+                    """INSERT INTO departments (code, faculty_id, website)
+                       VALUES ($1, $2, $3)
+                       ON CONFLICT (code) DO UPDATE SET
+                           faculty_id = COALESCE(EXCLUDED.faculty_id, departments.faculty_id),
+                           website = COALESCE(EXCLUDED.website, departments.website)
                        RETURNING id""",
                     dept,
                     fac_id,
+                    DEPARTMENT_WEBSITES.get(dept),
                 )
                 depts_seen[dept] = row["id"]
 
