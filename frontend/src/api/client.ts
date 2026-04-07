@@ -124,6 +124,26 @@ export async function fetchPipelineStatus(runId: string) {
   return res.json()
 }
 
+// --- Programs ---
+export interface ProgramInfo {
+  slug: string
+  title: string
+  path: string
+  faculty_slug: string
+}
+
+export interface FacultyPrograms {
+  faculty_slug: string
+  faculty_name: string
+  programs: ProgramInfo[]
+}
+
+export async function fetchPrograms(): Promise<FacultyPrograms[]> {
+  const res = await fetch(`${BASE}/api/v1/programs`)
+  if (!res.ok) throw new Error('Failed to fetch programs')
+  return res.json()
+}
+
 // --- Plans ---
 export interface PlanSummary {
   id: number
@@ -170,6 +190,7 @@ export async function fetchPlans(): Promise<PlanSummary[]> {
 export async function createPlan(body: {
   title?: string
   program_slug?: string
+  start_term?: string
   target_semesters?: number
   student_interests?: string[]
   completed_codes?: string[]

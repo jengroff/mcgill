@@ -15,8 +15,9 @@ import {
   deleteSemester,
   uploadPlanDocument,
   deletePlanDocument,
+  fetchPrograms,
 } from '../api/client'
-import type { PlanDetail, PlanSemester } from '../api/client'
+import type { PlanDetail, PlanSemester, FacultyPrograms } from '../api/client'
 import AuthPrompt from '../components/AuthPrompt'
 
 export default function PlannerPage() {
@@ -36,10 +37,17 @@ export default function PlannerPage() {
 
   if (!user) return <AuthPrompt />
 
-  async function handleCreatePlan(title: string, interests: string) {
+  async function handleCreatePlan(opts: {
+    title: string
+    interests: string
+    programSlug?: string
+    startTerm?: string
+  }) {
     const plan = await createPlan({
-      title: title || 'My Course Plan',
-      student_interests: interests ? interests.split(',').map((s) => s.trim()) : [],
+      title: opts.title || 'My Course Plan',
+      student_interests: opts.interests ? opts.interests.split(',').map((s) => s.trim()) : [],
+      program_slug: opts.programSlug || undefined,
+      start_term: opts.startTerm || undefined,
     })
     setActivePlan(plan)
     setShowNewPlan(false)
@@ -158,14 +166,109 @@ function CalendarDaysIcon() {
 // New Plan Form
 // ---------------------------------------------------------------------------
 
-function NewPlanForm({ onCreate, onCancel }: { onCreate: (title: string, interests: string) => void; onCancel: () => void }) {
+function NewPlanForm({ onCreate, onCancel }: {
+  onCreate: (opts: { title: string; interests: string; programSlug?: string; startTerm?: string }) => void
+  onCancel: () => void
+}) {
   const [title, setTitle] = useState('')
   const [interests, setInterests] = useState('')
+  const [faculties, setFaculties] = useState<FacultyPrograms[]>([])
+  const [selectedFaculty, setSelectedFaculty] = useState('')
+  const [selectedProgram, setSelectedProgram] = useState('')
+  const [startSeason, setStartSeason] = useState('Fall')
+  const [startYear, setStartYear] = useState(new Date().getFullYear())
+  const [loadingPrograms, setLoadingPrograms] = useState(true)
+
+  useEffect(() => {
+    fetchPrograms()
+      .then(setFaculties)
+      .catch(() => {})
+      .finally(() => setLoadingPrograms(false))
+  }, [])
+
+  const programs = faculties.find((f) => f.faculty_slug === selectedFaculty)?.programs ?? []
+
+  function handleFacultyChange(slug: string) {
+    setSelectedFaculty(slug)
+    setSelectedProgram('')
+  }
+
+  function handleProgramChange(slug: string) {
+    setSelectedProgram(slug)
+    const prog = programs.find((p) => p.slug === slug)
+    if (prog && !title) setTitle(prog.title)
+  }
+
+  const inputStyle = {
+    background: 'var(--bg-elevated)',
+    color: 'var(--text-primary)',
+    border: '1px solid var(--border)',
+  }
 
   return (
     <div className="max-w-lg mx-auto p-8">
       <h2 className="text-lg font-semibold mb-4" style={{ color: 'var(--text-primary)' }}>New Plan</h2>
       <div className="space-y-4">
+        {/* Program picker */}
+        <div>
+          <label className="block text-xs mb-1" style={{ color: 'var(--text-muted)' }}>Faculty</label>
+          <select
+            value={selectedFaculty}
+            onChange={(e) => handleFacultyChange(e.target.value)}
+            className="w-full rounded-lg px-3 py-2 text-sm outline-none cursor-pointer"
+            style={inputStyle}
+            disabled={loadingPrograms}
+          >
+            <option value="">{loadingPrograms ? 'Loading...' : 'Select a faculty (optional)'}</option>
+            {faculties.map((f) => (
+              <option key={f.faculty_slug} value={f.faculty_slug}>{f.faculty_name}</option>
+            ))}
+          </select>
+        </div>
+
+        {selectedFaculty && programs.length > 0 && (
+          <div>
+            <label className="block text-xs mb-1" style={{ color: 'var(--text-muted)' }}>Program</label>
+            <select
+              value={selectedProgram}
+              onChange={(e) => handleProgramChange(e.target.value)}
+              className="w-full rounded-lg px-3 py-2 text-sm outline-none cursor-pointer"
+              style={inputStyle}
+            >
+              <option value="">Select a program</option>
+              {programs.map((p) => (
+                <option key={p.slug} value={p.slug}>{p.title}</option>
+              ))}
+            </select>
+          </div>
+        )}
+
+        {/* Start term */}
+        <div>
+          <label className="block text-xs mb-1" style={{ color: 'var(--text-muted)' }}>Start Term</label>
+          <div className="flex gap-2">
+            <select
+              value={startSeason}
+              onChange={(e) => setStartSeason(e.target.value)}
+              className="rounded-lg px-3 py-2 text-sm outline-none cursor-pointer"
+              style={inputStyle}
+            >
+              <option value="Fall">Fall</option>
+              <option value="Winter">Winter</option>
+            </select>
+            <input
+              type="number"
+              value={startYear}
+              onChange={(e) => setStartYear(parseInt(e.target.value) || new Date().getFullYear())}
+              className="w-24 rounded-lg px-3 py-2 text-sm outline-none"
+              style={inputStyle}
+              min={2020}
+              max={2035}
+            />
+          </div>
+        </div>
+
+        {/* Title */}
         <div>
           <label className="block text-xs mb-1" style={{ color: 'var(--text-muted)' }}>Plan Title</label>
           <input
@@ -173,9 +276,11 @@ function NewPlanForm({ onCreate, onCancel }: { onCreate: (title: string, interes
             onChange={(e) => setTitle(e.target.value)}
             placeholder="e.g. Food Science Year 1"
             className="w-full rounded-lg px-3 py-2 text-sm outline-none"
-            style={{ background: 'var(--bg-elevated)', color: 'var(--text-primary)', border: '1px solid var(--border)' }}
+            style={inputStyle}
           />
         </div>
+
+        {/* Interests */}
         <div>
           <label className="block text-xs mb-1" style={{ color: 'var(--text-muted)' }}>Interests (comma-separated)</label>
           <input
@@ -183,12 +288,18 @@ function NewPlanForm({ onCreate, onCancel }: { onCreate: (title: string, interes
             onChange={(e) => setInterests(e.target.value)}
             placeholder="e.g. food chemistry, biology, mathematics"
             className="w-full rounded-lg px-3 py-2 text-sm outline-none"
-            style={{ background: 'var(--bg-elevated)', color: 'var(--text-primary)', border: '1px solid var(--border)' }}
+            style={inputStyle}
           />
         </div>
+
         <div className="flex gap-2">
           <button
-            onClick={() => onCreate(title, interests)}
+            onClick={() => onCreate({
+              title,
+              interests,
+              programSlug: selectedProgram || undefined,
+              startTerm: `${startSeason} ${startYear}`,
+            })}
             className="px-4 py-2 rounded-lg text-sm cursor-pointer"
             style={{ background: 'var(--accent)', color: '#fff', border: 'none' }}
           >

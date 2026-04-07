@@ -32,6 +32,7 @@ class PlanDocumentInfo(BaseModel):
 class PlanCreate(BaseModel):
     title: str = "Untitled Plan"
     program_slug: str | None = None
+    start_term: str | None = None
     target_semesters: int = 4
     student_interests: list[str] = []
     completed_codes: list[str] = []

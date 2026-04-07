@@ -60,7 +60,39 @@ async def create_plan(
             body.student_interests,
             body.completed_codes,
         )
-    return _plan_detail_from_row(row)
+        plan_id = row["id"]
+
+        semesters: list[PlanSemester] = []
+        if body.program_slug:
+            try:
+                from backend.services.synthesis.plan_builder import PlanBuilder
+
+                builder = PlanBuilder()
+                semester_data = await builder.auto_populate(
+                    program_slug=body.program_slug,
+                    start_term=body.start_term,
+                    target_semesters=body.target_semesters,
+                    completed_codes=body.completed_codes,
+                )
+                for sem in semester_data:
+                    sem_row = await conn.fetchrow(
+                        """INSERT INTO plan_semesters
+                               (plan_id, term, sort_order, courses, total_credits)
+                           VALUES ($1, $2, $3, $4, $5)
+                           RETURNING id, plan_id, term, sort_order, courses, total_credits""",
+                        plan_id,
+                        sem["term"],
+                        sem["sort_order"],
+                        sem["courses"],
+                        sem["total_credits"],
+                    )
+                    semesters.append(PlanSemester(**dict(sem_row)))
+            except Exception as e:
+                logger.warning("Auto-populate failed for plan %d: %s", plan_id, e)
+
+    detail = _plan_detail_from_row(row)
+    detail.semesters = semesters
+    return detail
 
 
 @router.get("/{plan_id}")
