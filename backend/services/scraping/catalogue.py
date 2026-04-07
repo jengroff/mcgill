@@ -225,6 +225,54 @@ async def run(
             i += 1
             await asyncio.sleep(settings.scraper_delay_sec)
 
+        # Phase 1d: Scrape external advising pages (SOUSA, etc.)
+        from backend.services.scraping.faculties import EXTERNAL_ADVISING_PAGES
+
+        ext_pages = []
+        for fac_slug, urls in EXTERNAL_ADVISING_PAGES.items():
+            if active and fac_slug not in {s for _, s, _ in active}:
+                continue
+            for url in urls:
+                ext_pages.append((fac_slug, url))
+
+        if ext_pages:
+            _progress(
+                "advising",
+                f"Scraping {len(ext_pages)} external advising pages...",
+                0,
+                len(ext_pages),
+            )
+            for j, (fac_slug, url) in enumerate(ext_pages):
+                html = await fetch_page(page, url)
+                if html:
+                    pg_title, pg_content = parse_program_page(html)
+                    if pg_content:
+                        # Use the URL path as the unique key
+                        from urllib.parse import urlparse
+
+                        url_path = urlparse(url).path
+                        async with pool.acquire() as conn:
+                            await conn.execute(
+                                """INSERT INTO program_pages (faculty_slug, path, title, content)
+                                   VALUES ($1, $2, $3, $4)
+                                   ON CONFLICT (path) DO UPDATE SET
+                                       title = EXCLUDED.title,
+                                       content = EXCLUDED.content,
+                                       scraped_at = now()""",
+                                fac_slug,
+                                url_path,
+                                pg_title,
+                                pg_content,
+                            )
+                if (j + 1) % 5 == 0 or j == len(ext_pages) - 1:
+                    _progress(
+                        "advising",
+                        f"Processed {j + 1}/{len(ext_pages)} advising pages",
+                        j + 1,
+                        len(ext_pages),
+                    )
+                await asyncio.sleep(settings.scraper_delay_sec)
+
         # Deduplicate variants, attach to records, and update DB
         all_variants = {k: list(dict.fromkeys(v)) for k, v in all_variants.items()}
         courses = list(records.values())

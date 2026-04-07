@@ -496,11 +496,20 @@ FACULTY_RESOURCES: dict[str, dict[str, str]] = {
         "students_society_url": "https://mcssmcgill.ca/",
         "foundation_email": "foundationyear.macdonald@mcgill.ca",
         "foundation_page": "https://coursecatalogue.mcgill.ca/en/undergraduate/agri-env-sci/programs/foundation/",
+        "advising_office": "Office of Student Academic Services (OSAS)",
+        "advising_url": "https://www.mcgill.ca/osas/advising",
+        "advising_location": "Macdonald-Stewart Building, Rooms MS2-082 & 83",
+        "advising_phone": "514-398-8779",
+        "academic_advisor": "Julie Major (julie.major@mcgill.ca)",
+        "foundation_year_page": "https://www.mcgill.ca/macdonald/undergraduates/newly-admitted/foundation-year",
     },
     "science": {
         "foundation_page": "https://coursecatalogue.mcgill.ca/en/undergraduate/science/overview-programs-offered/sci-foundation-program/foundation-year/",
         "foundation_planner": "https://www.mcgill.ca/science/files/science/bachelor_of_science_foundation_program_planner.pdf",
         "foundation_checklist": "https://www.mcgill.ca/science/undergraduate/accepted/checklist/firstyear/foundation",
+        "sousa_advising": "https://www.mcgill.ca/sousa/advising",
+        "sousa_u0_course_selection": "https://www.mcgill.ca/sousa/new-students/courseselection/bscu0",
+        "advising_email": "advisor.science@mcgill.ca",
     },
     "arts": {
         "foundation_page": "https://coursecatalogue.mcgill.ca/en/undergraduate/arts/degree-requirements/about-program/foundation-program-general-ba/",
@@ -509,6 +518,27 @@ FACULTY_RESOURCES: dict[str, dict[str, str]] = {
         "foundation_page": "https://coursecatalogue.mcgill.ca/en/undergraduate/arts-science/overview-programs-offered/basc-foundation-year-program/foundation-year-program-basc/",
         "foundation_checklist": "https://www.mcgill.ca/science/undergraduate/accepted/checklist/firstyear/bascfreshman",
     },
+}
+
+
+EXTERNAL_ADVISING_PAGES: dict[str, list[str]] = {
+    "agri-env-sci": [
+        "https://www.mcgill.ca/osas/advising",
+        "https://www.mcgill.ca/osas/advising/new-students",
+        "https://www.mcgill.ca/macdonald/undergraduates/newly-admitted/foundation-year",
+    ],
+    "science": [
+        "https://www.mcgill.ca/sousa/new-students/courseselection/bscu0",
+        "https://www.mcgill.ca/sousa/newstudents/courseselection/bscu1",
+        "https://www.mcgill.ca/sousa/newstudents/bsccourseselection",
+        "https://www.mcgill.ca/sousa/advising/program-advisors",
+        "https://www.mcgill.ca/sousa/advising/degree-advisors",
+        "https://www.mcgill.ca/sousa/currentstudents/registration",
+    ],
+    "arts-science": [
+        "https://www.mcgill.ca/sousa/newstudents/courseselection/bascu0",
+        "https://www.mcgill.ca/sousa/newstudents/courseselection/bascu1",
+    ],
 }
 
 
