@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Plus, FileText, Trash2, Upload, X, ChevronDown, ChevronRight, Sparkles, Loader2 } from 'lucide-react'
 import Markdown from 'react-markdown'
@@ -19,6 +19,9 @@ import {
   fetchPrograms,
   fetchCourseBatch,
   generatePlan,
+  createSession,
+  sendMessage,
+  sseUrl,
 } from '../api/client'
 import type { PlanDetail, PlanSemester, FacultyPrograms, CourseInfo } from '../api/client'
 import AuthPrompt from '../components/AuthPrompt'
@@ -152,6 +155,11 @@ export default function PlannerPage() {
           </div>
         )}
       </div>
+
+      {/* Right: Advisor chat */}
+      {activePlan && !showNewPlan && (
+        <PlanAdvisorChat planId={activePlan.id} planTitle={activePlan.title} />
+      )}
     </div>
   )
 }
@@ -613,6 +621,153 @@ function PlanDetailView({ plan, showDocs, onToggleDocs }: { plan: PlanDetail; sh
           </div>
         </div>
       )}
+    </div>
+  )
+}
+
+
+// ---------------------------------------------------------------------------
+// Plan Advisor Chat Panel
+// ---------------------------------------------------------------------------
+
+interface AdvisorMessage {
+  id: string
+  role: 'user' | 'assistant' | 'system'
+  content: string
+}
+
+function PlanAdvisorChat({ planId, planTitle }: { planId: number; planTitle: string }) {
+  const [sessionId, setSessionId] = useState<string | null>(null)
+  const [messages, setMessages] = useState<AdvisorMessage[]>([])
+  const [input, setInput] = useState('')
+  const [sending, setSending] = useState(false)
+  const scrollRef = useRef<HTMLDivElement>(null)
+  const esRef = useRef<EventSource | null>(null)
+
+  // Create session and connect SSE when plan changes
+  useEffect(() => {
+    let es: EventSource | null = null
+
+    async function init() {
+      const sid = await createSession()
+      setSessionId(sid)
+      setMessages([{
+        id: 'welcome',
+        role: 'assistant',
+        content: `I'm your advisor for **${planTitle}**. Ask me anything about your courses, schedule, or upload documents for analysis.`,
+      }])
+
+      es = new EventSource(sseUrl(sid))
+      esRef.current = es
+
+      es.onmessage = (ev) => {
+        try {
+          const data = JSON.parse(ev.data)
+          if (data.type === 'assistant' && data.content) {
+            setMessages((prev) => [...prev, {
+              id: crypto.randomUUID(),
+              role: 'assistant',
+              content: data.content,
+            }])
+            setSending(false)
+          } else if (data.type === 'error' && data.content) {
+            setMessages((prev) => [...prev, {
+              id: crypto.randomUUID(),
+              role: 'system',
+              content: data.content,
+            }])
+            setSending(false)
+          }
+        } catch { /* ignore */ }
+      }
+    }
+
+    init()
+    return () => {
+      es?.close()
+      esRef.current = null
+    }
+  }, [planId])
+
+  useEffect(() => {
+    scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: 'smooth' })
+  }, [messages])
+
+  async function handleSend() {
+    const text = input.trim()
+    if (!text || !sessionId || sending) return
+    setInput('')
+    setSending(true)
+    setMessages((prev) => [...prev, { id: crypto.randomUUID(), role: 'user', content: text }])
+    try {
+      await sendMessage(sessionId, text, planId)
+    } catch {
+      setSending(false)
+    }
+  }
+
+  return (
+    <div
+      className="w-96 flex-shrink-0 border-l flex flex-col"
+      style={{ borderColor: 'var(--border)', background: 'var(--bg-surface)' }}
+    >
+      <div className="p-3 border-b" style={{ borderColor: 'var(--border)' }}>
+        <div className="flex items-center gap-2">
+          <Sparkles size={14} style={{ color: 'var(--accent)' }} />
+          <span className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>Advisor</span>
+        </div>
+      </div>
+
+      <div ref={scrollRef} className="flex-1 overflow-y-auto p-3 space-y-3">
+        {messages.map((m) => (
+          <div
+            key={m.id}
+            className={`text-xs leading-relaxed ${m.role === 'user' ? 'text-right' : ''}`}
+          >
+            <div
+              className="inline-block rounded-lg px-3 py-2 max-w-[90%]"
+              style={{
+                background: m.role === 'user' ? 'var(--accent)' : 'var(--bg-elevated)',
+                color: m.role === 'user' ? '#fff' : 'var(--text-primary)',
+                textAlign: 'left',
+              }}
+            >
+              {m.role === 'assistant' || m.role === 'system' ? (
+                <Markdown remarkPlugins={[remarkGfm]}>{m.content}</Markdown>
+              ) : (
+                m.content
+              )}
+            </div>
+          </div>
+        ))}
+        {sending && (
+          <div className="text-xs" style={{ color: 'var(--text-muted)' }}>
+            <span className="animate-pulse">Thinking...</span>
+          </div>
+        )}
+      </div>
+
+      <div className="p-3 border-t" style={{ borderColor: 'var(--border)' }}>
+        <div className="flex gap-2">
+          <input
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSend() } }}
+            placeholder="Ask about your plan..."
+            disabled={sending || !sessionId}
+            className="flex-1 rounded-lg px-3 py-2 text-xs outline-none"
+            style={{ background: 'var(--bg-elevated)', color: 'var(--text-primary)', border: '1px solid var(--border)' }}
+          />
+          <button
+            onClick={handleSend}
+            disabled={sending || !input.trim() || !sessionId}
+            className="px-3 py-2 rounded-lg text-xs cursor-pointer"
+            style={{ background: 'var(--accent)', color: '#fff', border: 'none', opacity: sending || !input.trim() ? 0.5 : 1 }}
+          >
+            Send
+          </button>
+        </div>
+      </div>
     </div>
   )
 }

@@ -11,5 +11,6 @@ class SynthesisState(BaseWorkflowState, total=False):
     program_context: list[dict]
     graph_context: str
     structured_context: str
+    plan_context: str
     response: str
     sources: list[dict]

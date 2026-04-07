@@ -13,12 +13,15 @@
 - **Batch course lookup** — `POST /api/v1/courses/batch` accepts a list of codes and returns details (title, credits, terms, description) for all matched courses in one request
 - **"Explain Plan" button** — triggers the existing planner workflow (Claude Agent SDK) to generate a rationale for the auto-populated plan, explaining each course's purpose, prerequisite chains, workload balance, and alternatives
 - **Rich course display in planner** — semester courses now show title and credits alongside the code, and are clickable links to the full course detail page
+- **Advisor chat panel** — right-side panel in the planner with a plan-aware chat that knows the student's courses, semesters, interests, and uploaded documents; powered by the same hybrid retrieval + synthesis pipeline with plan context injected
 
 ### Changed
 - `POST /api/v1/plans` accepts `start_term` parameter and auto-populates semesters when `program_slug` is provided
 - Program page chunker keeps markdown tables intact so course requirement lists are retrieved as complete tables instead of fragmented rows
 - Planner agent prompt rewritten with a warm, direct advisory voice — explains courses in plain language, flags workload concerns, suggests alternatives, and provides practical registration tips
 - Auto-populated plans no longer contain duplicate courses
+- Chat `POST /api/v1/chat/ask` accepts optional `plan_id` to scope the conversation with full plan context (semesters, courses, documents)
+- Synthesis pipeline includes `plan_context` when chat is scoped to a curriculum plan
 
 ## 0.8.0 — 2026-04-06
 

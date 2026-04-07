@@ -33,6 +33,7 @@ class SynthesisOrchestrator(WorkflowOrchestrator):
         program_context=None,
         graph_context="",
         structured_context="",
+        plan_context="",
         **kwargs,
     ) -> SynthesisState:
         return SynthesisState(
@@ -46,6 +47,7 @@ class SynthesisOrchestrator(WorkflowOrchestrator):
             program_context=program_context or [],
             graph_context=graph_context,
             structured_context=structured_context,
+            plan_context=plan_context,
             response="",
             sources=[],
         )

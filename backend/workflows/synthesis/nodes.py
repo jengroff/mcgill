@@ -63,6 +63,11 @@ async def context_pack_node(state: SynthesisState) -> SynthesisState:
         if structured_ctx:
             parts.insert(0, structured_ctx)  # Prioritize structured data
 
+        # Plan context (when chat is scoped to a curriculum plan)
+        plan_ctx = state.get("plan_context", "")
+        if plan_ctx:
+            parts.insert(0, plan_ctx)
+
         # Program guide context
         for r in state.get("program_context", []):
             title = r.get("title", r.get("faculty_slug", ""))

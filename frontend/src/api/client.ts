@@ -51,11 +51,11 @@ export async function createSession(sessionId?: string): Promise<string> {
   return data.session_id
 }
 
-export async function sendMessage(sessionId: string, message: string) {
+export async function sendMessage(sessionId: string, message: string, planId?: number) {
   await fetch(`${BASE}/api/v1/chat/ask`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', ...authHeaders() },
-    body: JSON.stringify({ session_id: sessionId, message }),
+    body: JSON.stringify({ session_id: sessionId, message, plan_id: planId ?? null }),
   })
 }
 

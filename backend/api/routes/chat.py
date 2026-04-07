@@ -26,6 +26,7 @@ _sessions: dict[str, dict] = {}
 class ChatRequest(BaseModel):
     message: str
     session_id: str | None = None
+    plan_id: int | None = None
 
 
 class SessionRequest(BaseModel):
@@ -167,6 +168,8 @@ async def ask(
     session["messages"].append({"role": "user", "content": req.message})
     session["status"] = "processing"
     session["pending_question"] = req.message
+    if req.plan_id:
+        session["plan_id"] = req.plan_id
 
     conv_id = session.get("conversation_id")
 
@@ -553,6 +556,12 @@ async def _run_qa_pipeline(question: str, session_id: str) -> AsyncIterator[dict
     from backend.workflows.synthesis.graph import SynthesisOrchestrator
 
     session = _sessions.get(session_id, {})
+    plan_id = session.get("plan_id")
+
+    # Build plan context if this chat is scoped to a plan
+    plan_context = ""
+    if plan_id:
+        plan_context = await _build_plan_context(plan_id)
 
     yield {"type": "step_update", "phase": 1, "status": "running", "label": "Retrieval"}
     retrieval_orch = RetrievalOrchestrator()
@@ -576,6 +585,7 @@ async def _run_qa_pipeline(question: str, session_id: str) -> AsyncIterator[dict
         program_context=retrieval_state.get("program_results", []),
         graph_context=retrieval_state.get("graph_context", ""),
         structured_context=retrieval_state.get("structured_context", ""),
+        plan_context=plan_context,
     )
     yield {"type": "step_update", "phase": 2, "status": "done", "label": "Synthesis"}
 
@@ -592,6 +602,70 @@ async def _run_qa_pipeline(question: str, session_id: str) -> AsyncIterator[dict
 # ---------------------------------------------------------------------------
 # Background message persistence helper
 # ---------------------------------------------------------------------------
+
+
+async def _build_plan_context(plan_id: int) -> str:
+    """Load a plan's details, semesters, and uploaded documents to inject as chat context."""
+    from backend.db.postgres import get_pool
+
+    pool = await get_pool()
+    async with pool.acquire() as conn:
+        plan = await conn.fetchrow("SELECT * FROM plans WHERE id = $1", plan_id)
+        if not plan:
+            return ""
+
+        semesters = await conn.fetch(
+            "SELECT term, courses, total_credits FROM plan_semesters WHERE plan_id = $1 ORDER BY sort_order",
+            plan_id,
+        )
+        docs = await conn.fetch(
+            "SELECT filename, extracted_text FROM plan_documents WHERE plan_id = $1",
+            plan_id,
+        )
+
+        # Fetch course details for all codes in the plan
+        all_codes = [c for s in semesters for c in (s["courses"] or [])]
+        course_details = {}
+        if all_codes:
+            rows = await conn.fetch(
+                "SELECT code, title, credits, terms, description FROM courses WHERE code = ANY($1)",
+                all_codes,
+            )
+            course_details = {r["code"]: r for r in rows}
+
+    parts = [
+        "## Student's Current Plan",
+        f"**Title**: {plan['title']}",
+        f"**Program**: {plan['program_slug'] or 'not specified'}",
+        f"**Interests**: {', '.join(plan['student_interests'] or [])}",
+        f"**Status**: {plan['status']}",
+        "",
+    ]
+
+    for sem in semesters:
+        parts.append(f"### {sem['term']} ({sem['total_credits']} credits)")
+        for code in sem["courses"] or []:
+            info = course_details.get(code)
+            if info:
+                desc = (info["description"] or "")[:150]
+                parts.append(
+                    f"- **{code}** — {info['title']} ({info['credits'] or '?'} cr, "
+                    f"terms: {', '.join(info['terms'] or [])}): {desc}"
+                )
+            else:
+                parts.append(f"- **{code}** (details not in database)")
+        parts.append("")
+
+    if docs:
+        parts.append("### Uploaded Documents")
+        for doc in docs:
+            text = (doc["extracted_text"] or "")[:2000]
+            if text:
+                parts.append(f"**{doc['filename']}**:\n{text}\n")
+            else:
+                parts.append(f"**{doc['filename']}** (no text extracted)")
+
+    return "\n".join(parts)
 
 
 async def _persist_bg_message(session: dict, content: str) -> None:
