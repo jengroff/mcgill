@@ -1,5 +1,3 @@
-"""PDF processor with VLM support for McGill course guides."""
-
 from __future__ import annotations
 
 import logging

@@ -1,5 +1,3 @@
-"""BeautifulSoup HTML parsing for McGill course pages."""
-
 from __future__ import annotations
 
 import re

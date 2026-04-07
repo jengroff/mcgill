@@ -1,5 +1,3 @@
-"""Neo4j driver wrapper."""
-
 from __future__ import annotations
 
 from neo4j import AsyncGraphDatabase, AsyncDriver

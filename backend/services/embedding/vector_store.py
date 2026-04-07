@@ -1,5 +1,3 @@
-"""pgvector storage for course chunk embeddings."""
-
 from __future__ import annotations
 
 from backend.db.postgres import get_pool

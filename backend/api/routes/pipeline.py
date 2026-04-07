@@ -1,5 +1,3 @@
-"""Pipeline trigger and status endpoints — also supports SSE progress streaming."""
-
 from __future__ import annotations
 
 import asyncio

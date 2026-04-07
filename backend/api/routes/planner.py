@@ -1,5 +1,3 @@
-"""Curriculum planner endpoint — multi-semester planning with optional PDF guide."""
-
 from __future__ import annotations
 
 import logging

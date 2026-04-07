@@ -1,5 +1,3 @@
-"""Build the Neo4j entity graph from courses and resolved references."""
-
 from __future__ import annotations
 
 from backend.db.neo4j import run_query

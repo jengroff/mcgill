@@ -1,5 +1,3 @@
-"""Plan CRUD, semester management, document upload, conversation linking."""
-
 from __future__ import annotations
 
 import logging

@@ -1,5 +1,3 @@
-"""Available programs endpoint for the plan creation picker."""
-
 from __future__ import annotations
 
 import logging

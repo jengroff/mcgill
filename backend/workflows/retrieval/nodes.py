@@ -1,5 +1,3 @@
-"""Retrieval workflow nodes — keyword, semantic, program, graph, structured SQL, fusion."""
-
 from __future__ import annotations
 
 import asyncio

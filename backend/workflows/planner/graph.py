@@ -1,5 +1,3 @@
-"""Curriculum planner workflow orchestrator — LangGraph + Claude Agent SDK."""
-
 from __future__ import annotations
 
 import uuid

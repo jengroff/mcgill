@@ -1,5 +1,3 @@
-"""Parse prerequisite/restriction text into structured course references."""
-
 from __future__ import annotations
 
 import re

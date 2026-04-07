@@ -1,5 +1,3 @@
-"""Sentence window chunking for course content."""
-
 from __future__ import annotations
 
 import re

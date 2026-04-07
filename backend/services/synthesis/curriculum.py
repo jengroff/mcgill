@@ -1,5 +1,3 @@
-"""Curriculum assembly service — interest mapping, requirements, conflict detection."""
-
 from __future__ import annotations
 
 from backend.services.scraping.faculties import ALL_FACULTIES

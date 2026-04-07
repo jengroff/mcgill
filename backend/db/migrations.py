@@ -28,7 +28,6 @@ async def seed_from_json(path: Path | None = None) -> int:
     with open(path) as f:
         courses = json.load(f)
 
-    # Ensure tables exist before inserting
     await run_migrations()
 
     pool = await get_pool()

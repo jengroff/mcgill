@@ -1,5 +1,3 @@
-"""PostgreSQL + pgvector connection pool and table DDL."""
-
 from __future__ import annotations
 
 import asyncpg

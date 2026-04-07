@@ -1,5 +1,3 @@
-"""Plan auto-population — extract program requirements and distribute across semesters."""
-
 from __future__ import annotations
 
 import logging

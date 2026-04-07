@@ -1,5 +1,3 @@
-"""Search endpoint with hybrid retrieval."""
-
 from __future__ import annotations
 
 from fastapi import APIRouter, Query

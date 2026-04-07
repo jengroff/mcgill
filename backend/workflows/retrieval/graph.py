@@ -1,5 +1,3 @@
-"""Retrieval workflow orchestrator — parallel fan-out retrieval with RRF fusion."""
-
 from __future__ import annotations
 
 import asyncio

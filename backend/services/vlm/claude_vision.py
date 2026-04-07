@@ -1,5 +1,3 @@
-"""Claude Vision analyzer for McGill course guide pages."""
-
 from __future__ import annotations
 
 import base64

@@ -1,5 +1,3 @@
-"""Voyage AI embedding client."""
-
 from __future__ import annotations
 
 import voyageai
@@ -22,12 +20,9 @@ def get_client() -> voyageai.Client:
 def embed_texts(texts: list[str], input_type: str = "document") -> list[list[float]]:
     """Embed a list of texts using Voyage AI.
 
-    Args:
-        texts: Texts to embed.
-        input_type: "document" for indexing, "query" for search queries.
-
-    Returns:
-        List of embedding vectors (1024d for voyage-3).
+    **texts** are the strings to embed; **input_type** should be `"document"` for
+    indexing or `"query"` for search queries. Returns a list of 1024-d embedding
+    vectors (voyage-3).
     """
     client = get_client()
     all_embeddings: list[list[float]] = []

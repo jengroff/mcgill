@@ -1,5 +1,3 @@
-"""Prompt builder for the curriculum planning agent."""
-
 from __future__ import annotations
 
 

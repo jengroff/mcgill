@@ -1,5 +1,3 @@
-"""McGill faculty and department registry."""
-
 from __future__ import annotations
 
 ALL_FACULTIES: list[tuple[str, str, list[str]]] = [

@@ -1,5 +1,3 @@
-"""Ingestion workflow state — PDF/URL ingestion pipeline."""
-
 from __future__ import annotations
 
 from backend.lib.state import BaseWorkflowState

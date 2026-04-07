@@ -14,13 +14,10 @@ def resolve_name(
 ) -> EntityResolution:
     """Resolve a query string to the best matching course code.
 
-    Args:
-        query: The name to resolve (e.g., "Intro Organic Chem").
-        candidates: Mapping of course_code → canonical_title.
-        threshold: Minimum similarity score.
-
-    Returns:
-        EntityResolution with the best match or None if below threshold.
+    Compares **query** (e.g. `"Intro Organic Chem"`) against every entry in
+    **candidates** (a `course_code -> canonical_title` mapping) using Jaro-Winkler
+    similarity. Returns an `EntityResolution` with the best match, or `None` fields
+    if the best score falls below **threshold**.
     """
     norm_query = normalize_name(query)
     best_score = 0.0

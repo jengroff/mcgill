@@ -1,5 +1,3 @@
-"""Text-only fallback page analyzer with academic keyword detection."""
-
 from __future__ import annotations
 
 import logging

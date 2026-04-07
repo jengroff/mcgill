@@ -1,5 +1,3 @@
-"""Faculty and department browsing endpoints."""
-
 from __future__ import annotations
 
 from fastapi import APIRouter

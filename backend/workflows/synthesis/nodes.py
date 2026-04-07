@@ -1,5 +1,3 @@
-"""Synthesis workflow nodes — context packing and Claude synthesis."""
-
 from __future__ import annotations
 
 import traceback

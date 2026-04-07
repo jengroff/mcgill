@@ -1,5 +1,3 @@
-"""Planner workflow nodes — context gathering and SDK agent execution."""
-
 from __future__ import annotations
 
 import json

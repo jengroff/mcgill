@@ -1,5 +1,3 @@
-"""Curriculum assembly workflow orchestrator."""
-
 from __future__ import annotations
 
 import uuid

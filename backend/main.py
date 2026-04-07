@@ -1,5 +1,3 @@
-"""CLI entry point for the McGill Course Explorer."""
-
 from __future__ import annotations
 
 import argparse

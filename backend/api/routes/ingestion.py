@@ -1,5 +1,3 @@
-"""PDF / URL ingestion endpoint."""
-
 from __future__ import annotations
 
 import logging

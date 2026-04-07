@@ -1,5 +1,3 @@
-"""Hybrid retrieval combining semantic search (pgvector) and keyword search (full-text)."""
-
 from __future__ import annotations
 
 from backend.db.postgres import get_pool

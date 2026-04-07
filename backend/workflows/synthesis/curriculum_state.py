@@ -1,5 +1,3 @@
-"""Curriculum assembly workflow state."""
-
 from __future__ import annotations
 
 from backend.lib.state import BaseWorkflowState

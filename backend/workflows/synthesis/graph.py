@@ -1,5 +1,3 @@
-"""Synthesis workflow orchestrator — context packing then Claude synthesis."""
-
 from __future__ import annotations
 
 import uuid

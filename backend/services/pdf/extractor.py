@@ -1,5 +1,3 @@
-"""PDF extraction service — structured text from PDF bytes."""
-
 from __future__ import annotations
 
 import re

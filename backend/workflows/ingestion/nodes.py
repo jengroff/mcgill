@@ -1,5 +1,3 @@
-"""Ingestion workflow nodes — extract, chunk, embed, store."""
-
 from __future__ import annotations
 
 import traceback
