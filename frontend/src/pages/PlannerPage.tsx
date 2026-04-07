@@ -347,6 +347,7 @@ function PlanDetailView({ plan, showDocs, onToggleDocs }: { plan: PlanDetail; sh
   const [addingCourse, setAddingCourse] = useState<{ semId: number; code: string } | null>(null)
   const [courseDetails, setCourseDetails] = useState<Record<string, CourseInfo>>({})
   const [generating, setGenerating] = useState(false)
+  const [uploading, setUploading] = useState(false)
 
   useEffect(() => {
     const allCodes = plan.semesters.flatMap((s) => s.courses)
@@ -418,12 +419,16 @@ function PlanDetailView({ plan, showDocs, onToggleDocs }: { plan: PlanDetail; sh
   async function handleUpload(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0]
     if (!file) return
+    setUploading(true)
     try {
       const doc = await uploadPlanDocument(plan.id, file)
       setActivePlan({ ...plan, documents: [...plan.documents, doc] })
     } catch {
       addToast(`Failed to upload ${file.name}`)
     }
+    setUploading(false)
+    // Reset input so the same file can be re-selected
+    e.target.value = ''
   }
 
   async function handleDeleteDoc(docId: number) {
@@ -497,10 +502,13 @@ function PlanDetailView({ plan, showDocs, onToggleDocs }: { plan: PlanDetail; sh
       {showDocs && (
         <div className="mb-6 p-3 rounded-lg" style={{ background: 'var(--bg-surface)', border: '1px solid var(--border)' }}>
           <div className="flex items-center gap-2 mb-2">
-            <label className="flex items-center gap-1 text-xs px-2 py-1 rounded cursor-pointer" style={{ background: 'var(--accent)', color: '#fff' }}>
-              <Upload size={12} />
-              Upload
-              <input type="file" className="hidden" onChange={handleUpload} accept=".pdf,.txt,.csv,.xlsx" />
+            <label
+              className="flex items-center gap-1 text-xs px-2 py-1 rounded cursor-pointer"
+              style={{ background: 'var(--accent)', color: '#fff', opacity: uploading ? 0.6 : 1 }}
+            >
+              {uploading ? <Loader2 size={12} className="animate-spin" /> : <Upload size={12} />}
+              {uploading ? 'Uploading...' : 'Upload'}
+              <input type="file" className="hidden" onChange={handleUpload} accept=".pdf,.txt,.csv,.xlsx" disabled={uploading} />
             </label>
             <span className="text-xs" style={{ color: 'var(--text-muted)' }}>
               Transcripts, AP score reports, course guides
