@@ -67,6 +67,37 @@ def chunk_course(
     return chunks
 
 
+_TABLE_ROW = re.compile(r"^\|.*\|$")
+
+
+def _split_program_sections(content: str) -> list[str]:
+    """Split program page content into sections, keeping markdown tables intact.
+
+    Markdown tables (rows starting and ending with `|`) are grouped into a
+    single section so course requirement tables don't get fragmented across
+    chunks.
+    """
+    sections: list[str] = []
+    table_lines: list[str] = []
+
+    for line in content.split("\n"):
+        stripped = line.strip()
+        if _TABLE_ROW.match(stripped):
+            table_lines.append(stripped)
+        else:
+            if table_lines:
+                sections.append("\n".join(table_lines))
+                table_lines = []
+            if stripped:
+                sentences = split_sentences(stripped)
+                sections.extend(sentences if sentences else [stripped])
+
+    if table_lines:
+        sections.append("\n".join(table_lines))
+
+    return sections
+
+
 def chunk_program_page(
     title: str,
     content: str,
@@ -74,23 +105,29 @@ def chunk_program_page(
     window_size: int = WINDOW_SIZE,
     overlap: int = OVERLAP,
 ) -> list[str]:
-    """Create sentence-window chunks for a program guide page."""
+    """Create chunks for a program guide page.
+
+    Markdown tables (course requirement lists) are kept intact as single
+    chunks so downstream retrieval returns the complete course list rather
+    than fragments.
+    """
     prefix = f"Program: {title}. Faculty: {faculty_slug}."
 
-    sentences = split_sentences(content)
+    sections = _split_program_sections(content)
 
-    if not sentences:
+    if not sections:
         return [prefix] if title else []
 
-    if len(sentences) <= window_size:
-        return [f"{prefix} {' '.join(sentences)}"]
+    if len(sections) <= window_size:
+        return [f"{prefix} {' '.join(sections)}"]
 
     chunks = []
     step = max(1, window_size - overlap)
-    for i in range(0, len(sentences), step):
-        window = sentences[i : i + window_size]
-        chunks.append(f"{prefix} {' '.join(window)}")
-        if i + window_size >= len(sentences):
+    for i in range(0, len(sections), step):
+        window = sections[i : i + window_size]
+        chunk_text = " ".join(window)
+        chunks.append(f"{prefix} {chunk_text}")
+        if i + window_size >= len(sections):
             break
 
     return chunks

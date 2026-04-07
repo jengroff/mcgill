@@ -8,9 +8,11 @@
 - **PlanBuilder service** — extracts program requirements via regex, looks up course credits and term availability, and distributes courses across semesters respecting Fall/Winter scheduling and credit balance
 - **Program picker UI** — New Plan form now has faculty and program dropdowns that auto-fill the plan title, plus a start term selector (season + year)
 - Management (Desautels) faculty visible on the browse page
+- 40 missing department prefixes added to the faculty registry — Mac campus foundation prefixes (AECH, AEPH, AEHM, AEIS), Mac campus departments (AGEC, BTEC, ENTO, FAES, FMTP, SOIL, WILD, WOOD, etc.), cross-faculty departments (BINF, BMDE, EPSC, MIMM, HGEN, PPHS, etc.)
 
 ### Changed
 - `POST /api/v1/plans` accepts `start_term` parameter and auto-populates semesters when `program_slug` is provided
+- Program page chunker keeps markdown tables intact so course requirement lists are retrieved as complete tables instead of fragmented rows
 
 ## 0.8.0 — 2026-04-06
 
