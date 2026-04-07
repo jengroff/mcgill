@@ -265,17 +265,36 @@ async def upload_document(
     pool = await get_pool()
     raw = await file.read()
 
-    # Extract text from PDF if applicable
+    # Extract text from PDF — use VLM for visually rich documents, text parsing otherwise
     extracted = ""
-    if file.content_type == "application/pdf" or (
+    is_pdf = file.content_type == "application/pdf" or (
         file.filename and file.filename.lower().endswith(".pdf")
-    ):
-        try:
-            from backend.services.pdf.extract import extract_text
+    )
+    if is_pdf:
+        use_vlm = _pdf_needs_vlm(raw)
+        if use_vlm:
+            try:
+                from backend.services.vlm.pdf_processor import PDFProcessor
 
-            extracted = extract_text(raw)
-        except Exception as e:
-            logger.warning("PDF text extraction failed: %s", e)
+                pages = PDFProcessor(
+                    raw, file.filename or "upload.pdf", use_vlm=True
+                ).process()
+                extracted = "\n\n".join(
+                    p.get("text", "") for p in pages if p.get("text")
+                )
+                logger.info(
+                    "VLM extracted %d chars from %s", len(extracted), file.filename
+                )
+            except Exception as e:
+                logger.warning("VLM PDF extraction failed, falling back to text: %s", e)
+
+        if not extracted.strip():
+            try:
+                from backend.services.pdf.extractor import PDFExtractor
+
+                extracted = PDFExtractor().extract_text(raw)
+            except Exception as e:
+                logger.warning("PDF text extraction failed: %s", e)
 
     async with pool.acquire() as conn:
         await _assert_plan_owner(conn, plan_id, user["id"])
@@ -417,6 +436,49 @@ async def unlink_conversation(
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
+
+
+def _pdf_needs_vlm(pdf_bytes: bytes) -> bool:
+    """Detect whether a PDF has visual content that warrants VLM processing.
+
+    Returns True if the PDF contains images, scanned pages (little/no extractable
+    text relative to page count), tables, or other visual elements that text
+    extraction would miss.
+    """
+    try:
+        import pymupdf
+
+        doc = pymupdf.open(stream=pdf_bytes, filetype="pdf")
+        total_pages = len(doc)
+        if total_pages == 0:
+            doc.close()
+            return False
+
+        total_text_len = 0
+        total_images = 0
+        for i in range(len(doc)):
+            page = doc[i]
+            total_text_len += len(page.get_text().strip())
+            total_images += len(page.get_images())
+        doc.close()
+
+        avg_text_per_page = total_text_len / total_pages
+
+        # Scanned doc: very little extractable text per page
+        if avg_text_per_page < 50:
+            return True
+
+        # Image-heavy: images present alongside text (transcripts, charts, logos)
+        if total_images > 0:
+            return True
+
+        # Short text with tables likely means layout-dependent content
+        if avg_text_per_page < 300 and total_pages <= 10:
+            return True
+
+        return False
+    except Exception:
+        return False
 
 
 async def _assert_plan_owner(conn, plan_id: int, user_id: int):

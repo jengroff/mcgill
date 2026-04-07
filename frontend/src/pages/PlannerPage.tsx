@@ -641,8 +641,10 @@ function PlanAdvisorChat({ planId, planTitle }: { planId: number; planTitle: str
   const [messages, setMessages] = useState<AdvisorMessage[]>([])
   const [input, setInput] = useState('')
   const [sending, setSending] = useState(false)
+  const [width, setWidth] = useState(384)
   const scrollRef = useRef<HTMLDivElement>(null)
   const esRef = useRef<EventSource | null>(null)
+  const dragRef = useRef<{ startX: number; startW: number } | null>(null)
 
   // Create session and connect SSE when plan changes
   useEffect(() => {
@@ -706,11 +708,38 @@ function PlanAdvisorChat({ planId, planTitle }: { planId: number; planTitle: str
     }
   }
 
+  function handleDragStart(e: React.MouseEvent) {
+    e.preventDefault()
+    dragRef.current = { startX: e.clientX, startW: width }
+    const handleMove = (ev: MouseEvent) => {
+      if (!dragRef.current) return
+      const delta = dragRef.current.startX - ev.clientX
+      setWidth(Math.max(280, Math.min(800, dragRef.current.startW + delta)))
+    }
+    const handleUp = () => {
+      dragRef.current = null
+      document.removeEventListener('mousemove', handleMove)
+      document.removeEventListener('mouseup', handleUp)
+    }
+    document.addEventListener('mousemove', handleMove)
+    document.addEventListener('mouseup', handleUp)
+  }
+
   return (
     <div
-      className="w-96 flex-shrink-0 border-l flex flex-col"
-      style={{ borderColor: 'var(--border)', background: 'var(--bg-surface)' }}
+      className="flex-shrink-0 flex"
+      style={{ width }}
     >
+      {/* Drag handle */}
+      <div
+        onMouseDown={handleDragStart}
+        className="w-1 cursor-col-resize hover:bg-[var(--accent)]"
+        style={{ background: 'var(--border)' }}
+      />
+      <div
+        className="flex-1 border-l flex flex-col min-w-0"
+        style={{ borderColor: 'var(--border)', background: 'var(--bg-surface)' }}
+      >
       <div className="p-3 border-b" style={{ borderColor: 'var(--border)' }}>
         <div className="flex items-center gap-2">
           <Sparkles size={14} style={{ color: 'var(--accent)' }} />
@@ -767,6 +796,7 @@ function PlanAdvisorChat({ planId, planTitle }: { planId: number; planTitle: str
             Send
           </button>
         </div>
+      </div>
       </div>
     </div>
   )
