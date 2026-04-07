@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.9.0 — 2026-04-06
+
+### Added
+- **Plan auto-population** — selecting a program when creating a plan pre-fills semesters with required courses, credits, and term assignments extracted from scraped program pages
+- **Programs listing endpoint** — `GET /api/v1/programs` returns available programs grouped by faculty, derived from the program page registry
+- **PlanBuilder service** — extracts program requirements via regex, looks up course credits and term availability, and distributes courses across semesters respecting Fall/Winter scheduling and credit balance
+- **Program picker UI** — New Plan form now has faculty and program dropdowns that auto-fill the plan title, plus a start term selector (season + year)
+- Management (Desautels) faculty visible on the browse page
+
+### Changed
+- `POST /api/v1/plans` accepts `start_term` parameter and auto-populates semesters when `program_slug` is provided
+
 ## 0.8.0 — 2026-04-06
 
 ### Added

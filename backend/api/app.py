@@ -36,7 +36,7 @@ def create_app() -> FastAPI:
     app = FastAPI(
         title="McGill Course Explorer API",
         description="Scrape, resolve, embed, and query McGill University course data",
-        version="0.5.0",
+        version="0.9.0",
         lifespan=lifespan,
         docs_url="/docs" if settings.is_development else None,
         redoc_url="/redoc" if settings.is_development else None,
