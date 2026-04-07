@@ -14,6 +14,8 @@
 - **"Explain Plan" button** — triggers the existing planner workflow (Claude Agent SDK) to generate a rationale for the auto-populated plan, explaining each course's purpose, prerequisite chains, workload balance, and alternatives
 - **Rich course display in planner** — semester courses now show title and credits alongside the code, and are clickable links to the full course detail page
 - **Advisor chat panel** — right-side panel in the planner with a plan-aware chat that knows the student's courses, semesters, interests, and uploaded documents; powered by the same hybrid retrieval + synthesis pipeline with plan context injected
+- **Toast notifications** — all API errors now surface as dismissible toasts in the bottom-right corner with contextual messages and retry buttons where applicable
+- **Auth overlay** — login/signup form now renders as a blurred overlay blocking all content until the user authenticates, replacing per-page auth gates
 
 ### Changed
 - `POST /api/v1/plans` accepts `start_term` parameter and auto-populates semesters when `program_slug` is provided

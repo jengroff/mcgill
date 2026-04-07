@@ -24,7 +24,8 @@ make frontend                 # UI on :5174
 - **Department website directory** — 70+ department website URLs and student resources (student societies, library guides, advisor contacts) injected into synthesis context, so the advisor can reference official department pages, the Food Science Association, library subject guides, and named foundation year contacts
 - **Foundation program awareness** — Foundation Year program pages are explicitly scraped for Ag & Env Sci, Science, Arts, and Arts & Science faculties; synthesis prompt understands non-CEGEP students need a Foundation Program, mentions AP/IB exemptions, and cites specific contact emails
 - **Chat-driven operations** — natural language interface that routes between course Q&A, pipeline triggers ("ingest Science"), and curriculum planning, all over SSE
-- **PDF ingestion** — upload arbitrary PDFs to extract, chunk, embed, and store in pgvector alongside catalogue data
+- **PDF ingestion** — upload arbitrary PDFs to extract, chunk, embed, and store in pgvector alongside catalogue data; scanned and image-heavy PDFs are automatically routed through Claude Vision (VLM) for extraction
+- **Error handling** — all API failures surface as toast notifications with contextual messages and retry buttons; full-screen auth overlay blocks content until login
 
 ### Chat Examples
 
