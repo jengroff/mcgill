@@ -82,6 +82,13 @@ def cli():
             )
         )
     elif args.command == "pipeline":
+        import logging
+
+        logging.basicConfig(
+            level=logging.INFO,
+            format="%(asctime)s %(name)s %(levelname)s %(message)s",
+        )
+
         from backend.workflows.ingest.graph import run_pipeline
 
         asyncio.run(
