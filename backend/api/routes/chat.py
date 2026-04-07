@@ -228,8 +228,16 @@ async def stream(session_id: str, request: Request):
                 question = session.pop("pending_question")
                 session["status"] = "streaming"
 
-                pipeline_intent = _detect_pipeline_intent(question)
-                planner_intent = _detect_planner_intent(question)
+                # Plan-scoped sessions skip intent detection — always
+                # use the QA pipeline with plan context injected
+                is_plan_chat = bool(session.get("plan_id"))
+
+                pipeline_intent = (
+                    None if is_plan_chat else _detect_pipeline_intent(question)
+                )
+                planner_intent = (
+                    None if is_plan_chat else _detect_planner_intent(question)
+                )
                 if pipeline_intent:
                     _spawn_pipeline(session_id, pipeline_intent)
                     session["status"] = "idle"
