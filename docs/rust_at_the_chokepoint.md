@@ -201,3 +201,31 @@ Python remains the right choice for the majority of agent infrastructure, includ
 But when a library gets you to 3 milliseconds and you need 1.5, a purpose-built Rust function via PyO3 can close the remaining gap. The Rust implementation in this project beats rapidfuzz by ~2x and pure Python by ~107x on the function that was actually bottlenecking the agent. Course name resolution across a 4,900 entry catalog dropped to under 1 millisecond per query.
 
 The threshold for introducing Rust is higher than "faster than Python" and lower than most people think. If there is a hot loop on the critical path where even the best library is not fast enough, it is often worth doing.
+
+---
+
+## Appendix
+
+### A. Benchmark Methodology
+
+- **Runtime:** Python 3.12, Rust 1.93, PyO3 0.28, rapidfuzz 3.14
+- **Build:** `maturin develop --release` (single-threaded, release optimizations)
+- **Measurement:** Median of 100 iterations per workload, 3 warmup runs discarded
+- **Overhead included:** All speedup figures include the cost of Python-to-Rust data conversion (`str` to `&str`). Pure compute speedups are higher.
+- **Test data:** 40 realistic McGill course name variants (full and abbreviated forms), randomly sampled into 10,000 pairings with a fixed seed for reproducibility.
+
+### Full Results
+
+| Function | Workload | Python | rapidfuzz (C++) | Rust (PyO3) | vs Python | vs rapidfuzz |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| jaro_winkler | 10k string pairs | 171.7ms | 3.2ms | 1.6ms | **~107x** | **~2x** |
+
+- rapidfuzz uses a C++ bitparallel Jaro-Winkler with Unicode support, hash-map fallback for non-ASCII, configurable score cutoffs, and multi-word bitmask arrays for arbitrary-length strings
+- The Rust implementation uses the same bitparallel family but is specialized: raw byte slices, single `u64` bitmask (strings under 64 bytes), no branching in the inner loop
+- The naive Rust port (identical algorithm to Python, no bitparallel optimization) ran in ~12ms, a ~14x speedup from language overhead alone
+- The function falls back to pure Python gracefully if the Rust extension is not compiled
+- Build: `maturin develop --release` — compiles in under 10 seconds
+
+---
+
+*Joshua Engroff · Rust Acceleration Benchmarks · PyO3 0.28 · April 2026*

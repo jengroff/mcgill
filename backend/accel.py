@@ -4,12 +4,14 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+
 try:
     from backend._core import jaro_winkler as _rs_jaro_winkler
 
     RUST_AVAILABLE = True
 except ImportError:
     RUST_AVAILABLE = False
+
     logger.info("Rust extension not available — using pure Python fallback")
 
 

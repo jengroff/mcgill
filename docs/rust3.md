@@ -1,4 +1,3 @@
-
 # Rust at the Chokepoints
 
 *Accelerating CPU-bound work in agentic pipelines*
@@ -11,15 +10,15 @@
 
 There is a comfortable assumption in the agentic AI community that most wall clock time is spent waiting on LLM API calls, so the speed of the orchestration layer does not matter. Python is fine. It is glue code. The model is the bottleneck.
 
-That assumption holds right up until you are fuzzy matching a user query against 4,900 course names.
+That holds right up until you are fuzzy matching a user query against 4,900 course names.
 
 In practice, every LLM call in a production agent pipeline is surrounded by CPU-bound orchestration work. The agent resolves entities by matching user input against large record sets, normalizing and comparing strings across thousands of candidates before the model ever sees them. These stages run synchronously on the critical path, so when they take hundreds of milliseconds they effectively serialize the entire decision loop.
 
 The problem compounds with scale. Fuzzy matching 10,000 string pairs in pure Python takes roughly 172 milliseconds per batch, which adds up quickly when resolving course names, prerequisite references, and advisor lookups across a full catalog.
 
-At that point, the orchestration layer becomes the bottleneck rather than the model.
+At these workloads, the orchestration layer becomes the bottleneck rather than the model.
 
-I ran into this firsthand while building a Claude-powered course advisor for McGill University. The platform scrapes, resolves, embeds, and serves roughly 4,900 courses across 12 faculties via a LangGraph agent with a React frontend. Entity resolution, matching inputs like “Intro Organic Chem” to “CHEM 212: Introduction to Organic Chemistry 1,” sits directly on the critical path before every retrieval call.
+I encountered this firsthand while building a Claude-powered course advisor for McGill University. The platform scrapes, resolves, embeds, and serves roughly 4,900 courses across 12 faculties via a LangGraph agent with a React frontend. Entity resolution, matching inputs like “Intro Organic Chem” to “CHEM 212: Introduction to Organic Chemistry 1,” sits directly on the critical path before every retrieval call.
 
 So I decided to see what Rust could do about it.
 
@@ -41,7 +40,7 @@ except ImportError:
     RUST_AVAILABLE = False
 ```
 
-The calling code does not change. The function signature stays the same. The test suite stays the same. The Rust extension is effectively invisible to the rest of the system.
+The calling code does not change, with the same function signature and the same test suite. The Rust extension is effectively invisible to the rest of the system.
 
 What I accelerated:
 
