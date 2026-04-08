@@ -75,9 +75,9 @@ So I benchmarked against it.
 | **rapidfuzz (C++)** |   **3.2ms** | **53.7x** |              |
 | **Rust (PyO3)**     |   **1.6ms** | **107.3x** |    **2.0x**  |
 
-*10,000 string pairs, median of 100 iterations, 3 warmup runs discarded. Python 3.12, Rust 1.93, PyO3 0.28, rapidfuzz 3.14. Single threaded, release build. Speedups include the cost of Python-to-Rust data conversion.*
+*10,000 string pairs, median of 100 iterations, 3 warmup runs discarded. Python 3.12, Rust 1.93, PyO3 0.28, rapidfuzz 3.14. Single threaded, release build. Speedups include the cost of Python-to-Rust data conversion. The Rust-vs-rapidfuzz ratio varies from ~1.8x to ~2.2x across runs due to sub-millisecond measurement noise.*
 
-The Rust implementation is 2x faster than rapidfuzz and 107x faster than pure Python. Both the Rust and rapidfuzz implementations use bitparallel Jaro-Winkler, the same family of algorithm. The difference comes from the implementation: the Rust version is purpose-built for this workload, operating directly on byte slices with no support for Unicode normalization, score cutoffs, or arbitrary-length strings. rapidfuzz is a general-purpose library that handles all of those, and the generality has a cost.
+The Rust implementation is roughly 2x faster than rapidfuzz and ~107x faster than pure Python. Both the Rust and rapidfuzz implementations use bitparallel Jaro-Winkler, the same family of algorithm. The difference comes from the implementation: the Rust version is purpose-built for this workload, operating directly on byte slices with no support for Unicode normalization, score cutoffs, or arbitrary-length strings. rapidfuzz is a general-purpose library that handles all of those, and the generality has a cost.
 
 The test data uses realistic course name pairs such as "Introduction to Organic Chemistry" versus "Intro Organic Chem," "Advanced Calculus" versus "Calculus 1," and "Neuroanatomy and Neurophysiology" versus "Neuroanatomy," sampled into 10,000 random pairings.
 
@@ -161,7 +161,7 @@ rapidfuzz is a general-purpose library. It handles arbitrary Unicode via a hash 
 
 The Rust implementation is specialized. It operates on raw byte slices, assumes strings fit in a single `u64` (under 64 bytes, which covers all course names), and computes every score unconditionally. The resulting code is a tight sequence of bitwise operations with no branching in the inner loop, which the compiler can optimize aggressively.
 
-The tradeoff is clear: rapidfuzz handles everything, the Rust version handles exactly one workload. For that workload, the specialization pays off at 2x.
+The tradeoff is clear: rapidfuzz handles everything, the Rust version handles exactly one workload. For that workload, the specialization pays off at ~2x.
 
 ---
 
@@ -198,6 +198,6 @@ The next set of performance gains in agent systems is not primarily in the model
 
 Python remains the right choice for the majority of agent infrastructure, including prompt construction, tool dispatch, state management, and integration. For CPU-bound work between LLM calls, C-backed libraries like rapidfuzz can eliminate most of the overhead with no compilation required. That should be the first move.
 
-But when a library gets you to 3 milliseconds and you need 1.5, a purpose-built Rust function via PyO3 can close the remaining gap. The Rust implementation in this project beats rapidfuzz by 2x and pure Python by 107x on the function that was actually bottlenecking the agent. Course name resolution across a 4,900 entry catalog dropped to under 1 millisecond per query.
+But when a library gets you to 3 milliseconds and you need 1.5, a purpose-built Rust function via PyO3 can close the remaining gap. The Rust implementation in this project beats rapidfuzz by ~2x and pure Python by ~107x on the function that was actually bottlenecking the agent. Course name resolution across a 4,900 entry catalog dropped to under 1 millisecond per query.
 
 The threshold for introducing Rust is higher than "faster than Python" and lower than most people think. If there is a hot loop on the critical path where even the best library is not fast enough, it is often worth doing.
