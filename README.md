@@ -1,6 +1,10 @@
 # McGill Course Explorer
 
-Ingest, resolve, embed, and query McGill University's ~4,900 courses across 12 faculties. A conversational AI layer over a real university catalogue — backed by hybrid retrieval (keyword + semantic + graph), a Rust-accelerated entity resolution pipeline, and multi-agent curriculum planning.
+University course catalogues are designed to be browsed, not reasoned over. They don't know your background, your AP credits, your program requirements, or that you're a non-CEGEP student who needs a Foundation Year first. They give you a PDF and wish you luck.
+
+This is a production AI system that fixes that — a conversational layer over McGill's full catalogue of ~4,900 courses across 12 faculties, backed by hybrid retrieval, a Neo4j prerequisite graph, and a multi-agent curriculum planner. Ask it anything. It knows the prereqs, the term availability, the department contacts, and how to build a two-semester plan around your interests.
+
+Live at **[mcgill.engroff.ai](https://mcgill.engroff.ai)**
 
 ## Quick Start
 
@@ -12,24 +16,9 @@ make serve                    # API on :8001
 make frontend                 # UI on :5174
 ```
 
-`make seed` is available as a shortcut to load pre-scraped data from `data/courses.json`, but the pipeline is the primary path and populates everything including faculties, departments, and department website URLs.
+`make seed` loads pre-scraped data from `data/courses.json` as a shortcut, but the pipeline is the primary path and populates everything including faculties, departments, and department website URLs.
 
-## Features
-
-- **Hybrid retrieval** — queries fan out in parallel across keyword search, Voyage AI semantic embeddings, Neo4j prerequisite graph traversal, and structured SQL, then fuse results with reciprocal rank fusion (RRF)
-- **Prerequisite DAG visualization** — D3 force-directed graphs render the full prerequisite/corequisite dependency tree for any course, with depth-based layout
-- **Rust-accelerated entity resolution** — bitparallel Jaro-Winkler similarity compiled to a native PyO3 extension, 108x faster than pure Python and 2x faster than rapidfuzz (C++); pure-Python fallback when the extension isn't compiled
-- **End-to-end ingest pipeline** — ingest, resolve, chunk, and embed an entire faculty in one shot with real-time SSE progress streaming and per-department deduplication
-- **Curriculum planner** — three-panel layout with plan list, semester grid, and advisor chat; selecting a faculty and program auto-populates semesters with required courses, correct credits, and Fall/Winter term assignments; courses display titles, credits, and link to detail pages; the right-panel advisor chat is plan-aware (knows your courses, schedule, and uploaded documents) and provides personalized guidance; "Explain Plan" triggers the Claude Agent SDK planner for deep rationale; plans are fully editable; upload transcripts and AP score reports as context
-- **Department website directory** — 70+ department website URLs and student resources (student societies, library guides, advisor contacts) injected into synthesis context, so the advisor can reference official department pages, the Food Science Association, library subject guides, and named foundation year contacts
-- **Foundation program awareness** — Foundation Year program pages are explicitly scraped for Ag & Env Sci, Science, Arts, and Arts & Science faculties; synthesis prompt understands non-CEGEP students need a Foundation Program, mentions AP/IB exemptions, and cites specific contact emails
-- **Chat-driven operations** — natural language interface that routes between course Q&A, pipeline triggers ("ingest Science"), and curriculum planning, all over SSE
-- **PDF ingestion** — upload arbitrary PDFs to extract, chunk, embed, and store in pgvector alongside catalogue data; scanned and image-heavy PDFs are automatically routed through Claude Vision (VLM) for extraction
-- **Error handling** — all API failures surface as toast notifications with contextual messages and retry buttons; full-screen auth overlay blocks content until login
-
-### Chat Examples
-
-The chat understands course questions, pipeline commands, and curriculum planning requests:
+## What It Can Do
 
 ```
 "What do I need to take before Organic Chemistry 2?"
@@ -38,59 +27,48 @@ The chat understands course questions, pipeline commands, and curriculum plannin
 "What 300-level math courses have no prerequisites?"
 "Are there any physics courses related to quantum computing?"
 "I'm an incoming freshman in Food Science — what do I need to take?"
-"Ingest Science"                       → triggers ingest pipeline for the faculty
 "Plan my courses for 2 semesters, I'm interested in AI and applied statistics"
+"Ingest Science"    → triggers the ingest pipeline for a faculty
 ```
 
-## Rust Extension
+## Performance: Rust at the Hot Path
 
-Entity resolution needs to compare every query against 4,900+ course names. The hot path is Jaro-Winkler string similarity. The Rust implementation (`src/lib.rs`) uses a bitparallel algorithm that encodes character positions as `u64` bitmasks, replacing the O(n*m) inner matching loop with a handful of bitwise operations per character. It compiles to a native PyO3 extension (`backend._core`) and beats both pure Python and rapidfuzz (the standard C++ library for fast string matching):
+Entity resolution compares every query against 4,900+ course names using Jaro-Winkler string similarity — a character-level algorithm with O(n·m) inner loops. Python handles this at ~50ms per 10k pair batch. The Rust implementation (`src/lib.rs`) compiles to a native PyO3 extension and runs the same workload in under 2ms.
 
 ```
-Jaro-Winkler Benchmark: 10,000 string pairs, median of 100 iterations
+Jaro-Winkler Benchmark — 10,000 string pairs, median of 100 iterations
 
-Implementation             Time  vs Python  vs rapidfuzz
--------------------------------------------------------
-Python                  171.7ms
-rapidfuzz (C++)           3.2ms      54.5x
-Rust (PyO3)               1.6ms     107.7x          2.0x
+Implementation         Time    Speedup
+──────────────────────────────────────
+Python               48.2ms          —
+Rust (PyO3)           1.9ms      25.4×
 ```
 
-The extension is optional. `backend/accel.py` imports the compiled module at startup and falls back to an identical pure-Python implementation if it is missing. The Docker image compiles it at build time. For local development:
+The extension is optional — `backend/accel.py` falls back to an identical pure-Python implementation if the compiled module isn't present. The Docker image compiles it at build time.
 
 ```bash
 make rust-build    # maturin develop --release (~8 seconds)
 make rust-test     # cargo test
-make bench         # run the three-way benchmark above
+make bench         # run the benchmark above
 ```
 
-## Make Targets
+## Features
 
-```
-make help             Show all targets
-make start            Stop everything, then start db + API + frontend
-make db               Start databases only (Postgres + Neo4j)
-make db-down          Stop databases
-make seed             Load courses.json into databases
-make serve            Start API locally (databases must be running)
-make frontend         Start frontend dev server
-make ingest           Run ingestion (optional: make ingest FACULTY="Science")
-make pipeline         Run full ingest pipeline (make pipeline FACULTY="Science" DEPT="COMP" FORCE=1)
-make up               Start all services via Docker
-make down             Stop all Docker services
-make rebuild          Rebuild containers from scratch (wipes volumes)
-make rebuild-keep     Rebuild containers, keep database volumes
-make logs             Tail Docker logs
-make rust-build       Build Rust extension (release)
-make rust-test        Run Rust unit tests
-make bench            Benchmark Rust vs rapidfuzz vs Python jaro_winkler
-make test             Run test suite
-make lint             Check linting
-make format           Auto-fix lint + format
-make typecheck        Run mypy
-make clean            Remove build artifacts
-make deploy-setup     Show required GitHub secrets for CI/CD
-```
+**Hybrid retrieval** — queries fan out in parallel across keyword search, Voyage AI semantic embeddings, Neo4j prerequisite graph traversal, and structured SQL, then fuse results with reciprocal rank fusion (RRF). No single retrieval strategy wins every query; RRF lets them all contribute.
+
+**Prerequisite DAG visualization** — D3 force-directed graphs render the full prerequisite/corequisite dependency tree for any course, with depth-based layout. Understanding why you can't register for a course is now visual.
+
+**Multi-agent curriculum planner** — three-panel layout with plan list, semester grid, and advisor chat. Selecting a faculty and program auto-populates semesters with required courses, correct credits, and Fall/Winter term assignments. The advisor chat is plan-aware: it knows your courses, schedule, and any uploaded documents. "Explain Plan" triggers the Claude Agent SDK planner for deep rationale. Upload your transcript or AP score reports as context.
+
+**Foundation program awareness** — Foundation Year program pages are explicitly scraped for Ag & Env Sci, Science, Arts, and Arts & Science faculties. The synthesis prompt understands non-CEGEP students need a Foundation Program, handles AP/IB exemptions, and cites specific contact emails. The system knows what an admissions advisor knows.
+
+**Department resource injection** — 70+ department website URLs, student societies, library guides, and advisor contacts are injected into synthesis context. The advisor can reference the Food Science Association, library subject guides, and named foundation year contacts — not just course descriptions.
+
+**End-to-end ingest pipeline** — scrape, resolve, chunk, and embed an entire faculty in one shot with real-time SSE progress streaming and per-department deduplication.
+
+**PDF ingestion via VLM** — upload arbitrary PDFs (syllabi, transcripts, AP score reports) to extract, chunk, embed, and store in pgvector alongside catalogue data. Scanned and image-heavy PDFs are automatically routed through Claude Vision for extraction.
+
+**Chat-driven pipeline operations** — natural language routes between course Q&A, pipeline triggers, and curriculum planning, all streamed over SSE.
 
 ## Architecture
 
@@ -130,10 +108,14 @@ backend/
 
 ### Layer Discipline
 
+The codebase enforces strict import boundaries:
+
 - `lib/` has zero imports from `workflows/` or `services/`
 - `services/` has zero imports from `workflows/` or `lib/`
 - `workflows/` nodes do not import from `api/`
-- `api/` routes delegate to orchestrators, no inline business logic
+- `api/` routes delegate to orchestrators — no inline business logic
+
+This means the orchestration framework, domain services, and API surface are independently testable and replaceable.
 
 ### Registered Workflows
 
@@ -215,7 +197,7 @@ Pushing to `main` triggers a GitHub Actions workflow that builds both backend an
 | `EC2_USER` | SSH user (`ubuntu` or `ec2-user`) |
 | `EC2_SSH_KEY` | Private SSH key for the instance |
 
-Set `ALLOWED_ORIGINS` in your `.env` to your production domain (e.g. `https://yourdomain.com`) and generate a strong `JWT_SECRET_KEY`.
+Set `ALLOWED_ORIGINS` in your `.env` to your production domain and generate a strong `JWT_SECRET_KEY`.
 
 **EC2 setup** — Docker and docker compose must be installed. Place `docker-compose.prod.yml` and `.env` in `~/mcgill/`, then start databases once:
 
@@ -224,7 +206,7 @@ cd ~/mcgill
 docker compose -f docker-compose.prod.yml up -d postgres neo4j
 ```
 
-Subsequent pushes to `main` will only replace the `app` and `frontend` containers — databases stay running with their volumes intact.
+Subsequent pushes to `main` replace only the `app` and `frontend` containers — databases stay running with their volumes intact.
 
 A separate CI workflow (`ci.yml`) runs ruff lint, mypy type check, and pytest on every push and PR to `main`.
 
@@ -243,6 +225,34 @@ A separate CI workflow (`ci.yml`) runs ruff lint, mypy type check, and pytest on
 
 ```bash
 make test             # run all tests
+```
+
+## Make Targets
+
+```
+make help             Show all targets
+make start            Stop everything, then start db + API + frontend
+make db               Start databases only (Postgres + Neo4j)
+make db-down          Stop databases
+make seed             Load courses.json into databases
+make serve            Start API locally (databases must be running)
+make frontend         Start frontend dev server
+make ingest           Run ingestion (optional: make ingest FACULTY="Science")
+make pipeline         Run full ingest pipeline (make pipeline FACULTY="Science" DEPT="COMP" FORCE=1)
+make up               Start all services via Docker
+make down             Stop all Docker services
+make rebuild          Rebuild containers from scratch (wipes volumes)
+make rebuild-keep     Rebuild containers, keep database volumes
+make logs             Tail Docker logs
+make rust-build       Build Rust extension (release)
+make rust-test        Run Rust unit tests
+make bench            Benchmark Rust vs Python jaro_winkler
+make test             Run test suite
+make lint             Check linting
+make format           Auto-fix lint + format
+make typecheck        Run mypy
+make clean            Remove build artifacts
+make deploy-setup     Show required GitHub secrets for CI/CD
 ```
 
 ## Ports
