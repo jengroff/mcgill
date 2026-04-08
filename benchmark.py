@@ -1,9 +1,11 @@
-"""Benchmark: Rust vs pure Python Jaro-Winkler on course name data."""
+"""Benchmark: Rust vs rapidfuzz vs pure Python Jaro-Winkler on course name data."""
 
 from __future__ import annotations
 
 import random
 import time
+
+from rapidfuzz.distance import JaroWinkler
 
 RUST_AVAILABLE = False
 try:
@@ -12,6 +14,10 @@ try:
     RUST_AVAILABLE = True
 except ImportError:
     pass
+
+
+def rf_jaro_winkler(s1: str, s2: str, prefix_weight: float = 0.1) -> float:
+    return JaroWinkler.similarity(s1, s2, prefix_weight=prefix_weight)
 
 
 def py_jaro_winkler(s1: str, s2: str, prefix_weight: float = 0.1) -> float:
@@ -133,20 +139,30 @@ def main() -> None:
     pairs = make_pairs(n_pairs)
 
     print(
-        f"\nJaro-Winkler Benchmark — {n_pairs:,} string pairs, median of {iterations} iterations\n"
+        f"\nJaro-Winkler Benchmark: {n_pairs:,} string pairs, median of {iterations} iterations\n"
     )
-    print(f"{'Implementation':<16} {'Time':>10} {'Speedup':>10}")
-    print("-" * 38)
+    print(f"{'Implementation':<20} {'Time':>10} {'vs Python':>10} {'vs rapidfuzz':>13}")
+    print("-" * 55)
 
     py_time = bench_fn(py_jaro_winkler, pairs, iterations)
-    print(f"{'Python':<16} {py_time * 1000:>8.1f}ms {'—':>10}")
+    print(f"{'Python':<20} {py_time * 1000:>8.1f}ms {'':>10} {'':>13}")
+
+    rf_time = bench_fn(rf_jaro_winkler, pairs, iterations)
+    rf_vs_py = py_time / rf_time
+    print(
+        f"{'rapidfuzz (C++)':<20} {rf_time * 1000:>8.1f}ms {rf_vs_py:>9.1f}x {'':>13}"
+    )
 
     if RUST_AVAILABLE:
         rs_time = bench_fn(rs_jaro_winkler, pairs, iterations)
-        speedup = py_time / rs_time
-        print(f"{'Rust (PyO3)':<16} {rs_time * 1000:>8.1f}ms {speedup:>9.1f}x")
+        rs_vs_py = py_time / rs_time
+        rs_vs_rf = rf_time / rs_time
+        print(
+            f"{'Rust (PyO3)':<20} {rs_time * 1000:>8.1f}ms"
+            f" {rs_vs_py:>9.1f}x {rs_vs_rf:>12.1f}x"
+        )
     else:
-        print("\n  Rust extension not available — run `make rust-build` first")
+        print("\n  Rust extension not available -- run `make rust-build` first")
 
     print()
 

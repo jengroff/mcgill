@@ -18,7 +18,7 @@ make frontend                 # UI on :5174
 
 - **Hybrid retrieval** — queries fan out in parallel across keyword search, Voyage AI semantic embeddings, Neo4j prerequisite graph traversal, and structured SQL, then fuse results with reciprocal rank fusion (RRF)
 - **Prerequisite DAG visualization** — D3 force-directed graphs render the full prerequisite/corequisite dependency tree for any course, with depth-based layout
-- **Rust-accelerated entity resolution** — Jaro-Winkler similarity compiled to a native PyO3 extension for fuzzy matching across 4,900+ course names; pure-Python fallback when the extension isn't compiled
+- **Rust-accelerated entity resolution** — bitparallel Jaro-Winkler similarity compiled to a native PyO3 extension, 84x faster than pure Python and 1.9x faster than rapidfuzz (C++); pure-Python fallback when the extension isn't compiled
 - **End-to-end ingest pipeline** — ingest, resolve, chunk, and embed an entire faculty in one shot with real-time SSE progress streaming and per-department deduplication
 - **Curriculum planner** — three-panel layout with plan list, semester grid, and advisor chat; selecting a faculty and program auto-populates semesters with required courses, correct credits, and Fall/Winter term assignments; courses display titles, credits, and link to detail pages; the right-panel advisor chat is plan-aware (knows your courses, schedule, and uploaded documents) and provides personalized guidance; "Explain Plan" triggers the Claude Agent SDK planner for deep rationale; plans are fully editable; upload transcripts and AP score reports as context
 - **Department website directory** — 70+ department website URLs and student resources (student societies, library guides, advisor contacts) injected into synthesis context, so the advisor can reference official department pages, the Food Science Association, library subject guides, and named foundation year contacts
@@ -44,23 +44,24 @@ The chat understands course questions, pipeline commands, and curriculum plannin
 
 ## Rust Extension
 
-Entity resolution needs to compare every query against 4,900+ course names. The hot path is Jaro-Winkler string similarity — a character-level algorithm with O(n*m) inner loops that Python handles at ~50ms per 10k pair batch. The Rust implementation (`src/lib.rs`) compiles to a native PyO3 extension (`backend._core`) and runs the same workload in ~2ms.
+Entity resolution needs to compare every query against 4,900+ course names. The hot path is Jaro-Winkler string similarity. The Rust implementation (`src/lib.rs`) uses a bitparallel algorithm that encodes character positions as `u64` bitmasks, replacing the O(n*m) inner matching loop with a handful of bitwise operations per character. It compiles to a native PyO3 extension (`backend._core`) and beats both pure Python and rapidfuzz (the standard C++ library for fast string matching):
 
 ```
-Jaro-Winkler Benchmark — 10,000 string pairs, median of 100 iterations
+Jaro-Winkler Benchmark: 10,000 string pairs, median of 100 iterations
 
-Implementation         Time    Speedup
-──────────────────────────────────────
-Python               48.2ms          —
-Rust (PyO3)           1.9ms      25.4x
+Implementation             Time  vs Python  vs rapidfuzz
+-------------------------------------------------------
+Python                  178.4ms
+rapidfuzz (C++)           4.0ms      44.8x
+Rust (PyO3)               2.1ms      84.2x          1.9x
 ```
 
-The extension is optional. `backend/accel.py` imports the compiled module at startup and falls back to an identical pure-Python implementation if it's missing. The Docker image compiles it at build time; for local development:
+The extension is optional. `backend/accel.py` imports the compiled module at startup and falls back to an identical pure-Python implementation if it is missing. The Docker image compiles it at build time. For local development:
 
 ```bash
 make rust-build    # maturin develop --release (~8 seconds)
 make rust-test     # cargo test
-make bench         # run the benchmark above
+make bench         # run the three-way benchmark above
 ```
 
 ## Make Targets
@@ -82,7 +83,7 @@ make rebuild-keep     Rebuild containers, keep database volumes
 make logs             Tail Docker logs
 make rust-build       Build Rust extension (release)
 make rust-test        Run Rust unit tests
-make bench            Benchmark Rust vs Python jaro_winkler
+make bench            Benchmark Rust vs rapidfuzz vs Python jaro_winkler
 make test             Run test suite
 make lint             Check linting
 make format           Auto-fix lint + format
