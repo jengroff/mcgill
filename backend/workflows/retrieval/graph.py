@@ -6,8 +6,8 @@ import uuid
 from langgraph.graph import StateGraph, END
 from langgraph.graph.state import CompiledStateGraph
 
-from backend.lib.orchestrator import WorkflowOrchestrator
-from backend.lib.registry import registry, WorkflowConfig
+from backend.services.lib.orchestrator import WorkflowOrchestrator
+from backend.services.lib.registry import registry, WorkflowConfig
 from backend.workflows.retrieval.state import RetrievalState
 from backend.workflows.retrieval.nodes import (
     keyword_node,
@@ -18,7 +18,7 @@ from backend.workflows.retrieval.nodes import (
 )
 
 
-async def parallel_retrieval_node(state: RetrievalState) -> RetrievalState:
+async def parallel_retrieval_node(state: RetrievalState) -> dict:  # type: ignore[type-arg]
     """Run keyword, semantic, graph, and structured retrieval in parallel."""
     results = await asyncio.gather(
         keyword_node(state),
@@ -39,7 +39,7 @@ async def parallel_retrieval_node(state: RetrievalState) -> RetrievalState:
 
     if errors:
         merged["errors"] = errors
-    return merged  # type: ignore[return-value]
+    return merged
 
 
 class RetrievalOrchestrator(WorkflowOrchestrator):

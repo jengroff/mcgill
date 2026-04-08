@@ -4,6 +4,8 @@ import logging
 import traceback
 from pathlib import Path
 
+from typing import Any
+
 from backend.workflows.ingest.state import IngestState
 
 logger = logging.getLogger(__name__)
@@ -11,7 +13,7 @@ logger = logging.getLogger(__name__)
 DATA_DIR = Path(__file__).resolve().parents[3] / "data"
 
 
-async def precheck_node(state: IngestState) -> IngestState:
+async def precheck_node(state: IngestState) -> dict[str, Any]:
     """Determine which departments need processing by checking for existing embeddings.
 
     A department is considered "pipeline-complete" if it has at least one course
@@ -87,6 +89,7 @@ async def precheck_node(state: IngestState) -> IngestState:
             "active_depts": active,  # type: ignore[typeddict-item]
         }
     except Exception as e:
+        logger.exception("precheck_node failed")
         return {
             "scrape_status": "error",
             "errors": [f"precheck: {e}\n{traceback.format_exc()}"],
@@ -95,7 +98,7 @@ async def precheck_node(state: IngestState) -> IngestState:
         }
 
 
-async def scrape_node(state: IngestState) -> IngestState:
+async def scrape_node(state: IngestState) -> dict[str, Any]:
     """Phase 1: Scrape course catalogue.
 
     Uses `active_depts` from the pre-check node to scrape only departments
@@ -151,13 +154,14 @@ async def scrape_node(state: IngestState) -> IngestState:
             "scrape_status": "complete",
         }
     except Exception as e:
+        logger.exception("scrape_node failed")
         return {
             "scrape_status": "error",
             "errors": [f"scrape: {e}\n{traceback.format_exc()}"],
         }
 
 
-async def resolve_node(state: IngestState) -> IngestState:
+async def resolve_node(state: IngestState) -> dict[str, Any]:
     """Phase 2: Entity resolution and Neo4j graph build."""
     try:
         from backend.db.postgres import get_pool
@@ -255,13 +259,14 @@ async def resolve_node(state: IngestState) -> IngestState:
             "resolve_status": "complete",
         }
     except Exception as e:
+        logger.exception("resolve_node failed")
         return {
             "resolve_status": "error",
             "errors": [f"resolve: {e}\n{traceback.format_exc()}"],
         }
 
 
-async def embed_node(state: IngestState) -> IngestState:
+async def embed_node(state: IngestState) -> dict[str, Any]:
     """Phase 3: Generate embeddings and store in pgvector."""
     try:
         from backend.db.postgres import get_pool
@@ -365,6 +370,7 @@ async def embed_node(state: IngestState) -> IngestState:
             "embed_status": "complete",
         }
     except Exception as e:
+        logger.exception("embed_node failed")
         return {
             "embed_status": "error",
             "errors": [f"embed: {e}\n{traceback.format_exc()}"],

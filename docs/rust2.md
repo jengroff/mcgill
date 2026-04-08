@@ -2,7 +2,7 @@
 
 *Accelerating CPU-bound work in agentic pipelines*
 
-> **TL;DR:** I dropped a single Rust function into a Python agentic platform via PyO3 and measured an 84x speedup over pure Python and a 1.9x speedup over rapidfuzz, the best C++ string matching library available. This post walks through the benchmark, explains how a bitparallel Jaro-Winkler implementation in Rust outperforms both, and argues that selective Rust acceleration is one of the highest-leverage performance moves available to agent builders.
+> **TL;DR:** I dropped a single Rust function into a Python agentic platform via PyO3 and measured a ~107x speedup over pure Python and a ~2x speedup over rapidfuzz, the best C++ string matching library available. This post walks through the benchmark, explains how a bitparallel Jaro-Winkler implementation in Rust outperforms both, and argues that selective Rust acceleration is one of the highest-leverage performance moves available to agent builders.
 
 ---
 
@@ -14,7 +14,7 @@ That holds right up until you are fuzzy matching a user query against 4,900 cour
 
 In practice, every LLM call in a production agent pipeline is surrounded by CPU-bound orchestration work. The agent resolves entities by matching user input against large record sets, normalizing and comparing strings across thousands of candidates before the model ever sees them. These stages run synchronously on the critical path, so when they take hundreds of milliseconds they effectively serialize the entire decision loop.
 
-The problem compounds with scale. Fuzzy matching 10,000 string pairs in pure Python takes roughly 178 milliseconds per batch, which adds up quickly when resolving course names, prerequisite references, and advisor lookups across a full catalog.
+The problem compounds with scale. Fuzzy matching 10,000 string pairs in pure Python takes roughly 172 milliseconds per batch, which adds up quickly when resolving course names, prerequisite references, and advisor lookups across a full catalog.
 
 At these workloads, the orchestration layer becomes the bottleneck rather than the model.
 
@@ -28,7 +28,7 @@ So I decided to see what Rust could do about it.
 
 The strategy was deliberately narrow. Do not rewrite the platform, rewrite the inner loop.
 
-I identified one function where Python's per element overhead dominated runtime, wrote a Rust equivalent using PyO3, and exposed it as a native Python extension module. The total investment was about 130 lines of Rust, compiled via `maturin develop --release` in under ten seconds.
+I identified one function where Python's per element overhead dominated runtime, wrote a Rust equivalent using PyO3, and exposed it as a native Python extension module. The total investment was about 140 lines of Rust, compiled via `maturin develop --release` in under ten seconds.
 
 The integration layer is a single Python file, `accel.py`, which attempts to import the Rust extension and falls back to a pure Python implementation if it is not available:
 
@@ -71,17 +71,17 @@ So I benchmarked against it.
 
 |                     |        Time | vs Python | vs rapidfuzz |
 | ------------------- | ----------: | --------: | -----------: |
-| **Python**          | **178.4ms** |           |              |
-| **rapidfuzz (C++)** |   **4.0ms** | **44.8x** |              |
-| **Rust (PyO3)**     |   **2.1ms** | **84.2x** |    **1.9x**  |
+| **Python**          | **171.7ms** |           |              |
+| **rapidfuzz (C++)** |   **3.2ms** | **53.7x** |              |
+| **Rust (PyO3)**     |   **1.6ms** | **107.3x** |    **2.0x**  |
 
 *10,000 string pairs, median of 100 iterations, 3 warmup runs discarded. Python 3.12, Rust 1.93, PyO3 0.28, rapidfuzz 3.14. Single threaded, release build. Speedups include the cost of Python-to-Rust data conversion.*
 
-The Rust implementation is 1.9x faster than rapidfuzz and 84x faster than pure Python. Both the Rust and rapidfuzz implementations use bitparallel Jaro-Winkler, the same family of algorithm. The difference comes from the implementation: the Rust version is purpose-built for this workload, operating directly on byte slices with no support for Unicode normalization, score cutoffs, or arbitrary-length strings. rapidfuzz is a general-purpose library that handles all of those cases, and the generality has a cost.
+The Rust implementation is 2x faster than rapidfuzz and 107x faster than pure Python. Both the Rust and rapidfuzz implementations use bitparallel Jaro-Winkler, the same family of algorithm. The difference comes from the implementation: the Rust version is purpose-built for this workload, operating directly on byte slices with no support for Unicode normalization, score cutoffs, or arbitrary-length strings. rapidfuzz is a general-purpose library that handles all of those, and the generality has a cost.
 
 The test data uses realistic course name pairs such as "Introduction to Organic Chemistry" versus "Intro Organic Chem," "Advanced Calculus" versus "Calculus 1," and "Neuroanatomy and Neurophysiology" versus "Neuroanatomy," sampled into 10,000 random pairings.
 
-In practice, resolving a course name against the full 4,900 entry catalog takes about 1 millisecond per query with the Rust implementation, compared to roughly 2 milliseconds with rapidfuzz and 87 milliseconds in pure Python. A batch of 10 queries completes in about 10 milliseconds, which is the difference between a noticeable pause and an instant response.
+In practice, resolving a course name against the full 4,900 entry catalog takes under 1 millisecond per query with the Rust implementation, compared to about 1.6 milliseconds with rapidfuzz and 84 milliseconds in pure Python. A batch of 10 queries completes in about 8 milliseconds, which is the difference between a noticeable pause and an instant response.
 
 ---
 
@@ -89,7 +89,7 @@ In practice, resolving a course name against the full 4,900 entry catalog takes 
 
 ### Why Naive Rust is Already Fast
 
-My first implementation was a direct port of the Python Jaro-Winkler into Rust: same algorithm, same data structures, same nested loops. That version ran in about 12 milliseconds on the benchmark, a 13x speedup over Python. The improvement came entirely from how the two languages execute identical logic.
+My first implementation was a direct port of the Python Jaro-Winkler into Rust: same algorithm, same data structures, same nested loops. That version ran in about 12 milliseconds on the benchmark, roughly a 14x speedup over Python. The improvement came entirely from how the two languages execute identical logic.
 
 The standard Jaro matching pass scans a window of characters for each position in the first string:
 
@@ -106,9 +106,9 @@ for i, c1 in enumerate(s1):
         break
 ```
 
-In Python, every character comparison allocates a temporary string object, every boolean write updates reference counts, and every loop iteration involves method dispatch. In Rust, the same loop compiles down to byte comparisons, byte stores, and register increments. That overhead gap accounts for the 13x difference on identical logic.
+In Python, every character comparison allocates a temporary string object, every boolean write updates reference counts, and every loop iteration involves method dispatch. In Rust, the same loop compiles down to byte comparisons, byte stores, and register increments. That overhead gap accounts for the 14x difference on identical logic.
 
-But 13x is not the end of the story. rapidfuzz already runs at 45x by using a fundamentally better algorithm. To compete, the Rust implementation needed the same treatment.
+But 14x is not the end of the story. rapidfuzz already runs at 54x by using a fundamentally better algorithm. To compete, the Rust implementation needed the same treatment.
 
 ### Bitparallel Jaro-Winkler
 
@@ -123,7 +123,7 @@ for (i, &b) in pattern.iter().enumerate() {
 }
 ```
 
-For the pattern `"organic"`, `pm[b'o']` would have bit 0 set, `pm[b'r']` bit 1, `pm[b'g']` bits 2 and 5, and so on. This takes one pass over the pattern.
+For the pattern `"organic"`, `pm[b'o']` would have bit 0 set, `pm[b'r']` bit 1, `pm[b'g']` bit 2, and so on. This takes one pass over the pattern.
 
 **Matching.** For each character in the longer string (the text), a single bitmask operation finds all candidate match positions, and isolating the lowest set bit selects the leftmost available match:
 
@@ -161,7 +161,7 @@ rapidfuzz is a general-purpose library. It handles arbitrary Unicode via a hash 
 
 The Rust implementation is specialized. It operates on raw byte slices, assumes strings fit in a single `u64` (under 64 bytes, which covers all course names), and computes every score unconditionally. The resulting code is a tight sequence of bitwise operations with no branching in the inner loop, which the compiler can optimize aggressively.
 
-The tradeoff is clear: rapidfuzz handles everything, the Rust version handles exactly one workload. For that workload, the specialization pays off at 1.9x.
+The tradeoff is clear: rapidfuzz handles everything, the Rust version handles exactly one workload. For that workload, the specialization pays off at 2x.
 
 ---
 
@@ -170,11 +170,11 @@ The tradeoff is clear: rapidfuzz handles everything, the Rust version handles ex
 Not every slow function justifies a Rust rewrite. And not every slow function needs one.
 
 **Try a library first.**
-For common operations like string similarity, cosine distance, or edit distance, there are excellent C-backed Python libraries (rapidfuzz, scipy, numpy) that will get you most of the way. rapidfuzz delivers 45x over pure Python with zero compilation step. For many workloads, that is enough.
+For common operations like string similarity, cosine distance, or edit distance, there are excellent C-backed Python libraries (rapidfuzz, scipy, numpy) that will get you most of the way. rapidfuzz delivers 54x over pure Python with zero compilation step. For many workloads, that is enough.
 
 **Reach for Rust when:**
 
-* A C-backed library exists but you need the last factor of 2-3x on a latency-critical path
+* A C-backed library exists but you need the last factor of 2x on a latency-critical path
 * No suitable library exists for your specific computation
 * You have a tight loop over primitive data that runs on the order of one million iterations or more
 * The function sits on the synchronous critical path and the interface can remain narrow
@@ -188,7 +188,7 @@ For common operations like string similarity, cosine distance, or edit distance,
 
 The integration cost is lower than expected. PyO3 and maturin handle most of the build process. You write standard Rust, run a single command, and import the result into Python. A pure Python fallback keeps development and CI simple while production benefits from the speedup. The same test suite can validate both paths.
 
-For this case, about 130 lines of Rust took an afternoon to write. The performance improvement is permanent.
+For this case, about 140 lines of Rust took an afternoon to write. The performance improvement is permanent.
 
 ---
 
@@ -198,6 +198,6 @@ The next set of performance gains in agent systems is not primarily in the model
 
 Python remains the right choice for the majority of agent infrastructure, including prompt construction, tool dispatch, state management, and integration. For CPU-bound work between LLM calls, C-backed libraries like rapidfuzz can eliminate most of the overhead with no compilation required. That should be the first move.
 
-But when a library gets you to 4 milliseconds and you need 2, a purpose-built Rust function via PyO3 can close the remaining gap. The Rust implementation in this project beats rapidfuzz by 1.9x and pure Python by 84x on the function that was actually bottlenecking the agent. Course name resolution across a 4,900 entry catalog dropped to about 1 millisecond per query.
+But when a library gets you to 3 milliseconds and you need 1.5, a purpose-built Rust function via PyO3 can close the remaining gap. The Rust implementation in this project beats rapidfuzz by 2x and pure Python by 107x on the function that was actually bottlenecking the agent. Course name resolution across a 4,900 entry catalog dropped to under 1 millisecond per query.
 
 The threshold for introducing Rust is higher than "faster than Python" and lower than most people think. If there is a hot loop on the critical path where even the best library is not fast enough, it is often worth doing.

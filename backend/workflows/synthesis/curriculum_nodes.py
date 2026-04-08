@@ -1,11 +1,16 @@
 from __future__ import annotations
 
+import logging
 import traceback
+
+from typing import Any
 
 from backend.workflows.synthesis.curriculum_state import CurriculumState
 
+logger = logging.getLogger(__name__)
 
-async def interest_map_node(state: CurriculumState) -> CurriculumState:
+
+async def interest_map_node(state: CurriculumState) -> dict[str, Any]:
     """Map student interests to department domain tags."""
     try:
         from backend.services.synthesis.curriculum import CurriculumAssembler
@@ -14,13 +19,14 @@ async def interest_map_node(state: CurriculumState) -> CurriculumState:
         tags = assembler.map_interests_to_domains(state.get("student_interests", []))
         return {"domain_tags": tags}
     except Exception as e:
+        logger.exception("interest_map_node failed")
         return {
             "domain_tags": [],
             "errors": [f"interest_map: {e}\n{traceback.format_exc()}"],
         }
 
 
-async def requirements_node(state: CurriculumState) -> CurriculumState:
+async def requirements_node(state: CurriculumState) -> dict[str, Any]:
     """Resolve program requirements from program pages."""
     try:
         from backend.services.synthesis.curriculum import CurriculumAssembler
@@ -31,13 +37,14 @@ async def requirements_node(state: CurriculumState) -> CurriculumState:
         )
         return {"program_requirements": reqs}
     except Exception as e:
+        logger.exception("requirements_node failed")
         return {
             "program_requirements": {},
             "errors": [f"requirements: {e}\n{traceback.format_exc()}"],
         }
 
 
-async def candidate_retrieval_node(state: CurriculumState) -> CurriculumState:
+async def candidate_retrieval_node(state: CurriculumState) -> dict[str, Any]:
     """Retrieve candidate courses using domain tags as query."""
     try:
         from backend.workflows.retrieval.graph import RetrievalOrchestrator
@@ -52,13 +59,14 @@ async def candidate_retrieval_node(state: CurriculumState) -> CurriculumState:
         result = await retrieval_orch.run(query=query, top_k=20, mode="hybrid")
         return {"candidate_courses": result.get("fused_results", [])}  # type: ignore[typeddict-item]
     except Exception as e:
+        logger.exception("candidate_retrieval_node failed")
         return {
             "candidate_courses": [],
             "errors": [f"candidate_retrieval: {e}\n{traceback.format_exc()}"],
         }
 
 
-async def prereq_filter_node(state: CurriculumState) -> CurriculumState:
+async def prereq_filter_node(state: CurriculumState) -> dict[str, Any]:
     """Filter candidates by checking prerequisites are in completed_codes."""
     try:
         from backend.db.neo4j import run_query
@@ -91,10 +99,11 @@ async def prereq_filter_node(state: CurriculumState) -> CurriculumState:
 
         return {"candidate_courses": filtered}
     except Exception as e:
+        logger.exception("prereq_filter_node failed")
         return {"errors": [f"prereq_filter: {e}\n{traceback.format_exc()}"]}
 
 
-async def conflict_node(state: CurriculumState) -> CurriculumState:
+async def conflict_node(state: CurriculumState) -> dict[str, Any]:
     """Detect restriction conflicts among candidate courses."""
     try:
         from backend.services.synthesis.curriculum import CurriculumAssembler
@@ -108,10 +117,11 @@ async def conflict_node(state: CurriculumState) -> CurriculumState:
         conflicts = await assembler.detect_conflicts(codes)
         return {"conflicts": conflicts}
     except Exception as e:
+        logger.exception("conflict_node failed")
         return {"conflicts": [], "errors": [f"conflict: {e}\n{traceback.format_exc()}"]}
 
 
-async def rank_node(state: CurriculumState) -> CurriculumState:
+async def rank_node(state: CurriculumState) -> dict[str, Any]:
     """Score candidates by interest alignment + requirement coverage + prereq readiness."""
     try:
         candidates = state.get("candidate_courses", [])
@@ -158,13 +168,14 @@ async def rank_node(state: CurriculumState) -> CurriculumState:
         scored.sort(key=lambda x: x["curriculum_score"], reverse=True)
         return {"ranked_courses": scored[:15]}
     except Exception as e:
+        logger.exception("rank_node failed")
         return {
             "ranked_courses": state.get("candidate_courses", []),
             "errors": [f"rank: {e}\n{traceback.format_exc()}"],
         }
 
 
-async def assemble_node(state: CurriculumState) -> CurriculumState:
+async def assemble_node(state: CurriculumState) -> dict[str, Any]:
     """Call Anthropic API to write a natural language curriculum plan."""
     try:
         from backend.config import settings
@@ -215,7 +226,7 @@ Top recommended courses:
 
         return {"recommendation": response.content[0].text, "status": "complete"}  # type: ignore[union-attr]
     except Exception:
-        # Fallback: generate a simple list
+        logger.exception("assemble_node failed")
         ranked = state.get("ranked_courses", [])
         fallback = "Recommended courses:\n\n"
         for c in ranked[:10]:

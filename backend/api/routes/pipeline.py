@@ -8,8 +8,8 @@ from typing import AsyncIterator
 from fastapi import APIRouter, Request
 from pydantic import BaseModel
 
-from backend.lib.sse import _sse
-from backend.lib.streaming import sse_response
+from backend.services.lib.sse import _sse
+from backend.services.lib.streaming import sse_response
 
 logger = logging.getLogger("backend.api.pipeline")
 

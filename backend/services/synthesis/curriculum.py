@@ -1,6 +1,10 @@
 from __future__ import annotations
 
+import logging
+
 from backend.services.scraping.faculties import ALL_FACULTIES
+
+logger = logging.getLogger(__name__)
 
 
 # Map keywords → department codes for interest-to-domain matching
@@ -71,9 +75,6 @@ class CurriculumAssembler:
                  "categories": dict[str, list[str]], "credits_needed": int}
         """
         from backend.db.postgres import get_pool
-        import logging
-
-        logger = logging.getLogger("backend.services.synthesis.curriculum")
 
         pool = await get_pool()
         async with pool.acquire() as conn:
@@ -100,8 +101,8 @@ class CurriculumAssembler:
             result = await self._extract_requirements_llm(combined)
             if result.get("required") or result.get("electives"):
                 return result
-        except Exception as e:
-            logger.warning(f"LLM requirement extraction failed: {e}")
+        except Exception:
+            logger.exception("LLM requirement extraction failed")
 
         # Fallback: regex-based extraction using markdown section headers
         return self._extract_requirements_regex(combined)

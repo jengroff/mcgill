@@ -6,12 +6,14 @@ import tempfile
 import traceback
 from pathlib import Path
 
+from typing import Any
+
 from backend.workflows.planner.state import PlannerState
 
-logger = logging.getLogger("backend.workflows.planner")
+logger = logging.getLogger(__name__)
 
 
-async def gather_context_node(state: PlannerState) -> PlannerState:
+async def gather_context_node(state: PlannerState) -> dict[str, Any]:
     """Gather all context the planning agent needs: program reqs, courses, PDF guide.
 
     Writes context files to a temp work directory for the SDK agent to read.
@@ -75,7 +77,7 @@ async def gather_context_node(state: PlannerState) -> PlannerState:
         }
 
 
-async def plan_agent_node(state: PlannerState) -> PlannerState:
+async def plan_agent_node(state: PlannerState) -> dict[str, Any]:
     """Run the Claude Agent SDK to build the curriculum plan."""
     work_dir = state.get("work_dir", "")
     if not work_dir:
@@ -106,7 +108,7 @@ async def plan_agent_node(state: PlannerState) -> PlannerState:
             "status": "complete",
         }
     except Exception as e:
-        logger.warning("SDK agent failed (%s), falling back to direct synthesis", e)
+        logger.exception("SDK agent failed, falling back to direct synthesis")
         plan_md, plan_semesters = await _fallback_synthesis(state)
         return {
             "plan_markdown": plan_md,
@@ -117,7 +119,7 @@ async def plan_agent_node(state: PlannerState) -> PlannerState:
         }
 
 
-async def persist_plan_node(state: PlannerState) -> PlannerState:
+async def persist_plan_node(state: PlannerState) -> dict[str, Any]:
     """Persist planner results back to the plans table when plan_id is set."""
     plan_id = state.get("plan_id")
     if not plan_id:
@@ -311,7 +313,7 @@ async def _run_sdk_agent(prompt: str, work_dir: str) -> tuple[str, dict, list[st
         try:
             plan_json = json.loads(json_path.read_text())
         except json.JSONDecodeError:
-            logger.warning("Failed to parse curriculum_plan.json")
+            logger.exception("Failed to parse curriculum_plan.json")
 
     if not plan_md:
         raise RuntimeError("Agent did not produce curriculum_plan.md")

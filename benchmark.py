@@ -21,48 +21,73 @@ def rf_jaro_winkler(s1: str, s2: str, prefix_weight: float = 0.1) -> float:
 
 
 def py_jaro_winkler(s1: str, s2: str, prefix_weight: float = 0.1) -> float:
+    """Pure-Python Jaro-Winkler similarity, used as the baseline for benchmarking.
+
+    Computes similarity in two phases. The **Jaro phase** finds characters that
+    match within a sliding window of `floor(max(len(s1), len(s2)) / 2) - 1`
+    positions, then counts how many matched pairs appear out of order
+    (transpositions). The **Winkler phase** boosts the score when the first 1-4
+    characters of both strings agree.
+
+    This is a faithful O(n*m) implementation with no algorithmic tricks — the
+    same logic the Rust bitparallel version replaces. Kept here so the benchmark
+    measures the cost of Python's per-object overhead on identical logic.
+    """
     if s1 == s2:
         return 1.0
     if not s1 or not s2:
         return 0.0
-    max_dist = max(len(s1), len(s2)) // 2 - 1
-    if max_dist < 0:
-        max_dist = 0
-    s1_matches = [False] * len(s1)
-    s2_matches = [False] * len(s2)
-    matches = 0
-    transpositions = 0
-    for i, c1 in enumerate(s1):
-        start = max(0, i - max_dist)
-        end = min(len(s2), i + max_dist + 1)
-        for j in range(start, end):
-            if s2_matches[j] or c1 != s2[j]:
+
+    len1, len2 = len(s1), len(s2)
+    match_window = max(len1, len2) // 2 - 1
+    if match_window < 0:
+        match_window = 0
+
+    s1_matched = [False] * len1
+    s2_matched = [False] * len2
+    match_count = 0
+
+    # Matching pass: for each character in s1, search for the first unmatched
+    # occurrence of the same character in s2 within the match window.
+    for i, ch in enumerate(s1):
+        window_start = max(0, i - match_window)
+        window_end = min(len2, i + match_window + 1)
+        for j in range(window_start, window_end):
+            if s2_matched[j] or ch != s2[j]:
                 continue
-            s1_matches[i] = True
-            s2_matches[j] = True
-            matches += 1
+            s1_matched[i] = True
+            s2_matched[j] = True
+            match_count += 1
             break
-    if matches == 0:
+
+    if match_count == 0:
         return 0.0
-    k = 0
-    for i, c1 in enumerate(s1):
-        if not s1_matches[i]:
+
+    # Transposition pass: walk matched characters in order and count pairs
+    # where the characters differ (appear in a different sequence).
+    transpositions = 0
+    s2_cursor = 0
+    for i in range(len1):
+        if not s1_matched[i]:
             continue
-        while not s2_matches[k]:
-            k += 1
-        if c1 != s2[k]:
+        while not s2_matched[s2_cursor]:
+            s2_cursor += 1
+        if s1[i] != s2[s2_cursor]:
             transpositions += 1
-        k += 1
-    jaro = (
-        matches / len(s1) + matches / len(s2) + (matches - transpositions / 2) / matches
-    ) / 3
-    prefix = 0
-    for i in range(min(4, min(len(s1), len(s2)))):
+        s2_cursor += 1
+
+    m = match_count
+    jaro = (m / len1 + m / len2 + (m - transpositions // 2) / m) / 3
+
+    # Winkler prefix bonus: up to 4 matching leading characters.
+    common_prefix = 0
+    for i in range(min(4, len1, len2)):
         if s1[i] == s2[i]:
-            prefix += 1
+            common_prefix += 1
         else:
             break
-    return jaro + prefix * prefix_weight * (1 - jaro)
+
+    return jaro + common_prefix * prefix_weight * (1 - jaro)
 
 
 COURSE_NAMES = [

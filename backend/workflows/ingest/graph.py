@@ -5,8 +5,8 @@ import uuid
 from langgraph.graph import StateGraph, END
 from langgraph.graph.state import CompiledStateGraph
 
-from backend.lib.orchestrator import WorkflowOrchestrator
-from backend.lib.registry import registry, WorkflowConfig
+from backend.services.lib.orchestrator import WorkflowOrchestrator
+from backend.services.lib.registry import registry, WorkflowConfig
 from backend.workflows.ingest.state import IngestState
 from backend.workflows.ingest.nodes import (
     precheck_node,

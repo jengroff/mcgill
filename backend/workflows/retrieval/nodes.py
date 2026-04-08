@@ -5,12 +5,14 @@ import logging
 import re
 import traceback
 
+from typing import Any
+
 from backend.workflows.retrieval.state import RetrievalState
 
-logger = logging.getLogger("backend.workflows.retrieval")
+logger = logging.getLogger(__name__)
 
 
-async def keyword_node(state: RetrievalState) -> RetrievalState:
+async def keyword_node(state: RetrievalState) -> dict[str, Any]:
     """Full-text keyword search on courses."""
     try:
         from backend.services.embedding.retrieval import keyword_search
@@ -18,13 +20,14 @@ async def keyword_node(state: RetrievalState) -> RetrievalState:
         results = await keyword_search(state["query"], top_k=state.get("top_k", 10))
         return {"keyword_results": results}
     except Exception as e:
+        logger.exception("keyword_node failed")
         return {
             "keyword_results": [],
             "errors": [f"keyword: {e}\n{traceback.format_exc()}"],
         }
 
 
-async def semantic_node(state: RetrievalState) -> RetrievalState:
+async def semantic_node(state: RetrievalState) -> dict[str, Any]:
     """Dense vector semantic search on course chunks + program pages.
 
     Embeds the query once and runs both searches with the shared vector,
@@ -46,6 +49,7 @@ async def semantic_node(state: RetrievalState) -> RetrievalState:
         )
         return {"semantic_results": course_results, "program_results": program_results}
     except Exception as e:
+        logger.exception("semantic_node failed")
         return {
             "semantic_results": [],
             "program_results": [],
@@ -53,12 +57,12 @@ async def semantic_node(state: RetrievalState) -> RetrievalState:
         }
 
 
-async def program_node(state: RetrievalState) -> RetrievalState:
+async def program_node(state: RetrievalState) -> dict[str, Any]:
     """No-op — program search is handled by semantic_node to share the embedding call."""
     return {}
 
 
-async def graph_node(state: RetrievalState) -> RetrievalState:
+async def graph_node(state: RetrievalState) -> dict[str, Any]:
     """Neo4j prerequisite query if course codes detected in query."""
     try:
         codes = re.findall(
@@ -82,6 +86,7 @@ async def graph_node(state: RetrievalState) -> RetrievalState:
             return {"graph_context": ctx}
         return {"graph_context": ""}
     except Exception as e:
+        logger.exception("graph_node failed")
         return {
             "graph_context": "",
             "errors": [f"graph: {e}\n{traceback.format_exc()}"],
@@ -123,7 +128,7 @@ Notes:
 """
 
 
-async def structured_node(state: RetrievalState) -> RetrievalState:
+async def structured_node(state: RetrievalState) -> dict[str, Any]:
     """Text-to-SQL: use Claude to generate a read-only SQL query, execute it, return results."""
     try:
         import anthropic
@@ -172,12 +177,12 @@ async def structured_node(state: RetrievalState) -> RetrievalState:
             lines.append(f"... and {len(rows) - 25} more rows")
 
         return {"structured_context": "\n".join(lines)}
-    except Exception as e:
-        logger.warning(f"Structured query failed: {e}")
+    except Exception:
+        logger.exception("structured_node failed")
         return {"structured_context": ""}
 
 
-async def fusion_node(state: RetrievalState) -> RetrievalState:
+async def fusion_node(state: RetrievalState) -> dict[str, Any]:
     """Reciprocal rank fusion across keyword + semantic results."""
     try:
         from backend.services.embedding.retrieval import reciprocal_rank_fusion
@@ -189,7 +194,7 @@ async def fusion_node(state: RetrievalState) -> RetrievalState:
         )
         return {"fused_results": fused, "status": "complete"}
     except Exception as e:
-        # Fall back to whatever results we have
+        logger.exception("fusion_node failed")
         fallback = state.get("keyword_results", []) or state.get("semantic_results", [])
         return {
             "fused_results": fallback,

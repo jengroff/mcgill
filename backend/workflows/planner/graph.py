@@ -5,8 +5,8 @@ import uuid
 from langgraph.graph import StateGraph, END
 from langgraph.graph.state import CompiledStateGraph
 
-from backend.lib.orchestrator import WorkflowOrchestrator
-from backend.lib.registry import registry, WorkflowConfig
+from backend.services.lib.orchestrator import WorkflowOrchestrator
+from backend.services.lib.registry import registry, WorkflowConfig
 from backend.workflows.planner.state import PlannerState
 from backend.workflows.planner.nodes import (
     gather_context_node,

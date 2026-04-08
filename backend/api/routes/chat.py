@@ -13,8 +13,8 @@ from pydantic import BaseModel
 
 from backend.api.auth import get_current_user, get_optional_user
 from backend.api.deps import get_db
-from backend.lib.sse import _sse
-from backend.lib.streaming import sse_response
+from backend.services.lib.sse import _sse
+from backend.services.lib.streaming import sse_response
 
 logger = logging.getLogger("backend.api.chat")
 
@@ -162,6 +162,14 @@ async def ask(
     user: dict | None = Depends(get_optional_user),
     pool: asyncpg.Pool = Depends(get_db),
 ):
+    """Submit a user message to an existing or new chat session.
+
+    The message is appended to the in-memory session and persisted to Postgres
+    if the user is authenticated. The response is not returned here; instead,
+    the client connects to `GET /stream?session_id=...` to receive the
+    assistant's reply via SSE. If `plan_id` is set, the session is scoped to
+    that curriculum plan and all messages receive plan context.
+    """
     session_id = req.session_id or str(uuid.uuid4())
     session = _init_session(session_id)
 
@@ -208,6 +216,14 @@ async def ask(
 
 @router.get("/stream")
 async def stream(session_id: str, request: Request):
+    """SSE endpoint that drives the chat UI.
+
+    Polls the session's event queue at 200ms intervals and yields events as
+    `text/event-stream` lines. When a pending question is found, the endpoint
+    runs intent detection (pipeline trigger, planner trigger, or Q&A) inline
+    and streams results back. Plan-scoped sessions bypass intent detection
+    and always run the Q&A pipeline with plan context injected.
+    """
     session = _init_session(session_id)
 
     async def event_generator() -> AsyncIterator[str]:
@@ -228,8 +244,7 @@ async def stream(session_id: str, request: Request):
                 question = session.pop("pending_question")
                 session["status"] = "streaming"
 
-                # Plan-scoped sessions skip intent detection — always
-                # use the QA pipeline with plan context injected
+                # Plan-scoped sessions always go straight to QA with plan context
                 is_plan_chat = bool(session.get("plan_id"))
 
                 pipeline_intent = (
@@ -566,7 +581,6 @@ async def _run_qa_pipeline(question: str, session_id: str) -> AsyncIterator[dict
     session = _sessions.get(session_id, {})
     plan_id = session.get("plan_id")
 
-    # Build plan context if this chat is scoped to a plan
     plan_context = ""
     if plan_id:
         plan_context = await _build_plan_context(plan_id)
@@ -631,7 +645,6 @@ async def _build_plan_context(plan_id: int) -> str:
             plan_id,
         )
 
-        # Fetch course details for all codes in the plan
         all_codes = [c for s in semesters for c in (s["courses"] or [])]
         course_details = {}
         if all_codes:

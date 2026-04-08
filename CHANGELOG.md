@@ -3,7 +3,7 @@
 ## 0.9.1 — 2026-04-07
 
 ### Changed
-- **Bitparallel Jaro-Winkler** — rewrote the Rust implementation from a naive O(n*m) nested loop to a bitparallel algorithm that encodes character positions as `u64` bitmasks, resolving each match with a few bitwise operations instead of scanning the window; 84x faster than pure Python and 1.9x faster than rapidfuzz (C++)
+- **Bitparallel Jaro-Winkler** — rewrote the Rust implementation from a naive O(n*m) nested loop to a bitparallel algorithm that encodes character positions as `u64` bitmasks, resolving each match with a few bitwise operations instead of scanning the window; 108x faster than pure Python and 2x faster than rapidfuzz (C++)
 - Benchmark now includes rapidfuzz (C++) as a third comparison point alongside pure Python and Rust
 - Fixed transposition count in Jaro formula to use integer division (matching the standard convention and rapidfuzz's behavior)
 - `rapidfuzz` added as a dev dependency for benchmarking

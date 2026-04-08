@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from backend.lib.state import BaseWorkflowState
+from backend.services.lib.state import BaseWorkflowState
 
 
 class IngestState(BaseWorkflowState, total=False):

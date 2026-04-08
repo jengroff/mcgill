@@ -6,7 +6,7 @@ from dataclasses import dataclass, field
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from backend.lib.orchestrator import WorkflowOrchestrator
+    from backend.services.lib.orchestrator import WorkflowOrchestrator
 
 
 @dataclass

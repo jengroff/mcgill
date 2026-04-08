@@ -18,7 +18,7 @@ make frontend                 # UI on :5174
 
 - **Hybrid retrieval** — queries fan out in parallel across keyword search, Voyage AI semantic embeddings, Neo4j prerequisite graph traversal, and structured SQL, then fuse results with reciprocal rank fusion (RRF)
 - **Prerequisite DAG visualization** — D3 force-directed graphs render the full prerequisite/corequisite dependency tree for any course, with depth-based layout
-- **Rust-accelerated entity resolution** — bitparallel Jaro-Winkler similarity compiled to a native PyO3 extension, 84x faster than pure Python and 1.9x faster than rapidfuzz (C++); pure-Python fallback when the extension isn't compiled
+- **Rust-accelerated entity resolution** — bitparallel Jaro-Winkler similarity compiled to a native PyO3 extension, 108x faster than pure Python and 2x faster than rapidfuzz (C++); pure-Python fallback when the extension isn't compiled
 - **End-to-end ingest pipeline** — ingest, resolve, chunk, and embed an entire faculty in one shot with real-time SSE progress streaming and per-department deduplication
 - **Curriculum planner** — three-panel layout with plan list, semester grid, and advisor chat; selecting a faculty and program auto-populates semesters with required courses, correct credits, and Fall/Winter term assignments; courses display titles, credits, and link to detail pages; the right-panel advisor chat is plan-aware (knows your courses, schedule, and uploaded documents) and provides personalized guidance; "Explain Plan" triggers the Claude Agent SDK planner for deep rationale; plans are fully editable; upload transcripts and AP score reports as context
 - **Department website directory** — 70+ department website URLs and student resources (student societies, library guides, advisor contacts) injected into synthesis context, so the advisor can reference official department pages, the Food Science Association, library subject guides, and named foundation year contacts
@@ -51,9 +51,9 @@ Jaro-Winkler Benchmark: 10,000 string pairs, median of 100 iterations
 
 Implementation             Time  vs Python  vs rapidfuzz
 -------------------------------------------------------
-Python                  178.4ms
-rapidfuzz (C++)           4.0ms      44.8x
-Rust (PyO3)               2.1ms      84.2x          1.9x
+Python                  171.7ms
+rapidfuzz (C++)           3.2ms      54.5x
+Rust (PyO3)               1.6ms     107.7x          2.0x
 ```
 
 The extension is optional. `backend/accel.py` imports the compiled module at startup and falls back to an identical pure-Python implementation if it is missing. The Docker image compiles it at build time. For local development:

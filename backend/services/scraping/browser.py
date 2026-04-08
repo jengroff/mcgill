@@ -1,11 +1,14 @@
 from __future__ import annotations
 
+import logging
 from contextlib import asynccontextmanager
 from typing import AsyncGenerator
 
 from playwright.async_api import async_playwright, Page, BrowserContext
 
 from backend.config import settings
+
+logger = logging.getLogger(__name__)
 
 USER_AGENT = (
     "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
@@ -45,4 +48,5 @@ async def fetch_page(page: Page, url: str) -> str | None:
             return None
         return await page.content()
     except Exception:
+        logger.exception("Failed to fetch page: %s", url)
         return None

@@ -1,11 +1,16 @@
 from __future__ import annotations
 
+import logging
 import traceback
+
+from typing import Any
 
 from backend.workflows.ingestion.state import IngestionState
 
+logger = logging.getLogger(__name__)
 
-async def extract_node(state: IngestionState) -> IngestionState:
+
+async def extract_node(state: IngestionState) -> dict[str, Any]:
     """Extract structured text from PDF or URL."""
     try:
         source_type = state.get("source_type", "pdf")
@@ -41,10 +46,11 @@ async def extract_node(state: IngestionState) -> IngestionState:
         else:
             return {"errors": [f"Unknown source_type: {source_type}"]}
     except Exception as e:
+        logger.exception("extract_node failed")
         return {"errors": [f"extract: {e}\n{traceback.format_exc()}"]}
 
 
-async def chunk_node(state: IngestionState) -> IngestionState:
+async def chunk_node(state: IngestionState) -> dict[str, Any]:
     """Chunk extracted sections."""
     try:
         from backend.services.embedding.chunker import chunk_program_page
@@ -60,10 +66,11 @@ async def chunk_node(state: IngestionState) -> IngestionState:
 
         return {"chunks": all_chunks}
     except Exception as e:
+        logger.exception("chunk_node failed")
         return {"chunks": [], "errors": [f"chunk: {e}\n{traceback.format_exc()}"]}
 
 
-async def embed_node(state: IngestionState) -> IngestionState:
+async def embed_node(state: IngestionState) -> dict[str, Any]:
     """Generate embeddings for chunks."""
     try:
         from backend.services.embedding.voyage import embed_texts
@@ -75,10 +82,11 @@ async def embed_node(state: IngestionState) -> IngestionState:
         embeddings = embed_texts(chunks)
         return {"embeddings": embeddings}
     except Exception as e:
+        logger.exception("embed_node failed")
         return {"embeddings": [], "errors": [f"embed: {e}\n{traceback.format_exc()}"]}
 
 
-async def store_node(state: IngestionState) -> IngestionState:
+async def store_node(state: IngestionState) -> dict[str, Any]:
     """Store embedded chunks in pgvector."""
     try:
         from backend.db.postgres import get_pool
@@ -108,6 +116,7 @@ async def store_node(state: IngestionState) -> IngestionState:
         count = await insert_program_chunks(page_id, chunks, embeddings)
         return {"chunks_stored": count, "status": "complete"}
     except Exception as e:
+        logger.exception("store_node failed")
         return {
             "chunks_stored": 0,
             "status": "error",

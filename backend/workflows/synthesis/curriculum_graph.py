@@ -5,8 +5,8 @@ import uuid
 from langgraph.graph import StateGraph, END
 from langgraph.graph.state import CompiledStateGraph
 
-from backend.lib.orchestrator import WorkflowOrchestrator
-from backend.lib.registry import registry, WorkflowConfig
+from backend.services.lib.orchestrator import WorkflowOrchestrator
+from backend.services.lib.registry import registry, WorkflowConfig
 from backend.workflows.synthesis.curriculum_state import CurriculumState
 from backend.workflows.synthesis.curriculum_nodes import (
     interest_map_node,

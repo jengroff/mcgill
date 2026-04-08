@@ -44,6 +44,14 @@ async def list_plans(user: dict = Depends(get_current_user)) -> list[PlanSummary
 async def create_plan(
     body: PlanCreate, user: dict = Depends(get_current_user)
 ) -> PlanDetail:
+    """Create a new curriculum plan.
+
+    If `program_slug` is provided, the plan is auto-populated with semesters
+    via `PlanBuilder.auto_populate`, which extracts program requirements from
+    scraped program pages, looks up credit and term data, and distributes
+    courses across semesters respecting Fall/Winter scheduling. Auto-population
+    failures are logged but do not fail the request; the plan is still created.
+    """
     pool = await get_pool()
     async with pool.acquire() as conn:
         row = await conn.fetchrow(
@@ -262,10 +270,17 @@ async def upload_document(
     file: UploadFile = File(...),
     user: dict = Depends(get_current_user),
 ) -> PlanDocumentInfo:
+    """Upload a document (transcript, AP score report, etc.) to a plan.
+
+    PDF files are automatically text-extracted. If the PDF appears to contain
+    images, scanned pages, or layout-dependent content (detected by
+    `_pdf_needs_vlm`), it is first routed through the vision-language model
+    pipeline for richer extraction. If VLM extraction fails or returns nothing,
+    the endpoint falls back to plain text parsing via pymupdf/pdfplumber.
+    """
     pool = await get_pool()
     raw = await file.read()
 
-    # Extract text from PDF — use VLM for visually rich documents, text parsing otherwise
     extracted = ""
     is_pdf = file.content_type == "application/pdf" or (
         file.filename and file.filename.lower().endswith(".pdf")
@@ -399,7 +414,6 @@ async def link_conversation(
     pool = await get_pool()
     async with pool.acquire() as conn:
         await _assert_plan_owner(conn, plan_id, user["id"])
-        # Verify conversation belongs to user
         convo = await conn.fetchrow(
             "SELECT id FROM conversations WHERE id = $1 AND user_id = $2",
             conversation_id,
@@ -439,11 +453,12 @@ async def unlink_conversation(
 
 
 def _pdf_needs_vlm(pdf_bytes: bytes) -> bool:
-    """Detect whether a PDF has visual content that warrants VLM processing.
+    """Check whether a PDF should be routed through vision-language model extraction
+    rather than plain text parsing.
 
-    Returns True if the PDF contains images, scanned pages (little/no extractable
-    text relative to page count), tables, or other visual elements that text
-    extraction would miss.
+    Returns True for PDFs with images, scanned pages (little extractable text
+    relative to page count), or short text with few pages (likely layout-dependent
+    content like transcripts or grade reports).
     """
     try:
         import pymupdf

@@ -1,8 +1,13 @@
 from __future__ import annotations
 
+import logging
 import traceback
 
+from typing import Any
+
 from backend.workflows.synthesis.state import SynthesisState
+
+logger = logging.getLogger(__name__)
 
 SYSTEM_PROMPT = (
     "You are a McGill University course advisor assistant. "
@@ -38,7 +43,7 @@ def _lookup_dept_websites(dept_codes: set[str]) -> dict[str, str]:
     }
 
 
-async def context_pack_node(state: SynthesisState) -> SynthesisState:
+async def context_pack_node(state: SynthesisState) -> dict[str, Any]:
     """Assemble retrieval context into a Claude-ready string."""
     try:
         parts: list[str] = []
@@ -120,13 +125,14 @@ async def context_pack_node(state: SynthesisState) -> SynthesisState:
         # Store packed context in sources field for downstream
         return {"sources": [{"context_text": context_text}]}
     except Exception as e:
+        logger.exception("context_pack_node failed")
         return {
             "sources": [],
             "errors": [f"context_pack: {e}\n{traceback.format_exc()}"],
         }
 
 
-async def synthesize_node(state: SynthesisState) -> SynthesisState:
+async def synthesize_node(state: SynthesisState) -> dict[str, Any]:
     """Call Anthropic API with system prompt + packed context + conversation history."""
     try:
         from backend.config import settings
@@ -164,7 +170,7 @@ async def synthesize_node(state: SynthesisState) -> SynthesisState:
         return {"response": answer, "status": "complete"}
 
     except Exception as e:
-        # Fallback: return context summary without Claude synthesis
+        logger.exception("synthesize_node failed")
         retrieval_ctx = state.get("retrieval_context", [])
         if retrieval_ctx:
             fallback = "Here are the most relevant courses I found:\n\n"

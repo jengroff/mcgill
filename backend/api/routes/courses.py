@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import re
+
 from fastapi import APIRouter, HTTPException, Query
 from pydantic import BaseModel
 
@@ -65,6 +67,12 @@ async def list_courses(
     limit: int = Query(default=50, le=500),
     offset: int = 0,
 ):
+    """Paginated course listing with optional filters.
+
+    All filters are combinable. `q` runs a Postgres full-text search against
+    the pre-built `tsv` column. Returns `{total, courses}` where `total` is
+    the unpagged count.
+    """
     from backend.db.postgres import get_pool
 
     pool = await get_pool()
@@ -109,12 +117,16 @@ async def list_courses(
 
 @router.get("/courses/{code}")
 async def get_course(code: str):
+    """Fetch a single course with resolved prerequisite, corequisite, and restriction lists.
+
+    The `code` parameter is normalized before lookup: hyphens are replaced with
+    spaces and the department prefix is separated from the number, so `COMP-250`,
+    `comp250`, and `COMP 250` all resolve to the same course. Prerequisite data
+    comes from Neo4j; if Neo4j is unreachable the fields return as empty lists.
+    """
     from backend.db.postgres import get_pool
 
     pool = await get_pool()
-
-    # Normalize code: "COMP-250" or "comp250" → "COMP 250"
-    import re
 
     code = code.upper().replace("-", " ")
     m = re.match(r"([A-Z]{2,6})\s*(\d{3,4}[A-Z]?)", code)
@@ -160,7 +172,6 @@ async def get_course(code: str):
 async def get_prerequisite_tree(code: str, depth: int = Query(default=3, le=5)):
     """Get the prerequisite chain tree for a course."""
     from backend.db.neo4j import run_query
-    import re
 
     code = code.upper().replace("-", " ")
     m = re.match(r"([A-Z]{2,6})\s*(\d{3,4}[A-Z]?)", code)
@@ -178,8 +189,13 @@ async def get_prerequisite_tree(code: str, depth: int = Query(default=3, le=5)):
 
 @router.get("/graph/tree/{code}")
 async def get_prerequisite_tree_graph(code: str):
-    import re
+    """Build a flat DAG of prerequisite and corequisite relationships for a course.
 
+    Returns `{root, nodes, edges}` where **nodes** carry `code`, `title`,
+    `credits`, and `depth` (shortest path from root), and **edges** carry
+    `source`, `target`, and `type` (`"prerequisite"` or `"corequisite"`).
+    Traverses up to 4 levels deep in Neo4j. The frontend renders this with D3.
+    """
     code = code.upper().replace("-", " ")
     m = re.match(r"([A-Z]{2,6})\s*(\d{3,4}[A-Z]?)", code)
     if m:
@@ -187,8 +203,7 @@ async def get_prerequisite_tree_graph(code: str):
 
     from backend.db.neo4j import run_query
 
-    # Query 1: all nodes reachable from root, with shortest-path depth.
-    # min(length(path)) handles nodes reachable via multiple paths.
+    # min(length(path)) picks the shortest depth when a node is reachable via multiple paths
     node_rows = await run_query(
         """
         MATCH path = (root:Course {code: $code})-[:PREREQUISITE_OF*0..4]->(n:Course)
@@ -203,8 +218,6 @@ async def get_prerequisite_tree_graph(code: str):
 
     codes = [r["code"] for r in node_rows]
 
-    # Query 2: all PREREQUISITE_OF edges where both endpoints are in the node set.
-    # Pass codes as a parameter — do not interpolate into the query string.
     prereq_edges = await run_query(
         """
         MATCH (src:Course)-[:PREREQUISITE_OF]->(tgt:Course)
@@ -214,7 +227,6 @@ async def get_prerequisite_tree_graph(code: str):
         {"codes": codes},
     )
 
-    # Query 3: corequisite edges within the same node set.
     coreq_edges = await run_query(
         """
         MATCH (src:Course)-[:COREQUISITE_OF]->(tgt:Course)

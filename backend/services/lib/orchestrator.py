@@ -8,9 +8,9 @@ from typing import Callable
 
 from langgraph.graph.state import CompiledStateGraph
 
-from backend.lib.state import BaseWorkflowState
+from backend.services.lib.state import BaseWorkflowState
 
-logger = logging.getLogger("backend.lib.orchestrator")
+logger = logging.getLogger(__name__)
 
 
 class WorkflowOrchestrator(ABC):
