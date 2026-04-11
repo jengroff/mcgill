@@ -9,7 +9,7 @@ features = ["pyo3/extension-module"]
 
 [project]
 name = "mcgill"
-version = "0.9.1"
+version = "0.10.0"
 description = "McGill University Course Explorer — scrape, resolve, embed, serve"
 readme = "README.md"
 requires-python = ">=3.12"
@@ -46,15 +46,15 @@ include = ["backend*"]
 [tool.uv]
 package = true
 
-[tool.pytest.ini_options]
-asyncio_mode = "auto"
-
 [tool.mypy]
 python_version = "3.12"
 strict = false
 warn_return_any = true
 warn_unused_configs = true
 ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
 
 [dependency-groups]
 dev = [

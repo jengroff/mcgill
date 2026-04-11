@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom'
 import { ChevronRight, ArrowLeft, BookOpen } from 'lucide-react'
 import { fetchDepartments, fetchFaculty } from '../api/client'
 import { useAppStore } from '../store/appStore'
+import PipelineRunner from '../components/PipelineRunner'
 
 interface DeptItem {
   code: string
@@ -43,7 +44,11 @@ export default function FacultyPage() {
         ) : (
           <>
             <h1 className="text-xl font-bold mb-1" style={{ color: 'var(--text-primary)' }}>{faculty?.name}</h1>
-            <p className="text-sm mb-6" style={{ color: 'var(--text-muted)' }}>{departments.length} departments</p>
+            <p className="text-sm mb-4" style={{ color: 'var(--text-muted)' }}>{departments.length} departments</p>
+
+            <div className="mb-6">
+              <PipelineRunner facultyFilter={slug ? [slug] : undefined} />
+            </div>
 
             <div className="space-y-2">
               {departments.map((d) => (

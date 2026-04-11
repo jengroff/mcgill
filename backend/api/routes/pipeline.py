@@ -24,6 +24,7 @@ class PipelineRequest(BaseModel):
     dept_filter: list[str] | None = None
     max_course_pages: int | None = None
     max_program_pages: int | None = None
+    force: bool = False
 
 
 @router.post("/pipeline/run")
@@ -107,6 +108,7 @@ async def _execute_pipeline(run_id: str, req: PipelineRequest):
             dept_filter=req.dept_filter,
             max_course_pages=req.max_course_pages,
             max_program_pages=req.max_program_pages,
+            force=req.force,
         )
         run["status"] = final_state.get("status", "complete")
         run["result"] = {

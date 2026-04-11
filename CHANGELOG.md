@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.10.0 — 2026-04-11
+
+### Added
+- **Pipeline runner UI** — faculty and department pages now have a "Run Pipeline" button that triggers the full ingest pipeline (scrape -> resolve -> chunk -> embed) with real-time phase progress via SSE
+- **Force re-process checkbox** — UI toggle next to the pipeline button mirrors `make pipeline FORCE=1`, allowing re-ingestion of already-processed departments
+- **`force` flag in pipeline API** — `POST /api/v1/pipeline/run` now accepts a `force` boolean parameter, previously only available via CLI
+
+### Changed
+- Medicine & Health Sciences, Education, and Environment faculties are now visible on the browse page (previously hidden)
+
 ## 0.9.1 — 2026-04-07
 
 ### Changed

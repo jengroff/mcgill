@@ -126,6 +126,7 @@ export async function triggerPipeline(config: {
   dept_filter?: string[]
   max_course_pages?: number
   max_program_pages?: number
+  force?: boolean
 }) {
   const res = await fetch(`${BASE}/api/v1/pipeline/run`, {
     method: 'POST',

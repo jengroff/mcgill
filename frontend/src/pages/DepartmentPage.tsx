@@ -4,6 +4,7 @@ import { ArrowLeft } from 'lucide-react'
 import { fetchDepartmentCourses } from '../api/client'
 import { useAppStore } from '../store/appStore'
 import CourseCard from '../components/CourseCard'
+import PipelineRunner from '../components/PipelineRunner'
 
 interface CourseItem {
   code: string
@@ -40,7 +41,11 @@ export default function DepartmentPage() {
         <div className="flex items-center justify-between mb-1">
           <h1 className="text-xl font-bold" style={{ color: 'var(--text-primary)' }}>{code}</h1>
         </div>
-        <p className="text-sm mb-6" style={{ color: 'var(--text-muted)' }}>{courses.length} courses</p>
+        <p className="text-sm mb-4" style={{ color: 'var(--text-muted)' }}>{courses.length} courses</p>
+
+        <div className="mb-6">
+          <PipelineRunner deptFilter={code ? [code] : undefined} />
+        </div>
 
         {loading ? (
           <div className="text-center py-8" style={{ color: 'var(--text-muted)' }}>Loading courses...</div>

@@ -138,7 +138,7 @@ This means the orchestration framework, domain services, and API surface are ind
 | `GET /api/v1/courses/{code}` | Full course detail with resolved prerequisites |
 | `GET /api/v1/graph/tree/{code}` | Prerequisite DAG (flat nodes + edges with depth) |
 | `GET /api/v1/search` | Hybrid search (keyword/semantic/hybrid modes) |
-| `POST /api/v1/pipeline/run` | Trigger ingest pipeline (supports `faculty_filter`, `dept_filter`) |
+| `POST /api/v1/pipeline/run` | Trigger ingest pipeline (supports `faculty_filter`, `dept_filter`, `force`) |
 | `GET /api/v1/pipeline/stream/{run_id}` | SSE stream for pipeline progress |
 | `POST /api/v1/ingest/pdf` | Upload and ingest a PDF file |
 | `POST /api/v1/curriculum/recommend` | Generate curriculum recommendations |
@@ -212,7 +212,7 @@ A separate CI workflow (`ci.yml`) runs ruff lint, mypy type check, and pytest on
 
 ## Tests
 
-122 unit tests covering core functionality with zero external dependencies (no Postgres, Neo4j, or API keys required):
+148 tests covering core functionality (unit tests need no external dependencies; integration tests need Postgres/API keys):
 
 | Module | Tests | Coverage |
 |--------|-------|----------|
@@ -220,6 +220,7 @@ A separate CI workflow (`ci.yml`) runs ruff lint, mypy type check, and pytest on
 | `test_prerequisites.py` | 13 | Prerequisite/corequisite/restriction extraction, deduplication, self-reference filtering |
 | `test_chunker.py` | 20 | Sentence splitting, course chunking with windowing and overlap, program page chunking |
 | `test_registry.py` | 30 | Faculty registry, department websites, student resources, foundation page seeds, curriculum interest mapping |
+| `test_pipeline_api.py` | 9 | Pipeline API request model, trigger endpoint, force flag, status endpoint |
 | `test_auth.py` | 25 | Password hashing, JWT, registration, login, chat persistence (4 unit + 21 integration) |
 | `test_fdsc_program_retrieval.py` | 17 | End-to-end FDSC program retrieval and synthesis (integration, requires Postgres + Anthropic) |
 
