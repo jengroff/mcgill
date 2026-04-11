@@ -212,7 +212,7 @@ A separate CI workflow (`ci.yml`) runs ruff lint, mypy type check, and pytest on
 
 ## Tests
 
-148 tests covering core functionality (unit tests need no external dependencies; integration tests need Postgres/API keys):
+131 tests covering core functionality (unit tests need no external dependencies; integration tests need Postgres):
 
 | Module | Tests | Coverage |
 |--------|-------|----------|
@@ -222,7 +222,6 @@ A separate CI workflow (`ci.yml`) runs ruff lint, mypy type check, and pytest on
 | `test_registry.py` | 30 | Faculty registry, department websites, student resources, foundation page seeds, curriculum interest mapping |
 | `test_pipeline_api.py` | 9 | Pipeline API request model, trigger endpoint, force flag, status endpoint |
 | `test_auth.py` | 25 | Password hashing, JWT, registration, login, chat persistence (4 unit + 21 integration) |
-| `test_fdsc_program_retrieval.py` | 17 | End-to-end FDSC program retrieval and synthesis (integration, requires Postgres + Anthropic) |
 
 ```bash
 make test             # run all tests

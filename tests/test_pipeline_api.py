@@ -11,9 +11,15 @@ from backend.api.routes.pipeline import PipelineRequest, _runs
 
 @pytest.fixture
 def client():
-    app = create_app()
-    with TestClient(app) as c:
-        yield c
+    with (
+        patch("backend.db.postgres.init_db", new_callable=AsyncMock),
+        patch("backend.db.postgres.close_db", new_callable=AsyncMock),
+        patch("backend.db.neo4j.init_neo4j", new_callable=AsyncMock),
+        patch("backend.db.neo4j.close_neo4j", new_callable=AsyncMock),
+    ):
+        app = create_app()
+        with TestClient(app) as c:
+            yield c
 
 
 @pytest.fixture(autouse=True)
