@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.10.2 — 2026-04-11
+
+### Added
+- **User Guide page** — comprehensive `/guide` page accessible from the main nav, documenting Browse & Search, Chat (retrieval pipeline breakdown), Planner (plan creation, semester/course management, document uploads, AI generation, plan-scoped advisor chat), and Pipeline (phases, scope, force re-process)
+
 ## 0.10.1 — 2026-04-11
 
 ### Added

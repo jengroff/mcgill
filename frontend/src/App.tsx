@@ -9,6 +9,7 @@ import DepartmentPage from './pages/DepartmentPage'
 import CoursePage from './pages/CoursePage'
 import ChatPage from './pages/ChatPage'
 import PlannerPage from './pages/PlannerPage'
+import GuidePage from './pages/GuidePage'
 import { useAppStore } from './store/appStore'
 import { fetchMe, createSession, sseUrl } from './api/client'
 
@@ -75,6 +76,7 @@ export default function App() {
           <Route path="/course/:code" element={<CoursePage />} />
           <Route path="/chat" element={<ChatPage />} />
           <Route path="/planner" element={<PlannerPage />} />
+          <Route path="/guide" element={<GuidePage />} />
         </Routes>
         {!user && (
           <div

@@ -1,4 +1,4 @@
-import { Activity, GraduationCap, MessageCircle, CalendarDays, LogOut } from 'lucide-react'
+import { Activity, GraduationCap, MessageCircle, CalendarDays, BookOpen, LogOut } from 'lucide-react'
 import { Link, useLocation } from 'react-router-dom'
 import { useAppStore } from '../store/appStore'
 
@@ -54,6 +54,18 @@ export default function Header() {
         >
           <CalendarDays size={12} />
           Planner
+        </Link>
+
+        <Link
+          to="/guide"
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-md no-underline transition-colors"
+          style={{
+            color: location.pathname === '/guide' ? 'var(--text-primary)' : 'var(--text-muted)',
+            background: location.pathname === '/guide' ? 'var(--bg-elevated)' : 'transparent',
+          }}
+        >
+          <BookOpen size={12} />
+          Guide
         </Link>
 
         <div className="flex items-center gap-1.5 ml-2" style={{ color: connected ? '#10b981' : 'var(--text-muted)' }}>
