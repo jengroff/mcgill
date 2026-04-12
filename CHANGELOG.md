@@ -5,6 +5,9 @@
 ### Added
 - **User Guide page** — comprehensive `/guide` page accessible from the main nav, documenting Browse & Search, Chat (retrieval pipeline breakdown), Planner (plan creation, semester/course management, document uploads, AI generation, plan-scoped advisor chat), and Pipeline (phases, scope, force re-process)
 
+### Fixed
+- **Pipeline SSE disconnect** — added keepalive comments every 15 seconds to the pipeline stream and increased the Vite proxy timeout to 10 minutes, fixing "Lost connection to pipeline stream" errors during long-running scrape/embed phases
+
 ## 0.10.1 — 2026-04-11
 
 ### Added

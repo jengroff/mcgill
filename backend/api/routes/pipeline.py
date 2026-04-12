@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import asyncio
 import logging
+import time
 import uuid
 from typing import AsyncIterator
 
@@ -63,6 +64,7 @@ async def pipeline_stream(run_id: str, request: Request):
 
     async def event_generator() -> AsyncIterator[str]:
         nonlocal seen
+        last_data_at = time.monotonic()
         yield _sse({"type": "pipeline_started", "run_id": run_id})
 
         while not await request.is_disconnected():
@@ -71,6 +73,7 @@ async def pipeline_stream(run_id: str, request: Request):
 
             while seen < len(progress):
                 yield _sse(progress[seen])
+                last_data_at = time.monotonic()
                 seen += 1
 
             if run.get("status") in ("complete", "error"):
@@ -82,6 +85,11 @@ async def pipeline_stream(run_id: str, request: Request):
                     }
                 )
                 break
+
+            # Keep the connection alive during long-running phases
+            if time.monotonic() - last_data_at > 15:
+                yield ": keepalive\n\n"
+                last_data_at = time.monotonic()
 
             await asyncio.sleep(0.3)
 

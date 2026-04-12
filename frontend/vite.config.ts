@@ -7,7 +7,10 @@ export default defineConfig({
   server: {
     port: 5174,
     proxy: {
-      '/api': 'http://localhost:8001',
+      '/api': {
+        target: 'http://localhost:8001',
+        timeout: 600_000, // 10 min — SSE pipeline streams can run long
+      },
       '/health': 'http://localhost:8001',
     },
   },
