@@ -106,13 +106,16 @@ async def scrape_node(state: IngestState) -> dict[str, Any]:
     """
     try:
         from backend.services.scraping.catalogue import run as run_scrape
+        from backend.workflows.ingest.progress import get as get_progress_sink
 
         active_depts = state.get("active_depts")
+        progress_sink = get_progress_sink(state.get("run_id", ""))
         courses = await run_scrape(
             faculty_filter=state.get("faculty_filter") if not active_depts else None,
             dept_filter=active_depts or state.get("dept_filter"),
             max_course_pages=state.get("max_course_pages"),
             max_program_pages=state.get("max_program_pages"),
+            on_progress=progress_sink,
         )
 
         # Also insert into PostgreSQL
@@ -148,6 +151,14 @@ async def scrape_node(state: IngestState) -> dict[str, Any]:
                     c.url,
                     c.name_variants,
                 )
+
+        # Scrape important dates (runs independently of course scraping)
+        from backend.services.scraping.important_dates import scrape_important_dates
+
+        try:
+            await scrape_important_dates(on_progress=progress_sink)
+        except Exception:
+            logger.exception("important_dates scrape failed (non-fatal)")
 
         return {
             "courses_scraped": len(courses),

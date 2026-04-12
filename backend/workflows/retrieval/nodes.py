@@ -103,6 +103,7 @@ Tables:
            url varchar, name_variants text[], scraped_at timestamptz, updated_at timestamptz)
   course_faculties (course_id int FK→courses, faculty_id int FK→faculties, PK(course_id,faculty_id))
   program_pages (id serial PK, faculty_slug varchar, path varchar UNIQUE, title varchar, content text, scraped_at timestamptz)
+  important_dates (id serial PK, title varchar, start_date date, end_date date, scraped_at timestamptz)
 
 Relationships:
   - courses.dept = departments.code (department code, e.g. 'COMP', 'MATH', 'PHIL')
@@ -125,6 +126,15 @@ Notes:
   - program_pages.faculty_slug groups pages by faculty, e.g. 'agri-env-sci', 'science'.
   - departments.website contains the department's main website URL (e.g. 'https://www.mcgill.ca/foodscience/').
     Join courses.dept = departments.code to look up department websites.
+  - important_dates stores university dates: holidays, breaks, exams, registration deadlines, etc.
+  - important_dates.title contains the event name, e.g. 'LABOUR DAY Holiday', 'Fall 2026 READING BREAK',
+    'CHRISTMAS AND NEW YEAR\\'S holiday break', 'Fall 2026 Exams begin'.
+  - For term-specific date queries, filter with title ILIKE '%Fall%' or use start_date ranges
+    (Fall ≈ Sep–Dec, Winter ≈ Jan–Apr, Summer ≈ May–Aug).
+  - For category queries, filter with title ILIKE '%holiday%' or '%break%' or '%exam%'.
+  - Single-day events have start_date = end_date; multi-day events have different start/end dates.
+  - Always query important_dates for questions about academic calendar, breaks, holidays, exam periods,
+    registration deadlines, convocation, or any university date-related questions.
 """
 
 

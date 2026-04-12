@@ -189,6 +189,17 @@ CREATE TABLE IF NOT EXISTS plan_documents (
 
 CREATE INDEX IF NOT EXISTS idx_plan_documents_plan ON plan_documents(plan_id);
 
+CREATE TABLE IF NOT EXISTS important_dates (
+    id          SERIAL PRIMARY KEY,
+    title       VARCHAR(512) NOT NULL,
+    start_date  DATE,
+    end_date    DATE,
+    scraped_at  TIMESTAMPTZ DEFAULT now(),
+    UNIQUE(title, start_date)
+);
+
+CREATE INDEX IF NOT EXISTS idx_important_dates_start ON important_dates(start_date);
+
 CREATE TABLE IF NOT EXISTS plan_conversations (
     plan_id         INTEGER REFERENCES plans(id) ON DELETE CASCADE,
     conversation_id INTEGER REFERENCES conversations(id) ON DELETE CASCADE,

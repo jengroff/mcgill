@@ -585,19 +585,9 @@ async def _run_qa_pipeline(question: str, session_id: str) -> AsyncIterator[dict
     if plan_id:
         plan_context = await _build_plan_context(plan_id)
 
-    yield {"type": "step_update", "phase": 1, "status": "running", "label": "Retrieval"}
     retrieval_orch = RetrievalOrchestrator()
     retrieval_state = await retrieval_orch.run(query=question, top_k=10, mode="hybrid")
-    yield {"type": "step_update", "phase": 1, "status": "done", "label": "Retrieval"}
 
-    sources = [
-        {"code": r.get("code", ""), "title": r.get("title", "")}
-        for r in retrieval_state.get("fused_results", [])[:5]  # type: ignore[index]
-    ]
-    if sources:
-        yield {"type": "sources", "sources": sources}
-
-    yield {"type": "step_update", "phase": 2, "status": "running", "label": "Synthesis"}
     synthesis_orch = SynthesisOrchestrator()
     synthesis_state = await synthesis_orch.run(
         query=question,
@@ -609,7 +599,6 @@ async def _run_qa_pipeline(question: str, session_id: str) -> AsyncIterator[dict
         structured_context=retrieval_state.get("structured_context", ""),
         plan_context=plan_context,
     )
-    yield {"type": "step_update", "phase": 2, "status": "done", "label": "Synthesis"}
 
     answer = synthesis_state.get("response", "")
     if answer:

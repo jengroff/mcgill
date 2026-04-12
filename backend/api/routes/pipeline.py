@@ -99,6 +99,7 @@ async def pipeline_stream(run_id: str, request: Request):
 async def _execute_pipeline(run_id: str, req: PipelineRequest):
     """Delegate pipeline execution to IngestOrchestrator."""
     from backend.workflows.ingest.graph import IngestOrchestrator
+    from backend.workflows.ingest.progress import register, unregister
 
     run = _runs[run_id]
     run["status"] = "running"
@@ -108,6 +109,19 @@ async def _execute_pipeline(run_id: str, req: PipelineRequest):
     def on_event(event: dict):
         run["phase"] = event.get("phase")
         run["progress"].append(event)
+
+    def on_progress(phase: str, message: str, current: int = 0, total: int = 0):
+        run["progress"].append(
+            {
+                "type": "log",
+                "phase": phase,
+                "message": message,
+                "current": current,
+                "total": total,
+            }
+        )
+
+    register(run_id, on_progress)
 
     try:
         final_state = await orchestrator.stream(
@@ -129,3 +143,5 @@ async def _execute_pipeline(run_id: str, req: PipelineRequest):
         logger.exception("Pipeline execution error")
         run["status"] = "error"
         run["result"] = {"error": str(e)}
+    finally:
+        unregister(run_id)

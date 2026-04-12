@@ -523,7 +523,6 @@ FACULTY_RESOURCES: dict[str, dict[str, str]] = {
 
 GENERAL_INFO_PAGES: dict[str, list[str]] = {
     "academic-calendar": [
-        "https://www.mcgill.ca/importantdates/",
         "https://www.mcgill.ca/importantdates/key-dates",
     ],
     "enrollment": [
