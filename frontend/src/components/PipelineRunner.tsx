@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback, useEffect } from 'react'
+import { useState, useRef, useCallback } from 'react'
 import { Play, CheckCircle, Circle, Loader, XCircle } from 'lucide-react'
 import { triggerPipeline, pipelineStreamUrl } from '../api/client'
 
@@ -37,19 +37,14 @@ export default function PipelineRunner({ facultyFilter, deptFilter }: PipelineRu
   const [phases, setPhases] = useState<Phase[]>(INITIAL_PHASES)
   const [result, setResult] = useState<Record<string, unknown> | null>(null)
   const [error, setError] = useState<string | null>(null)
-  const [logs, setLogs] = useState<string[]>([])
+  const [statusMsg, setStatusMsg] = useState<string | null>(null)
   const evtSourceRef = useRef<EventSource | null>(null)
-  const logEndRef = useRef<HTMLDivElement | null>(null)
-
-  useEffect(() => {
-    logEndRef.current?.scrollIntoView({ behavior: 'smooth' })
-  }, [logs])
 
   const run = useCallback(async () => {
     setRunning(true)
     setError(null)
     setResult(null)
-    setLogs([])
+    setStatusMsg(null)
     setPhases(INITIAL_PHASES.map((p) => ({ ...p, status: 'idle' })))
 
     try {
@@ -65,7 +60,7 @@ export default function PipelineRunner({ facultyFilter, deptFilter }: PipelineRu
         const data = JSON.parse(evt.data)
 
         if (data.type === 'log' && data.message) {
-          setLogs((prev) => [...prev, data.message])
+          setStatusMsg(data.message)
         }
 
         if (data.type === 'step_update' && data.status === 'done') {
@@ -143,16 +138,10 @@ export default function PipelineRunner({ facultyFilter, deptFilter }: PipelineRu
             </div>
           ))}
 
-          {logs.length > 0 && (
-            <div
-              className="mt-2 max-h-40 overflow-y-auto rounded px-3 py-2 text-xs font-mono leading-relaxed"
-              style={{ background: 'var(--bg-base)', color: 'var(--text-muted)', border: '1px solid var(--border)' }}
-            >
-              {logs.map((msg, i) => (
-                <div key={i}>{msg}</div>
-              ))}
-              <div ref={logEndRef} />
-            </div>
+          {statusMsg && (
+            <p className="mt-2 text-xs font-mono" style={{ color: 'var(--text-muted)' }}>
+              {statusMsg}
+            </p>
           )}
 
           {result && (
