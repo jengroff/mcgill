@@ -30,7 +30,7 @@ The pipeline is the primary data path — it scrapes, resolves prerequisites, ch
 "When is the fall 2026 reading break?"
 "What are the holidays in winter 2027?"
 "Plan my courses for 2 semesters, I'm interested in AI and applied statistics"
-"Ingest Science"    → triggers the ingest pipeline for a faculty
+"Run the pipeline for Science"  → triggers the ingest pipeline for a faculty
 ```
 
 ## Performance: Rust at the Hot Path
@@ -78,12 +78,20 @@ make bench         # run the benchmark above
 
 ```
 backend/
-├── lib/            Reusable orchestration framework (zero domain knowledge)
-│   ├── orchestrator.py    WorkflowOrchestrator ABC
-│   ├── registry.py        WorkflowRegistry singleton
-│   ├── state.py           BaseWorkflowState TypedDict
-│   ├── sse.py             Shared SSE helpers
-│   └── streaming.py       StreamingResponse factory
+├── services/
+│   ├── lib/            Reusable orchestration framework (zero domain knowledge)
+│   │   ├── orchestrator.py    WorkflowOrchestrator ABC
+│   │   ├── registry.py        WorkflowRegistry singleton
+│   │   ├── state.py           BaseWorkflowState TypedDict
+│   │   ├── sse.py             Shared SSE helpers
+│   │   └── streaming.py       StreamingResponse factory
+│   │
+│   ├── scraping/          Browser, parser, catalogue, faculty registry, important dates
+│   ├── resolution/        Entity graph, prerequisites, fuzzy matching
+│   ├── embedding/         Chunker, Voyage AI, vector store, retrieval
+│   ├── pdf/               PDF text extraction (pymupdf + pdfplumber)
+│   ├── vlm/               Vision Language Model for PDF course guide processing
+│   └── synthesis/         Curriculum assembler (interest mapping, requirements)
 │
 ├── workflows/      LangGraph workflow definitions
 │   ├── ingest/            Ingest → Resolve → Chunk → Embed
@@ -93,14 +101,6 @@ backend/
 │   └── planner/           Multi-semester curriculum planner (Agent SDK + VLM)
 │
 ├── accel.py        Rust/Python fallback for Jaro-Winkler (PyO3)
-├── services/       Stateless domain services (no workflow/lib imports)
-│   ├── scraping/          Browser, parser, catalogue, faculty registry
-│   ├── resolution/        Entity graph, prerequisites, fuzzy matching
-│   ├── embedding/         Chunker, Voyage AI, vector store, retrieval
-│   ├── pdf/               PDF text extraction (pymupdf + pdfplumber)
-│   ├── vlm/               Vision Language Model for PDF course guide processing
-│   └── synthesis/         Curriculum assembler (interest mapping, requirements)
-│
 ├── db/             PostgreSQL + pgvector, Neo4j
 ├── models/         Pydantic models
 ├── api/            FastAPI routes (thin delegation to orchestrators)
@@ -114,8 +114,8 @@ backend/
 
 The codebase enforces strict import boundaries:
 
-- `lib/` has zero imports from `workflows/` or `services/`
-- `services/` has zero imports from `workflows/` or `lib/`
+- `services/lib/` has zero imports from `workflows/` or other `services/` modules
+- `services/` has zero imports from `workflows/` or `services/lib/`
 - `workflows/` nodes do not import from `api/`
 - `api/` routes delegate to orchestrators — no inline business logic
 
