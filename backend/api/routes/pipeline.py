@@ -126,6 +126,7 @@ async def _execute_pipeline(run_id: str, req: PipelineRequest):
     try:
         final_state = await orchestrator.stream(
             on_event=on_event,
+            run_id=run_id,
             faculty_filter=req.faculty_filter,
             dept_filter=req.dept_filter,
             max_course_pages=req.max_course_pages,

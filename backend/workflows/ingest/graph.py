@@ -60,6 +60,7 @@ class IngestOrchestrator(WorkflowOrchestrator):
 
     def build_initial_state(
         self,
+        run_id=None,
         faculty_filter=None,
         dept_filter=None,
         max_course_pages=None,
@@ -68,7 +69,7 @@ class IngestOrchestrator(WorkflowOrchestrator):
         **kwargs,
     ) -> IngestState:
         return IngestState(
-            run_id=str(uuid.uuid4()),
+            run_id=run_id or str(uuid.uuid4()),
             errors=[],
             status="pending",
             faculty_filter=faculty_filter,
