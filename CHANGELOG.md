@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.11.0 — 2026-04-12
+
+### Added
+- **Structured important dates scraper** — new Playwright-based scraper interacts with the McGill importantdates Drupal form (sets date range, paginates all result pages), storing each entry with title, start date, and end date in a dedicated `important_dates` table for precise SQL querying
+- **`pipeline --general` flag** — `mcgill pipeline --general` (or `make pipeline-general`) runs the full ingest pipeline for university-wide data: scrapes important dates into the structured table, fetches general info pages (academic calendar, enrollment, exams, fees, graduation), then chunks and embeds them for vector search — all independent of any faculty/department pipeline run
+- Standalone `scrape` command hidden from CLI help (still works for backwards compatibility); `pipeline` is now the single entry point for all data ingestion
+- **Real-time pipeline progress** — the Pipeline Runner UI now streams human-readable status messages (e.g. 'Found 51 course pages to scrape', 'Scraped 51/51 pages') via SSE log events in a scrollable panel
+
+### Changed
+- Chat sidebar no longer shows internal 'Pipeline' phase status or random course 'Sources' for non-course queries — these were noise for end users
+- Chat text-to-SQL schema now includes the `important_dates` table with usage hints, so the chatbot can answer questions about breaks, holidays, exam periods, and registration deadlines via structured SQL queries
+- Removed `importantdates/` from the generic program page scraper (now handled by the dedicated structured scraper; `key-dates` static page retained)
+
 ## 0.10.2 — 2026-04-11
 
 ### Added

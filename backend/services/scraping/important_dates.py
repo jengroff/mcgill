@@ -129,14 +129,51 @@ async def scrape_important_dates(on_progress: ProgressCallback = None) -> int:
     async with browser_context() as ctx:
         page = await ctx.new_page()
 
-        await page.goto(URL, timeout=30000, wait_until="networkidle")
+        await page.goto(URL, timeout=60000, wait_until="networkidle")
 
-        # Fill date range filters (leave Term/Category/Faculty at defaults = "Any")
-        await page.fill(START_DATE_FIELD, DATE_RANGE_START)
-        await page.fill(END_DATE_FIELD, DATE_RANGE_END)
+        # The date inputs are rendered by Drupal's date_popup / jQuery datepicker
+        # after JS executes. Try the direct selector first; if it's not in the DOM,
+        # fall back to setting values via JavaScript.
+        try:
+            await page.wait_for_selector(START_DATE_FIELD, timeout=10000)
+            await page.fill(START_DATE_FIELD, DATE_RANGE_START)
+            await page.fill(END_DATE_FIELD, DATE_RANGE_END)
+            await page.press(END_DATE_FIELD, "Enter")
+        except Exception:
+            logger.info("Date inputs not found by name, setting values via JS")
+            await page.evaluate(
+                """([start, end]) => {
+                    // Find date inputs by partial name match
+                    const inputs = document.querySelectorAll('input[type="text"]');
+                    for (const inp of inputs) {
+                        const name = inp.name || '';
+                        if (name.includes('event_date_value') && !name.includes('value2')) {
+                            inp.value = start;
+                            inp.dispatchEvent(new Event('change', {bubbles: true}));
+                        } else if (name.includes('event_date_value2')) {
+                            inp.value = end;
+                            inp.dispatchEvent(new Event('change', {bubbles: true}));
+                        }
+                    }
+                    // Try submitting the exposed filter form
+                    const form = document.querySelector('.views-exposed-form form')
+                        || document.querySelector('form[id*="views-exposed-form"]')
+                        || document.querySelector('.views-exposed-form');
+                    if (form && form.submit) {
+                        form.submit();
+                    } else {
+                        // Click the apply/submit button
+                        const btn = document.querySelector(
+                            '.views-exposed-form input[type="submit"], '
+                            + '.views-exposed-form button[type="submit"], '
+                            + 'input[value="Apply"], button:has-text("Apply")'
+                        );
+                        if (btn) btn.click();
+                    }
+                }""",
+                [DATE_RANGE_START, DATE_RANGE_END],
+            )
 
-        # Submit the filter form — press Enter in the end date field to trigger AJAX
-        await page.press(END_DATE_FIELD, "Enter")
         await page.wait_for_load_state("networkidle")
 
         page_num = 1

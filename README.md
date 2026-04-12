@@ -16,7 +16,7 @@ make serve                    # API on :8001
 make frontend                 # UI on :5174
 ```
 
-`make seed` loads pre-scraped data from `data/courses.json` as a shortcut, but the pipeline is the primary path and populates everything including faculties, departments, and department website URLs.
+The pipeline is the primary data path — it scrapes, resolves prerequisites, chunks, and embeds everything including faculties, departments, and department website URLs.
 
 ## What It Can Do
 
@@ -27,6 +27,8 @@ make frontend                 # UI on :5174
 "What 300-level math courses have no prerequisites?"
 "Are there any physics courses related to quantum computing?"
 "I'm an incoming freshman in Food Science — what do I need to take?"
+"When is the fall 2026 reading break?"
+"What are the holidays in winter 2027?"
 "Plan my courses for 2 semesters, I'm interested in AI and applied statistics"
 "Ingest Science"    → triggers the ingest pipeline for a faculty
 ```
@@ -63,6 +65,8 @@ make bench         # run the benchmark above
 **Foundation program awareness** — Foundation Year program pages are explicitly scraped for Ag & Env Sci, Science, Arts, and Arts & Science faculties. The synthesis prompt understands non-CEGEP students need a Foundation Program, handles AP/IB exemptions, and cites specific contact emails. The system knows what an admissions advisor knows.
 
 **Department resource injection** — 70+ department website URLs, student societies, library guides, and advisor contacts are injected into synthesis context. The advisor can reference the Food Science Association, library subject guides, and named foundation year contacts — not just course descriptions.
+
+**Academic calendar awareness** — important dates (breaks, holidays, exam periods, registration deadlines) are scraped from McGill's importantdates page into a structured table and queried via SQL, so the chatbot gives precise date answers instead of hallucinating.
 
 **End-to-end ingest pipeline** — scrape, resolve, chunk, and embed an entire faculty in one shot with real-time SSE progress streaming and per-department deduplication.
 
@@ -168,11 +172,11 @@ This means the orchestration framework, domain services, and API surface are ind
 
 ```bash
 mcgill serve                          # Start FastAPI server
-mcgill ingest --faculty Science       # Ingest one faculty
+mcgill pipeline --faculty Science     # Full pipeline for a faculty (scrape, resolve, embed)
 mcgill pipeline --dept COMP           # Full pipeline for a department
-mcgill pipeline --faculty engineering # Full pipeline (skips already-processed depts)
-mcgill pipeline --faculty Science --force  # Re-process all depts even if already done
-mcgill seed                           # Load courses.json into databases
+mcgill pipeline --faculty engineering # Skips already-processed depts
+mcgill pipeline --faculty Science --force  # Re-process even if already done
+mcgill pipeline --general             # University-wide data (dates, calendar, exams, fees)
 mcgill ingest-pdf syllabus.pdf --faculty science  # Ingest a PDF
 mcgill curriculum --interests "machine learning" "statistics" --program computer-science
 ```
@@ -234,11 +238,10 @@ make help             Show all targets
 make start            Stop everything, then start db + API + frontend
 make db               Start databases only (Postgres + Neo4j)
 make db-down          Stop databases
-make seed             Load courses.json into databases
 make serve            Start API locally (databases must be running)
 make frontend         Start frontend dev server
-make ingest           Run ingestion (optional: make ingest FACULTY="Science")
 make pipeline         Run full ingest pipeline (make pipeline FACULTY="Science" DEPT="COMP" FORCE=1)
+make pipeline-general Ingest university-wide data (important dates, calendar, exams, fees)
 make up               Start all services via Docker
 make down             Stop all Docker services
 make rebuild          Rebuild containers from scratch (wipes volumes)
