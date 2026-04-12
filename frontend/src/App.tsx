@@ -34,16 +34,20 @@ export default function App() {
       .catch(() => logout())
   }, [token])
 
-  // Establish SSE connection on app load so Live indicator works on all tabs
+  // Establish SSE connection — don't block the UI, retry on failure
   useEffect(() => {
-    async function connect() {
-      const sid = sessionId ?? await createSession()
-      if (!sessionId) setSessionId(sid)
+    let cancelled = false
 
-      const es = new EventSource(sseUrl(sid))
-      esRef.current = es
-      es.onopen = () => setConnected(true)
-      es.onerror = () => setConnected(false)
+    async function connect() {
+      try {
+        const sid = sessionId ?? await createSession()
+        if (cancelled) return
+        if (!sessionId) setSessionId(sid)
+
+        const es = new EventSource(sseUrl(sid))
+        esRef.current = es
+        es.onopen = () => setConnected(true)
+        es.onerror = () => setConnected(false)
 
       es.onmessage = (ev) => {
         try {
@@ -63,10 +67,14 @@ export default function App() {
           }
         } catch { /* ignore */ }
       }
+      } catch {
+        // Session creation failed (cold start, network) — retry after 2s
+        if (!cancelled) setTimeout(connect, 2000)
+      }
     }
 
     connect()
-    return () => { esRef.current?.close() }
+    return () => { cancelled = true; esRef.current?.close() }
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   const user = useAppStore((s) => s.user)

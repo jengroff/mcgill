@@ -3,10 +3,10 @@ import { Send } from 'lucide-react'
 import Markdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { useAppStore } from '../store/appStore'
-import { sendMessage } from '../api/client'
+import { sendMessage, createSession, sseUrl } from '../api/client'
 
 export default function ChatPanel() {
-  const { sessionId, messages, addMessage, sending, setSending } = useAppStore()
+  const { sessionId, setSessionId, messages, addMessage, sending, setSending, streamToken, finalizeStream } = useAppStore()
   const [input, setInput] = useState('')
   const bottomRef = useRef<HTMLDivElement>(null)
 
@@ -16,12 +16,28 @@ export default function ChatPanel() {
 
   async function handleSend() {
     const text = input.trim()
-    if (!text || sending || !sessionId) return
+    if (!text || sending) return
     setInput('')
     setSending(true)
     addMessage('user', text)
     try {
-      await sendMessage(sessionId, text)
+      // Create session lazily if SSE connection hasn't established yet
+      let sid = sessionId
+      if (!sid) {
+        sid = await createSession()
+        setSessionId(sid)
+        const es = new EventSource(sseUrl(sid))
+        es.onmessage = (ev) => {
+          try {
+            const data = JSON.parse(ev.data)
+            if (data.type === 'token') streamToken(data.content)
+            else if (data.type === 'assistant_done') finalizeStream()
+            else if (data.type === 'assistant') addMessage('assistant', data.content)
+            else if (data.type === 'error') addMessage('system', data.content)
+          } catch { /* ignore */ }
+        }
+      }
+      await sendMessage(sid, text)
     } catch {
       addMessage('system', 'Failed to send message')
       setSending(false)
@@ -117,7 +133,7 @@ export default function ChatPanel() {
         <div ref={bottomRef} />
       </div>
 
-      <div className="p-3 border-t" style={{ borderColor: 'var(--border)' }}>
+      <div className="p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] border-t" style={{ borderColor: 'var(--border)' }}>
         <div className="flex gap-2 items-end">
           <textarea
             value={input}
@@ -125,7 +141,7 @@ export default function ChatPanel() {
             onKeyDown={handleKeyDown}
             placeholder="Ask about courses, prerequisites, programs..."
             rows={1}
-            className="flex-1 resize-none rounded-lg px-3 py-2 text-sm outline-none"
+            className="flex-1 resize-none rounded-lg px-3 py-2.5 text-sm outline-none"
             style={{
               background: 'var(--bg-elevated)',
               color: 'var(--text-primary)',
@@ -135,7 +151,7 @@ export default function ChatPanel() {
           <button
             onClick={handleSend}
             disabled={!input.trim() || sending}
-            className="rounded-lg p-2 transition-opacity cursor-pointer"
+            className="rounded-lg p-2.5 transition-opacity cursor-pointer"
             style={{
               background: 'var(--accent)',
               color: '#fff',
@@ -143,7 +159,7 @@ export default function ChatPanel() {
               border: 'none',
             }}
           >
-            <Send size={16} />
+            <Send size={18} />
           </button>
         </div>
       </div>
