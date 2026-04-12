@@ -521,6 +521,31 @@ FACULTY_RESOURCES: dict[str, dict[str, str]] = {
 }
 
 
+GENERAL_INFO_PAGES: dict[str, list[str]] = {
+    "academic-calendar": [
+        "https://www.mcgill.ca/importantdates/",
+        "https://www.mcgill.ca/importantdates/key-dates",
+    ],
+    "enrollment": [
+        "https://www.mcgill.ca/students/records/",
+        "https://www.mcgill.ca/students/records/add-drop",
+    ],
+    "exams": [
+        "https://www.mcgill.ca/students/exams/",
+    ],
+    "graduation": [
+        "https://www.mcgill.ca/students/graduation/",
+    ],
+    "fees-funding": [
+        "https://www.mcgill.ca/studentaccounts/tuition-fees",
+        "https://www.mcgill.ca/studentaid/",
+    ],
+    "new-students": [
+        "https://www.mcgill.ca/students/new/",
+    ],
+}
+
+
 EXTERNAL_ADVISING_PAGES: dict[str, list[str]] = {
     "agri-env-sci": [
         "https://www.mcgill.ca/osas/advising",

@@ -6,12 +6,14 @@ import logging
 import re
 from pathlib import Path
 from typing import Callable
+from urllib.parse import urlparse
 
 from backend.config import settings
 from backend.models.course import CourseCreate
 from backend.services.scraping.browser import browser_context, fetch_page
 from backend.services.scraping.faculties import (
     ALL_FACULTIES,
+    GENERAL_INFO_PAGES,
     PROGRAM_PAGES,
     get_active_faculties,
 )
@@ -248,8 +250,6 @@ async def run(
                     pg_title, pg_content = parse_program_page(html)
                     if pg_content:
                         # Use the URL path as the unique key
-                        from urllib.parse import urlparse
-
                         url_path = urlparse(url).path
                         async with pool.acquire() as conn:
                             await conn.execute(
@@ -270,6 +270,48 @@ async def run(
                         f"Processed {j + 1}/{len(ext_pages)} advising pages",
                         j + 1,
                         len(ext_pages),
+                    )
+                await asyncio.sleep(settings.scraper_delay_sec)
+
+        # Phase 1e: Scrape general university info pages (academic calendar, etc.)
+        gen_pages = [
+            (category, url)
+            for category, urls in GENERAL_INFO_PAGES.items()
+            for url in urls
+        ]
+
+        if gen_pages:
+            _progress(
+                "general",
+                f"Scraping {len(gen_pages)} general info pages...",
+                0,
+                len(gen_pages),
+            )
+            for k, (category, url) in enumerate(gen_pages):
+                html = await fetch_page(page, url)
+                if html:
+                    pg_title, pg_content = parse_program_page(html)
+                    if pg_content:
+                        url_path = urlparse(url).path
+                        async with pool.acquire() as conn:
+                            await conn.execute(
+                                """INSERT INTO program_pages (faculty_slug, path, title, content)
+                                   VALUES ($1, $2, $3, $4)
+                                   ON CONFLICT (path) DO UPDATE SET
+                                       title = EXCLUDED.title,
+                                       content = EXCLUDED.content,
+                                       scraped_at = now()""",
+                                "university",
+                                url_path,
+                                pg_title or category.replace("-", " ").title(),
+                                pg_content,
+                            )
+                if (k + 1) % 5 == 0 or k == len(gen_pages) - 1:
+                    _progress(
+                        "general",
+                        f"Processed {k + 1}/{len(gen_pages)} general info pages",
+                        k + 1,
+                        len(gen_pages),
                     )
                 await asyncio.sleep(settings.scraper_delay_sec)
 

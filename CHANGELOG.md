@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.10.1 — 2026-04-11
+
+### Added
+- **General university info scraping** — pipeline now scrapes McGill's academic calendar, important dates, exam info, tuition/fees, graduation, and new student pages, storing them as `program_pages` with `faculty_slug="university"` so the chatbot can answer questions about holidays, enrollment deadlines, and other institutional info
+
 ## 0.10.0 — 2026-04-11
 
 ### Added
