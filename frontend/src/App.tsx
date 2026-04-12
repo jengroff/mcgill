@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import Header from './components/Header'
 import AuthPrompt from './components/AuthPrompt'
 import Toasts from './components/Toasts'
@@ -64,6 +64,8 @@ export default function App() {
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   const user = useAppStore((s) => s.user)
+  const location = useLocation()
+  const isPublicRoute = location.pathname === '/guide'
 
   return (
     <div className="h-screen flex flex-col" style={{ background: 'var(--bg-primary)' }}>
@@ -78,7 +80,7 @@ export default function App() {
           <Route path="/planner" element={<PlannerPage />} />
           <Route path="/guide" element={<GuidePage />} />
         </Routes>
-        {!user && (
+        {!user && !isPublicRoute && (
           <div
             className="absolute inset-0 z-50 flex items-center justify-center"
             style={{ background: 'rgba(0, 0, 0, 0.6)', backdropFilter: 'blur(4px)' }}
