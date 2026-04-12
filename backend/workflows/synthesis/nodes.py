@@ -63,22 +63,68 @@ async def context_pack_node(state: SynthesisState) -> dict[str, Any]:
         if graph_ctx:
             parts.append(graph_ctx)
 
-        # Structured SQL results (counts, aggregates, rankings)
-        structured_ctx = state.get("structured_context", "")
-        if structured_ctx:
-            parts.insert(0, structured_ctx)  # Prioritize structured data
-
         # Plan context (when chat is scoped to a curriculum plan)
         plan_ctx = state.get("plan_context", "")
         if plan_ctx:
             parts.insert(0, plan_ctx)
 
-        # Program guide context
-        for r in state.get("program_context", []):
-            title = r.get("title", r.get("faculty_slug", ""))
-            text = r.get("text", "")
-            if text:
-                parts.append(f"[{title}]\n{text}")
+        # Program guide context (key dates, program requirements, etc.)
+        # For each matched chunk, also pull the next few chunks from the same
+        # page so the LLM sees continuations (e.g. the Reading Break line that
+        # follows the "Classes begin" line on the key-dates page).
+        program_parts: list[str] = []
+        seen_chunk_ids: set[int] = set()
+        program_ctx = state.get("program_context", [])
+
+        if program_ctx:
+            from backend.db.postgres import get_pool
+
+            pool = await get_pool()
+            for r in program_ctx:
+                page_id = r.get("program_page_id")
+                chunk_id = r.get("id")
+                title = r.get("title", r.get("faculty_slug", ""))
+                text = r.get("text", "")
+
+                if not text:
+                    continue
+                if chunk_id and chunk_id in seen_chunk_ids:
+                    continue
+                if chunk_id:
+                    seen_chunk_ids.add(chunk_id)
+
+                # Fetch this chunk and the next 3 from the same page
+                if page_id:
+                    async with pool.acquire() as conn:
+                        neighbors = await conn.fetch(
+                            """SELECT id, text FROM program_chunks
+                               WHERE program_page_id = $1
+                                 AND chunk_index >= (
+                                     SELECT chunk_index FROM program_chunks WHERE id = $2
+                                 )
+                               ORDER BY chunk_index
+                               LIMIT 16""",
+                            page_id,
+                            chunk_id,
+                        )
+                    combined = []
+                    for nb in neighbors:
+                        if nb["id"] not in seen_chunk_ids:
+                            seen_chunk_ids.add(nb["id"])
+                            combined.append(nb["text"])
+                    if combined:
+                        program_parts.append(f"[{title}]\n" + "\n".join(combined))
+                        continue
+
+                program_parts.append(f"[{title}]\n{text}")
+
+        if program_parts:
+            parts[0:0] = program_parts
+
+        # Structured SQL results (counts, aggregates, rankings)
+        structured_ctx = state.get("structured_context", "")
+        if structured_ctx:
+            parts.insert(0, structured_ctx)
 
         # Department website URLs + resources
         websites = _lookup_dept_websites(dept_codes)
@@ -117,10 +163,10 @@ async def context_pack_node(state: SynthesisState) -> dict[str, Any]:
         if resource_lines:
             parts.append("Student resources:\n" + "\n".join(resource_lines))
 
-        # Trim to rough token budget (~8k chars ≈ ~2k tokens)
+        # Trim to rough token budget (~12k chars ≈ ~3k tokens)
         context_text = "\n---\n".join(parts)
-        if len(context_text) > 8000:
-            context_text = context_text[:8000] + "\n... (trimmed)"
+        if len(context_text) > 12000:
+            context_text = context_text[:12000] + "\n... (trimmed)"
 
         # Store packed context in sources field for downstream
         return {"sources": [{"context_text": context_text}]}

@@ -79,7 +79,8 @@ async def search_similar_programs(
 
     async with pool.acquire() as conn:
         rows = await conn.fetch(
-            """SELECT pc.text, pc.program_page_id, pp.title, pp.faculty_slug,
+            """SELECT pc.id, pc.chunk_index, pc.text, pc.program_page_id,
+                      pp.title, pp.faculty_slug,
                       1 - (pc.embedding <=> $1::vector) AS similarity
                FROM program_chunks pc
                JOIN program_pages pp ON pp.id = pc.program_page_id

@@ -196,6 +196,7 @@ def cli():
                     await create_ivfflat_index()
 
                 print(f"Embedded {total_chunks} chunks from general info pages")
+
                 await close_db()
 
             asyncio.run(_run_general())

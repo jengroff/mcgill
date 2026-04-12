@@ -45,7 +45,7 @@ async def semantic_node(state: RetrievalState) -> dict[str, Any]:
 
         course_results, program_results = await asyncio.gather(
             search_similar(query_emb, top_k),
-            search_similar_programs(query_emb, 5),
+            search_similar_programs(query_emb, 10),
         )
         return {"semantic_results": course_results, "program_results": program_results}
     except Exception as e:
@@ -126,15 +126,19 @@ Notes:
   - program_pages.faculty_slug groups pages by faculty, e.g. 'agri-env-sci', 'science'.
   - departments.website contains the department's main website URL (e.g. 'https://www.mcgill.ca/foodscience/').
     Join courses.dept = departments.code to look up department websites.
-  - important_dates stores university dates: holidays, breaks, exams, registration deadlines, etc.
+  - important_dates stores individual university date entries (317+ rows) — transfers, readmissions,
+    registration deadlines, individual exam sessions, convocation ceremonies, etc.
   - important_dates.title contains the event name, e.g. 'LABOUR DAY Holiday', 'Fall 2026 READING BREAK',
     'CHRISTMAS AND NEW YEAR\\'S holiday break', 'Fall 2026 Exams begin'.
   - For term-specific date queries, filter with title ILIKE '%Fall%' or use start_date ranges
     (Fall ≈ Sep–Dec, Winter ≈ Jan–Apr, Summer ≈ May–Aug).
   - For category queries, filter with title ILIKE '%holiday%' or '%break%' or '%exam%'.
   - Single-day events have start_date = end_date; multi-day events have different start/end dates.
-  - Always query important_dates for questions about academic calendar, breaks, holidays, exam periods,
-    registration deadlines, convocation, or any university date-related questions.
+  - Use important_dates ONLY for specific date lookups like 'when is Labour Day' or 'when do exams start'.
+  - For broad overview questions like 'what are the key dates in fall 2026' or 'what is the academic
+    calendar', return SKIP — the answer is in program_pages (the key-dates page), not in this table.
+    Querying important_dates for broad questions returns hundreds of administrative rows that are not
+    what the user is looking for.
 """
 
 
@@ -175,6 +179,11 @@ async def structured_node(state: RetrievalState) -> dict[str, Any]:
             return {
                 "structured_context": f"SQL query returned no results.\nQuery: {sql}"
             }
+
+        # If a broad query against important_dates returns many rows, discard it —
+        # the user is asking an overview question better served by program_pages.
+        if len(rows) > 15 and "important_dates" in sql.lower():
+            return {"structured_context": ""}
 
         # Format results as readable text
         columns = list(rows[0].keys())
