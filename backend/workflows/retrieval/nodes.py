@@ -142,9 +142,36 @@ Notes:
 """
 
 
+_SQL_TRIGGERS = {
+    "how many",
+    "count",
+    "number of",
+    "list all",
+    "top ",
+    "most ",
+    "least ",
+    "average",
+    "total",
+    "rank",
+    "compare",
+    "which department",
+    "which faculty",
+    "per department",
+    "per faculty",
+    "statistics",
+    "how much",
+}
+
+
 async def structured_node(state: RetrievalState) -> dict[str, Any]:
     """Text-to-SQL: use Claude to generate a read-only SQL query, execute it, return results."""
     try:
+        # Fast keyword gate — skip the Haiku API call for queries that
+        # clearly don't need SQL (date lookups, course info, prerequisites).
+        query_lower = state["query"].lower()
+        if not any(w in query_lower for w in _SQL_TRIGGERS):
+            return {"structured_context": ""}
+
         import anthropic
         from backend.config import settings
         from backend.db.postgres import get_pool

@@ -21,6 +21,8 @@ export default function App() {
   const setSessionId = useAppStore((s) => s.setSessionId)
   const setConnected = useAppStore((s) => s.setConnected)
   const addMessage = useAppStore((s) => s.addMessage)
+  const streamToken = useAppStore((s) => s.streamToken)
+  const finalizeStream = useAppStore((s) => s.finalizeStream)
   const updateStep = useAppStore((s) => s.updateStep)
   const setSources = useAppStore((s) => s.setSources)
   const esRef = useRef<EventSource | null>(null)
@@ -46,7 +48,11 @@ export default function App() {
       es.onmessage = (ev) => {
         try {
           const data = JSON.parse(ev.data)
-          if (data.type === 'assistant') {
+          if (data.type === 'token') {
+            streamToken(data.content)
+          } else if (data.type === 'assistant_done') {
+            finalizeStream()
+          } else if (data.type === 'assistant') {
             addMessage('assistant', data.content)
           } else if (data.type === 'step_update') {
             updateStep(data.phase, data.label, data.status)

@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.12.0 — 2026-04-12
+
+### Added
+- **Streaming chat responses** — synthesis tokens now stream to the frontend via SSE as they're generated, so users see text appearing within ~1.5 seconds instead of waiting ~10 seconds for the full response
+- **Keyword gate on structured_node** — queries that don't need SQL (date lookups, course info, prerequisites) skip the Haiku text-to-SQL call entirely, saving ~1.3 seconds per query
+
+### Changed
+- Chat synthesis model switched from Sonnet to Haiku for ~3x faster generation; Sonnet retained for curriculum planner where deeper reasoning matters
+- Program page context now prioritized over SQL results and course data in the context window, with adjacent chunk expansion (16-chunk window) so full sections like Fall 2026 key dates reach the LLM intact
+- Context budget increased from 8k to 12k chars to accommodate complete academic calendar sections
+- Broad important_dates SQL results (>15 rows) discarded automatically — overview questions now answered from the key-dates program page instead of hundreds of administrative date rows
+- Synthesis system prompt updated to state dates and deadlines as facts when present in context, eliminating unnecessary hedging
+
 ## 0.11.0 — 2026-04-12
 
 ### Added

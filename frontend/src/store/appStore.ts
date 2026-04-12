@@ -13,6 +13,7 @@ export interface ChatMessage {
   role: 'user' | 'assistant' | 'system'
   content: string
   timestamp: number
+  streaming?: boolean
 }
 
 export interface CourseSource {
@@ -62,6 +63,8 @@ interface AppState {
   updateStep: (phase: number, label: string, status: PhaseStatus) => void
   addMessage: (role: ChatMessage['role'], content: string) => void
   setSending: (v: boolean) => void
+  streamToken: (content: string) => void
+  finalizeStream: () => void
   setSources: (s: CourseSource[]) => void
   setPipelineRunId: (id: string | null) => void
   setPipelineStatus: (s: string | null) => void
@@ -124,6 +127,37 @@ export const useAppStore = create<AppState>((set) => ({
     })),
 
   setSending: (v) => set({ sending: v }),
+
+  streamToken: (content) =>
+    set((s) => {
+      const last = s.messages[s.messages.length - 1]
+      if (last && last.role === 'assistant' && last.streaming) {
+        const updated = [...s.messages]
+        updated[updated.length - 1] = { ...last, content: last.content + content }
+        return { messages: updated }
+      }
+      return {
+        messages: [...s.messages, {
+          id: crypto.randomUUID(),
+          role: 'assistant',
+          content,
+          timestamp: Date.now(),
+          streaming: true,
+        }],
+      }
+    }),
+
+  finalizeStream: () =>
+    set((s) => {
+      const last = s.messages[s.messages.length - 1]
+      if (last && last.streaming) {
+        const updated = [...s.messages]
+        updated[updated.length - 1] = { ...last, streaming: false }
+        return { messages: updated, sending: false }
+      }
+      return { sending: false }
+    }),
+
   setSources: (sources) => set({ sources }),
   setPipelineRunId: (id) => set({ pipelineRunId: id }),
   setPipelineStatus: (s) => set({ pipelineStatus: s }),

@@ -576,7 +576,7 @@ async def _run_pipeline_bg(
 
 async def _run_qa_pipeline(question: str, session_id: str) -> AsyncIterator[dict]:
     from backend.workflows.retrieval.graph import RetrievalOrchestrator
-    from backend.workflows.synthesis.graph import SynthesisOrchestrator
+    from backend.workflows.synthesis.nodes import context_pack_node, SYSTEM_PROMPT
 
     session = _sessions.get(session_id, {})
     plan_id = session.get("plan_id")
@@ -588,26 +588,55 @@ async def _run_qa_pipeline(question: str, session_id: str) -> AsyncIterator[dict
     retrieval_orch = RetrievalOrchestrator()
     retrieval_state = await retrieval_orch.run(query=question, top_k=10, mode="hybrid")
 
-    synthesis_orch = SynthesisOrchestrator()
-    synthesis_state = await synthesis_orch.run(
-        query=question,
-        session_id=session_id,
-        conversation_history=session.get("messages", [])[-6:],
-        retrieval_context=retrieval_state.get("fused_results", []),
-        program_context=retrieval_state.get("program_results", []),
-        graph_context=retrieval_state.get("graph_context", ""),
-        structured_context=retrieval_state.get("structured_context", ""),
-        plan_context=plan_context,
+    # Pack context directly (bypass SynthesisOrchestrator for streaming)
+    pack_result = await context_pack_node(
+        {
+            "query": question,
+            "retrieval_context": retrieval_state.get("fused_results", []),  # type: ignore[typeddict-item]
+            "program_context": retrieval_state.get("program_results", []),  # type: ignore[typeddict-item]
+            "graph_context": retrieval_state.get("graph_context", ""),  # type: ignore[typeddict-item]
+            "structured_context": retrieval_state.get("structured_context", ""),  # type: ignore[typeddict-item]
+            "plan_context": plan_context,
+        }
     )
 
-    answer = synthesis_state.get("response", "")
-    if answer:
-        yield {"type": "assistant", "content": answer}
-        _sessions[session_id]["messages"].append(
-            {"role": "assistant", "content": answer}
-        )
+    context_text = ""
+    for s in pack_result.get("sources", []):
+        if "context_text" in s:
+            context_text = s["context_text"]
+            break
 
-        await _persist_bg_message(_sessions[session_id], answer)  # type: ignore[arg-type]
+    messages = [
+        {"role": "user", "content": f"Context:\n{context_text}\n\nQuestion: {question}"}
+    ]
+    history = session.get("messages", [])[-6:]
+    if len(history) > 1:
+        messages = history[:-1] + messages
+
+    # Stream synthesis via Haiku for speed
+    import anthropic
+    from backend.config import settings
+
+    client = anthropic.AsyncAnthropic(api_key=settings.anthropic_api_key)
+
+    full_answer = ""
+    async with client.messages.stream(
+        model="claude-haiku-4-5-20251001",
+        max_tokens=1024,
+        system=SYSTEM_PROMPT,
+        messages=messages,  # type: ignore[arg-type]
+    ) as stream:
+        async for text in stream.text_stream:
+            full_answer += text
+            yield {"type": "token", "content": text}
+
+    yield {"type": "assistant_done"}
+
+    if full_answer:
+        _sessions[session_id]["messages"].append(
+            {"role": "assistant", "content": full_answer}
+        )
+        await _persist_bg_message(_sessions[session_id], full_answer)  # type: ignore[arg-type]
 
 
 # ---------------------------------------------------------------------------

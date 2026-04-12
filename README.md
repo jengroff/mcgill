@@ -56,6 +56,8 @@ make bench         # run the benchmark above
 
 ## Features
 
+**Streaming chat with ~1.5s time-to-first-token** — chat responses stream token-by-token via SSE so text appears almost immediately. Synthesis uses Haiku for speed; retrieval skips the text-to-SQL call for non-aggregate queries via a keyword gate. Total latency dropped from ~10s to ~7s.
+
 **Hybrid retrieval** — queries fan out in parallel across keyword search, Voyage AI semantic embeddings, Neo4j prerequisite graph traversal, and structured SQL, then fuse results with reciprocal rank fusion (RRF). No single retrieval strategy wins every query; RRF lets them all contribute.
 
 **Prerequisite DAG visualization** — D3 force-directed graphs render the full prerequisite/corequisite dependency tree for any course, with depth-based layout. Understanding why you can't register for a course is now visual.
