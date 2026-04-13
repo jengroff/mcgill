@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.13.0 — 2026-04-13
+
+### Changed
+- **Concurrent scraping** — all scraping phases (course pages, program pages, advising pages, general info pages) now fetch with a pool of browser pages in parallel instead of one at a time. Default concurrency is 5 pages with a 0.2s inter-request delay (previously sequential with 1s delay). For ~2200 course pages, scraping dropped from ~22 minutes to ~4 minutes. Configurable via `SCRAPER_CONCURRENCY` and `SCRAPER_DELAY_SEC` environment variables
+- **Batched Neo4j graph builds** — course node creation, term relationships, faculty cross-listings, and prerequisite edges now use `UNWIND` batching (500 items per query) instead of individual Cypher round-trips per course. Reduces ~6000-10000 Neo4j sessions to ~15 batched queries
+- **Batched chunk inserts** — `insert_chunks` and `insert_program_chunks` use `executemany` instead of per-row `execute`, cutting thousands of individual Postgres round-trips to one protocol-level operation per course
+- Removed redundant course INSERT loop in `scrape_node` — the scraper already upserts each course during scraping, so the post-scrape re-insert of every course was eliminated
+
 ## 0.12.0 — 2026-04-12
 
 ### Added

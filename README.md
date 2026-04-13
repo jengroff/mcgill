@@ -70,7 +70,7 @@ make bench         # run the benchmark above
 
 **Academic calendar awareness** — important dates (breaks, holidays, exam periods, registration deadlines) are scraped from McGill's importantdates page into a structured table and queried via SQL, so the chatbot gives precise date answers instead of hallucinating.
 
-**End-to-end ingest pipeline** — scrape, resolve, chunk, and embed an entire faculty in one shot with real-time SSE progress streaming and per-department deduplication.
+**End-to-end ingest pipeline** — scrape, resolve, chunk, and embed an entire faculty in one shot with real-time SSE progress streaming and per-department deduplication. Scraping uses a pool of concurrent browser pages (5 by default) for ~5x throughput; Neo4j graph builds and pgvector chunk inserts are batched to minimize round-trips.
 
 **PDF ingestion via VLM** — upload arbitrary PDFs (syllabi, transcripts, AP score reports) to extract, chunk, embed, and store in pgvector alongside catalogue data. Scanned and image-heavy PDFs are automatically routed through Claude Vision for extraction.
 

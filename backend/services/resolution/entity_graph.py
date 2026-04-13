@@ -1,9 +1,15 @@
 from __future__ import annotations
 
+import logging
+
 from backend.db.neo4j import run_query
 from backend.models.course import CourseCreate
 from backend.models.graph import PrerequisiteRef
 from backend.services.scraping.faculties import ALL_FACULTIES
+
+logger = logging.getLogger(__name__)
+
+BATCH_SIZE = 500
 
 
 async def build_faculty_nodes() -> int:
@@ -26,71 +32,101 @@ async def build_faculty_nodes() -> int:
 
 
 async def build_course_nodes(courses: list[CourseCreate]) -> int:
-    count = 0
-    for c in courses:
+    course_params = [
+        {
+            "code": c.code,
+            "slug": c.slug,
+            "title": c.title,
+            "dept": c.dept,
+            "number": c.number,
+            "credits": c.credits,
+            "description": c.description[:500],
+        }
+        for c in courses
+    ]
+
+    for i in range(0, len(course_params), BATCH_SIZE):
+        batch = course_params[i : i + BATCH_SIZE]
         await run_query(
-            """MERGE (c:Course {code: $code})
-               SET c.slug = $slug,
-                   c.title = $title,
-                   c.dept = $dept,
-                   c.number = $number,
-                   c.credits = $credits,
-                   c.description = $description""",
-            {
-                "code": c.code,
-                "slug": c.slug,
-                "title": c.title,
-                "dept": c.dept,
-                "number": c.number,
-                "credits": c.credits,
-                "description": c.description[:500],
-            },
+            """UNWIND $batch AS c
+               MERGE (course:Course {code: c.code})
+               SET course.slug = c.slug,
+                   course.title = c.title,
+                   course.dept = c.dept,
+                   course.number = c.number,
+                   course.credits = c.credits,
+                   course.description = c.description
+               MERGE (d:Department {code: c.dept})
+               MERGE (course)-[:BELONGS_TO]->(d)""",
+            {"batch": batch},
+        )
+        logger.info(
+            "Neo4j: merged %d/%d course nodes",
+            min(i + BATCH_SIZE, len(courses)),
+            len(courses),
         )
 
-        # Course → Department
+    # Batch term relationships
+    term_items = [{"code": c.code, "term": term} for c in courses for term in c.terms]
+    for i in range(0, len(term_items), BATCH_SIZE):
+        term_batch = term_items[i : i + BATCH_SIZE]
         await run_query(
-            """MATCH (c:Course {code: $code})
-               MERGE (d:Department {code: $dept})
-               MERGE (c)-[:BELONGS_TO]->(d)""",
-            {"code": c.code, "dept": c.dept},
+            """UNWIND $batch AS item
+               MATCH (c:Course {code: item.code})
+               MERGE (t:Term {name: item.term})
+               MERGE (c)-[:OFFERED_IN]->(t)""",
+            {"batch": term_batch},
         )
 
-        # Course → Term
-        for term in c.terms:
+    # Batch faculty cross-listings
+    fac_items = [
+        {
+            "code": c.code,
+            "slug": fac_name.lower()
+            .replace(" ", "-")
+            .replace("&", "and")
+            .replace("(", "")
+            .replace(")", ""),
+            "name": fac_name,
+        }
+        for c in courses
+        for fac_name in c.faculties
+    ]
+    if fac_items:
+        for i in range(0, len(fac_items), BATCH_SIZE):
+            fac_batch = fac_items[i : i + BATCH_SIZE]
             await run_query(
-                """MATCH (c:Course {code: $code})
-                   MERGE (t:Term {name: $term})
-                   MERGE (c)-[:OFFERED_IN]->(t)""",
-                {"code": c.code, "term": term},
-            )
-
-        # Course → Faculty (cross-listed)
-        for fac_name in c.faculties:
-            slug = fac_name.lower().replace(" ", "-").replace("&", "and")
-            slug = slug.replace("(", "").replace(")", "")
-            await run_query(
-                """MATCH (c:Course {code: $code})
-                   MERGE (f:Faculty {slug: $slug})
-                   SET f.name = $name
+                """UNWIND $batch AS item
+                   MATCH (c:Course {code: item.code})
+                   MERGE (f:Faculty {slug: item.slug})
+                   SET f.name = item.name
                    MERGE (c)-[:CROSS_LISTED_IN]->(f)""",
-                {"code": c.code, "slug": slug, "name": fac_name},
+                {"batch": fac_batch},
             )
 
-        count += 1
-    return count
+    return len(courses)
 
 
 async def build_relationships(refs: list[PrerequisiteRef]) -> int:
-    count = 0
+    by_type: dict[str, list[dict]] = {}
     for ref in refs:
-        rel_type = ref.relationship
-        await run_query(
-            f"""MATCH (src:Course {{code: $src}})
-                MATCH (tgt:Course {{code: $tgt}})
-                MERGE (src)-[:{rel_type}]->(tgt)""",
-            {"src": ref.source_code, "tgt": ref.target_code},
+        by_type.setdefault(ref.relationship, []).append(
+            {"src": ref.source_code, "tgt": ref.target_code}
         )
-        count += 1
+
+    count = 0
+    for rel_type, items in by_type.items():
+        for i in range(0, len(items), BATCH_SIZE):
+            batch = items[i : i + BATCH_SIZE]
+            await run_query(
+                f"""UNWIND $batch AS item
+                    MATCH (src:Course {{code: item.src}})
+                    MATCH (tgt:Course {{code: item.tgt}})
+                    MERGE (src)-[:{rel_type}]->(tgt)""",
+                {"batch": batch},
+            )
+            count += len(batch)
+
     return count
 
 

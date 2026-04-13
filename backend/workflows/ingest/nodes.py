@@ -118,40 +118,6 @@ async def scrape_node(state: IngestState) -> dict[str, Any]:
             on_progress=progress_sink,
         )
 
-        # Also insert into PostgreSQL
-        from backend.db.postgres import get_pool
-
-        pool = await get_pool()
-        async with pool.acquire() as conn:
-            for c in courses:
-                await conn.execute(
-                    """INSERT INTO courses (code, slug, title, dept, number, credits,
-                           faculty, terms, description, prerequisites_raw,
-                           restrictions_raw, notes_raw, url, name_variants)
-                       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14)
-                       ON CONFLICT (code) DO UPDATE SET
-                           title = EXCLUDED.title,
-                           description = EXCLUDED.description,
-                           prerequisites_raw = EXCLUDED.prerequisites_raw,
-                           restrictions_raw = EXCLUDED.restrictions_raw,
-                           terms = EXCLUDED.terms,
-                           updated_at = now()""",
-                    c.code,
-                    c.slug,
-                    c.title,
-                    c.dept,
-                    c.number,
-                    c.credits,
-                    c.faculty,
-                    c.terms,
-                    c.description,
-                    c.prerequisites_raw,
-                    c.restrictions_raw,
-                    c.notes_raw,
-                    c.url,
-                    c.name_variants,
-                )
-
         # Scrape important dates (runs independently of course scraping)
         from backend.services.scraping.important_dates import scrape_important_dates
 

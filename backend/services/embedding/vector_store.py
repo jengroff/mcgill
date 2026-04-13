@@ -10,19 +10,16 @@ async def insert_chunks(
 ) -> int:
     pool = await get_pool()
     async with pool.acquire() as conn:
-        # Clear existing chunks for this course
         await conn.execute("DELETE FROM course_chunks WHERE course_id = $1", course_id)
-
-        for i, (text, emb) in enumerate(zip(chunks, embeddings)):
-            emb_str = "[" + ",".join(str(v) for v in emb) + "]"
-            await conn.execute(
-                """INSERT INTO course_chunks (course_id, chunk_index, text, embedding)
-                   VALUES ($1, $2, $3, $4::vector)""",
-                course_id,
-                i,
-                text,
-                emb_str,
-            )
+        records = [
+            (course_id, i, text, "[" + ",".join(str(v) for v in emb) + "]")
+            for i, (text, emb) in enumerate(zip(chunks, embeddings))
+        ]
+        await conn.executemany(
+            """INSERT INTO course_chunks (course_id, chunk_index, text, embedding)
+               VALUES ($1, $2, $3, $4::vector)""",
+            records,
+        )
     return len(chunks)
 
 
@@ -57,16 +54,15 @@ async def insert_program_chunks(
         await conn.execute(
             "DELETE FROM program_chunks WHERE program_page_id = $1", program_page_id
         )
-        for i, (text, emb) in enumerate(zip(chunks, embeddings)):
-            emb_str = "[" + ",".join(str(v) for v in emb) + "]"
-            await conn.execute(
-                """INSERT INTO program_chunks (program_page_id, chunk_index, text, embedding)
-                   VALUES ($1, $2, $3, $4::vector)""",
-                program_page_id,
-                i,
-                text,
-                emb_str,
-            )
+        records = [
+            (program_page_id, i, text, "[" + ",".join(str(v) for v in emb) + "]")
+            for i, (text, emb) in enumerate(zip(chunks, embeddings))
+        ]
+        await conn.executemany(
+            """INSERT INTO program_chunks (program_page_id, chunk_index, text, embedding)
+               VALUES ($1, $2, $3, $4::vector)""",
+            records,
+        )
     return len(chunks)
 
 
