@@ -139,7 +139,7 @@ export default function ChatPanel() {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="Ask about courses, prerequisites, programs..."
+            placeholder=""
             rows={1}
             className="flex-1 resize-none rounded-lg px-3 py-2.5 text-sm outline-none"
             style={{

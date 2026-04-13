@@ -832,7 +832,7 @@ function PlanAdvisorChat({ planId, planTitle }: { planId: number; planTitle: str
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSend() } }}
-            placeholder="Ask about your plan..."
+            placeholder=""
             disabled={sending || !sessionId}
             className="flex-1 rounded-lg px-3 py-2 text-xs outline-none"
             style={{ background: 'var(--bg-elevated)', color: 'var(--text-primary)', border: '1px solid var(--border)' }}
