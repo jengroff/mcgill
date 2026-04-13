@@ -133,7 +133,7 @@ export default function ChatPanel() {
         <div ref={bottomRef} />
       </div>
 
-      <div className="p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] border-t" style={{ borderColor: 'var(--border)' }}>
+      <div className="p-3 border-t" style={{ borderColor: 'var(--border)' }}>
         <div className="flex gap-2 items-end">
           <textarea
             value={input}
@@ -141,7 +141,7 @@ export default function ChatPanel() {
             onKeyDown={handleKeyDown}
             placeholder=""
             rows={1}
-            className="flex-1 resize-none rounded-lg px-3 py-2.5 text-sm outline-none"
+            className="flex-1 resize-none rounded-lg px-3 py-2 text-sm outline-none"
             style={{
               background: 'var(--bg-elevated)',
               color: 'var(--text-primary)',
@@ -151,7 +151,7 @@ export default function ChatPanel() {
           <button
             onClick={handleSend}
             disabled={!input.trim() || sending}
-            className="rounded-lg p-2.5 transition-opacity cursor-pointer"
+            className="rounded-lg p-2 transition-opacity cursor-pointer"
             style={{
               background: 'var(--accent)',
               color: '#fff',
@@ -159,7 +159,7 @@ export default function ChatPanel() {
               border: 'none',
             }}
           >
-            <Send size={18} />
+            <Send size={16} />
           </button>
         </div>
       </div>

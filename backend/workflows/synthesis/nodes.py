@@ -70,6 +70,45 @@ async def context_pack_node(state: SynthesisState) -> dict[str, Any]:
         if plan_ctx:
             parts.insert(0, plan_ctx)
 
+        # Direct key-dates injection: if the query is about dates, calendar,
+        # breaks, holidays, or exams, fetch the key-dates page content directly
+        # from the DB instead of relying on semantic search ranking.
+        query_lower = state.get("query", "").lower()
+        _DATE_KEYWORDS = {
+            "key dates",
+            "important dates",
+            "academic calendar",
+            "reading break",
+            "holiday",
+            "break",
+            "exam period",
+            "exams begin",
+            "exams end",
+            "classes begin",
+            "classes end",
+            "labour day",
+            "thanksgiving",
+            "when do",
+            "when does",
+            "when is",
+            "when are",
+            "schedule",
+            "fall 2026",
+            "winter 2027",
+            "fall 2027",
+            "winter 2028",
+        }
+        if any(kw in query_lower for kw in _DATE_KEYWORDS):
+            from backend.db.postgres import get_pool
+
+            pool = await get_pool()
+            async with pool.acquire() as conn:
+                row = await conn.fetchrow(
+                    "SELECT content FROM program_pages WHERE title = 'Key academic dates'"
+                )
+            if row and row["content"]:
+                parts.insert(0, f"[Key academic dates]\n{row['content']}")
+
         # Program guide context (key dates, program requirements, etc.)
         # For each matched chunk, also pull the next few chunks from the same
         # page so the LLM sees continuations (e.g. the Reading Break line that

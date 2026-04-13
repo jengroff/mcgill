@@ -84,32 +84,9 @@ export default function PlannerPage() {
   }
 
   return (
-    <div className="h-full flex flex-col md:flex-row overflow-hidden">
-      {/* Mobile plan selector */}
-      <div className="md:hidden flex items-center gap-2 px-4 py-2 border-b" style={{ borderColor: 'var(--border)', background: 'var(--bg-surface)' }}>
-        <select
-          value={activePlan?.id ?? ''}
-          onChange={(e) => { const id = Number(e.target.value); if (id) handleSelectPlan(id) }}
-          className="flex-1 rounded-lg px-3 py-2 text-sm outline-none"
-          style={{ background: 'var(--bg-elevated)', color: 'var(--text-primary)', border: '1px solid var(--border)' }}
-        >
-          <option value="">Select a plan</option>
-          {plans.map((p) => (
-            <option key={p.id} value={p.id}>{p.title}</option>
-          ))}
-        </select>
-        <button
-          onClick={() => setShowNewPlan(true)}
-          className="p-2 rounded cursor-pointer flex-shrink-0"
-          style={{ background: 'var(--accent)', color: '#fff', border: 'none' }}
-          title="New plan"
-        >
-          <Plus size={14} />
-        </button>
-      </div>
-
-      {/* Left: Plan list (desktop only) */}
-      <div className="hidden md:flex w-64 flex-shrink-0 border-r flex-col" style={{ borderColor: 'var(--border)', background: 'var(--bg-surface)' }}>
+    <div className="h-full flex overflow-hidden">
+      {/* Left: Plan list */}
+      <div className="w-64 flex-shrink-0 border-r flex flex-col" style={{ borderColor: 'var(--border)', background: 'var(--bg-surface)' }}>
         <div className="p-3 border-b flex items-center justify-between" style={{ borderColor: 'var(--border)' }}>
           <span className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>Plans</span>
           <button
@@ -185,11 +162,9 @@ export default function PlannerPage() {
         )}
       </div>
 
-      {/* Right: Advisor chat (hidden on mobile) */}
+      {/* Right: Advisor chat */}
       {activePlan && !showNewPlan && (
-        <div className="hidden lg:flex">
-          <PlanAdvisorChat planId={activePlan.id} planTitle={activePlan.title} />
-        </div>
+        <PlanAdvisorChat planId={activePlan.id} planTitle={activePlan.title} />
       )}
     </div>
   )
@@ -832,7 +807,7 @@ function PlanAdvisorChat({ planId, planTitle }: { planId: number; planTitle: str
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSend() } }}
-            placeholder=""
+            placeholder="Ask about your plan..."
             disabled={sending || !sessionId}
             className="flex-1 rounded-lg px-3 py-2 text-xs outline-none"
             style={{ background: 'var(--bg-elevated)', color: 'var(--text-primary)', border: '1px solid var(--border)' }}
