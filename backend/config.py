@@ -37,7 +37,8 @@ class Settings(BaseSettings):
     allowed_origins: str = ""
 
     # Scraper
-    scraper_delay_sec: float = 1.0
+    scraper_delay_sec: float = 0.2
+    scraper_concurrency: int = 5
     scraper_headless: bool = True
     scraper_timeout_ms: int = 30000
 
